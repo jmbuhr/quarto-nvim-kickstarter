@@ -14,4 +14,5 @@ vim.opt.shiftwidth = tabsize
 vim.opt.tabstop = tabsize
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
