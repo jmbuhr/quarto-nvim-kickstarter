@@ -2,13 +2,20 @@
 
 Companion to <https://github.com/jmbuhr/quarto-nvim>.
 
-Clone this repo into `~/.config/nvim/`
-or copy-paste just the parts you like.
+## Setup
+
+Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
 It also works great for sending code to different terminals
-together with `tmux`, here is a configuration for tmux as well:
+together with `tmux`, here is a configuration for tmux:
 <https://github.com/jmbuhr/tmux-kickstarter>
 
+Both of these configurations make use of a "Nerd Font" for icons and symbols.
+Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
+
+Now you are good to go!
+
+## Links to the plugins
 
 Some of the plugins included are:
 
