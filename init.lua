@@ -4,7 +4,6 @@ require'keymap'
 
 vim.cmd'colorscheme nord'
 
-
 vim.cmd [[
 filetype plugin on
 filetype indent on

@@ -52,11 +52,7 @@ return require('packer').startup(function(use)
 
 	-- colorscheme with TS support,
 	-- so it highlights embedded languages in qmd files
-	use {'shaunsingh/nord.nvim',
-		config = function()
-			vim.g.nord_borders = true
-		end
-	}
+	use {'shaunsingh/nord.nvim'} 
 
 	-- send code from python/r/qmd docuemts to the terminal
 	-- thanks to tmux can be used for any repl
