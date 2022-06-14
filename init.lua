@@ -1,42 +1,45 @@
-require'config'
-require'plugins'
-require'keymap'
+require 'config'
+require 'plugins'
+require 'keymap'
 
-vim.cmd'colorscheme nord'
+vim.cmd 'colorscheme nord'
 
-vim.cmd [[
-filetype plugin on
-filetype indent on
 
-au FocusGained,BufEnter * checktime
-syntax enable
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  pattern = { "*" },
+  command = "checktime",
+}
+)
 
-augroup filetypedetect
-  au! BufRead,BufNewFile *.qmd setfiletype markdown
-augroup END
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  pattern = { "*" },
+  command = "setlocal nonumber",
+}
+)
 
-augroup Terminal
-  autocmd!
-  au TermOpen * set nonu
-augroup end
-]]
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.qmd" },
+  command = "setfiletype markdown",
+}
+)
 
 
 -- filetree
-require'nvim-tree'.setup{}
+require 'nvim-tree'.setup {}
 
 -- LSP
 local lspconfig = require('lspconfig')
 local cmp = require('cmp_nvim_lsp')
-local configs = require'lspconfig.configs'
+local configs = require 'lspconfig.configs'
 local util = require("lspconfig.util")
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -57,8 +60,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   underline = true,
   update_in_insert = false,
 })
-vim.lsp.handlers["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border})
-vim.lsp.handlers["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -84,7 +87,7 @@ lspconfig.pyright.setup {
   },
   root_dir = function(fname)
     return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or
-    util.path.dirname(fname)
+        util.path.dirname(fname)
   end
 }
 
@@ -92,16 +95,16 @@ lspconfig.pyright.setup {
 lspconfig.diagnosticls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = {"python"},
+  filetypes = { "python" },
   init_options = {
     formatters = {
       black = {
         command = "black",
-        args = {"--quiet", "-"},
-        rootPatterns = {".git", "pyproject.toml", "setup.py", "tox."},
+        args = { "--quiet", "-" },
+        rootPatterns = { ".git", "pyproject.toml", "setup.py", "tox." },
       },
       formatFiletypes = {
-        python = {"black"}
+        python = { "black" }
       }
     }
   }
@@ -112,8 +115,8 @@ lspconfig.diagnosticls.setup {
 if not lspconfig.emmet_ls then
   configs.emmet_ls = {
     default_config = {
-      cmd = {'emmet-ls', '--stdio'};
-      filetypes = {'html', 'css', 'blade', 'jsx', 'xml', 'scss'};
+      cmd = { 'emmet-ls', '--stdio' };
+      filetypes = { 'html', 'css', 'blade', 'jsx', 'xml', 'scss' };
       root_dir = function(fname)
         return vim.loop.cwd()
       end;
@@ -121,7 +124,7 @@ if not lspconfig.emmet_ls then
     };
   }
 end
-lspconfig.emmet_ls.setup{
+lspconfig.emmet_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
@@ -135,8 +138,8 @@ lspconfig.cssls.setup {
 
 -- completion
 -- Setup nvim-cmp.
-local cmp = require'cmp'
-local luasnip = require'luasnip'
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
 local lspkind = require "lspkind"
 
 lspkind.init()
@@ -235,9 +238,9 @@ cmp.setup({
     documentation = {
       border = border,
     },
-  experimental = {
-    ghost_text = true,
-  },
+    experimental = {
+      ghost_text = true,
+    },
   },
 })
 
@@ -249,7 +252,7 @@ require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/sni
 
 
 -- Treesitter
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,
@@ -298,5 +301,3 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-
-
