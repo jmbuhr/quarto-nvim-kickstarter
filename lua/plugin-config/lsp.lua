@@ -27,10 +27,15 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  client.resolved_capabilities.document_formatting = true
+  client.server_capabilities.document_formatting = true
 end
 
 local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
+local lsp_flags = {
+    allow_incremental_sync = true,
+    debounce_text_changes = 150,
+}
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,

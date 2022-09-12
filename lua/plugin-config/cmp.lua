@@ -7,6 +7,8 @@ local lspkind = require "lspkind"
 lspkind.init()
 
 
+local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -65,7 +67,6 @@ cmp.setup({
         nvim_lsp = "[LSP]",
         buffer = "[buf]",
         path = "[path]",
-        nvim_lua = "[api]",
         spell = "[spell]",
         pandoc_references = "[ref]",
         tags = "[tag]",
@@ -79,12 +80,11 @@ cmp.setup({
     },
   },
   sources = {
-    { name = 'luasnip' },
-    { name = 'nvim_lsp' },
-    { name = 'pandoc_references' },
     { name = 'path' },
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'pandoc_references' },
     { name = 'buffer', keyword_length = 4, max_item_count = 8 },
-    { name = "nvim_lua" },
     { name = 'spell' },
     { name = 'treesitter' },
     { name = 'calc' },
@@ -93,21 +93,18 @@ cmp.setup({
   },
   view = {
     entries = "native",
-
   },
   window = {
     documentation = {
       border = border,
     },
-    experimental = {
-      ghost_text = true,
-    },
   },
 })
+
+
 
 -- for friendly snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 -- for custom snippets
 require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snips" } })
-
 

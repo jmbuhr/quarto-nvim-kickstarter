@@ -26,12 +26,10 @@ imap('<s-cr>', '<esc><Plug>SlimeSendCell<cr>i')
 vmap('<cr>', '<Plug>SlimeRegionSend')
 nmap('<leader><cr>', '<Plug>SlimeSendCell')
 
-
 -- configure code sending, change where to send
 -- speak: leader-code-configure
 nmap('<leader>cc', '<Plug>SlimeConfig')
 
-nmap('<c-b>', '<cmd>NvimTreeToggle<cr>')
 
 -- source entire file
 nmap('<leader>xx', ':w<cr>:source %<cr>')
@@ -43,43 +41,56 @@ vmap('<', '<gv')
 -- remove search highlight on esc
 nmap('<esc>','<cmd>noh<cr>')
 
--- find things with telescope
-nmap('<leader>ff', "<cmd>Telescope git_files<cr>")
-nmap('<leader>fa', "<cmd>Telescope find_files<cr>")
-nmap('<leader>fh', "<cmd>Telescope help_tags<cr>")
+-- find files with telescope
 nmap('<c-p>', "<cmd>Telescope find_files<cr>")
 
 -- terminal mode
 -- get out ouf terminal insert mode with esc
 vim.keymap.set('t', '<esc>', [[<c-\><c-n>]], {silent = true, noremap = true})
 
--- diagnostic
-nmap('<leader>dd', vim.diagnostic.disable)
-nmap('<leader>ds', vim.diagnostic.enable)
+-- open filetree
+nmap('<c-b>', '<cmd>NvimTreeToggle<cr>')
 
--- lsp
--- nmap('<leader>lr', vim.lsp.buf.references)
-nmap('<leader>ld',vim.lsp.buf.type_definition)
-nmap('<leader>lR',vim.lsp.buf.rename)
-nmap('<leader>la',vim.lsp.buf.code_action)
-nmap('<leader>ld',vim.diagnostic.open_float)
-
-
--- open quarto preview
-nmap('<leader>qp', require'quarto'.quartoPreview)
+-- move between splits and tabs
+nmap('<c-h>', '<c-w>h')
+nmap('<c-l>', '<c-w>l')
+nmap('<c-j>', '<c-w>j')
+nmap('<c-k>', '<c-w>k')
+nmap('H', '<cmd>tabprevious<cr>')
+nmap('L', '<cmd>tabnext<cr>')
 
 
 --show kepbindings with whichkey
 --add your own here if you want them to
 --show up in the popup as well
 wk.register({
-    l = {
-      name = 'language/lsp',
-      r = {'<cmd>Telescope lsp_references<cr>', 'references'},
-      R = {vim.lsp.buf.rename, 'rename'},
-      a = {vim.lsp.buf.code_action, 'coda action'},
-      d = {vim.diagnostic.open_float , 'diagnostics'},
-    },
+  l = {
+    name = 'language/lsp',
+    r = {'<cmd>Telescope lsp_references<cr>', 'references'},
+    R = {vim.lsp.buf.rename, 'rename'},
+    D = {vim.lsp.buf.type_definition, 'type definition'},
+    a = {vim.lsp.buf.code_action, 'coda action'},
+    d = {vim.diagnostic.open_float , 'diagnostics'},
+    f = {vim.lsp.buf.format, 'format'}
+  },
+  d  = {
+    name = 'diagnostics',
+    d = {vim.diagnostic.disable, 'disable'},
+    e = {vim.diagnostic.enable, 'enable'},
+  },
+  q = {
+    name = 'quarto',
+    p = {require'quarto'.quartoPreview, 'preview'}
+  },
+  f = {
+    name = 'find (telescope)',
+    f = {'<cmd>Telescope find_files<cr>', 'files'},
+    g = {'<cmd>Telescope git_files<cr>', 'git files'},
+    h = {'<cmd>Telescope help_tags<cr>', 'help'},
+    k = {'<cmd>Telescope keymaps<cr>', 'keymaps'},
+    r = {'<cmd>Telescope lsp_references<cr>', 'references'},
+    c = {'<cmd>Telescope colorscheme<cr>', 'colorscheme'},
+  }
   },
   {mode = 'n', prefix = '<leader>'}
 )
