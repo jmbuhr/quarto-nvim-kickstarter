@@ -5,21 +5,24 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
+-- install packages when this file is saved
 vim.cmd[[
   augroup packer_user_config
     autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerClean
     autocmd BufWritePost plugins.lua source <afile> | PackerInstall
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]]
 
 -- This file can be loaded by calling `lua require
-return require('packer').startup(function(use)
+require('packer').startup{
+  function(use)
 	-- packer can manager itself
 	use 'wbthomason/packer.nvim'
 
 	-- quarto
-  use 'jmbuhr/quarto-nvim'
+  use 'quarto-dev/quarto-nvim'
 
 	-- common dependencies
 	use { 'ryanoasis/vim-devicons' }
@@ -33,9 +36,15 @@ return require('packer').startup(function(use)
 	use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 	use { 'nvim-telescope/telescope-packer.nvim' }
 
-	-- filetree
-	use { 'kyazdani42/nvim-tree.lua' }
+  -- show keybinding help window
+  use { 'folke/which-key.nvim' }
 
+	-- filetree
+	use { 'kyazdani42/nvim-tree.lua',
+      config = function()
+        require 'nvim-tree'.setup {}
+      end
+  }
 
 	-- paste an image to markdown from the clipboard
 	-- use :PasteImg
@@ -50,9 +59,10 @@ return require('packer').startup(function(use)
 	}
 
 
-	-- colorscheme with TS support,
+	-- colorschemes with TS support,
 	-- so it highlights embedded languages in qmd files
 	use {'shaunsingh/nord.nvim'} 
+  use { "catppuccin/nvim", as = "catppuccin" }
 
 	-- send code from python/r/qmd docuemts to the terminal
 	-- thanks to tmux can be used for any repl
@@ -74,10 +84,14 @@ return require('packer').startup(function(use)
 	use 'nvim-treesitter/nvim-treesitter-textobjects'
 	use 'nvim-treesitter/playground'
 
+  -- lsp installer
+  use { "williamboman/mason.nvim" }
+  use { "williamboman/mason-lspconfig.nvim" }
 
 	-- completion
 	use { 'hrsh7th/nvim-cmp' }
 	use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
 	use { 'hrsh7th/cmp-buffer' }
 	use { 'hrsh7th/cmp-path' }
 	use { 'hrsh7th/cmp-calc' }
@@ -90,17 +104,30 @@ return require('packer').startup(function(use)
 	use { 'jc-doyle/cmp-pandoc-references' }
 	use { 'L3MON4D3/LuaSnip' }
 	use { 'rafamadriz/friendly-snippets' }
+  use { 'windwp/nvim-autopairs', -- complete parentheses etc.
+    config = function()
+      require('nvim-autopairs').setup {}
+    end
+  }
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end
+
+  end,
   config = {
     display = {
       open_fn = require('packer.util').float,
     }
   }
-end)
+}
 
+M = {}
+M.packer_bootstrap = function()
+  return packer_bootstrap
+end
+return M
 

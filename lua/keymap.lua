@@ -1,3 +1,5 @@
+local wk = require("which-key")
+
 local nmap = function(key, effect)
   vim.keymap.set('n', key, effect, {silent = true, noremap = true})
 end
@@ -44,6 +46,8 @@ nmap('<esc>','<cmd>noh<cr>')
 -- find things with telescope
 nmap('<leader>ff', "<cmd>Telescope git_files<cr>")
 nmap('<leader>fa', "<cmd>Telescope find_files<cr>")
+nmap('<leader>fh', "<cmd>Telescope help_tags<cr>")
+nmap('<c-p>', "<cmd>Telescope find_files<cr>")
 
 -- terminal mode
 -- get out ouf terminal insert mode with esc
@@ -54,7 +58,7 @@ nmap('<leader>dd', vim.diagnostic.disable)
 nmap('<leader>ds', vim.diagnostic.enable)
 
 -- lsp
-nmap('<leader>lr', vim.lsp.buf.references)
+-- nmap('<leader>lr', vim.lsp.buf.references)
 nmap('<leader>ld',vim.lsp.buf.type_definition)
 nmap('<leader>lR',vim.lsp.buf.rename)
 nmap('<leader>la',vim.lsp.buf.code_action)
@@ -64,3 +68,18 @@ nmap('<leader>ld',vim.diagnostic.open_float)
 -- open quarto preview
 nmap('<leader>qp', require'quarto'.quartoPreview)
 
+
+--show kepbindings with whichkey
+--add your own here if you want them to
+--show up in the popup as well
+wk.register({
+    l = {
+      name = 'language/lsp',
+      r = {'<cmd>Telescope lsp_references<cr>', 'references'},
+      R = {vim.lsp.buf.rename, 'rename'},
+      a = {vim.lsp.buf.code_action, 'coda action'},
+      d = {vim.diagnostic.open_float , 'diagnostics'},
+    },
+  },
+  {mode = 'n', prefix = '<leader>'}
+)

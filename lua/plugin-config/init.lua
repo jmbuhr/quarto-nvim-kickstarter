@@ -1,0 +1,5 @@
+require'plugin-config.completion'
+require'plugin-config.language-servers'
+require'plugin-config.telescope'
+require'plugin-config.treesitter'
+require'plugin-config.autocommands'

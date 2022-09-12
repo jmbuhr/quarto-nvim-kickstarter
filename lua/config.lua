@@ -4,6 +4,7 @@ vim.opt.termguicolors = true
 
 -- more opinionated
 vim.opt.number = true -- show linenumbers
+vim.opt.timeoutlen = 400 -- until which-key pops up
 vim.opt.updatetime = 250 -- for autocommands and hovers
 vim.opt.mouse= 'a' -- enable mouse
 vim.opt.mousefocus = true
@@ -33,3 +34,5 @@ vim.opt.breakindent = true
 -- consisten number column
 vim.opt.signcolumn = "yes:1"
 
+-- how to show a autocomplete menu
+vim.opt.completeopt = 'menuone,noinsert'
