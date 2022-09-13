@@ -16,4 +16,4 @@ end
 require 'keymap'
 vim.cmd 'colorscheme nord'
 require 'plugin-config'
-
+require 'custom'
