@@ -1,19 +1,10 @@
 
 -- Treesitter
 require 'nvim-treesitter.configs'.setup {
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {'r', 'python', 'markdown', 'markdown_inline', 'julia', 'yaml', 'lua', 'vim'}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-    },
-  },
-  indent = {
-    enable = true,
-    disable = { "yaml" },
   },
   textobjects = {
     select = {
