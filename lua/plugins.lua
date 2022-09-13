@@ -1,11 +1,18 @@
 --  bootstrap packer
 local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local packer_bootstrap
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-    install_path })
+
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+    return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 -- install packages when this file is saved
 vim.cmd [[
@@ -89,6 +96,16 @@ require('packer').startup {
     use { "williamboman/mason.nvim" }
     use { "williamboman/mason-lspconfig.nvim" }
 
+
+    -- debug adapter protocol
+    use { 'mfussenegger/nvim-dap' }
+    use { 'rcarriga/nvim-dap-ui',
+      config = function()
+        require("dapui").setup()
+      end
+    }
+    use {'mfussenegger/nvim-dap-python'}
+
     -- completion
     use { 'hrsh7th/nvim-cmp' }
     use { 'hrsh7th/cmp-nvim-lsp' }
@@ -110,6 +127,25 @@ require('packer').startup {
       end
     }
 
+    -- editing tools
+    use { 'tpope/vim-repeat' }
+    use { 'tpope/vim-surround' }
+
+    -- color html colors
+    use { 'norcalli/nvim-colorizer.lua',
+      config = function()
+        require 'colorizer'.setup {
+          css = { css_fn = true, css = true },
+          'javascript',
+          'html',
+          'r',
+          'rmd',
+          'qmd',
+          'markdown',
+          'python'
+        }
+      end
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -125,8 +161,4 @@ require('packer').startup {
   }
 }
 
-M = {}
-M.packer_bootstrap = function()
-  return packer_bootstrap
-end
-return M
+return packer_bootstrap

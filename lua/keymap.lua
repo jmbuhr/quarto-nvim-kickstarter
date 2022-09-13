@@ -44,6 +44,10 @@ nmap('<esc>','<cmd>noh<cr>')
 -- find files with telescope
 nmap('<c-p>', "<cmd>Telescope find_files<cr>")
 
+-- paste and without overwriting register
+vmap("<leader>p", "\"_dP")
+
+
 -- terminal mode
 -- get out ouf terminal insert mode with esc
 vim.keymap.set('t', '<esc>', [[<c-\><c-n>]], {silent = true, noremap = true})
@@ -70,13 +74,26 @@ wk.register({
     R = {vim.lsp.buf.rename, 'rename'},
     D = {vim.lsp.buf.type_definition, 'type definition'},
     a = {vim.lsp.buf.code_action, 'coda action'},
-    d = {vim.diagnostic.open_float , 'diagnostics'},
-    f = {vim.lsp.buf.format, 'format'}
+    e = {vim.diagnostic.open_float , 'diagnostics'},
+    f = {vim.lsp.buf.format, 'format'},
+    d  = {
+      name = 'diagnostics',
+      d = {vim.diagnostic.disable, 'disable'},
+      e = {vim.diagnostic.enable, 'enable'},
+    },
   },
-  d  = {
-    name = 'diagnostics',
-    d = {vim.diagnostic.disable, 'disable'},
-    e = {vim.diagnostic.enable, 'enable'},
+  d = {
+    name = "debug",
+    b = { ":lua require'dap'.toggle_breakpoint()<CR>", "breakpoint" },
+    B = { ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "breakpoint condition" },
+    l = { ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", "log point" },
+    r = { ":lua require'dap'.repl.open()<cr>", "repl" },
+    u = { ":lua require'dapui'.toggle()<cr>", "ui" },
+    c = { ":lua require'dap'.continue()<cr>", "continue" },
+    so = { ":lua require'dap'.step_over()<cr>", "step over" },
+    si = { ":lua require'dap'.step_into()<cr>", "step into" },
+    st = { ":lua require'dap'.step_out()<cr>", "step out" },
+    h = { ":lua require('dap-python').test_method()<cr>", "debug here" },
   },
   q = {
     name = 'quarto',
@@ -85,12 +102,34 @@ wk.register({
   f = {
     name = 'find (telescope)',
     f = {'<cmd>Telescope find_files<cr>', 'files'},
-    g = {'<cmd>Telescope git_files<cr>', 'git files'},
     h = {'<cmd>Telescope help_tags<cr>', 'help'},
     k = {'<cmd>Telescope keymaps<cr>', 'keymaps'},
     r = {'<cmd>Telescope lsp_references<cr>', 'references'},
-    c = {'<cmd>Telescope colorscheme<cr>', 'colorscheme'},
-  }
+    g = { "<cmd>Telescope live_grep<cr>", "grep" },
+    b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "fuzzy" },
+    m = { "<cmd>Telescope marks<cr>", "marks" },
+    M = { "<cmd>Telescope man_pages<cr>", "man pages" },
+    c = { "<cmd>Telescope git_commits<cr>", "git commits" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "symbols" },
+    t = { "<cmd>Telescope tmux sessions<cr>", "tmux session" },
+    w = { "<cmd>Telescope tmux windows<cr>", "tmux window" },
+    d = { "<cmd>Telescope buffers<cr>", "buffers" },
+    q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
+    l = { "<cmd>Telescope loclist<cr>", "loclist" },
+    j = { "<cmd>Telescope jumplist<cr>", "marks" },
+    p = { "<cmd>Telescope project<cr>", "project" },
+  },
+  s = {
+    name = "spellcheck",
+    s = { "<cmd>Telescope spell_suggest<cr>", "spelling" },
+    ['/'] = { '<cmd>setlocal spell!<cr>', 'spellcheck' },
+    n = { ']s', 'next' },
+    p = {'[s', 'previous'},
+    g = {'zg', 'good'},
+    a = {'zg', 'accept'},
+    b = {'zb', 'bad'},
+    ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
+  },
   },
   {mode = 'n', prefix = '<leader>'}
 )

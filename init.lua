@@ -1,6 +1,6 @@
 require 'config'
-local plugins = require('plugins')
-if plugins.packer_bootstrap() then
+local packer_bootstrap= require('plugins')
+if packer_bootstrap then
   print '=================================='
   print '    Plugins are being installed'
   print '    Wait until Packer completes,'
