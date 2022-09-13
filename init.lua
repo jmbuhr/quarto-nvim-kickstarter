@@ -1,4 +1,5 @@
 require 'config'
+
 local packer_bootstrap= require('plugins')
 if packer_bootstrap then
   print '=================================='
@@ -13,7 +14,6 @@ if packer_bootstrap then
 end
 
 require 'keymap'
-
 vim.cmd 'colorscheme nord'
-
 require 'plugin-config'
+
