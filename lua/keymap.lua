@@ -44,24 +44,12 @@ nmap('<esc>','<cmd>noh<cr>')
 -- find files with telescope
 nmap('<c-p>', "<cmd>Telescope find_files<cr>")
 
--- paste and without overwriting register
-vmap("<leader>p", "\"_dP")
-
-
 -- terminal mode
 -- get out ouf terminal insert mode with esc
 vim.keymap.set('t', '<esc>', [[<c-\><c-n>]], {silent = true, noremap = true})
 
 -- open filetree
 nmap('<c-b>', '<cmd>NvimTreeToggle<cr>')
-
--- move between splits and tabs
-nmap('<c-h>', '<c-w>h')
-nmap('<c-l>', '<c-w>l')
-nmap('<c-j>', '<c-w>j')
-nmap('<c-k>', '<c-w>k')
-nmap('H', '<cmd>tabprevious<cr>')
-nmap('L', '<cmd>tabnext<cr>')
 
 
 --show kepbindings with whichkey
@@ -102,6 +90,7 @@ wk.register({
   f = {
     name = 'find (telescope)',
     f = {'<cmd>Telescope find_files<cr>', 'files'},
+    F = {'<cmd>Telescope find_files<cr>', 'files'},
     h = {'<cmd>Telescope help_tags<cr>', 'help'},
     k = {'<cmd>Telescope keymaps<cr>', 'keymaps'},
     r = {'<cmd>Telescope lsp_references<cr>', 'references'},
@@ -133,3 +122,113 @@ wk.register({
   },
   {mode = 'n', prefix = '<leader>'}
 )
+
+-- normal mode
+wk.register({
+  L = { ":tabnext<cr>", "next tab" },
+  H = { ":tabprevious<cr>", "previous tab" },
+  ['gx'] = { ':!xdg-open <c-r><c-a><cr>', 'open file' },
+  ["<c-q>"] = {'<cmd>q<cr>', 'close buffer'},
+  ['<esc>'] = { '<cmd>noh<cr>', 'remove search highlight' },
+  ['n'] = {'nzzzv', 'center search'},
+  ['gN'] = {'Nzzzv', 'center search'},
+  ['gl'] = {'<c-]>', 'open help link'},
+  ['gf'] = { ':e <cfile><CR>', 'edit file' },
+  ['<C-j>']  = {'<C-W>j', 'move to window'},
+  ['<C-k>']  = {'<C-W>k', 'move to window'},
+  ['<C-h>']  = {'<C-W>h', 'move to window'},
+  ['<C-l>']  = {'<C-W>l', 'move to window'},
+  ['<tab>']  = {'<cmd>cnext<cr>', 'next qf'},
+  ['<c-tab>']  = {'<cmd>cprev<cr>', 'previous qf'},
+}, { mode = 'n' })
+
+-- visual mode
+wk.register({
+  ['<cr>'] = {'<Plug>SlimeRegionSend', 'run code region'},
+  ['gx'] = { '"ty:!xdg-open t<cr>', 'open file' },
+  ['<M-j>'] =  { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
+  ['<M-k>'] = { ":m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
+  ['.'] = { ':norm .<cr>', 'repat last normal mode command' },
+  ['q'] = { ':norm @q<cr>', 'repat q macro' },
+}, { mode = 'v'})
+
+wk.register({
+  ['<leader>'] = {'<Plug>SlimeRegionSend', 'run code region'},
+  ['<cr>'] = {'<cmd>MkdnFollowLink<cr>', 'follow / create link'},
+  ['p'] = {'"_dP', 'replace without overwriting reg'},
+} , { mode = 'v', prefix = "<leader>"})
+
+
+
+
+
+-- normal mode
+wk.register({
+  L = { ":tabnext<cr>", "next tab" },
+  H = { ":tabprevious<cr>", "previous tab" },
+  ['gx'] = { ':!xdg-open <c-r><c-a><cr>', 'open file' },
+  ["<c-q>"] = {'<cmd>q<cr>', 'close buffer'},
+  ['<esc>'] = { '<cmd>noh<cr>', 'remove search highlight' },
+  ['n'] = {'nzzzv', 'center search'},
+  ['gN'] = {'Nzzzv', 'center search'},
+  ['gl'] = {'<c-]>', 'open help link'},
+  ['gf'] = { ':e <cfile><CR>', 'edit file' },
+  ['<C-j>']  = {'<C-W>j', 'move to window'},
+  ['<C-k>']  = {'<C-W>k', 'move to window'},
+  ['<C-h>']  = {'<C-W>h', 'move to window'},
+  ['<C-l>']  = {'<C-W>l', 'move to window'},
+  ['<tab>']  = {'<cmd>cnext<cr>', 'next qf'},
+  ['<c-tab>']  = {'<cmd>cprev<cr>', 'previous qf'},
+}, { mode = 'n' })
+
+-- visual mode
+wk.register({
+  ['<cr>'] = {'<Plug>SlimeRegionSend', 'run code region'},
+  ['gx'] = { '"ty:!xdg-open t<cr>', 'open file' },
+  ['<M-j>'] =  { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
+  ['<M-k>'] = { ":m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
+  ['.'] = { ':norm .<cr>', 'repat last normal mode command' },
+  ['q'] = { ':norm @q<cr>', 'repat q macro' },
+}, { mode = 'v'})
+
+wk.register({
+  ['<leader>'] = {'<Plug>SlimeRegionSend', 'run code region'},
+  ['<cr>'] = {'<cmd>MkdnFollowLink<cr>', 'follow / create link'},
+  ['p'] = {'"_dP', 'replace without overwriting reg'},
+} , { mode = 'v', prefix = "<leader>"})
+
+-- normal mode
+wk.register({
+  L = { ":tabnext<cr>", "next tab" },
+  H = { ":tabprevious<cr>", "previous tab" },
+  ['gx'] = { ':!xdg-open <c-r><c-a><cr>', 'open file' },
+  ["<c-q>"] = {'<cmd>q<cr>', 'close buffer'},
+  ['<esc>'] = { '<cmd>noh<cr>', 'remove search highlight' },
+  ['n'] = {'nzzzv', 'center search'},
+  ['gN'] = {'Nzzzv', 'center search'},
+  ['gl'] = {'<c-]>', 'open help link'},
+  ['gf'] = { ':e <cfile><CR>', 'edit file' },
+  ['<C-j>']  = {'<C-W>j', 'move to window'},
+  ['<C-k>']  = {'<C-W>k', 'move to window'},
+  ['<C-h>']  = {'<C-W>h', 'move to window'},
+  ['<C-l>']  = {'<C-W>l', 'move to window'},
+  ['<tab>']  = {'<cmd>cnext<cr>', 'next qf'},
+  ['<c-tab>']  = {'<cmd>cprev<cr>', 'previous qf'},
+}, { mode = 'n' })
+
+-- visual mode
+wk.register({
+  ['<cr>'] = {'<Plug>SlimeRegionSend', 'run code region'},
+  ['gx'] = { '"ty:!xdg-open t<cr>', 'open file' },
+  ['<M-j>'] =  { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
+  ['<M-k>'] = { ":m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
+  ['.'] = { ':norm .<cr>', 'repat last normal mode command' },
+  ['q'] = { ':norm @q<cr>', 'repeat q macro' },
+}, { mode = 'v'})
+
+wk.register({
+  ['<leader>'] = {'<Plug>SlimeRegionSend', 'run code region'},
+  ['<cr>'] = {'<cmd>MkdnFollowLink<cr>', 'follow / create link'},
+  ['p'] = {'"_dP', 'replace without overwriting reg'},
+} , { mode = 'v', prefix = "<leader>"})
+
