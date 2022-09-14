@@ -7,8 +7,7 @@ local util = require("lspconfig.util")
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "sumneko_lua", "pyright", "r_language_server", "emmet_ls",
-    "cssls", "diagnosticls", "debugpy" }
+    automatic_installation = true
 })
 
 local on_attach = function(client, bufnr)
