@@ -12,6 +12,16 @@ local imap = function(key, effect)
   vim.keymap.set('i', key, effect, {silent = true, noremap = true})
 end
 
+-- for vim-slime configuration
+local function chooseTerminal()
+  local current_terminal = vim.bo.channel
+  vim.api.nvim_set_var('slimeTerminal', current_terminal)
+end
+
+local function setTerminal()
+  vim.b.slime_config = {jobid = vim.api.nvim_get_var('slimeTerminal')}
+end
+
 -- send code with ctrl+Enter
 -- just like in e.g. RStudio
 -- needs kitty (or other terminal) config:
@@ -118,6 +128,14 @@ wk.register({
     a = {'zg', 'accept'},
     b = {'zb', 'bad'},
     ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
+  },
+  c =  {
+    t = {chooseTerminal, 'choose terminal'},
+    s = {setTerminal, 'set terminal'},
+    r = {':split term://R<cr>', 'spawn R terminal'},
+    i = {':split term://ipython<cr>', 'spawn ipython terminal'},
+    p = {':split term://python<cr>', 'spawn python terminal'},
+    j = {':split term://julia<cr>', 'spawn julia terminal'},
   },
   },
   {mode = 'n', prefix = '<leader>'}

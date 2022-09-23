@@ -1,6 +1,4 @@
 --  bootstrap packer
-local fn = vim.fn
-
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -76,10 +74,14 @@ require('packer').startup {
     -- like ipython, R, bash
     use { 'jpalardy/vim-slime',
       config = function()
-        vim.g.slime_target = "tmux"
-        vim.g.slime_bracketed_paste = 1
-        vim.g.slime_default_config = { socket_name = "default", target_pane = ":.2" }
         vim.b.slime_cell_delimiter = "#%%"
+
+        -- vim.g.slime_target = "tmux"
+        -- vim.g.slime_bracketed_paste = 1
+        -- vim.g.slime_default_config = { socket_name = "default", target_pane = ":.2" }
+
+        -- use neovim terminal by default:
+        vim.g.slime_target = "neovim"
       end
     }
 
