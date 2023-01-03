@@ -22,6 +22,13 @@ Now you are good to go!
 ![image](https://user-images.githubusercontent.com/17450586/210392573-57c0ad1c-5db0-4f2a-9119-608bd2398494.png)
 ![image](https://user-images.githubusercontent.com/17450586/210392838-1c643a65-e792-4a54-bbdb-3ae959995a79.png)
 
+### With tmux
+
+Combine it with [tmux-kickstarter](https://github.com/jmbuhr/tmux-kickstarter) for a versatile data science experience!
+
+![image](https://user-images.githubusercontent.com/17450586/210393754-04404e62-15ab-4cb2-afba-deeefc3fec9e.png)
+
+
 
 ## Links to the plugins
 
