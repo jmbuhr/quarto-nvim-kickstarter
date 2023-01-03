@@ -1,6 +1,6 @@
 # Quarto Nvim Kickstarter
 
-Companion to <https://github.com/jmbuhr/quarto-nvim>.
+Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
 ## Setup
 

@@ -62,13 +62,17 @@
     "prefix": "$$",
     "body": ["\\$$", "${0}", "\\$$"]
   },
-  "py": {
-    "prefix": ["py"],
+  "pycode": {
+    "prefix": ["pyc"],
     "body": ["```{python} ", "$1", "```"]
   },
   "rcode": {
-    "prefix": ["rcode"],
+    "prefix": ["rco"],
     "body": ["```{r} ", "$1", "```"]
+  },
+  "bashcode": {
+    "prefix": ["bco"],
+    "body": ["```{bash} ", "$1", "```"]
   },
   "code": {
     "prefix": ["code"],
