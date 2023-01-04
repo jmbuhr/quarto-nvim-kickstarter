@@ -66,11 +66,17 @@ vim.opt.conceallevel = 0
 
 
 -- plugins
--- slime
+-- slime, general
 vim.b.slime_cell_delimiter = "#%%"
-vim.g.slime_target = 'tmux'
-vim.g.slime_bracketed_paste = 1
-vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
+
+-- -- slime, tmux
+-- vim.g.slime_target = 'tmux'
+-- vim.g.slime_bracketed_paste = 1
+-- vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
+
+-- slime, neovvim terminal
+vim.g.slime_target = "neovim"
+-- vim.g.slime_python_ipython = 1
 
 -- git blame, lualine
 vim.g.gitblame_display_virtual_text = 0
