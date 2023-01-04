@@ -314,6 +314,7 @@ return {
           format = lspkind.cmp_format {
             with_text = true,
             menu = {
+              otter = "[🦦]",
               luasnip = "[snip]",
               nvim_lsp = "[LSP]",
               buffer = "[buf]",
@@ -325,11 +326,11 @@ return {
               calc = "[calc]",
               latex_symbols = "[tex]",
               emoji = "[emoji]",
-              otter = "[🦦]",
             },
           },
         },
         sources = {
+          { name = 'otter' },
           { name = 'path' },
           { name = 'plugins' },
           { name = 'nvim_lsp' },
@@ -341,7 +342,6 @@ return {
           { name = 'calc' },
           { name = 'latex_symbols' },
           { name = 'emoji' },
-          { name = 'otter' },
         },
         view = {
           entries = "native",
