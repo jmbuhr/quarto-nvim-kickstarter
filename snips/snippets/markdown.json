@@ -13,7 +13,7 @@
   "tabset": {
     "prefix": ["tabset"],
     "body": [
-      "::: {.panel-tabset}",
+      ":::: {.panel-tabset}",
       "",
       "### $1",
       "",
@@ -29,7 +29,7 @@
   "fig3": {
     "prefix": ["fig3"],
     "body": [
-      "::: {#fig-${1:label} layout=\"[[1, 1], [1]]\"}",
+      ":::: {#fig-${1:label} layout=\"[[1, 1], [1]]\"}",
       "",
       "![${2:subcap1}](${3:figure}){#fig-$2}",
       "",
@@ -44,7 +44,7 @@
   "fig2": {
     "prefix": ["fig2"],
     "body": [
-      "::: {#fig-${1:label} layout=\"[1,1]\"}",
+      ":::: {#fig-${1:label} layout=\"[1,1]\"}",
       "",
       "![${2:subcap1}](${3:figure}){#fig-$2}",
       "",
