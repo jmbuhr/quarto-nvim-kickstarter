@@ -1,4 +1,0 @@
-(
-  (comment) @codechunk
-  (#eq? @codechunk "#%%")
-)
