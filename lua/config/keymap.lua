@@ -173,6 +173,7 @@ wk.register(
       t = { switchTheme, 'switch theme' },
       l = { ':Lazy<cr>', 'Lazy' },
       m = { ':Mason<cr>', 'Mason' },
+      s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', 'Settings' },
     },
     l = {
       name = 'language/lsp',
