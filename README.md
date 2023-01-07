@@ -6,11 +6,11 @@ Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
-It also works great for sending code to different terminals
-together with `tmux`, here is a configuration for tmux:
-<https://github.com/jmbuhr/tmux-kickstarter>
+```bash
+git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git ~/.config/nvim
+```
 
-Both of these configurations make use of a "Nerd Font" for icons and symbols.
+This configuration can make use of a "Nerd Font" for icons and symbols.
 Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
 
 Now you are good to go!
