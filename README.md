@@ -6,8 +6,16 @@ Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
+> Unix, Linux Installation
+
 ```bash
 git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git ~/.config/nvim
+```
+
+> Windows Powershell Installation
+
+```bash
+git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git "$env:LOCALAPPDATA\nvim"
 ```
 
 This configuration can make use of a "Nerd Font" for icons and symbols.
