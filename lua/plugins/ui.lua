@@ -67,6 +67,19 @@ return {
     },
     config = function()
       local git_blame = require('gitblame')
+      vim.o.shortmess = vim.o.shortmess .. "S" -- this is for the search_count function so lua can know this is `lua expression`
+      --function for optimizing the search count 
+      local function search_count()
+        if vim.api.nvim_get_vvar("hlsearch") == 1 then
+          local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+
+          if res.total > 0 then
+            return string.format("%d/%d", res.current, res.total)
+          end
+        end
+
+        return ""
+      end
       require('lualine').setup {
         options = {
           section_separators = '',
@@ -77,7 +90,8 @@ return {
         sections = {
           lualine_c = {
             { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
-          }
+          },
+          lualine_b = {'branch', { search_count, type = "lua_expr" } }
         },
         extensions = { 'nvim-tree' },
       }
