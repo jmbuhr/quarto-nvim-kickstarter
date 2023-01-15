@@ -6,20 +6,24 @@ Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
-> Unix, Linux Installation
+This configuration can make use of a "Nerd Font" for icons and symbols.
+Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
+
+### Unix, Linux Installation
 
 ```bash
 git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git ~/.config/nvim
 ```
 
-> Windows Powershell Installation
+### Windows Powershell Installation
 
 ```bash
 git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git "$env:LOCALAPPDATA\nvim"
 ```
 
-This configuration can make use of a "Nerd Font" for icons and symbols.
-Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
+The telescope file finder uses `fzf` for fuzzy finding via the [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) extension.
+It will automatically install `fzf`, but needs some requirements which are not pre-installed on Windows.
+Check out the previous link for those (or comment out the extension in `./lua/plugins/ui.lua`).
 
 Now you are good to go!
 
