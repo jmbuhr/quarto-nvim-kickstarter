@@ -114,6 +114,7 @@ return {
           },
           diagnostics = {
             globals = { 'vim', 'quarto', 'pandoc', 'io', 'string', 'print', 'require', 'table' },
+            disable = { 'trailing-space' },
           },
           workspace = {
             library = lua_library_files,
