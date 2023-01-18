@@ -8,18 +8,6 @@ return {
     }
   end
   },
-  -- enhanced f t motions
-  { 'ggandor/flit.nvim',
-    dependencies = { 'ggandor/leap.nvim' },
-    config = function()
-      require('flit').setup {
-        keys = { f = 'f', F = 'F', t = 't', T = 'T' },
-        labeled_modes = "v",
-        multiline = true,
-        opts = {}
-      }
-    end
-  },
   -- commenting with e.g. `gcc` or `gcip`
   -- respects TS, so it works in quarto documents
   { 'numToStr/Comment.nvim', config = function()
