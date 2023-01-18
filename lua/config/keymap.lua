@@ -289,7 +289,7 @@ wk.register({
 wk.register({
   -- ['<c-e>'] = { "<esc>:FeMaco<cr>i", "edit code" },
   ['<m-->'] = { ' <- ', "assign" },
-  ['<m-m>'] = { ' |> ', "pipe" },
+  ['<m-m>'] = { ' |>', "pipe" },
   ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
   ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
