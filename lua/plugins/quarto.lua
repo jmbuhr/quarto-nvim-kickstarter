@@ -1,22 +1,24 @@
 return {
   { 'quarto-dev/quarto-nvim',
+    version = nil,
+    branch = 'quarto-ft',
     dependencies = {
       { 'jmbuhr/otter.nvim', },
       { 'quarto-dev/quarto-vim',
-        dev = false,
         dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
       },
       'neovim/nvim-lspconfig'
     },
     config = function()
-      vim.cmd [[
-        let g:pandoc#syntax#conceal#use=0 
-        let g:pandoc#syntax#codeblocks#embeds#use=0
-      ]]
+      vim.g['pandoc#syntax#conceal#use'] = true
+      vim.g['pandoc#syntax#codeblocks#embeds#use'] = false
+      vim.g['pandoc#syntax#conceal#blacklist'] = { 'codeblock_delim', 'codeblock_start' }
+      -- a=accents/ligatures d=delimiters m=math symbols  g=Greek  s=superscripts/subscripts
+      vim.g['tex_conceal'] = 'g'
       require 'quarto'.setup {
         lspFeatures = {
           enabled = true,
-          languages = { 'r', 'python', 'julia', 'haskell', 'lua' },
+          languages = { 'r', 'python', 'julia' },
           diagnostics = {
             enabled = true,
             triggers = { "BufWrite" }
@@ -36,4 +38,3 @@ return {
   -- :PasteImg,
   'ekickx/clipboard-image.nvim',
 }
-
