@@ -1,10 +1,14 @@
 return {
-  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
+  { 'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    version = nil,
+    branch = 'master',
+    config = function()
     require 'nvim-treesitter.configs'.setup {
-      ensure_installed = { 'r', 'python', 'markdown', 'markdown_inline', 'julia', 'yaml', 'lua', 'vim', 'query', 'help' },
+      ensure_installed = { 'r', 'python', 'markdown', 'markdown_inline', 'julia', 'yaml', 'lua', 'vim', 'query', 'help', 'latex' },
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = { 'markdown' },
       },
       indent = {
         enable = true,
@@ -60,5 +64,4 @@ return {
   end },
   'nvim-treesitter/nvim-treesitter-textobjects',
   'nvim-treesitter/playground',
-
 }

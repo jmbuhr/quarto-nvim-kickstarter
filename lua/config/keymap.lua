@@ -171,6 +171,7 @@ wk.register(
     v = {
       name = 'vim',
       t = { switchTheme, 'switch theme' },
+      c = { ':Telescope colorscheme<cr>', 'colortheme' },
       l = { ':Lazy<cr>', 'Lazy' },
       m = { ':Mason<cr>', 'Mason' },
       s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', 'Settings' },

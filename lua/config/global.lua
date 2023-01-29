@@ -1,4 +1,3 @@
-
 vim.g.markdown_fenced_languages = { 'html', 'python', 'bash=sh', 'R=r' }
 vim.opt.termguicolors = true
 
@@ -6,7 +5,7 @@ vim.opt.termguicolors = true
 vim.opt.number = true -- show linenumbers
 vim.opt.timeoutlen = 400 -- until which-key pops up
 vim.opt.updatetime = 250 -- for autocommands and hovers
-vim.opt.mouse= 'a' -- enable mouse
+vim.opt.mouse = 'a' -- enable mouse
 vim.opt.mousefocus = true
 vim.opt.clipboard:append 'unnamedplus' -- use system clipboard
 
@@ -57,12 +56,13 @@ vim.opt.showtabline = 1
 vim.opt.winbar = '%t'
 
 --don't continue comments automagically
-vim.opt.formatoptions:remove({'c', 'r', 'o'})
-
+vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 0
-vim.opt.conceallevel = 0
+
+-- conceal highlighting
+vim.opt.conceallevel = 1
 
 
 -- plugins
