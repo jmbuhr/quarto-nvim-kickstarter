@@ -2,6 +2,9 @@
 vim.g.markdown_fenced_languages = { 'html', 'python', 'bash=sh', 'R=r' }
 vim.opt.termguicolors = true
 
+-- copilot functions
+vim.g.copilot_filetypes = {markdown = true}
+
 -- more opinionated
 vim.opt.number = true -- show linenumbers
 vim.opt.timeoutlen = 400 -- until which-key pops up

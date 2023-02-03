@@ -64,7 +64,7 @@ return {
           ['<CR>'] = cmp.mapping.confirm({
             select = true,
           }),
-          ["<Tab>"] = cmp.mapping(function(fallback)
+          ["<C-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif has_words_before() then
