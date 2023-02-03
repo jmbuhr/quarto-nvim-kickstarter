@@ -12,13 +12,13 @@ Download one here: <https://www.nerdfonts.com/> and set it as your terminal font
 ### Unix, Linux Installation
 
 ```bash
-git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git ~/.config/nvim
+git clone https://github.com/grandjeanlab/quarto-nvim-kickstarter.git ~/.config/nvim
 ```
 
 ### Windows Powershell Installation
 
 ```bash
-git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git "$env:LOCALAPPDATA\nvim"
+git clone https://github.com/grandjeanlab/quarto-nvim-kickstarter.git "$env:LOCALAPPDATA\nvim"
 ```
 
 The telescope file finder uses `fzf` for fuzzy finding via the [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) extension.
