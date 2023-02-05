@@ -151,7 +151,7 @@ local function open_plugin()
   vim.cmd(cmd)
 end
 
-vim.keymap.set('n', '<leader>vp', open_plugin)
+local otter = require("otter")
 
 --show kepbindings with whichkey
 --add your own here if you want them to
@@ -170,6 +170,7 @@ wk.register(
     },
     v = {
       name = 'vim',
+      p = {open_plugin, 'open plugin'},
       t = { switchTheme, 'switch theme' },
       c = { ':Telescope colorscheme<cr>', 'colortheme' },
       l = { ':Lazy<cr>', 'Lazy' },
@@ -190,9 +191,11 @@ wk.register(
         d = { vim.diagnostic.disable, 'disable' },
         e = { vim.diagnostic.enable, 'enable' },
       },
+      g = { ':Neogen<cr>', 'neogen docstring'}
     },
     q = {
       name = 'quarto',
+      a = { ":QuartoActivate<cr>", 'activate' },
       p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
       q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
       h = { ":QuartoHelp ", 'help' },

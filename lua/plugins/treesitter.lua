@@ -8,7 +8,8 @@ return {
       ensure_installed = { 'r', 'python', 'markdown', 'markdown_inline', 'julia', 'yaml', 'lua', 'vim', 'query', 'help', 'latex' },
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = { 'markdown' },
+        -- additional_vim_regex_highlighting = { 'markdown' },
+        additional_vim_regex_highlighting = false,
       },
       indent = {
         enable = true,

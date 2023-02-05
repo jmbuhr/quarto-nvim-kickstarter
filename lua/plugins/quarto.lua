@@ -5,16 +5,16 @@ return {
     dependencies = {
       { 'jmbuhr/otter.nvim', },
       { 'quarto-dev/quarto-vim',
+        dev = false,
         dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
       },
       'neovim/nvim-lspconfig'
     },
     config = function()
-      vim.g['pandoc#syntax#conceal#use'] = true
+      vim.g['pandoc#syntax#conceal#use'] = false
       vim.g['pandoc#syntax#codeblocks#embeds#use'] = false
       vim.g['pandoc#syntax#conceal#blacklist'] = { 'codeblock_delim', 'codeblock_start' }
-      -- a=accents/ligatures d=delimiters m=math symbols  g=Greek  s=superscripts/subscripts
-      vim.g['tex_conceal'] = 'g'
+      vim.g['tex_conceal'] = 'g' -- a=accents/ligatures d=delimiters m=math symbols  g=Greek  s=superscripts/subscripts
       require 'quarto'.setup {
         lspFeatures = {
           enabled = true,

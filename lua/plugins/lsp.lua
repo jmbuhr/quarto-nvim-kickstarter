@@ -9,6 +9,9 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
+  -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+    require("neodev").setup()
+
     local lspconfig = require('lspconfig')
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
     local configs = require 'lspconfig.configs'
