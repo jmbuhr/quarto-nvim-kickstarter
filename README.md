@@ -27,6 +27,10 @@ Check out the previous link for those (or comment out the extension in `./lua/pl
 
 Now you are good to go!
 
+## Videos
+
+https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
+
 ## Screenshots
 
 ![image](https://user-images.githubusercontent.com/17450586/210392216-a99815ac-1872-4c48-bf24-5a50df14c6d2.png)
