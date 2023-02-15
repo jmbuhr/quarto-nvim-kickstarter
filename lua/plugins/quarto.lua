@@ -70,6 +70,9 @@ return {
   -- display images in the terminal!
   { 'edluffy/hologram.nvim',
     config = function()
+      -- require'hologram'.setup{
+      --   auto_display = true
+      -- }
     end
   },
 }
