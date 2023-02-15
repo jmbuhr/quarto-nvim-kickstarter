@@ -218,7 +218,12 @@ wk.register(
       q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
       l = { "<cmd>Telescope loclist<cr>", "loclist" },
       j = { "<cmd>Telescope jumplist<cr>", "marks" },
-      p = { "<cmd>Telescope project<cr>", "project" },
+      p = { "project" },
+    },
+    h = {
+      name = 'hidden',
+      h = {':set conceallevel=1<cr>', 'hide/conceal'},
+      s = {':set conceallevel=0<cr>', 'show/unconceal'},
     },
     s = {
       name = "spellcheck",

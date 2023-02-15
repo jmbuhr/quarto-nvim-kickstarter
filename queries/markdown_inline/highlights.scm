@@ -40,56 +40,57 @@
 (shortcut_link ["[" "]"] @punctuation.delimiter)
 
 ; Conceal codeblock and text style markers
-([
-  (code_span_delimiter)
-  (emphasis_delimiter)
-] @conceal
-(#set! conceal ""))
+; ([
+;   (code_span_delimiter)
+;   (emphasis_delimiter)
+; ] @conceal
+; (#set! conceal ""))
 
 ; Conceal inline links
-(inline_link
-  [
-    "["
-    "]"
-    "("
-    (link_destination)
-    ")"
-  ] @conceal
-  (#set! conceal ""))
+; (inline_link
+;   [
+;     "["
+;     "]"
+;     "("
+;     (link_destination)
+;     ")"
+;   ] @conceal
+;   (#set! conceal ""))
 
 ; Conceal image links
-(image
-  [
-    "!"
-    "["
-    "]"
-    "("
-    (link_destination)
-    ")"
-  ] @conceal
-  (#set! conceal ""))
+; (image
+;   [
+;     "!"
+;     "["
+;     "]"
+;     "("
+;     (link_destination)
+;     ")"
+;   ] @conceal
+;   (#set! conceal ""))
 
 ; Conceal full reference links
-(full_reference_link
-  [
-    "["
-    "]"
-    (link_label)
-  ] @conceal
-  (#set! conceal ""))
+; (full_reference_link
+;   [
+;     "["
+;     "]"
+;     (link_label)
+;   ] @conceal
+;   (#set! conceal ""))
 
 ; Conceal collapsed reference links
-(collapsed_reference_link
-  [
-    "["
-    "]"
-  ] @conceal
-  (#set! conceal ""))
+; (collapsed_reference_link
+;   [
+;     "["
+;     "]"
+;   ] @conceal
+;   (#set! conceal ""))
 
 ; Conceal shortcut links
-(shortcut_link
-  [
-    "["
-    "]"
-  ] @conceal
-  (#set! conceal ""))
+; (shortcut_link
+;   [
+;     "["
+;     "]"
+;   ] @conceal
+;   (#set! conceal ""))
+

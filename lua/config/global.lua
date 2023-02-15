@@ -61,10 +61,6 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 -- hide cmdline when not used
 vim.opt.cmdheight = 0
 
--- conceal highlighting
-vim.opt.conceallevel = 1
-
-
 -- plugins
 -- slime, general
 vim.b.slime_cell_delimiter = "#%%"
