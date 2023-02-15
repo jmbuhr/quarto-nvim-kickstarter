@@ -1,7 +1,7 @@
 return {
   { 'quarto-dev/quarto-nvim',
-    version = nil,
-    branch = 'quarto-ft',
+    -- version = nil,
+    -- branch = 'quarto-ft',
     dependencies = {
       { 'jmbuhr/otter.nvim', },
       { 'quarto-dev/quarto-vim',
