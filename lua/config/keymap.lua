@@ -151,7 +151,7 @@ local function open_plugin()
   vim.cmd(cmd)
 end
 
-vim.keymap.set('n', '<leader>vp', open_plugin)
+local otter = require("otter")
 
 --show kepbindings with whichkey
 --add your own here if you want them to
@@ -170,7 +170,9 @@ wk.register(
     },
     v = {
       name = 'vim',
+      p = {open_plugin, 'open plugin'},
       t = { switchTheme, 'switch theme' },
+      c = { ':Telescope colorscheme<cr>', 'colortheme' },
       l = { ':Lazy<cr>', 'Lazy' },
       m = { ':Mason<cr>', 'Mason' },
       s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', 'Settings' },
@@ -189,9 +191,11 @@ wk.register(
         d = { vim.diagnostic.disable, 'disable' },
         e = { vim.diagnostic.enable, 'enable' },
       },
+      g = { ':Neogen<cr>', 'neogen docstring'}
     },
     q = {
       name = 'quarto',
+      a = { ":QuartoActivate<cr>", 'activate' },
       p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
       q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
       h = { ":QuartoHelp ", 'help' },
@@ -214,7 +218,12 @@ wk.register(
       q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
       l = { "<cmd>Telescope loclist<cr>", "loclist" },
       j = { "<cmd>Telescope jumplist<cr>", "marks" },
-      p = { "<cmd>Telescope project<cr>", "project" },
+      p = { "project" },
+    },
+    h = {
+      name = 'hidden',
+      h = {':set conceallevel=1<cr>', 'hide/conceal'},
+      s = {':set conceallevel=0<cr>', 'show/unconceal'},
     },
     s = {
       name = "spellcheck",

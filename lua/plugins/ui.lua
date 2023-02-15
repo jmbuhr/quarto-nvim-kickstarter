@@ -53,14 +53,14 @@ return {
     telescope.load_extension('fzf')
     telescope.load_extension('ui-select')
     telescope.load_extension('file_browser')
-    telescope.load_extension('project')
+    -- telescope.load_extension('project')
   end
   },
   { 'nvim-telescope/telescope-ui-select.nvim' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   -- { 'nvim-telescope/telescope-dap.nvim' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
-  { 'nvim-telescope/telescope-project.nvim' },
+  -- { 'nvim-telescope/telescope-project.nvim' },
   { 'nvim-lualine/lualine.nvim',
     dependencies = {
       { 'f-person/git-blame.nvim' },
@@ -80,6 +80,9 @@ return {
 
         return ""
       end
+      local function macro_reg()
+        return vim.fn.reg_recording()
+      end
       require('lualine').setup {
         options = {
           section_separators = '',
@@ -88,10 +91,11 @@ return {
           theme = "catppuccin",
         },
         sections = {
+          lualine_a = {'mode', {macro_reg, type = 'lua_expr', color = 'WarningMsg'} },
+          lualine_b = {'branch', { search_count, type = 'lua_expr' } },
           lualine_c = {
             { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
           },
-          lualine_b = {'branch', { search_count, type = "lua_expr" } }
         },
         extensions = { 'nvim-tree' },
       }
