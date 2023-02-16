@@ -2,6 +2,11 @@
 
 Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
+## Videos
+
+Check out this playlist for a full guide and walkthrough:
+https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
+
 ## Setup
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
@@ -27,9 +32,14 @@ Check out the previous link for those (or comment out the extension in `./lua/pl
 
 Now you are good to go!
 
-## Videos
+## Updating
 
-https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
+Certain updates to plugins may leave behind unused plugin data. If this configuration produces an error on startup, try removing those first, allowing the lazy.nvim package manager to recreate the correct plugin structure:
+
+```bash
+rm -r ~/.local/share/nvim
+rm -r ~/.local/state/nvim
+```
 
 ## Screenshots
 
@@ -51,6 +61,7 @@ Or combine it with [tmux-kickstarter](https://github.com/jmbuhr/tmux-kickstarter
 
 Some of the plugins included are:
 
+- <https://github.com/folke/lazy.nvim>
 - <https://github.com/jpalardy/vim-slime>
 - <https://github.com/neovim/nvim-lspconfig>
 - <https://github.com/nvim-treesitter/nvim-treesitter>
