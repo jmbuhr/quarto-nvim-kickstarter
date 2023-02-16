@@ -151,7 +151,6 @@ local function open_plugin()
   vim.cmd(cmd)
 end
 
-local otter = require("otter")
 
 --show kepbindings with whichkey
 --add your own here if you want them to
@@ -251,10 +250,6 @@ wk.register(
         o = { ':DiffviewOpen<cr>', 'open' },
         c = { ':DiffviewClose<cr>', 'close' },
       }
-    },
-    t = {
-      name = 'treesitter',
-      h = { ":TSNodeUnderCursor<cr>", "hover" },
     },
     w = {
       name = 'write',
