@@ -1,7 +1,5 @@
 return {
   { 'quarto-dev/quarto-nvim',
-    -- version = nil,
-    -- branch = 'quarto-ft',
     dependencies = {
       { 'jmbuhr/otter.nvim',
         config = function ()
@@ -13,7 +11,6 @@ return {
             }
           }
         end,
-        dev = true,
       },
       { 'quarto-dev/quarto-vim',
         ft = 'quarto',
