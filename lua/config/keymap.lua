@@ -250,10 +250,6 @@ wk.register(
         c = { ':DiffviewClose<cr>', 'close' },
       }
     },
-    t = {
-      name = 'treesitter',
-      h = { ":TSNodeUnderCursor<cr>", "hover" },
-    },
     w = {
       name = 'write',
       w = { ":w<cr>", "write" },
