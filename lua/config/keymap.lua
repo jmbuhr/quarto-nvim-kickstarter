@@ -151,8 +151,6 @@ local function open_plugin()
   vim.cmd(cmd)
 end
 
-local otter = require("otter")
-
 --show kepbindings with whichkey
 --add your own here if you want them to
 --show up in the popup as well

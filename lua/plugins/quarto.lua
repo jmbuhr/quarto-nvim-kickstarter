@@ -3,7 +3,18 @@ return {
     -- version = nil,
     -- branch = 'quarto-ft',
     dependencies = {
-      { 'jmbuhr/otter.nvim', },
+      { 'jmbuhr/otter.nvim',
+        config = function ()
+          require'otter.config'.setup{
+            lsp = {
+              hover = {
+                border = require'misc.style'.border
+              }
+            }
+          }
+        end,
+        dev = true,
+      },
       { 'quarto-dev/quarto-vim',
         ft = 'quarto',
         dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
@@ -48,6 +59,7 @@ return {
         lspFeatures = {
           enabled = true,
           languages = { 'r', 'python', 'julia' },
+          chunks = 'curly', -- 'curly' or 'all'
           diagnostics = {
             enabled = true,
             triggers = { "BufWrite" }
