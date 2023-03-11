@@ -20,7 +20,7 @@ return {
     telescope.setup {
       defaults = {
         buffer_previewer_maker = new_maker,
-        file_ignore_patterns = { "node_modules", "%_files/*.html", "%_cache", ".git/", "site_libs" },
+        file_ignore_patterns = { "node_modules", "%_files/*.html", "%_cache", ".git/", "site_libs", ".venv" },
         layout_strategy = "flex",
         sorting_strategy = "ascending",
         layout_config = {
