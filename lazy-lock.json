@@ -51,7 +51,7 @@
   "playground": { "branch": "master", "commit": "4044b53c4d4fcd7a78eae20b8627f78ce7dc6f56" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "projections.nvim": { "branch": "main", "commit": "008de87749e6baa402a2ce2f3ebc75e724b95da1" },
-  "quarto-nvim": { "branch": "main", "commit": "72a24e072d51306a078014b6665413a76d9df6a6" },
+  "quarto-nvim": { "branch": "main", "commit": "91c82b96660d0b2d830c668365719b295272432d" },
   "quarto-vim": { "branch": "master", "commit": "216247339470794e74a5fda5e5515008d6dc1057" },
   "symbols-outline.nvim": { "branch": "master", "commit": "512791925d57a61c545bc303356e8a8f7869763c" },
   "tabby.nvim": { "branch": "main", "commit": "187b604da1a6452c700ce21fdf340ffbea956298" },
