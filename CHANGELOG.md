@@ -1,0 +1,11 @@
+# Changelog
+
+## [0.3.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.2.0...v0.3.0) (2023-03-11)
+
+
+### Features
+
+* add ci with autorelease ([1d53ef5](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1d53ef5d86b6dc5b1e9b3482483e9efc00cdaf74))
+* add DAP configuration ([eb48da3](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/eb48da3b897b4bf885fa9f2d51fdd173a54ac8f2))
+* ignore python .venv folder in telescope search ([071183a](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/071183a0bcdc3f095e7325d6d305e7e7f481f6d1))
+* update plugins ([5af0945](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/5af094561492d0a6ff9cfb6613d9c200148c282c))
