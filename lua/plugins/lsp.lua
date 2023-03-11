@@ -129,6 +129,10 @@ return {
       capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
       capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+      -- also needs:
+      -- $home/.config/marksman/config.toml :
+      -- [core]
+      -- markdown.file_extensions = ["md", "markdown", "qmd"]
       lspconfig.marksman.setup {
         on_attach = on_attach2,
         capabilities = capabilities,
