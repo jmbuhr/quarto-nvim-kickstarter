@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.3.0...v0.3.1) (2023-03-11)
+
+
+### Bug Fixes
+
+* also add marksman config example ([126937d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/126937dbc0770512142a5171c6f711c357adb4f3))
+
 ## [0.3.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.2.0...v0.3.0) (2023-03-11)
 
 
