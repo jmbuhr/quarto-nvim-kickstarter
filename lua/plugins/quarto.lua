@@ -1,6 +1,7 @@
 return {
   { 'quarto-dev/quarto-nvim',
     dependencies = {
+      { 'hrsh7th/nvim-cmp' },
       { 'jmbuhr/otter.nvim',
         config = function ()
           require'otter.config'.setup{
