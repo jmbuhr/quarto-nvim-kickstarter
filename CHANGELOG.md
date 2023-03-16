@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.3.1...v0.4.0) (2023-03-16)
+
+
+### Features
+
+* add bash language server ([96af1a1](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/96af1a13b97881d1b9334d5b3c7791c84c4b73b9))
+
 ## [0.3.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.3.0...v0.3.1) (2023-03-11)
 
 
