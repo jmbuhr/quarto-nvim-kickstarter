@@ -30,7 +30,7 @@ return {
       dashboard.section.footer.val = fortune({
         fortune_list = {
           { "You otter be proud of yourself!", "", "— 🦦" },
-          { "Hello from the otter slide!", "", "— Adele" },
+          { "Hello from the otter slide!", "", "— Otterdele" },
           { "To otter space!", "", "— 🦦" },
           { "What if I say I'm not like the otters?", "", "— Foo Fighters" },
         }

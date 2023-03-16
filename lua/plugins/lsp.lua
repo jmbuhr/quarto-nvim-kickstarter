@@ -62,7 +62,6 @@ return {
 
       local lspconfig = require('lspconfig')
       local cmp_nvim_lsp = require('cmp_nvim_lsp')
-      local configs = require 'lspconfig.configs'
       local util = require("lspconfig.util")
 
       require("mason").setup()
@@ -221,6 +220,13 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
+      }
+
+      lspconfig.bashls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+        filetypes = {'sh', 'bash'}
       }
     end
   }
