@@ -5,11 +5,11 @@ return {
       { 'neovim/nvim-lspconfig' },
       { 'nvim-treesitter/nvim-treesitter' },
       { 'jmbuhr/otter.nvim',
-        config = function ()
-          require'otter.config'.setup{
+        config = function()
+          require 'otter.config'.setup {
             lsp = {
               hover = {
-                border = require'misc.style'.border
+                border = require 'misc.style'.border
               }
             }
           }
@@ -57,7 +57,7 @@ return {
       require 'quarto'.setup {
         lspFeatures = {
           enabled = true,
-          languages = { 'r', 'python', 'julia' },
+          languages = { 'r', 'python', 'julia', 'bash' },
           chunks = 'curly', -- 'curly' or 'all'
           diagnostics = {
             enabled = true,
@@ -74,7 +74,7 @@ return {
   -- thanks to tmux can be used for any repl
   -- like ipython, R, bash
   { 'jpalardy/vim-slime',
-    config = function ()
+    init = function()
       vim.b.slime_cell_delimiter = "#%%"
       -- -- slime, tmux
       -- vim.g.slime_target = 'tmux'
@@ -84,6 +84,7 @@ return {
       -- slime, neovvim terminal
       vim.g.slime_target = "neovim"
       -- vim.g.slime_python_ipython = 1
+      --
     end
   },
   -- paste an image to markdown from the clipboard
