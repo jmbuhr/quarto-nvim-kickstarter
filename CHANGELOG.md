@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.4.0...v0.5.0) (2023-03-28)
+
+
+### Features
+
+* spellchecking exceptions for links ([55b62ae](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/55b62ae3a7cff76b30cb1b3243c69aa023a6cb8d))
+
 ## [0.4.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.3.1...v0.4.0) (2023-03-16)
 
 
