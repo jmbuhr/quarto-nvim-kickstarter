@@ -94,3 +94,10 @@
 ;   ] @conceal
 ;   (#set! conceal ""))
 
+[
+  (link_destination)
+  (uri_autolink)
+  (shortcut_link)
+  (code_span)
+] @nospell
+
