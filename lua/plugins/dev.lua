@@ -1,4 +1,10 @@
 return {
+
+  { "folke/neodev.nvim", config = function()
+    require("neodev").setup {}
+  end
+  },
+
   {'stevearc/profile.nvim',
     config = function()
       local should_profile = os.getenv("NVIM_PROFILE")
@@ -28,4 +34,5 @@ return {
       vim.keymap.set("", "<f1>", toggle_profile)
     end
   }
+
 }

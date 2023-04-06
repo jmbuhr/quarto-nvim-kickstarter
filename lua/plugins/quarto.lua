@@ -203,6 +203,8 @@ return {
       local lua_plugin_paths = {}
       table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
 
+      -- not upadated yet in automatic mason-lspconfig install,
+      -- open mason manually with `<space>vm` and `/` search for lua.
       lspconfig.lua_ls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
@@ -525,6 +527,5 @@ return {
   -- paste an image to markdown from the clipboard
   -- :PasteImg,
   'ekickx/clipboard-image.nvim',
-
 
 }
