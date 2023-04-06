@@ -1,102 +1,104 @@
 return {
-  { 'nvim-treesitter/nvim-treesitter',
-  tag = nil,
-  branch = 'master',
-  run = ':TSUpdate',
-  config = function()
-    require 'nvim-treesitter.configs'.setup {
-      ensure_installed = {
-        'r', 'python', 'markdown', 'markdown_inline',
-        'julia', 'bash', 'yaml', 'lua', 'vim',
-        'query', 'vimdoc', 'latex'
-      },
-      highlight = {
-        enable = true,
-        -- additional_vim_regex_highlighting = { 'markdown' },
-        additional_vim_regex_highlighting = false,
-        -- note: the vim regex based highlighting from
-        -- quarto-vim / vim-pandoc sets the wrong comment character
-        -- for some sections where there is `$` math.
-      },
-      indent = {
-        enable = true,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+  {
+    'nvim-treesitter/nvim-treesitter',
+    tag = nil,
+    branch = 'master',
+    run = ':TSUpdate',
+    config = function()
+      require 'nvim-treesitter.configs'.setup {
+        ensure_installed = {
+          'r', 'python', 'markdown', 'markdown_inline',
+          'julia', 'bash', 'yaml', 'lua', 'vim',
+          'query', 'vimdoc', 'latex'
         },
-      },
-      textobjects = {
-        select = {
+        highlight = {
           enable = true,
-          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          -- additional_vim_regex_highlighting = { 'markdown' },
+          additional_vim_regex_highlighting = false,
+          -- note: the vim regex based highlighting from
+          -- quarto-vim / vim-pandoc sets the wrong comment character
+          -- for some sections where there is `$` math.
+        },
+        indent = {
+          enable = true,
+        },
+        incremental_selection = {
+          enable = true,
           keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
-            ['ao'] = '@codechunk.outer',
-            ['io'] = '@codechunk.inner',
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
           },
         },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            [']m'] = '@function.outer',
-            [']c'] = '@codechunk.inner',
-            [']]'] = '@class.outer',
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+              ['ao'] = '@codechunk.outer',
+              ['io'] = '@codechunk.inner',
+            },
           },
-          goto_next_end = {
-            [']M'] = '@function.outer',
-            [']['] = '@class.outer',
-          },
-          goto_previous_start = {
-            ['[m'] = '@function.outer',
-            ['[c'] = '@codechunk.inner',
-            -- ['[['] = '@class.outer',
-          },
-          goto_previous_end = {
-            ['[M'] = '@function.outer',
-            ['[]'] = '@class.outer',
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              [']m'] = '@function.outer',
+              [']c'] = '@codechunk.inner',
+              [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+              [']M'] = '@function.outer',
+              [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+              ['[m'] = '@function.outer',
+              ['[c'] = '@codechunk.inner',
+              -- ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+              ['[M'] = '@function.outer',
+              ['[]'] = '@class.outer',
+            },
           },
         },
-      },
-    }
-  end
-},
--- { 'nvim-treesitter/nvim-treesitter-textobjects' },
--- { 'nvim-treesitter/playground',
---   tag = nil,
---   branch = 'master',
--- },
-  { 'neovim/nvim-lspconfig',
-  tag = nil,
-  version = nil,
-  branch = 'master',
-  event = "BufReadPre",
-  dependencies = {
-    { "williamboman/mason-lspconfig.nvim" },
-    { "williamboman/mason.nvim" },
-    { "hrsh7th/cmp-nvim-lsp" },
+      }
+    end
   },
-  config = function()
-    require('mason').setup()
-    require('mason-lspconfig').setup {
-      automatic_installation = true,
-    }
+  -- { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  -- { 'nvim-treesitter/playground',
+  --   tag = nil,
+  --   branch = 'master',
+  -- },
+  {
+    'neovim/nvim-lspconfig',
+    tag = nil,
+    version = nil,
+    branch = 'master',
+    event = "BufReadPre",
+    dependencies = {
+      { "williamboman/mason-lspconfig.nvim" },
+      { "williamboman/mason.nvim" },
+      { "hrsh7th/cmp-nvim-lsp" },
+    },
+    config = function()
+      require('mason').setup()
+      require('mason-lspconfig').setup {
+        automatic_installation = true,
+      }
 
-  local lspconfig = require('lspconfig')
-  local cmp_nvim_lsp = require('cmp_nvim_lsp')
-  local util = require("lspconfig.util")
+      local lspconfig = require('lspconfig')
+      local cmp_nvim_lsp = require('cmp_nvim_lsp')
+      local util = require("lspconfig.util")
 
-  local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+      local on_attach = function(client, bufnr)
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
         local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -240,7 +242,7 @@ return {
         flags = lsp_flags,
         root_dir = function(fname)
           return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or
-            util.path.dirname(fname)
+              util.path.dirname(fname)
         end
       }
 
@@ -265,13 +267,13 @@ return {
         capabilities = capabilities,
         flags = lsp_flags
       }
-
     end
   },
 
 
   -- completion
-  { 'hrsh7th/nvim-cmp',
+  {
+    'hrsh7th/nvim-cmp',
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-nvim-lsp-signature-help' },
@@ -289,7 +291,8 @@ return {
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
 
-      { "zbirenbaum/copilot-cmp",
+      {
+        "zbirenbaum/copilot-cmp",
         after = { "copilot.lua" },
         dependencies = { "zbirenbaum/copilot.lua" },
         config = function()
@@ -298,7 +301,8 @@ return {
             panel = { enabled = false },
           })
           require("copilot_cmp").setup()
-        end },
+        end
+      },
 
     },
     config = function()
@@ -379,16 +383,16 @@ return {
           },
         },
         sources = {
-          { name = 'copilot', keyword_length = 0, max_item_count = 3 },
+          { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
-          { name = 'luasnip', keyword_length = 3, max_item_count = 3 },
+          { name = 'luasnip',                keyword_length = 3, max_item_count = 3 },
           { name = 'pandoc_references' },
-          { name = 'buffer', keyword_length = 5, max_item_count = 3 },
+          { name = 'buffer',                 keyword_length = 5, max_item_count = 3 },
           { name = 'spell' },
-          { name = 'treesitter', keyword_length = 5, max_item_count = 3 },
+          { name = 'treesitter',             keyword_length = 5, max_item_count = 3 },
           { name = 'calc' },
           { name = 'latex_symbols' },
           { name = 'emoji' },
@@ -406,16 +410,17 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
       -- for custom snippets
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snips" } })
-
     end
   },
 
 
-  { 'quarto-dev/quarto-nvim',
+  {
+    'quarto-dev/quarto-nvim',
     dev = true,
     dependencies = {
       { 'hrsh7th/nvim-cmp' },
-      { 'jmbuhr/otter.nvim',
+      {
+        'jmbuhr/otter.nvim',
         dev = true,
         -- tag = nil,
         -- branch = 'nightly-treesitter',
@@ -475,7 +480,7 @@ return {
           languages = { 'r', 'python', 'julia', 'bash' },
           chunks = 'curly', -- 'curly' or 'all'
           diagnostics = {
-            enabled = false,
+            enabled = true,
             triggers = { "BufWritePost" }
           },
           completion = {
@@ -487,16 +492,16 @@ return {
   },
   -- send code from python/r/qmd documets to a terminal or REPL
   -- like ipython, R, bash
-  { 'jpalardy/vim-slime',
+  {
+    'jpalardy/vim-slime',
     init = function()
-
       Quarto_is_in_python_chunk = function()
-        require'otter.tools.functions'.is_otter_language_context('python')
+        require 'otter.tools.functions'.is_otter_language_context('python')
       end
 
       vim.cmd [[
       function SlimeOverride_EscapeText_quarto(text)
-      call v:lua.Quarto_is_in_python_chunk() 
+      call v:lua.Quarto_is_in_python_chunk()
       if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
       return ["%cpaste -q", "\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
       else
@@ -504,6 +509,23 @@ return {
       end
       endfunction
       ]]
+
+
+      local function mark_terminal()
+        vim.g.slime_last_channel = vim.b.terminal_job_id
+        vim.print(vim.g.slime_last_channel)
+      end
+
+      local function set_terminal()
+        -- vim.g.slime_default_config = nil
+        vim.b.slime_config = { jobid = vim.g.slime_last_channel }
+        -- vim.cmd.SlimeConfig()
+      end
+
+      require 'which-key'.register({
+        ['<leader>cm'] = { mark_terminal, 'mark terminal' },
+        ['<leader>cs'] = { set_terminal, 'set terminal' },
+      })
 
       vim.b.slime_cell_delimiter = "#%%"
 
@@ -518,7 +540,6 @@ return {
 
 
       local function toggleSlime()
-
         if vim.g.slime_target == 'tmux' then
           pcall(function()
             vim.b.slime_config = nil
@@ -543,9 +564,6 @@ return {
       end
 
       vim.keymap.set('n', '<leader>ct', toggleSlime)
-
-
-
     end
   },
   -- paste an image to markdown from the clipboard
