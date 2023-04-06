@@ -1,11 +1,8 @@
 return {
   { 'tpope/vim-repeat' },
   { 'tpope/vim-surround' },
-  { 'lukas-reineke/indent-blankline.nvim', config = function()
-    require("indent_blankline").setup {
-      show_current_context = true,
-      show_current_context_start = false,
-    }
+  { 'windwp/nvim-autopairs', config = function()
+    require('nvim-autopairs').setup {}
   end
   },
   -- commenting with e.g. `gcc` or `gcip`
