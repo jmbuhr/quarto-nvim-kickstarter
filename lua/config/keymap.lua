@@ -297,3 +297,4 @@ wk.register({
   ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
 }, { mode = 'i' })
+

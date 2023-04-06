@@ -1,101 +1,102 @@
 return {
-    { 'nvim-treesitter/nvim-treesitter',
-      tag = nil,
-      branch = 'master',
-      run = ':TSUpdate',
-      config = function()
-        require 'nvim-treesitter.configs'.setup {
-          ensure_installed = { 'r', 'python', 'markdown', 'markdown_inline', 'julia', 'bash', 'yaml', 'lua', 'vim',
-            'query', 'vimdoc', 'latex' },
-          highlight = {
-            enable = true,
-            -- additional_vim_regex_highlighting = { 'markdown' },
-            additional_vim_regex_highlighting = false,
-            -- note: the vim regex based highlighting from
-            -- quarto-vim / vim-pandoc sets the wrong comment character
-            -- for some sections where there is `$` math.
-          },
-          indent = {
-            enable = true,
-          },
-          incremental_selection = {
-            enable = true,
-            keymaps = {
-              init_selection = "gnn",
-              node_incremental = "grn",
-              scope_incremental = "grc",
-              node_decremental = "grm",
-            },
-          },
-          textobjects = {
-            select = {
-              enable = true,
-              lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-              keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
-                ['ac'] = '@class.outer',
-                ['ic'] = '@class.inner',
-                ['ao'] = '@codechunk.outer',
-                ['io'] = '@codechunk.inner',
-              },
-            },
-            move = {
-              enable = true,
-              set_jumps = true, -- whether to set jumps in the jumplist
-              goto_next_start = {
-                [']m'] = '@function.outer',
-                [']c'] = '@codechunk.inner',
-                [']]'] = '@class.outer',
-              },
-              goto_next_end = {
-                [']M'] = '@function.outer',
-                [']['] = '@class.outer',
-              },
-              goto_previous_start = {
-                ['[m'] = '@function.outer',
-                ['[c'] = '@codechunk.inner',
-                -- ['[['] = '@class.outer',
-              },
-              goto_previous_end = {
-                ['[M'] = '@function.outer',
-                ['[]'] = '@class.outer',
-              },
-            },
-          },
-        }
-      end
-    },
-    -- { 'nvim-treesitter/nvim-treesitter-textobjects' },
-    -- { 'nvim-treesitter/playground',
-    --   tag = nil,
-    --   branch = 'master',
-    -- },
-  { 'neovim/nvim-lspconfig',
-    tag = nil,
-    version = nil,
-    event = "BufReadPre",
-    dependencies = {
-      -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-      -- { "folke/neodev.nvim", config = true },
-      { "williamboman/mason.nvim", config = true },
-      { "williamboman/mason-lspconfig.nvim",
-        tag = nil,
-        version = nil,
-        opts = {
-          automatic_installation = true,
-        }
+  { 'nvim-treesitter/nvim-treesitter',
+  tag = nil,
+  branch = 'master',
+  run = ':TSUpdate',
+  config = function()
+    require 'nvim-treesitter.configs'.setup {
+      ensure_installed = {
+        'r', 'python', 'markdown', 'markdown_inline',
+        'julia', 'bash', 'yaml', 'lua', 'vim',
+        'query', 'vimdoc', 'latex'
       },
-      { "hrsh7th/cmp-nvim-lsp" },
-    },
-    config = function()
-      local lspconfig = require('lspconfig')
-      local cmp_nvim_lsp = require('cmp_nvim_lsp')
-      local util = require("lspconfig.util")
+      highlight = {
+        enable = true,
+        -- additional_vim_regex_highlighting = { 'markdown' },
+        additional_vim_regex_highlighting = false,
+        -- note: the vim regex based highlighting from
+        -- quarto-vim / vim-pandoc sets the wrong comment character
+        -- for some sections where there is `$` math.
+      },
+      indent = {
+        enable = true,
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+            ['ao'] = '@codechunk.outer',
+            ['io'] = '@codechunk.inner',
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            [']m'] = '@function.outer',
+            [']c'] = '@codechunk.inner',
+            [']]'] = '@class.outer',
+          },
+          goto_next_end = {
+            [']M'] = '@function.outer',
+            [']['] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[m'] = '@function.outer',
+            ['[c'] = '@codechunk.inner',
+            -- ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[M'] = '@function.outer',
+            ['[]'] = '@class.outer',
+          },
+        },
+      },
+    }
+  end
+},
+-- { 'nvim-treesitter/nvim-treesitter-textobjects' },
+-- { 'nvim-treesitter/playground',
+--   tag = nil,
+--   branch = 'master',
+-- },
+  { 'neovim/nvim-lspconfig',
+  tag = nil,
+  version = nil,
+  branch = 'master',
+  event = "BufReadPre",
+  dependencies = {
+    { "williamboman/mason-lspconfig.nvim" },
+    { "williamboman/mason.nvim" },
+    { "hrsh7th/cmp-nvim-lsp" },
+  },
+  config = function()
+    require('mason').setup()
+    require('mason-lspconfig').setup {
+      automatic_installation = true,
+    }
 
-      local on_attach = function(client, bufnr)
-        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local lspconfig = require('lspconfig')
+  local cmp_nvim_lsp = require('cmp_nvim_lsp')
+  local util = require("lspconfig.util")
+
+  local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
         local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -239,7 +240,7 @@ return {
         flags = lsp_flags,
         root_dir = function(fname)
           return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or
-              util.path.dirname(fname)
+            util.path.dirname(fname)
         end
       }
 
@@ -255,6 +256,16 @@ return {
         flags = lsp_flags,
         filetypes = { 'sh', 'bash' }
       }
+
+      -- Add additional languages here.
+      -- See `:h lspconfig-all` for the configuration.
+      -- Like e.g. Haskell:
+      lspconfig.hls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
     end
   },
 
@@ -277,6 +288,18 @@ return {
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
+
+      { "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        dependencies = { "zbirenbaum/copilot.lua" },
+        config = function()
+          require("copilot").setup({
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+          })
+          require("copilot_cmp").setup()
+        end },
+
     },
     config = function()
       local cmp = require 'cmp'
@@ -340,6 +363,7 @@ return {
             with_text = true,
             menu = {
               otter = "[🦦]",
+              copilot = '[]',
               luasnip = "[snip]",
               nvim_lsp = "[LSP]",
               buffer = "[buf]",
@@ -355,7 +379,8 @@ return {
           },
         },
         sources = {
-          { name = 'otter' }, -- quarto
+          { name = 'copilot', keyword_length = 0, max_item_count = 3 },
+          { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
@@ -425,7 +450,7 @@ return {
       -- 		custom replacement character defined (see
       -- 		|:syn-cchar|).
       -- 3		Concealed text is completely hidden.
-    --
+      --
       -- vim.opt.conceallevel = 1
       --
       -- -- disable conceal in markdown/quarto
@@ -460,68 +485,67 @@ return {
       }
     end
   },
-  -- send code from python/r/qmd docuemts to the terminal
-  -- thanks to tmux can be used for any repl
+  -- send code from python/r/qmd documets to a terminal or REPL
   -- like ipython, R, bash
   { 'jpalardy/vim-slime',
     init = function()
 
-      -- Quarto_is_in_python_chunk = function()
-      --   vim.b.quarto_is_python_chunk = false
-      --   local ts = vim.treesitter
-      --   local language_tree = ts.get_parser(0, 'markdown')
-      --   local syntax_tree = language_tree:parse()
-      --   local root = syntax_tree[1]:root()
-      --
-      --   -- create capture
-      --   local query = vim.treesitter.query.parse('markdown', require 'otter.tools.queries'['markdown'])
-      --
-      --   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-      --   row = row - 1
-      --   col = col
-      --
-      --   -- get text ranges
-      --   for pattern, match, metadata in query:iter_matches(root, 0) do
-      --     -- each match has two nodes, the language and the code
-      --     -- the language node is the first one
-      --     local found = false -- reset found for the next match
-      --     for id, node in pairs(match) do
-      --       local name = query.captures[id]
-      --       local ok, text = pcall(vim.treesitter.get_node_text, node, 0)
-      --       if not ok then return false end
-      --       if name == 'lang' and text == 'python' then
-      --         -- we found a match where the language node matches
-      --         -- the otter language
-      --         found = true
-      --       end
-      --       -- the corresponding code is in the current range
-      --       if found and name == 'code' and ts.is_in_node_range(node, row, col) then
-      --         vim.b.quarto_is_python_chunk = true
-      --       end
-      --     end
-      --   end
-      -- end
-      --
-      -- vim.cmd [[
-      -- function SlimeOverride_EscapeText_quarto(text)
-      --   call v:lua.Quarto_is_in_python_chunk() 
-      --   if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
-      --     return ["%cpaste -q", "\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
-      --   else
-      --     return a:text
-      --   end
-      -- endfunction
-      -- ]]
+      Quarto_is_in_python_chunk = function()
+        require'otter.tools.functions'.is_otter_language_context('python')
+      end
+
+      vim.cmd [[
+      function SlimeOverride_EscapeText_quarto(text)
+      call v:lua.Quarto_is_in_python_chunk() 
+      if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
+      return ["%cpaste -q", "\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
+      else
+      return a:text
+      end
+      endfunction
+      ]]
 
       vim.b.slime_cell_delimiter = "#%%"
+
+      -- slime, neovvim terminal
+      vim.g.slime_target = "neovim"
+      vim.g.slime_python_ipython = 1
+
       -- -- slime, tmux
       -- vim.g.slime_target = 'tmux'
       -- vim.g.slime_bracketed_paste = 1
       -- vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
 
-      -- slime, neovvim terminal
-      vim.g.slime_target = "neovim"
-      vim.g.slime_python_ipython = 1
+
+      local function toggleSlime()
+
+        if vim.g.slime_target == 'tmux' then
+          pcall(function()
+            vim.b.slime_config = nil
+            vim.g.slime_default_config = nil
+          end
+          )
+          -- slime, neovvim terminal
+          vim.g.slime_target = "neovim"
+          vim.g.slime_bracketed_paste = 0
+          vim.g.slime_python_ipython = 1
+        elseif vim.g.slime_target == 'neovim' then
+          pcall(function()
+            vim.b.slime_config = nil
+            vim.g.slime_default_config = nil
+          end
+          )
+          -- -- slime, tmux
+          vim.g.slime_target = 'tmux'
+          vim.g.slime_bracketed_paste = 1
+          vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
+        end
+      end
+
+      vim.keymap.set('n', '<leader>ct', toggleSlime)
+
+
+
     end
   },
   -- paste an image to markdown from the clipboard
