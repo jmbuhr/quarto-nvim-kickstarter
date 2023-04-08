@@ -13,11 +13,14 @@ return {
         },
         highlight = {
           enable = true,
-          -- additional_vim_regex_highlighting = { 'markdown' },
           additional_vim_regex_highlighting = false,
+          -- optional (with quarto-vim extension and pandoc-syntax)
+          -- additional_vim_regex_highlighting = { 'markdown' },
+
           -- note: the vim regex based highlighting from
           -- quarto-vim / vim-pandoc sets the wrong comment character
           -- for some sections where there is `$` math.
+
         },
         indent = {
           enable = true,
@@ -270,7 +273,6 @@ return {
     end
   },
 
-
   -- completion
   {
     'hrsh7th/nvim-cmp',
@@ -285,12 +287,13 @@ return {
       { 'f3fora/cmp-spell' },
       { 'ray-x/cmp-treesitter' },
       { 'kdheepak/cmp-latex-symbols' },
-      -- { 'jc-doyle/cmp-pandoc-references' },
       { 'jmbuhr/cmp-pandoc-references' },
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
 
+      -- optional
+      -- more things to try:
       {
         "zbirenbaum/copilot-cmp",
         after = { "copilot.lua" },
@@ -416,14 +419,16 @@ return {
 
   {
     'quarto-dev/quarto-nvim',
-    dev = true,
+    dev = false,
+    tag = nil,
+    branch = 'nightly',
     dependencies = {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
-        dev = true,
-        -- tag = nil,
-        -- branch = 'nightly-treesitter',
+        dev = false,
+        tag = nil,
+        branch = 'nightly-treesitter',
         config = function()
           require 'otter.config'.setup {
             lsp = {
@@ -472,6 +477,7 @@ return {
       -- vim.g['tex_conceal'] = 'gm'
       -- --   end
       -- },
+
     },
     config = function()
       require 'quarto'.setup {
@@ -490,6 +496,7 @@ return {
       }
     end
   },
+
   -- send code from python/r/qmd documets to a terminal or REPL
   -- like ipython, R, bash
   {
@@ -510,22 +517,14 @@ return {
       endfunction
       ]]
 
-
       local function mark_terminal()
         vim.g.slime_last_channel = vim.b.terminal_job_id
         vim.print(vim.g.slime_last_channel)
       end
 
       local function set_terminal()
-        -- vim.g.slime_default_config = nil
         vim.b.slime_config = { jobid = vim.g.slime_last_channel }
-        -- vim.cmd.SlimeConfig()
       end
-
-      require 'which-key'.register({
-        ['<leader>cm'] = { mark_terminal, 'mark terminal' },
-        ['<leader>cs'] = { set_terminal, 'set terminal' },
-      })
 
       vim.b.slime_cell_delimiter = "#%%"
 
@@ -538,8 +537,7 @@ return {
       -- vim.g.slime_bracketed_paste = 1
       -- vim.g.slime_default_config = { socket_name = "default", target_pane = ".2" }
 
-
-      local function toggleSlime()
+      local function toggle_slime_tmux_nvim()
         if vim.g.slime_target == 'tmux' then
           pcall(function()
             vim.b.slime_config = nil
@@ -563,11 +561,16 @@ return {
         end
       end
 
-      vim.keymap.set('n', '<leader>ct', toggleSlime)
+      require 'which-key'.register({
+        ['<leader>cm'] = { mark_terminal, 'mark terminal' },
+        ['<leader>cs'] = { set_terminal, 'set terminal' },
+        ['<leader>ct'] = { toggle_slime_tmux_nvim, 'toggle tmux/nvim terminal' },
+      })
     end
   },
+
   -- paste an image to markdown from the clipboard
   -- :PasteImg,
-  'ekickx/clipboard-image.nvim',
+  { 'ekickx/clipboard-image.nvim' },
 
 }

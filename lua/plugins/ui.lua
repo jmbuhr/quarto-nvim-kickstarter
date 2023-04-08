@@ -68,6 +68,7 @@ return {
     },
     config = function()
       local git_blame = require('gitblame')
+      vim.g.gitblame_display_virtual_text = 0
       vim.o.shortmess = vim.o.shortmess .. "S" -- this is for the search_count function so lua can know this is `lua expression`
       --function for optimizing the search count 
       local function search_count()

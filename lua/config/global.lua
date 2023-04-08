@@ -1,9 +1,6 @@
 vim.g.markdown_fenced_languages = { 'html', 'python', 'bash=sh', 'R=r' }
 vim.opt.termguicolors = true
 
-vim.opt.shada = nil
-vim.opt.swapfile = false
-
 -- more opinionated
 vim.opt.number = true -- show linenumbers
 vim.opt.timeoutlen = 400 -- until which-key pops up
@@ -63,12 +60,5 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 0
-
--- plugins
--- slime, general
-vim.b.slime_cell_delimiter = "#%%"
-
--- git blame, lualine
-vim.g.gitblame_display_virtual_text = 0
 
 
