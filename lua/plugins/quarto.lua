@@ -9,7 +9,7 @@ return {
         ensure_installed = {
           'r', 'python', 'markdown', 'markdown_inline',
           'julia', 'bash', 'yaml', 'lua', 'vim',
-          'query', 'vimdoc', 'latex'
+          'query', 'vimdoc', 'latex', 'html', 'css'
         },
         highlight = {
           enable = true,
@@ -225,7 +225,7 @@ return {
               plugin = lua_plugin_paths,
             },
             diagnostics = {
-              globals = { 'vim', 'quarto', 'pandoc', 'io', 'string', 'print', 'require', 'table' },
+              globals = { 'vim', 'quarto', 'pandoc', 'io', 'string', 'print', 'require', 'table', 'has' },
               disable = { 'trailing-space' },
             },
             workspace = {
@@ -265,11 +265,11 @@ return {
       -- Add additional languages here.
       -- See `:h lspconfig-all` for the configuration.
       -- Like e.g. Haskell:
-      lspconfig.hls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags
-      }
+      -- lspconfig.hls.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags
+      -- }
     end
   },
 
@@ -294,18 +294,18 @@ return {
 
       -- optional
       -- more things to try:
-      {
-        "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
-        dependencies = { "zbirenbaum/copilot.lua" },
-        config = function()
-          require("copilot").setup({
-            suggestion = { enabled = false },
-            panel = { enabled = false },
-          })
-          require("copilot_cmp").setup()
-        end
-      },
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   after = { "copilot.lua" },
+      --   dependencies = { "zbirenbaum/copilot.lua" },
+      --   config = function()
+      --     require("copilot").setup({
+      --       suggestion = { enabled = false },
+      --       panel = { enabled = false },
+      --     })
+      --     require("copilot_cmp").setup()
+      --   end
+      -- },
 
     },
     config = function()
@@ -386,7 +386,7 @@ return {
           },
         },
         sources = {
-          { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
+          -- { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
@@ -481,8 +481,10 @@ return {
     },
     config = function()
       require 'quarto'.setup {
+        debug = false,
+        closePreviewOnExit = true,
         lspFeatures = {
-          enabled = true,
+          enabled = false,
           languages = { 'r', 'python', 'julia', 'bash' },
           chunks = 'curly', -- 'curly' or 'all'
           diagnostics = {
@@ -490,9 +492,13 @@ return {
             triggers = { "BufWritePost" }
           },
           completion = {
-            enabled = true
-          }
-        }
+            enabled = false,
+          },
+        },
+        keymap = {
+          hover = 'K',
+          definition = 'gd'
+        },
       }
     end
   },

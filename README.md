@@ -13,7 +13,7 @@ https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
-If you already have your own configuration check out `lua/plugins/quarto.lua`
+If you already have your own configuration, check out `lua/plugins/quarto.lua`
 for the configuration of all plugins directly relevant to your Quarto experience.
 
 This configuration can make use of a "Nerd Font" for icons and symbols.
