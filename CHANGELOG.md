@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.5.0...v0.6.0) (2023-04-09)
+
+
+### Features
+
+* add kebinding to mark and switch between terminal targets ([d2492ef](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d2492efa67779466fee95beb1c61b9ba899ce0d3))
+* show optional features ([1487088](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/148708815987bf41e88f918a45eda64247db094b))
+* use ipython cpaste when in python code chunk ([0756a76](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/0756a76273420edf78c9919ef9a58c180fd07f54))
+
 ## [0.5.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.4.0...v0.5.0) (2023-03-28)
 
 
