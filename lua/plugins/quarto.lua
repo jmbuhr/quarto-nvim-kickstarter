@@ -2,16 +2,12 @@ return {
 
   {
     'quarto-dev/quarto-nvim',
-    dev = false,
-    -- tag = nil,
-    -- branch = 'nightly',
+    version = '0.7.3',
     dependencies = {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
-        dev = false,
-        -- tag = nil,
-        -- branch = 'nightly',
+        version = '0.8.1',
         config = function()
           require 'otter.config'.setup {
             lsp = {
@@ -78,15 +74,14 @@ return {
 
   {
     'nvim-treesitter/nvim-treesitter',
-    tag = nil,
-    branch = 'master',
+    version = '0.8.3',
     run = ':TSUpdate',
     config = function()
       require 'nvim-treesitter.configs'.setup {
         ensure_installed = {
           'r', 'python', 'markdown', 'markdown_inline',
           'julia', 'bash', 'yaml', 'lua', 'vim',
-          'query', 'vimdoc', 'latex', 'html', 'css'
+          'query', 'help', 'latex', 'html', 'css'
         },
         highlight = {
           enable = true,
@@ -236,12 +231,12 @@ return {
       -- $home/.config/marksman/config.toml :
       -- [core]
       -- markdown.file_extensions = ["md", "markdown", "qmd"]
-      lspconfig.marksman.setup {
-        on_attach = on_attach2,
-        capabilities = capabilities,
-        filetypes = { 'markdown', 'quarto' },
-        root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
-      }
+      -- lspconfig.marksman.setup {
+      --   on_attach = on_attach2,
+      --   capabilities = capabilities,
+      --   filetypes = { 'markdown', 'quarto' },
+      --   root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+      -- }
 
       lspconfig.r_language_server.setup {
         on_attach = on_attach,
