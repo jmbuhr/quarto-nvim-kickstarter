@@ -30,15 +30,15 @@ vim.g.nord_borders = true
 vim.opt.smartindent = true
 vim.opt.breakindent = true
 
--- consisten number column
+-- consistent number column
 vim.opt.signcolumn = "yes:1"
 
--- how to show a autocomplete menu
+-- how to show autocomplete menu
 vim.opt.completeopt = 'menuone,noinsert'
 
 -- add folds with treesitter grammar
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- but open all by default
 vim.opt.foldlevel = 99
 
@@ -60,12 +60,5 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 0
-
--- plugins
--- slime, general
-vim.b.slime_cell_delimiter = "#%%"
-
--- git blame, lualine
-vim.g.gitblame_display_virtual_text = 0
 
 

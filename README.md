@@ -2,6 +2,8 @@
 
 Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
+This requires Neovim >= **v0.9.0** (https://github.com/neovim/neovim/releases/tag/stable)
+
 ## Videos
 
 Check out this playlist for a full guide and walkthrough:
@@ -10,6 +12,9 @@ https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
 ## Setup
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
+
+If you already have your own configuration, check out `lua/plugins/quarto.lua`
+for the configuration of all plugins directly relevant to your Quarto experience.
 
 This configuration can make use of a "Nerd Font" for icons and symbols.
 Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
@@ -55,7 +60,6 @@ Use the integrated neovim terminal to execute code chunks:
 Or combine it with [tmux-kickstarter](https://github.com/jmbuhr/tmux-kickstarter) for an even more versatile data science experience!
 
 ![image](https://user-images.githubusercontent.com/17450586/210393754-04404e62-15ab-4cb2-afba-deeefc3fec9e.png)
-
 
 ## Links to the plugins
 

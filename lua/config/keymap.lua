@@ -14,41 +14,6 @@ R = function(name)
   return require(name)
 end
 
--- save in insert mode
-vim.keymap.set("i", "<C-s>", "<cmd>:w<cr><esc>")
-vim.keymap.set("n", "<C-s>", "<cmd>:w<cr><esc>")
-
--- Resize window using <shift> arrow keys
-vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>")
-vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>")
-vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>")
-vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>")
-
--- Move between windows using <ctrl> direction
-vim.keymap.set("n", '<C-j>', '<C-W>j')
-vim.keymap.set("n", '<C-k>', '<C-W>k')
-vim.keymap.set("n", '<C-h>', '<C-W>h')
-vim.keymap.set("n", '<C-l>', '<C-W>l')
-
--- Add undo break-points
-vim.keymap.set("i", ",", ",<c-g>u")
-vim.keymap.set("i", ".", ".<c-g>u")
-vim.keymap.set("i", ";", ";<c-g>u")
-
-
-function _G.set_terminal_keymaps()
-  local opts = { buffer = 0 }
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
 local nmap = function(key, effect)
   vim.keymap.set('n', key, effect, { silent = true, noremap = true })
 end
@@ -61,15 +26,26 @@ local imap = function(key, effect)
   vim.keymap.set('i', key, effect, { silent = true, noremap = true })
 end
 
-local function switchTheme()
-  if vim.o.background == 'light' then
-    vim.o.background = 'dark'
-    vim.cmd [[Catppuccin mocha]]
-  else
-    vim.o.background = 'light'
-    vim.cmd [[Catppuccin latte]]
-  end
-end
+-- save with ctrl+s
+imap("<C-s>", "<cmd>:w<cr><esc>")
+nmap("<C-s>", "<cmd>:w<cr><esc>")
+
+-- Move between windows using <ctrl> direction
+nmap('<C-j>', '<C-W>j')
+nmap('<C-k>', '<C-W>k')
+nmap('<C-h>', '<C-W>h')
+nmap('<C-l>', '<C-W>l')
+
+-- Resize window using <shift> arrow keys
+nmap("<S-Up>", "<cmd>resize +2<CR>")
+nmap("<S-Down>", "<cmd>resize -2<CR>")
+nmap("<S-Left>", "<cmd>vertical resize -2<CR>")
+nmap("<S-Right>", "<cmd>vertical resize +2<CR>")
+
+-- Add undo break-points
+imap(",", ",<c-g>u")
+imap(".", ".<c-g>u")
+imap(";", ";<c-g>u")
 
 nmap('Q', '<Nop>')
 
@@ -87,12 +63,6 @@ imap('<s-cr>', '<esc><Plug>SlimeSendCell<cr>i')
 vmap('<cr>', '<Plug>SlimeRegionSend')
 nmap('<leader><cr>', '<Plug>SlimeSendCell')
 
--- list hidden buffers
-nmap('<leader>ls', ':ls!<cr>')
-nmap('<leader>vh', ':execute "h " . expand("<cword>")<cr>')
-
--- source entire file
-nmap('<leader>xx', ':w<cr>:source %<cr>')
 
 -- keep selection after indent/dedent
 vmap('>', '>gv')
@@ -115,17 +85,6 @@ nmap('n', "nzz")
 nmap('<c-d>', '<c-d>zz')
 nmap('<c-u>', '<c-u>zz')
 
-
--- terminal mode
--- get out ouf terminal insert mode with esc
-vim.keymap.set('t', '<esc>', [[<c-\><c-n>]], { silent = true, noremap = true })
---move to other window
-vim.keymap.set('t', '<c-j>', [[<c-\><c-n><c-w>w]], { silent = true, noremap = true })
-vim.keymap.set('n', '<leader>j', [[<c-w>wi]], { silent = true, noremap = true })
-
--- open filetree
-nmap('<c-b>', '<cmd>NvimTreeToggle<cr>')
-
 -- move between splits and tabs
 nmap('<c-h>', '<c-w>h')
 nmap('<c-l>', '<c-w>l')
@@ -134,21 +93,14 @@ nmap('<c-k>', '<c-w>k')
 nmap('H', '<cmd>tabprevious<cr>')
 nmap('L', '<cmd>tabnext<cr>')
 
-local function open_plugin()
-  local word = vim.fn.expand('<cWORD>')
-  -- url = string.match(url, '".+"')
-  local url = string.match(word, '%b""')
-  if url ~= nil then
-    url = string.gsub(url, '["\']', '')
+local function toggle_light_dark_theme()
+  if vim.o.background == 'light' then
+    vim.o.background = 'dark'
+    vim.cmd [[Catppuccin mocha]]
   else
-    url = string.match(word, "%b''")
-    if url ~= nil then
-      url = string.gsub(url, '["\']', '')
-    end
+    vim.o.background = 'light'
+    vim.cmd [[Catppuccin latte]]
   end
-  url = 'https://github.com/' .. url
-  local cmd = "!brave-browser " .. url
-  vim.cmd(cmd)
 end
 
 --show kepbindings with whichkey
@@ -159,21 +111,20 @@ wk.register(
     c = {
       name = 'code',
       c = { ':SlimeConfig<cr>', 'slime config' },
-      n = {  ':split term://$SHELL<cr>', 'new terminal' },
-      r = {  ':split term://R<cr>', 'new R terminal' },
-      p = {  ':split term://python<cr>', 'new python terminal' },
-      i = {  ':split term://ipython<cr>', 'new ipython terminal' },
-      j = {  ':split term://julia<cr>', 'new julia terminal' },
-      s = {  ':echo b:terminal_job_id<cr>', 'show terminal id' },
+      n = { ':split term://$SHELL<cr>', 'new terminal' },
+      r = { ':split term://R<cr>', 'new R terminal' },
+      p = { ':split term://python<cr>', 'new python terminal' },
+      i = { ':split term://ipython<cr>', 'new ipython terminal' },
+      j = { ':split term://julia<cr>', 'new julia terminal' },
     },
     v = {
       name = 'vim',
-      p = {open_plugin, 'open plugin'},
-      t = { switchTheme, 'switch theme' },
+      t = { toggle_light_dark_theme, 'switch theme' },
       c = { ':Telescope colorscheme<cr>', 'colortheme' },
       l = { ':Lazy<cr>', 'Lazy' },
       m = { ':Mason<cr>', 'Mason' },
       s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', 'Settings' },
+      h = { ':execute "h " . expand("<cword>")<cr>', 'help' }
     },
     l = {
       name = 'language/lsp',
@@ -189,7 +140,8 @@ wk.register(
         d = { vim.diagnostic.disable, 'disable' },
         e = { vim.diagnostic.enable, 'enable' },
       },
-      g = { ':Neogen<cr>', 'neogen docstring'}
+      g    = { ':Neogen<cr>', 'neogen docstring' },
+      s    = { ':ls!<cr>', 'list all buffers' },
     },
     q = {
       name = 'quarto',
@@ -219,9 +171,18 @@ wk.register(
       p = { "project" },
     },
     h = {
-      name = 'hidden',
-      h = {':set conceallevel=1<cr>', 'hide/conceal'},
-      s = {':set conceallevel=0<cr>', 'show/unconceal'},
+      name = 'help/debug/conceal',
+      c = {
+        name = 'conceal',
+        h = { ':set conceallevel=1<cr>', 'hide/conceal' },
+        s = { ':set conceallevel=0<cr>', 'show/unconceal' },
+      },
+      t = {
+        name = 'treesitter',
+        t = { vim.treesitter.inspect_tree, 'show tree' },
+        c = { ':=vim.treesitter.get_captures_at_cursor()<cr>', 'show capture' },
+        n = { ':=vim.treesitter.get_node():type()<cr>', 'show node' },
+      }
     },
     s = {
       name = "spellcheck",
@@ -254,13 +215,16 @@ wk.register(
       name = 'write',
       w = { ":w<cr>", "write" },
     },
+    x = {
+      name = 'execute',
+      x = { ':w<cr>:source %<cr>', 'file' }
+    }
   }, { mode = 'n', prefix = '<leader>' }
 )
 
 -- normal mode
 wk.register({
   ['<c-LeftMouse>'] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'go to definition' },
-  ['gx']            = { ':!xdg-open <c-r><c-a><cr>', 'open file' },
   ["<c-q>"]         = { '<cmd>q<cr>', 'close buffer' },
   ['<esc>']         = { '<cmd>noh<cr>', 'remove search highlight' },
   ['n']             = { 'nzzzv', 'center search' },
@@ -277,7 +241,6 @@ wk.register({
 -- visual mode
 wk.register({
   ['<cr>'] = { '<Plug>SlimeRegionSend', 'run code region' },
-  ['gx'] = { '"ty:!xdg-open t<cr>', 'open file' },
   ['<M-j>'] = { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
   ['<M-k>'] = { ":m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
   ['.'] = { ':norm .<cr>', 'repat last normal mode command' },
