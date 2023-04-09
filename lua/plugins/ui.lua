@@ -116,6 +116,9 @@ return {
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
   -- filetree
   { 'kyazdani42/nvim-tree.lua',
+    keys = {
+      { '<c-b>', ':NvimTreeToggle<cr>' },
+    },
     config = function()
       require 'nvim-tree'.setup {
         disable_netrw       = true,

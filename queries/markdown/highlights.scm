@@ -1,4 +1,5 @@
 ;From MDeiml/tree-sitter-markdown
+;From MDeiml/tree-sitter-markdown
 (atx_heading (inline) @text.title)
 (setext_heading (paragraph) @text.title)
 
@@ -65,10 +66,9 @@
 ] @string.escape
 
 ; ([
-;   ; (info_string)
+;   (info_string)
 ;   (fenced_code_block_delimiter)
 ; ] @conceal
 ; (#set! conceal ""))
 
 (inline) @spell
-

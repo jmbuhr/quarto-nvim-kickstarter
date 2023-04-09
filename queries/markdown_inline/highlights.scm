@@ -1,9 +1,9 @@
 ;; From MDeiml/tree-sitter-markdown
-;; https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/markdown_inline/highlights.scm
+;; From MDeiml/tree-sitter-markdown
 [
   (code_span)
   (link_title)
-] @text.literal
+] @text.literal @nospell
 
 [
   (emphasis_delimiter)
@@ -19,7 +19,7 @@
 [
   (link_destination)
   (uri_autolink)
-] @text.uri
+] @text.uri @nospell
 
 [
   (link_label)
@@ -39,14 +39,14 @@
 (inline_link ["[" "]" "(" ")"] @punctuation.delimiter)
 (shortcut_link ["[" "]"] @punctuation.delimiter)
 
-; Conceal codeblock and text style markers
+; ; Conceal codeblock and text style markers
 ; ([
 ;   (code_span_delimiter)
 ;   (emphasis_delimiter)
 ; ] @conceal
 ; (#set! conceal ""))
 
-; Conceal inline links
+; ; Conceal inline links
 ; (inline_link
 ;   [
 ;     "["
@@ -57,7 +57,7 @@
 ;   ] @conceal
 ;   (#set! conceal ""))
 
-; Conceal image links
+; ; Conceal image links
 ; (image
 ;   [
 ;     "!"
@@ -69,7 +69,7 @@
 ;   ] @conceal
 ;   (#set! conceal ""))
 
-; Conceal full reference links
+; ; Conceal full reference links
 ; (full_reference_link
 ;   [
 ;     "["
@@ -78,7 +78,7 @@
 ;   ] @conceal
 ;   (#set! conceal ""))
 
-; Conceal collapsed reference links
+; ; Conceal collapsed reference links
 ; (collapsed_reference_link
 ;   [
 ;     "["
@@ -86,7 +86,7 @@
 ;   ] @conceal
 ;   (#set! conceal ""))
 
-; Conceal shortcut links
+; ; Conceal shortcut links
 ; (shortcut_link
 ;   [
 ;     "["
@@ -95,9 +95,5 @@
 ;   (#set! conceal ""))
 
 [
-  (link_destination)
-  (uri_autolink)
   (shortcut_link)
-  (code_span)
 ] @nospell
-
