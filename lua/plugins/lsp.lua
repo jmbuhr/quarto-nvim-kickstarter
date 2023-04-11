@@ -136,11 +136,5 @@ return {
             util.path.dirname(fname)
       end
     }
-
-    lspconfig.julials.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = lsp_flags,
-    }
   end
 }

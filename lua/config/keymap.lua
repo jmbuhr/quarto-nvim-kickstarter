@@ -35,7 +35,6 @@ vim.keymap.set("i", ",", ",<c-g>u")
 vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
 
-
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
@@ -64,7 +63,7 @@ end
 local function switchTheme()
   if vim.o.background == 'light' then
     vim.o.background = 'dark'
-    vim.cmd [[Catppuccin mocha]]
+    vim.cmd [[Catppuccin frappe]]
   else
     vim.o.background = 'light'
     vim.cmd [[Catppuccin latte]]
@@ -133,6 +132,9 @@ nmap('<c-j>', '<c-w>j')
 nmap('<c-k>', '<c-w>k')
 nmap('H', '<cmd>tabprevious<cr>')
 nmap('L', '<cmd>tabnext<cr>')
+
+-- R bindings added by JG
+-- imap("<C-n>", "%>%")
 
 local function open_plugin()
   local word = vim.fn.expand('<cWORD>')
@@ -289,8 +291,8 @@ wk.register({
 wk.register({
   -- ['<c-e>'] = { "<esc>:FeMaco<cr>i", "edit code" },
   ['<m-->'] = { ' <- ', "assign" },
-  ['<m-m>'] = { ' |>', "pipe" },
-  ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
+  ['<m-m>'] = { ' %>%', "pipe" },
+  ['<m-i>'] = { '```r<cr>```<esc>O', "r code chunk" },
   ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
 }, { mode = 'i' })

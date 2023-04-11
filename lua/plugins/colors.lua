@@ -4,7 +4,7 @@ return {
   { 'EdenEast/nightfox.nvim' },
   { "catppuccin/nvim", name = "catppuccin", config = function()
     require("catppuccin").setup {
-      flavour = "mocha", -- mocha, macchiato, frappe, latte
+      flavour = "frappe", -- mocha, macchiato, frappe, latte
       term_colors = true,
       integrations = {
         nvimtree = true,
@@ -15,7 +15,7 @@ return {
       }
     }
     vim.cmd.colorscheme 'catppuccin'
-    local colors = require('catppuccin.palettes.mocha')
+    local colors = require('catppuccin.palettes.frappe')
     vim.cmd.highlight { 'Tabline', 'guifg=' .. colors.green, 'guibg=' .. colors.mantle }
   end
   },
