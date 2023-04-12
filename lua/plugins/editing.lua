@@ -5,6 +5,7 @@ return {
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup {}
+      require('nvim-autopairs').remove_rule('`')
     end
   },
   -- commenting with e.g. `gcc` or `gcip`
@@ -13,9 +14,7 @@ return {
     'numToStr/Comment.nvim',
     version = nil,
     branch = 'master',
-    config = function()
-      require('Comment').setup {}
-    end
+    config = true, -- default settings
   },
   {
     "danymat/neogen",
