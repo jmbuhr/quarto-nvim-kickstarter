@@ -140,7 +140,7 @@ return {
             goto_previous_start = {
               ['[m'] = '@function.outer',
               ['[c'] = '@codechunk.inner',
-              -- ['[['] = '@class.outer',
+              ['[['] = '@class.outer',
             },
             goto_previous_end = {
               ['[M'] = '@function.outer',
@@ -151,7 +151,7 @@ return {
       }
     end
   },
-  -- { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  { 'nvim-treesitter/nvim-treesitter-textobjects' },
   {
     'neovim/nvim-lspconfig',
     tag = nil,
