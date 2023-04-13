@@ -12,7 +12,8 @@ return {
         gitsigns = true,
         telescope = true,
         treesitter = true
-      }
+      },
+      transparent_background = false,
     }
     vim.cmd.colorscheme 'catppuccin'
     local colors = require('catppuccin.palettes.mocha')
