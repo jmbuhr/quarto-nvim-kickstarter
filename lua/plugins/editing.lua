@@ -11,8 +11,7 @@ return {
   -- respects TS, so it works in quarto documents
   {
     'numToStr/Comment.nvim',
-    version = nil,
-    branch = 'master',
+    version = '0.8.0',
     config = function()
       require('Comment').setup {}
     end
