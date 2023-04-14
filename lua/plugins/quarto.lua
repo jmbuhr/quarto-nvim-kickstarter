@@ -74,11 +74,37 @@ return {
 
   {
     'nvim-treesitter/nvim-treesitter',
+    dev = true,
     tag = nil,
     branch = 'master',
     run = ':TSUpdate',
     config = function()
+
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.quarto = {
+        install_info = {
+          url = "~/projects/tree-sitter-quarto/tree-sitter-quarto", -- local path or git repo
+          files = { "src/parser.c", "src/scanner.c" },       -- note that some parsers also require src/scanner.c or src/scanner.cc
+          -- optional entries:
+          branch = "main",                  -- default branch in case of git repo if different from master
+          generate_requires_npm = false,    -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+        },
+        filetype = "quarto",                    -- if filetype does not match the parser name
+      }
+      parser_config.quarto_inline = {
+        install_info = {
+          url = "~/projects/tree-sitter-quarto/tree-sitter-quarto-inline", -- local path or git repo
+          files = { "src/parser.c", "src/scanner.c" },       -- note that some parsers also require src/scanner.c or src/scanner.cc
+          -- optional entries:
+          branch = "main",                  -- default branch in case of git repo if different from master
+          generate_requires_npm = false,    -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+        }
+      }
+
       require 'nvim-treesitter.configs'.setup {
+        auto_install = true,
         ensure_installed = {
           'r', 'python', 'markdown', 'markdown_inline',
           'julia', 'bash', 'yaml', 'lua', 'vim',
@@ -145,6 +171,7 @@ return {
           },
         },
       }
+
     end
   },
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
@@ -371,18 +398,18 @@ return {
 
       -- optional
       -- more things to try:
-      -- {
-      --   "zbirenbaum/copilot-cmp",
-      --   after = { "copilot.lua" },
-      --   dependencies = { "zbirenbaum/copilot.lua" },
-      --   config = function()
-      --     require("copilot").setup({
-      --       suggestion = { enabled = false },
-      --       panel = { enabled = false },
-      --     })
-      --     require("copilot_cmp").setup()
-      --   end
-      -- },
+      {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        dependencies = { "zbirenbaum/copilot.lua" },
+        config = function()
+          require("copilot").setup({
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+          })
+          require("copilot_cmp").setup()
+        end
+      },
 
     },
     config = function()
@@ -463,7 +490,7 @@ return {
           },
         },
         sources = {
-          -- { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
+          { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
