@@ -3,15 +3,11 @@ return {
   {
     'quarto-dev/quarto-nvim',
     dev = false,
-    -- tag = nil,
-    -- branch = 'nightly',
     dependencies = {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
         dev = false,
-        -- tag = nil,
-        -- branch = 'nightly',
         config = function()
           require 'otter.config'.setup {
             lsp = {
