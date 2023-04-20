@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.6.0...v0.7.0) (2023-04-20)
+
+
+### Features
+
+* add keybindings to add different code chunks ([f2cd9d6](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f2cd9d619b7a6efdcaa04e939382df78f1b73b5c))
+* re-introduce codechunk textobjects to jump to ([cb06ff7](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/cb06ff7e16b31ebcf26271905dd0c1e477e4d3f9))
+
+
+### Bug Fixes
+
+* don't autopair backticks ([5b0ed1f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/5b0ed1f214fc7f160aaedda85d2bacb03686d990))
+
 ## [0.6.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.5.0...v0.6.0) (2023-04-09)
 
 
