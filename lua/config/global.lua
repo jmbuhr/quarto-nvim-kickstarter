@@ -9,6 +9,9 @@ vim.opt.mouse = 'a' -- enable mouse
 vim.opt.mousefocus = true
 vim.opt.clipboard:append 'unnamedplus' -- use system clipboard
 
+-- don't ask about existing swap files
+vim.opt.shortmess:append 'A'
+
 -- use spaces as tabs
 local tabsize = 2
 vim.opt.expandtab = true
