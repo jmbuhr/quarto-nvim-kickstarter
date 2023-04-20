@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.7.0...v0.8.0) (2023-04-20)
+
+
+### Features
+
+* add &lt;leader&gt;qr keybindings to run code with vim-slime ([8959d0d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8959d0d4b468394ee901348d424a7e9d0d8d8e37))
+* be less verbose ([9385099](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/93850996bbc58f74e29a276b3293c55fddc5d650))
+
 ## [0.7.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.6.0...v0.7.0) (2023-04-20)
 
 
