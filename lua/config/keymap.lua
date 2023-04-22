@@ -240,6 +240,7 @@ wk.register({
   ['cob']           = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
   ['cor']           = { 'o```{r}<cr>```<esc>O', "r code chunk" },
   ['cop']           = { 'o```{python}<cr>```<esc>O', "python code chunk" },
+  ['coj']           = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
   ['col']           = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
   ['<m-i>']         = { 'o```{r}<cr>```<esc>O', "r code chunk" },
   ['<cm-i>']        = { 'o```{python}<cr>```<esc>O', "r code chunk" },
