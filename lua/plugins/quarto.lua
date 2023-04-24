@@ -239,6 +239,14 @@ return {
         root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
       }
 
+      -- -- another optional language server for grammar and spelling
+      -- -- <https://github.com/valentjn/ltex-ls>
+      -- lspconfig.ltex.setup {
+      --   on_attach = on_attach2,
+      --   capabilities = capabilities,
+      --   filetypes = { "markdown", "tex", "quarto" },
+      -- }
+
       lspconfig.r_language_server.setup {
         on_attach = on_attach,
         capabilities = capabilities,
