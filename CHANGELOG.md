@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.8.1...v0.9.0) (2023-04-24)
+
+
+### Features
+
+* **opt:** ltex ([e17573d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/e17573dfbc708918442b9b7b2015d501cff72029))
+
 ## [0.8.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.8.0...v0.8.1) (2023-04-22)
 
 
