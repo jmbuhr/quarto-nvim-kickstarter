@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.8.0...v0.8.1) (2023-04-22)
+
+
+### Bug Fixes
+
+* add coj keybinding to insert julia code chunk ([64fdafd](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/64fdafde61a438f654f186c38f9f431fb0f778a2))
+
 ## [0.8.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.7.0...v0.8.0) (2023-04-20)
 
 
