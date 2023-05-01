@@ -9,7 +9,7 @@ return {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
-        dev = false,
+        dev = true,
         config = function()
           require 'otter.config'.setup {
             lsp = {
