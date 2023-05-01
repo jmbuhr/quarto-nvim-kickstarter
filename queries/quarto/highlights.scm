@@ -1,5 +1,4 @@
 ;From nvim-treesitter/nvim-treesitter
-;From MDeiml/tree-sitter-markdown
 (atx_heading (inline) @text.title)
 (setext_heading (paragraph) @text.title)
 
@@ -49,7 +48,6 @@
   (list_marker_parenthesis)
   (thematic_break)
 ] @punctuation.special
-
 
 (task_list_marker_unchecked) @text.todo.unchecked
 (task_list_marker_checked) @text.todo.checked
