@@ -2,7 +2,9 @@ return {
 
   {
     'quarto-dev/quarto-nvim',
-    dev = false,
+    dev = true,
+    -- tag = nil,
+    -- branch = 'nightly',
     dependencies = {
       { 'hrsh7th/nvim-cmp' },
       {
@@ -189,7 +191,7 @@ return {
     config = function()
       require('mason').setup()
       require('mason-lspconfig').setup {
-        automatic_installation = true,
+        -- automatic_installation = true,
       }
 
       local lspconfig = require('lspconfig')
@@ -374,6 +376,13 @@ return {
       --   capabilities = capabilities,
       --   flags = lsp_flags
       -- }
+
+      lspconfig.denols.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
     end
   },
 
