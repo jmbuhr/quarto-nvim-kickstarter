@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.9.0...v0.9.1) (2023-05-01)
+
+
+### Bug Fixes
+
+* more robust vim-slime cell delimiter detection ([fa7f21c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fa7f21c5ccd4ac9b1deb034851a9f7bf7f9115b2))
+
 ## [0.9.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.8.1...v0.9.0) (2023-04-24)
 
 
