@@ -1,5 +1,36 @@
 # Changelog
 
+## [0.9.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.9.0...v0.9.1) (2023-05-01)
+
+
+### Bug Fixes
+
+* more robust vim-slime cell delimiter detection ([fa7f21c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fa7f21c5ccd4ac9b1deb034851a9f7bf7f9115b2))
+
+## [0.9.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.8.1...v0.9.0) (2023-04-24)
+
+
+### Features
+
+* **opt:** ltex ([e17573d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/e17573dfbc708918442b9b7b2015d501cff72029))
+
+Thanks to @sondalex for the suggestion!
+
+## [0.8.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.8.0...v0.8.1) (2023-04-22)
+
+
+### Bug Fixes
+
+* add coj keybinding to insert julia code chunk ([64fdafd](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/64fdafde61a438f654f186c38f9f431fb0f778a2))
+
+## [0.8.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.7.0...v0.8.0) (2023-04-20)
+
+
+### Features
+
+* add &lt;leader&gt;qr keybindings to run code with vim-slime ([8959d0d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8959d0d4b468394ee901348d424a7e9d0d8d8e37))
+* be less verbose ([9385099](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/93850996bbc58f74e29a276b3293c55fddc5d650))
+
 ## [0.7.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.6.0...v0.7.0) (2023-04-20)
 
 
