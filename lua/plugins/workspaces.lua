@@ -1,5 +1,8 @@
 return {
   { 'gnikdroy/projections.nvim',
+    keys = {
+      { '<leader>fp',  function() vim.cmd("Telescope projections") end },
+    },
     config = function()
 
       vim.opt.sessionoptions:append("localoptions") -- Save localoptions to session file
@@ -18,7 +21,6 @@ return {
 
       -- Bind <leader>fp to Telescope projections
       require('telescope').load_extension('projections')
-      vim.keymap.set("n", "<leader>fp", function() vim.cmd("Telescope projections") end)
 
       -- Autostore session on VimExit
       local Session = require("projections.session")
