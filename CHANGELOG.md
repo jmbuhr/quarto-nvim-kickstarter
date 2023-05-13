@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.9.1...v0.10.0) (2023-05-05)
+
+
+### Features
+
+* make pyright less hungry ([57b1d7b](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/57b1d7b702ece0a32af2143ced163da31134252f))
+
 ## [0.9.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.9.0...v0.9.1) (2023-05-01)
 
 
