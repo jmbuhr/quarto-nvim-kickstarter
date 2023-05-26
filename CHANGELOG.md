@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.11.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.10.0...v0.11.0) (2023-05-26)
+
+
+### Features
+
+* set up keymap for rename and references in qmd ([4ce8272](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ce8272e8bd9a6f6dccf96ebf5e09306e5855fda))
+
+
+### Bug Fixes
+
+* overwrite less markdown queries ([2594395](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/2594395789a7e4080ff8e4381aa6a53de8a79f3e))
+* **r:** disable rich documentation (=&gt; pure markdown) ([9ed4a37](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9ed4a3734ffbaeb17bd9948ff26dc2e2fd1558bf))
+* resume showing gitignored files for find files ([102fdf3](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/102fdf3a1140729b382a3b7950604b8270b795e7))
+
 ## [0.10.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.9.1...v0.10.0) (2023-05-05)
 
 
