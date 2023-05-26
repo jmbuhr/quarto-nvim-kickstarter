@@ -2,6 +2,7 @@ return {
   { 'shaunsingh/nord.nvim' },
   { 'folke/tokyonight.nvim' },
   { 'EdenEast/nightfox.nvim' },
+  { 'projekt0n/github-nvim-theme' },
   { "catppuccin/nvim", name = "catppuccin", config = function()
     require("catppuccin").setup {
       flavour = "mocha", -- mocha, macchiato, frappe, latte
