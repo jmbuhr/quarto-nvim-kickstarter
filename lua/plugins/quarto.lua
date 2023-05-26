@@ -250,7 +250,14 @@ return {
       lspconfig.r_language_server.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-        flags = lsp_flags
+        flags = lsp_flags,
+        settings = {
+          r = {
+            lsp = {
+              rich_documentation = false
+            },
+          },
+        },
       }
 
       lspconfig.emmet_ls.setup {
