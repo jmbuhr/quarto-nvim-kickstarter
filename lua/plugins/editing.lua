@@ -27,4 +27,10 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
   },
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require('leap').add_default_mappings()
+    end
+  }
 }
