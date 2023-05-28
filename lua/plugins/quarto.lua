@@ -434,7 +434,7 @@ return {
               fallback()
             end
           end, { "i", "s" }),
-          ['<c-a>'] = cmp.mapping.complete(),
+          -- ['<c-e>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({
             select = true,
