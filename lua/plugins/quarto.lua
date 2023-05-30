@@ -2,14 +2,14 @@ return {
 
   {
     'quarto-dev/quarto-nvim',
-    dev = true,
+    dev = false,
     -- tag = nil,
     -- branch = 'nightly',
     dependencies = {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
-        dev = true,
+        dev = false,
         config = function()
           require 'otter.config'.setup {
             lsp = {
@@ -50,6 +50,9 @@ return {
 
     },
     config = function()
+
+      vim.opt.conceallevel = 1
+
       require 'quarto'.setup {
         debug = false,
         closePreviewOnExit = true,
