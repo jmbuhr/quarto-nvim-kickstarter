@@ -386,18 +386,18 @@ return {
 
       -- optional
       -- more things to try:
-      -- {
-      --   "zbirenbaum/copilot-cmp",
-      --   after = { "copilot.lua" },
-      --   dependencies = { "zbirenbaum/copilot.lua" },
-      --   config = function()
-      --     require("copilot").setup({
-      --       suggestion = { enabled = false },
-      --       panel = { enabled = false },
-      --     })
-      --     require("copilot_cmp").setup()
-      --   end
-      -- },
+      {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        dependencies = { "zbirenbaum/copilot.lua" },
+        config = function()
+          require("copilot").setup({
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+          })
+          require("copilot_cmp").setup()
+        end
+      },
 
     },
     config = function()
@@ -478,7 +478,7 @@ return {
           },
         },
         sources = {
-          -- { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
+          { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
