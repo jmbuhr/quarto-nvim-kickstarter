@@ -79,7 +79,7 @@ return {
 
   {
     'nvim-treesitter/nvim-treesitter',
-    dev = true,
+    dev = false,
     tag = nil,
     branch = 'master',
     run = ':TSUpdate',
