@@ -1,6 +1,14 @@
 return {
   { 'tpope/vim-repeat' },
-  { 'tpope/vim-surround' },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
   {
     'windwp/nvim-autopairs',
     config = function()
@@ -23,12 +31,12 @@ return {
   },
   {
     "chrishrb/gx.nvim",
-    event = { "BufEnter" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
   },
   {
     "ggandor/leap.nvim",
+    event = { "BufEnter" },
     config = function()
       require('leap').add_default_mappings()
     end
