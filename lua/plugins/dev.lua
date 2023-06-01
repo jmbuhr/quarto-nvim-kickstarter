@@ -1,7 +1,8 @@
 return {
 
-  { "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
+  -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
   { "folke/neodev.nvim", opts = {} },
+  { "nvim-treesitter/playground" },
 
   -- {'stevearc/profile.nvim',
   --   config = function()

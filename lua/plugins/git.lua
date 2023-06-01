@@ -25,7 +25,7 @@ return {
     }
   end
   },
-  { 'f-person/git-blame.nvim' },
+  -- { 'f-person/git-blame.nvim' },
   -- github PRs and the like with gh-cli
   -- { 'pwntester/octo.nvim', config = function()
   --   require "octo".setup()

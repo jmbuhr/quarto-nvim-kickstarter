@@ -9,7 +9,7 @@ return {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
-        dev = false,
+        dev = true,
         config = function()
           require 'otter.config'.setup {
             lsp = {
@@ -18,6 +18,7 @@ return {
               }
             }
           }
+          vim.api.nvim_set_keymap('n', '<leader>oa', ':lua require"otter".dev_setup()<cr>', {})
         end,
       },
 
@@ -57,7 +58,7 @@ return {
         closePreviewOnExit = true,
         lspFeatures = {
           enabled = true,
-          languages = { 'r', 'python', 'julia', 'bash', 'lua' },
+          languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'css', 'javascript', 'lua', 'vim', 'yaml' },
           chunks = 'curly', -- 'curly' or 'all'
           diagnostics = {
             enabled = true,
@@ -191,7 +192,7 @@ return {
     config = function()
       require('mason').setup()
       require('mason-lspconfig').setup {
-        -- automatic_installation = true,
+        automatic_installation = true,
       }
 
       local lspconfig = require('lspconfig')
@@ -395,6 +396,33 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
+      }
+
+      lspconfig.cssls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
+      lspconfig.html.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
+
+      lspconfig.yamlls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+        settings = {
+          yaml = {
+            schemas = {
+              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+              ["https://json.schemastore.org/sourcehut-build-0.65.0.json"] = "*.qmd-tmp.yml",
+            },
+          },
+        }
       }
     end
   },
