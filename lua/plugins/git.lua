@@ -1,7 +1,7 @@
 return {
   -- git and projects
   -- { 'ThePrimeagen/git-worktree.nvim' },
-  -- { 'sindrets/diffview.nvim' },
+  { 'sindrets/diffview.nvim' },
   { 'TimUntersberger/neogit',
     lazy = true,
     cmd = 'Neogit',
