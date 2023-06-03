@@ -53,8 +53,8 @@ return {
         closePreviewOnExit = true,
         lspFeatures = {
           enabled = true,
-          languages = { 'r', 'python', 'julia', 'bash', 'lua' },
-          chunks = 'curly', -- 'curly' or 'all'
+          chunks = 'all',
+          languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html' },
           diagnostics = {
             enabled = true,
             triggers = { "BufWritePost" }
@@ -65,7 +65,9 @@ return {
         },
         keymap = {
           hover = 'K',
-          definition = 'gd'
+          definition = 'gd',
+          rename = '<leader>lR',
+          references = 'gr',
         },
       }
     end
@@ -82,7 +84,7 @@ return {
         ensure_installed = {
           'r', 'python', 'markdown', 'markdown_inline',
           'julia', 'bash', 'yaml', 'lua', 'vim',
-          'query', 'vimdoc', 'latex', 'html', 'css'
+          'query', 'vimdoc', 'latex', 'html', 'css',
         },
         highlight = {
           enable = true,
@@ -265,6 +267,18 @@ return {
       }
 
       lspconfig.cssls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
+      lspconfig.html.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
+      lspconfig.emmet_ls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags

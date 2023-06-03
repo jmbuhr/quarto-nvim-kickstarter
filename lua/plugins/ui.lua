@@ -107,12 +107,12 @@ return {
     require 'tabby.tabline'.use_preset('tab_only')
   end
   },
-  { 'dstein64/nvim-scrollview', config = function()
-    require('scrollview').setup({
-      current_only = true,
-    })
-  end
-  },
+  -- { 'dstein64/nvim-scrollview', config = function()
+  --   require('scrollview').setup({
+  --     current_only = true,
+  --   })
+  -- end
+  -- },
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
   -- filetree
   { 'nvim-tree/nvim-tree.lua',
@@ -154,11 +154,11 @@ return {
     require("trouble").setup {}
   end
   },
-  { 'lukas-reineke/indent-blankline.nvim', config = function()
-    require("indent_blankline").setup {
-      show_current_context = true,
-      show_current_context_start = false,
-    }
-  end
-  },
+  -- { 'lukas-reineke/indent-blankline.nvim', config = function()
+  --   require("indent_blankline").setup {
+  --     show_current_context = true,
+  --     show_current_context_start = false,
+  --   }
+  -- end
+  -- },
 }
