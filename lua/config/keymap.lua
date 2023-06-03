@@ -269,4 +269,5 @@ wk.register({
   ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
   ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
+  ['<c-x><c-x>'] = { '<c-x><c-o>', "omnifunc completion" },
 }, { mode = 'i' })

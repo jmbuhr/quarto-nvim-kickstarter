@@ -2,7 +2,7 @@ return {
 
   {
     'quarto-dev/quarto-nvim',
-    dev = false,
+    dev = true,
     -- tag = nil,
     -- branch = 'nightly',
     dependencies = {
@@ -419,7 +419,7 @@ return {
           yaml = {
             schemas = {
               ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-              ["https://json.schemastore.org/sourcehut-build-0.65.0.json"] = "*.qmd-tmp.yml",
+              -- ["https://raw.githubusercontent.com/quarto-dev/quarto-cli/main/src/resources/schema/document-attributes.yml"] = "*.qmd-tmp.yml",
             },
           },
         }
@@ -446,6 +446,7 @@ return {
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
+      { 'petertriho/cmp-git', opts = {} },
 
       -- optional
       -- more things to try:
@@ -554,6 +555,7 @@ return {
         sources = {
           -- { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
+          { name = "git" },
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
