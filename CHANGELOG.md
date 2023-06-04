@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.11.0...v0.12.0) (2023-06-03)
+
+
+### Features
+
+* add leap.nvim ([ef6fdde](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ef6fdde2c011d7703bc7e345c4cf1d5f5cf9887d))
+
+
+### Performance Improvements
+
+* disable slower plugins by default ([7912423](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/7912423229bc360b1673b65e3743397a85200103))
+
 ## [0.11.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.10.0...v0.11.0) (2023-05-26)
 
 
