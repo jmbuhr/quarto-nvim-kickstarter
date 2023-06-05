@@ -1,10 +1,8 @@
 return {
 
   -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-  -- { "folke/neodev.nvim", config = function()
-  --   require("neodev").setup {}
-  -- end
-  -- },
+  { "folke/neodev.nvim", opts = {} },
+  { "nvim-treesitter/playground" },
 
   -- {'stevearc/profile.nvim',
   --   config = function()

@@ -1,7 +1,7 @@
 return {
   -- git and projects
   -- { 'ThePrimeagen/git-worktree.nvim' },
-  -- { 'sindrets/diffview.nvim' },
+  { 'sindrets/diffview.nvim' },
   { 'TimUntersberger/neogit',
     lazy = true,
     cmd = 'Neogit',
@@ -25,6 +25,7 @@ return {
     }
   end
   },
+  -- { 'f-person/git-blame.nvim' },
   -- github PRs and the like with gh-cli
   -- { 'pwntester/octo.nvim', config = function()
   --   require "octo".setup()
