@@ -54,7 +54,7 @@ return {
         lspFeatures = {
           enabled = true,
           languages = { 'r', 'python', 'julia', 'bash', 'lua' },
-          chunks = 'curly', -- 'curly' or 'all'
+          chunks = 'all', -- 'curly' or 'all'
           diagnostics = {
             enabled = true,
             triggers = { "BufWritePost" }
