@@ -35,5 +35,7 @@ return {
   --     vim.keymap.set("", "<f1>", toggle_profile)
   --   end
   -- }
+  { 'nvim-treesitter/playground' },
+  { 'nvim-orgmode/orgmode' },
 
 }
