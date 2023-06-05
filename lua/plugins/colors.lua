@@ -25,7 +25,11 @@ return {
   -- color html colors
   { 'norcalli/nvim-colorizer.lua', config = function()
     require 'colorizer'.setup {
-      css = { css_fn = true, css = true },
+      css = {
+        css_fn = true,
+        css = true,
+        names = true,
+      },
       'javascript',
       'html',
       'r',

@@ -143,6 +143,10 @@ wk.register(
       g    = { ':Neogen<cr>', 'neogen docstring' },
       s    = { ':ls!<cr>', 'list all buffers' },
     },
+    o = {
+      name = 'otter',
+      a = { require'otter'.dev_setup, 'activate' },
+    },
     q = {
       name = 'quarto',
       a = { ":QuartoActivate<cr>", 'activate' },

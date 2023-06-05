@@ -107,12 +107,12 @@ return {
     require 'tabby.tabline'.use_preset('tab_only')
   end
   },
-  { 'dstein64/nvim-scrollview', config = function()
-    require('scrollview').setup({
-      current_only = true,
-    })
-  end
-  },
+  -- { 'dstein64/nvim-scrollview', config = function()
+  --   require('scrollview').setup({
+  --     current_only = true,
+  --   })
+  -- end
+  -- },
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
   -- filetree
   { 'nvim-tree/nvim-tree.lua',
