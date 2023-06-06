@@ -9,7 +9,7 @@ return {
       { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
-        dev = true,
+        dev = false,
         config = function()
           require 'otter.config'.setup {
             lsp = {
@@ -54,7 +54,6 @@ return {
       vim.opt.conceallevel = 1
 
       require 'quarto'.setup {
-        debug = false,
         closePreviewOnExit = true,
         lspFeatures = {
           enabled = true,
