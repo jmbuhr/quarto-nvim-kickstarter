@@ -56,14 +56,14 @@ return {
       telescope.load_extension('ui-select')
       telescope.load_extension('file_browser')
       telescope.load_extension('dap')
-      -- telescope.load_extension('project')
+      telescope.load_extension('project')
     end
   },
   { 'nvim-telescope/telescope-ui-select.nvim' },
   { 'nvim-telescope/telescope-fzf-native.nvim',  build = 'make' },
   { 'nvim-telescope/telescope-dap.nvim' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
-  -- { 'nvim-telescope/telescope-project.nvim' },
+  { 'nvim-telescope/telescope-project.nvim' },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
