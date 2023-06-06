@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.13.0...v0.14.0) (2023-06-06)
+
+
+### Features
+
+* revert to only completing curly code chunks, but also add html ([fa372b6](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fa372b68dded03e08735a0c7786c62110c6b91a1))
+
 ## [0.13.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.12.0...v0.13.0) (2023-06-05)
 
 
