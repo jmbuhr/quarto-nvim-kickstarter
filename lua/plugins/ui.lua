@@ -67,11 +67,11 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
-      { 'f-person/git-blame.nvim' },
+      -- { 'f-person/git-blame.nvim' },
     },
     config = function()
-      local git_blame = require('gitblame')
-      vim.g.gitblame_display_virtual_text = 0
+      -- local git_blame = require('gitblame')
+      -- vim.g.gitblame_display_virtual_text = 0
       vim.o.shortmess = vim.o.shortmess ..
       "S"                                      -- this is for the search_count function so lua can know this is `lua expression`
       --function for optimizing the search count
@@ -100,7 +100,7 @@ return {
           lualine_a = { 'mode', { macro_reg, type = 'lua_expr', color = 'WarningMsg' } },
           lualine_b = { 'branch', { search_count, type = 'lua_expr' } },
           lualine_c = {
-            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
+            -- { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
           },
         },
         extensions = { 'nvim-tree' },
@@ -113,14 +113,15 @@ return {
       require 'tabby.tabline'.use_preset('tab_only')
     end
   },
-  {
-    'dstein64/nvim-scrollview',
-    config = function()
-      require('scrollview').setup({
-        current_only = true,
-      })
-    end
-  },
+  -- {
+  --   'dstein64/nvim-scrollview',
+  --   config = function()
+  --     require('scrollview').setup({
+  --       current_only = true,
+  --       signs_on_startup = {}
+  --     })
+  --   end
+  -- },
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
   -- filetree
   { 'nvim-tree/nvim-tree.lua',
