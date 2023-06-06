@@ -188,6 +188,7 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
       { "williamboman/mason.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
+      { "folke/neoconf.nvim", opts = {} },
     },
     config = function()
       require('mason').setup()
