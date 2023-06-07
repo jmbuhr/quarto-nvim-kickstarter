@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.14.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.13.0...v0.14.0) (2023-06-06)
+
+
+### Features
+
+* revert to only completing curly code chunks, but also add html ([fa372b6](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fa372b68dded03e08735a0c7786c62110c6b91a1))
+
+## [0.13.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.12.0...v0.13.0) (2023-06-05)
+
+
+### Features
+
+* enable completion for all chunks by default ([15023f2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/15023f25b68930db951e15f478d0082ccfb2ce72))
+
+
+### Bug Fixes
+
+* remove (deprecated?) vim-slime option ([896c432](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/896c432ba0ad5676bf36c918f050f9193a87586b))
+* respect .ignore file for finding files ([1bf09f2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1bf09f2e9d16c0c398d7bebb4b5965b15fe2e98c))
+
 ## [0.12.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.11.0...v0.12.0) (2023-06-03)
 
 
