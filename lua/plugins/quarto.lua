@@ -518,6 +518,9 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
       -- for custom snippets
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
+      -- link quarto and rmarkdown to markdown snippets
+      luasnip.filetype_extend("quarto", {"markdown"})
+      luasnip.filetype_extend("rmarkdown", {"markdown"})
     end
   },
 
