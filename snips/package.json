@@ -13,7 +13,9 @@
       },
       {
         "language": [
-          "quarto"
+          "quarto",
+          "rmd",
+          "tex"
         ],
         "path": "./snippets/tex.json"
       },
@@ -29,7 +31,6 @@
           "markdown",
           "tex",
           "html",
-          "rmd"
         ],
         "path": "./snippets/global.json"
       },
@@ -125,17 +126,7 @@
         "path": "./snippets/shell.json"
       },
       {
-        "language": [
-          "markdown",
-          "rmd"
-        ],
-        "path": "./snippets/markdown.json"
-      },
-      {
-        "language": [
-          "rmd",
-          "qmd"
-        ],
+        "language": "rmd",
         "path": "./snippets/rmd.json"
       },
       {
