@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.0...v0.14.1) (2023-06-07)
+
+
+### Bug Fixes
+
+* properly use vim slime ipython pause ([378b376](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/378b3761a74480d6fe05fd5bc83609d38670e49b))
+
 ## [0.14.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.13.0...v0.14.0) (2023-06-06)
 
 
