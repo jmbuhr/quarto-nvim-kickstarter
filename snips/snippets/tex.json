@@ -417,5 +417,36 @@
         "body": "\\underline{$1} $0",
         "description": "Underline",
         "prefix": "und"
+    },
+    "begin": {
+      "body": "\\begin{${1:something}}\n\t$0\n\\end{$1}",
+      "description": "begin{} / end{}",
+      "prefix": "begin"
+    },
+    "eqalign": {
+      "body": "\\begin{align}\n\t$0\n\\end{align}",
+      "description": "Align",
+      "prefix": "eqalign"
+    },
+    "notation": {
+      "body": "$1 &= \\text{$2} \\\\\\",
+      "description": "notation of variables in an equation",
+      "prefix": "notation"
+    },
+    "blindtext": {
+      "body": "\\blindtext",
+      "description": "add blindtext in LaTex",
+      "prefix": "blind"
+    },
+    "wrap figure": {
+      "body": [
+        "\\begin{wrapfigure}{r}{${1:width}\\textwidth}",
+        "   \\includegraphics[width=${1:width}\\textwidth]{./img/${2:path}}",
+        "   \\caption{${3:cap}}",
+        "   \\label{fig-${4:label}}",
+        "\\end{wrapfigure}"
+      ],
+      "description": "Add wrap figure with a caption and a label",
+      "prefix": "wrap"
     }
 }
