@@ -535,10 +535,11 @@ return {
       end
 
       vim.cmd [[
+      let g:slime_dispatch_ipython_pause = 100
       function SlimeOverride_EscapeText_quarto(text)
       call v:lua.Quarto_is_in_python_chunk()
       if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
-      return ["%cpaste -q", "\n", a:text, "--", "\n"]
+      return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
       else
       return a:text
       end
