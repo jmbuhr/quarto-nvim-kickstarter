@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.1...v0.14.2) (2023-06-16)
+
+
+### Bug Fixes
+
+* delete broken symlink ([ebb15b8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ebb15b867119afb9f82df1b25442b76abb1c93cc))
+* re-introduce quarto snippets ([6131c25](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/6131c2515509a00df1ccbdd530bcf3cfb2ac441d))
+
 ## [0.14.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.0...v0.14.1) (2023-06-07)
 
 
