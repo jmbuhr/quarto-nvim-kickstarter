@@ -54,7 +54,6 @@ return {
       vim.opt.conceallevel = 1
 
       require 'quarto'.setup {
-        debug = false,
         closePreviewOnExit = true,
         lspFeatures = {
           enabled = true,
@@ -459,15 +458,15 @@ return {
           require("copilot").setup({
             suggestion = {
               enabled = true,
+              auto_trigger = false,
               keymap = {
-                accept = "<M-l>",
+                accept = "<c-a>",
                 accept_word = false,
                 accept_line = false,
                 next = "<M-]>",
                 prev = "<M-[>",
                 dismiss = "<C-]>",
               },
-
             },
             panel = { enabled = false },
           })
@@ -599,7 +598,7 @@ return {
       function SlimeOverride_EscapeText_quarto(text)
       call v:lua.Quarto_is_in_python_chunk()
       if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
-      return ["%cpaste -q", "\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
+      return ["%cpaste -q", "\n", a:text, "--", "\n"]
       else
       return a:text
       end
