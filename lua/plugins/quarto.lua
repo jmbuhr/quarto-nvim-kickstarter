@@ -511,6 +511,9 @@ return {
           end, { "i", "s" }),
           -- ['<c-e>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
+          ['<c-a>'] = cmp.mapping.confirm({
+            select = true,
+          }),
           ['<CR>'] = cmp.mapping.confirm({
             select = true,
           }),
