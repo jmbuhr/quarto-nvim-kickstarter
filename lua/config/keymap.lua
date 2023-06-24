@@ -145,7 +145,7 @@ wk.register(
     },
     o = {
       name = 'otter',
-      a = { require'otter'.dev_setup, 'activate' },
+      a = { require 'otter'.dev_setup, 'activate' },
     },
     q = {
       name = 'quarto',
@@ -153,7 +153,8 @@ wk.register(
       p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
       q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
       h = { ":QuartoHelp ", 'help' },
-      r = { name = 'run',
+      r = {
+        name = 'run',
         r = { ':QuartoSendAbove<cr>', 'to cursor' },
         a = { ':QuartoSendAll<cr>', 'all' },
       },
@@ -217,6 +218,12 @@ wk.register(
         name = 'diff',
         o = { ':DiffviewOpen<cr>', 'open' },
         c = { ':DiffviewClose<cr>', 'close' },
+      },
+      b = {
+        name = 'blame',
+        b = { ':GitBlameToggle<cr>', 'toggle' },
+        o = { ':GitBlameOpenCommitURL<cr>', 'open' },
+        c = { ':GitBlameCopyCommitURL<cr>', 'copy' },
       }
     },
     w = {
@@ -239,8 +246,8 @@ wk.register({
   ['gN']            = { 'Nzzzv', 'center search' },
   ['gl']            = { '<c-]>', 'open help link' },
   ['gf']            = { ':e <cfile><CR>', 'edit file' },
-  ['coo']            = { 'o# %%<cr>', 'new code chunk below' },
-  ['cOo']            = { 'O# %%<cr>', 'new code chunk above' },
+  ['coo']           = { 'o# %%<cr>', 'new code chunk below' },
+  ['cOo']           = { 'O# %%<cr>', 'new code chunk above' },
   ['cob']           = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
   ['cor']           = { 'o```{r}<cr>```<esc>O', "r code chunk" },
   ['cop']           = { 'o```{python}<cr>```<esc>O', "python code chunk" },

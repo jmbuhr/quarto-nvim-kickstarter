@@ -63,12 +63,7 @@ return {
   { 'nvim-telescope/telescope-file-browser.nvim' },
   -- { 'nvim-telescope/telescope-project.nvim' },
   { 'nvim-lualine/lualine.nvim',
-    dependencies = {
-      { 'f-person/git-blame.nvim' },
-    },
     config = function()
-      local git_blame = require('gitblame')
-      vim.g.gitblame_display_virtual_text = 0
       vim.o.shortmess = vim.o.shortmess .. "S" -- this is for the search_count function so lua can know this is `lua expression`
       --function for optimizing the search count 
       local function search_count()
@@ -96,7 +91,6 @@ return {
           lualine_a = {'mode', {macro_reg, type = 'lua_expr', color = 'WarningMsg'} },
           lualine_b = {'branch', { search_count, type = 'lua_expr' } },
           lualine_c = {
-            { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
           },
         },
         extensions = { 'nvim-tree' },
