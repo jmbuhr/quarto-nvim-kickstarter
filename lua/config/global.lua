@@ -63,3 +63,7 @@ vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 0
+
+-- scroll before end of window
+vim.opt.scrolloff = 5
+
