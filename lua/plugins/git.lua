@@ -1,8 +1,8 @@
 return {
   -- git and projects
-  -- { 'ThePrimeagen/git-worktree.nvim' },
-  -- { 'sindrets/diffview.nvim' },
-  { 'TimUntersberger/neogit',
+  { 'sindrets/diffview.nvim' },
+  {
+    'TimUntersberger/neogit',
     lazy = true,
     cmd = 'Neogit',
     config = function()
@@ -14,18 +14,23 @@ return {
       }
     end
   },
-  { 'lewis6991/gitsigns.nvim', config = function()
-    require('gitsigns').setup {}
-  end
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup {}
+    end
   },
-  { 'akinsho/git-conflict.nvim', config = function()
-    require('git-conflict').setup {
-      default_mappings = true,
-      disable_diagnostics = true,
-    }
-  end
+  {
+    'akinsho/git-conflict.nvim',
+    config = function()
+      require('git-conflict').setup {
+        default_mappings = true,
+        disable_diagnostics = true,
+      }
+    end
   },
-  { 'f-person/git-blame.nvim',
+  {
+    'f-person/git-blame.nvim',
     init = function()
       vim.g.gitblame_display_virtual_text = 1
       vim.g.gitblame_enabled = 0
