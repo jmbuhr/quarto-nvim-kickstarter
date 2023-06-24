@@ -187,7 +187,7 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
       { "williamboman/mason.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "folke/neoconf.nvim", opts = {} },
+      { "folke/neoconf.nvim",               opts = {} },
     },
     config = function()
       require('mason').setup()
@@ -358,9 +358,10 @@ return {
         settings = {
           python = {
             analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = 'openFilesOnly',
+              autoSearchPaths = false,
+              useLibraryCodeForTypes = false,
+              diagnosticMode = 'openFilesOnly', -- 'workspace'
+              autoImportCompletions = true,
             },
           },
         },
@@ -369,6 +370,35 @@ return {
               util.path.dirname(fname)
         end
       }
+
+      -- lspconfig.pylsp.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      --   settings = {
+      --     pylsp = {
+      --       plugins = {
+      --         pylint = {
+      --           enabled = true,
+      --           executable = "pylint"
+      --         },
+      --         pyflakes = { enabled = false },
+      --         pycodestyle = {
+      --           enabled = false,
+      --           ignore = { 'W391', 'E741' },
+      --           maxLineLength = 100
+      --         },
+      --         jedi_completion = { fuzzy = true },
+      --         pyls_isort = { enabled = true },
+      --         pylsp_mypy = { enabled = true },
+      --         -- have to install:
+      --         -- jedi,
+      --         -- mypy
+      --         -- with Mason as well.
+      --       },
+      --     }
+      --   }
+      -- }
 
       lspconfig.julials.setup {
         on_attach = on_attach,
@@ -446,7 +476,7 @@ return {
       { 'L3MON4D3/LuaSnip' },
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
-      { 'petertriho/cmp-git', opts = {} },
+      { 'petertriho/cmp-git',                 opts = {} },
 
       -- optional
       -- more things to try:

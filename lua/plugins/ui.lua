@@ -107,12 +107,14 @@ return {
       }
     end
   },
+
   {
     'nanozuki/tabby.nvim',
     config = function()
       require 'tabby.tabline'.use_preset('tab_only')
     end
   },
+
   -- {
   --   'dstein64/nvim-scrollview',
   --   config = function()
@@ -148,6 +150,7 @@ return {
       }
     end
   },
+
   -- show keybinding help window
   { 'folke/which-key.nvim' },
   {
@@ -156,6 +159,7 @@ return {
       require("symbols-outline").setup()
     end
   },
+
   -- terminal
   {
     "akinsho/toggleterm.nvim",
@@ -167,6 +171,7 @@ return {
       }
     end
   },
+
   -- show diagnostics list
   {
     "folke/trouble.nvim",
@@ -174,6 +179,7 @@ return {
       require("trouble").setup {}
     end
   },
+
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
@@ -183,4 +189,5 @@ return {
       }
     end
   },
+
 }

@@ -26,9 +26,6 @@ vim.g.maplocalleader = " "
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- colortheme tweaks
-vim.g.nord_borders = true
-
 -- indent
 vim.opt.smartindent = true
 vim.opt.breakindent = true
