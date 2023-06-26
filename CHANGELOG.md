@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.2...v0.15.0) (2023-06-24)
+
+
+### Features
+
+* warn if quarto resource path is not found ([c166dd2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c166dd2400bea07474f4d514e810ef0f9d83c944)), closes [#36](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/36)
+
 ## [0.14.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.1...v0.14.2) (2023-06-16)
 
 
