@@ -1,7 +1,7 @@
 return {
 
   -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-  { "folke/neodev.nvim", opt = {} },
+  -- { "folke/neodev.nvim", opt = {} },
 
   -- {'stevearc/profile.nvim',
   --   config = function()

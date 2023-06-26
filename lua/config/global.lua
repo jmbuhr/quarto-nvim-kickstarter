@@ -48,6 +48,21 @@ vim.opt.foldlevel = 99
 -- global statusline
 vim.opt.laststatus = 3
 
+vim.cmd [[
+let g:currentmode={
+       \ 'n'  : '%#String# NORMAL ',
+       \ 'v'  : '%#Search# VISUAL ',
+       \ "\<C-V>" : '%#Title# V·Block ',
+       \ 'V'  : '%#IncSearch# V·Line ',
+       \ 'Rv' : '%#String# V·Replace ',
+       \ 'i'  : '%#ModeMsg# INSERT ',
+       \ 'R'  : '%#Substitute# R ',
+       \ 'c'  : '%#CurSearch# Command ',
+       \ 't'  : '%#ModeMsg# TERM ',
+       \}
+]]
+vim.opt.statusline = '%{%g:currentmode[mode()]%} %* %t | %y | %* %= c:%c l:%l/%L %p%% 🦦 '
+
 -- split right and below by default
 vim.opt.splitright = true
 vim.opt.splitbelow = true
