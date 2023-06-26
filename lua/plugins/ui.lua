@@ -56,7 +56,6 @@ return {
       telescope.load_extension('ui-select')
       telescope.load_extension('file_browser')
       telescope.load_extension('dap')
-      -- telescope.load_extension('project')
     end
   },
   { 'nvim-telescope/telescope-ui-select.nvim' },
@@ -75,7 +74,8 @@ return {
         },
         sections = {
           lualine_a = { 'mode' },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          -- lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_b = { },
           lualine_c = { 'searchcount' },
           lualine_x = { 'filetype' },
           lualine_y = { 'progress' },
@@ -93,14 +93,15 @@ return {
     end
   },
 
-  -- { 'dstein64/nvim-scrollview', config = function()
-  --   require('scrollview').setup({
-  --     current_only = true,
-  --   })
-  -- end
-  -- },
+  { 'dstein64/nvim-scrollview', config = function()
+    require('scrollview').setup({
+      current_only = true,
+    })
+  end
+  },
 
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
+
   -- filetree
   {
     'nvim-tree/nvim-tree.lua',
@@ -126,12 +127,12 @@ return {
   },
   -- show keybinding help window
   { 'folke/which-key.nvim' },
-  {
-    'simrat39/symbols-outline.nvim',
-    config = function()
-      require("symbols-outline").setup()
-    end
-  },
+  -- {
+  --   'simrat39/symbols-outline.nvim',
+  --   config = function()
+  --     require("symbols-outline").setup()
+  --   end
+  -- },
   -- terminal
   {
     "akinsho/toggleterm.nvim",
