@@ -118,8 +118,6 @@ return {
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ic'] = '@class.inner',
-              ['ao'] = '@codechunk.outer',
-              ['io'] = '@codechunk.inner',
             },
           },
           move = {
@@ -127,8 +125,8 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               [']m'] = '@function.outer',
-              [']c'] = '@codechunk.inner',
-              [']]'] = '@class.outer',
+              [']c'] = '@content.inner',
+              [']]'] = '@class.inner',
             },
             goto_next_end = {
               [']M'] = '@function.outer',
@@ -136,8 +134,8 @@ return {
             },
             goto_previous_start = {
               ['[m'] = '@function.outer',
-              ['[c'] = '@codechunk.inner',
-              ['[['] = '@class.outer',
+              ['[c'] = '@content.inner',
+              ['[['] = '@class.inner',
             },
             goto_previous_end = {
               ['[M'] = '@function.outer',
@@ -403,18 +401,30 @@ return {
 
       -- optional
       -- more things to try:
-      -- {
-      --   "zbirenbaum/copilot-cmp",
-      --   after = { "copilot.lua" },
-      --   dependencies = { "zbirenbaum/copilot.lua" },
-      --   config = function()
-      --     require("copilot").setup({
-      --       suggestion = { enabled = false },
-      --       panel = { enabled = false },
-      --     })
-      --     require("copilot_cmp").setup()
-      --   end
-      -- },
+      {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        dependencies = { "zbirenbaum/copilot.lua" },
+        config = function()
+          require("copilot").setup({
+            suggestion = {
+              enabled = true,
+              auto_trigger = true,
+              debounce = 75,
+              keymap = {
+                accept = "<c-a>",
+                accept_word = false,
+                accept_line = false,
+                next = "<M-]>",
+                prev = "<M-[>",
+                dismiss = "<C-]>",
+              },
+            },
+            panel = { enabled = false },
+          })
+          -- require("copilot_cmp").setup()
+        end
+      },
 
     },
     config = function()
@@ -523,8 +533,8 @@ return {
       -- for custom snippets
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
       -- link quarto and rmarkdown to markdown snippets
-      luasnip.filetype_extend("quarto", {"markdown"})
-      luasnip.filetype_extend("rmarkdown", {"markdown"})
+      luasnip.filetype_extend("quarto", { "markdown" })
+      luasnip.filetype_extend("rmarkdown", { "markdown" })
     end
   },
 
@@ -534,7 +544,6 @@ return {
   {
     'jpalardy/vim-slime',
     init = function()
-
       vim.b['quarto_is_' .. 'python' .. '_chunk'] = false
       Quarto_is_in_python_chunk = function()
         require 'otter.tools.functions'.is_otter_language_context('python')

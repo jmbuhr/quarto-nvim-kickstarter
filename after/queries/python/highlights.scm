@@ -7,5 +7,5 @@
 
 (
 (comment) @content
-(#match? @content "^\\#\\%\\%")
-) @content
+(#match? @content "^\\# ?\\%\\%")
+) @class.outer @text.literal
