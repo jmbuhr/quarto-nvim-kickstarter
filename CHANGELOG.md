@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.16.0...v0.16.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* ts textobjects for plain python/r file code chunks ([24021b8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/24021b8ca25b569592cf8dc8174a1cc00ab29e30))
+
 ## [0.16.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.15.0...v0.16.0) (2023-06-27)
 
 
