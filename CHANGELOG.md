@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.16.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.15.0...v0.16.0) (2023-06-27)
+
+
+### Features
+
+* re-use [@class](https://github.com/class) textobject for nicer keybindings ([ab63d0d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ab63d0d6fff43903c65bf849a86a4999380a9215))
+
 ## [0.15.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.2...v0.15.0) (2023-06-24)
 
 
