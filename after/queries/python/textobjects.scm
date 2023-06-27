@@ -1,6 +1,8 @@
 ;extends
 
 (
-(comment) @content
-(#match? @content "^\\# ?\\%\\%")
-) @class.outer @text.literal
+(comment) @content1
+(#match? @content1 "^\\# ?\\%\\%") 
+) @class.inner
+
+
