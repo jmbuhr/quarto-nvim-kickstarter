@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.16.1...v0.17.0) (2023-06-28)
+
+
+### Features
+
+* keybindings for qmd document_symbols and type_definition ([c99a52c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c99a52c5950b953bccf16f85fe3efc479ec42ce6))
+
 ## [0.16.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.16.0...v0.16.1) (2023-06-27)
 
 
