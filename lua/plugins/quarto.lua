@@ -175,6 +175,7 @@ return {
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         local opts = { noremap = true, silent = true }
 
+        buf_set_keymap('n', 'gS', '<cmd>Telescope lsp_document_symbols<CR>', opts)
         buf_set_keymap('n', 'gD', '<cmd>Telescope lsp_type_definitions<CR>', opts)
         buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
         buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -196,7 +197,6 @@ return {
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         local opts = { noremap = true, silent = true }
 
-        buf_set_keymap('n', 'gD', '<cmd>Telescope lsp_type_definitions<CR>', opts)
         buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
         buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
         buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
