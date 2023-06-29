@@ -256,7 +256,9 @@ wk.register({
   ['<m-i>']         = { 'o```{r}<cr>```<esc>O', "r code chunk" },
   ['<cm-i>']        = { 'o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>']         = { 'o```{python}<cr>```<esc>O', "r code chunk" },
-}, { mode = 'n' })
+  [']q']            = {':silent cnext<cr>', 'quickfix next'},
+  ['[q']            = {':silent cprev<cr>', 'quickfix prev'},
+}, { mode = 'n', silent = true })
 
 
 -- visual mode

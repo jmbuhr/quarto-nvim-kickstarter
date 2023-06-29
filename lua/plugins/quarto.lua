@@ -125,7 +125,6 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               [']m'] = '@function.outer',
-              [']c'] = '@content.inner',
               [']]'] = '@class.inner',
             },
             goto_next_end = {
@@ -134,7 +133,6 @@ return {
             },
             goto_previous_start = {
               ['[m'] = '@function.outer',
-              ['[c'] = '@content.inner',
               ['[['] = '@class.inner',
             },
             goto_previous_end = {
