@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.18.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.17.0...v0.18.0) (2023-06-30)
+
+
+### Features
+
+* highlight code chunks with headlines.nvim ([7eb3d01](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/7eb3d01d2113359820321be064ff0b0a1f378c43))
+* **keys:** next/previous quickfix item ([c2f0ae0](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c2f0ae0ebf0c63b6ab1fb26282ec1446e3f068ee))
+* show more of the file path in windowline ([8ee2436](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8ee2436d785ebeaba0c47b28755d881a15c86d98))
+
 ## [0.17.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.16.1...v0.17.0) (2023-06-28)
 
 
