@@ -71,7 +71,7 @@ vim.opt.splitbelow = true
 vim.opt.showtabline = 1
 
 --windowline
-vim.opt.winbar = '%t'
+vim.opt.winbar = '%f'
 
 --don't continue comments automagically
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' })

@@ -75,7 +75,7 @@ return {
         sections = {
           lualine_a = { 'mode' },
           -- lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_b = { },
+          lualine_b = {},
           lualine_c = { 'searchcount' },
           lualine_x = { 'filetype' },
           lualine_y = { 'progress' },
@@ -93,11 +93,13 @@ return {
     end
   },
 
-  { 'dstein64/nvim-scrollview', config = function()
-    require('scrollview').setup({
-      current_only = true,
-    })
-  end
+  {
+    'dstein64/nvim-scrollview',
+    config = function()
+      require('scrollview').setup({
+        current_only = true,
+      })
+    end
   },
 
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
