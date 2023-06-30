@@ -393,7 +393,10 @@ return {
       { 'ray-x/cmp-treesitter' },
       { 'kdheepak/cmp-latex-symbols' },
       { 'jmbuhr/cmp-pandoc-references' },
-      { 'L3MON4D3/LuaSnip' },
+      { 'L3MON4D3/LuaSnip',
+        version = nil,
+        branch = 'master'
+      },
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
 
