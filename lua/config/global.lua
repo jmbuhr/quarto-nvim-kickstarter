@@ -1,13 +1,16 @@
-vim.g.markdown_fenced_languages = { 'html', 'python', 'bash=sh', 'R=r' }
+
+-- proper colors
 vim.opt.termguicolors = true
 
 -- more opinionated
 vim.opt.number = true                  -- show linenumbers
-vim.opt.timeoutlen = 400               -- until which-key pops up
-vim.opt.updatetime = 250               -- for autocommands and hovers
 vim.opt.mouse = 'a'                    -- enable mouse
 vim.opt.mousefocus = true
 vim.opt.clipboard:append 'unnamedplus' -- use system clipboard
+
+ 
+vim.opt.timeoutlen = 400               -- until which-key pops up
+vim.opt.updatetime = 250               -- for autocommands and hovers
 
 -- don't ask about existing swap files
 vim.opt.shortmess:append 'A'
@@ -25,9 +28,6 @@ vim.g.maplocalleader = " "
 -- smarter search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
--- colortheme tweaks
-vim.g.nord_borders = true
 
 -- indent
 vim.opt.smartindent = true
