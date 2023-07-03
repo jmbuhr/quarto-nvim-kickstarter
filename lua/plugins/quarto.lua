@@ -342,8 +342,8 @@ return {
           python = {
             analysis = {
               autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = 'openFilesOnly',
+              useLibraryCodeForTypes = false,
+             diagnosticMode = 'openFilesOnly',
             },
           },
         },
