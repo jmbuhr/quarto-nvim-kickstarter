@@ -22,12 +22,20 @@ return {
   },
   {
     'akinsho/git-conflict.nvim',
-    config = function()
+    init = function()
       require('git-conflict').setup {
-        default_mappings = true,
+        default_mappings = false,
         disable_diagnostics = true,
       }
-    end
+    end,
+    keys = {
+      { 'co', ':GitConflictChooseOurs<cr>' },
+      { 'ct', ':GitConflictChooseTheirs<cr>' },
+      { 'cb', ':GitConflictChooseBoth<cr>' },
+      { 'c0', ':GitConflictChooseNone<cr>' },
+      { ']x', ':GitConflictNextConflict<cr>' },
+      { '[x', ':GitConflictPrevConflict<cr>' },
+    },
   },
   {
     'f-person/git-blame.nvim',
