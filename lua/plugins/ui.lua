@@ -10,7 +10,7 @@ return {
       local new_maker = function(filepath, bufnr, opts)
         opts = opts or {}
         filepath = vim.fn.expand(filepath)
-        vim.uv.fs_stat(filepath, function(_, stat)
+        vim.loop.fs_stat(filepath, function(_, stat)
           if not stat then return end
           if stat.size > 100000 then
             return
