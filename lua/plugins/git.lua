@@ -2,7 +2,7 @@ return {
   -- git and projects
   { 'sindrets/diffview.nvim' },
   {
-    'TimUntersberger/neogit',
+    'NeogitOrg/neogit',
     lazy = true,
     cmd = 'Neogit',
     config = function()
