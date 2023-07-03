@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.0...v0.18.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* luasnip package.json ([eaf9688](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/eaf96886724d0a6d6b812e854235da6808c6034d))
+
 ## [0.18.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.17.0...v0.18.0) (2023-06-30)
 
 
