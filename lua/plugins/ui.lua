@@ -93,14 +93,14 @@ return {
     end
   },
 
-  {
-    'dstein64/nvim-scrollview',
-    config = function()
-      require('scrollview').setup({
-        current_only = true,
-      })
-    end
-  },
+  -- {
+  --   'dstein64/nvim-scrollview',
+  --   config = function()
+  --     require('scrollview').setup({
+  --       current_only = true,
+  --     })
+  --   end
+  -- },
 
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
 
@@ -129,12 +129,14 @@ return {
   },
   -- show keybinding help window
   { 'folke/which-key.nvim' },
+
   -- {
   --   'simrat39/symbols-outline.nvim',
   --   config = function()
   --     require("symbols-outline").setup()
   --   end
   -- },
+
   -- terminal
   {
     "akinsho/toggleterm.nvim",
