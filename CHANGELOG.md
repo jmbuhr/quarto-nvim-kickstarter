@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.3](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.2...v0.18.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* back to vim.loop instead of vim.uv until nvim v0.10 is released ([1f14aa1](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1f14aa10775aa9cb828eb1e72efc0326d8482565))
+
 ## [0.18.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.1...v0.18.2) (2023-07-03)
 
 
