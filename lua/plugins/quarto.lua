@@ -343,7 +343,7 @@ return {
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = false,
-             diagnosticMode = 'openFilesOnly',
+              diagnosticMode = 'openFilesOnly',
             },
           },
         },

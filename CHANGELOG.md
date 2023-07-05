@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.18.3](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.2...v0.18.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* back to vim.loop instead of vim.uv until nvim v0.10 is released ([1f14aa1](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1f14aa10775aa9cb828eb1e72efc0326d8482565))
+
+## [0.18.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.1...v0.18.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix git diffview keybindings ([1c3570f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1c3570fd6f1561003bc5ad4368e7507c55cb3b39))
+* neogit moved to new user/org ([9b1e426](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9b1e42612d9606e96aebf2bd322ca0927b4367ff))
+
+
+### Performance Improvements
+
+* disable scrollview ([0c49ab8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/0c49ab801cad2a127a78205860248d894c810271))
+* faster pyright config ([760feff](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/760feff4838a293e5eb96c642d6fbc6a50d6a16c))
+
 ## [0.18.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.0...v0.18.1) (2023-06-30)
 
 
