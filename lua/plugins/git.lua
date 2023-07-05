@@ -29,10 +29,10 @@ return {
       }
     end,
     keys = {
-      { 'co', ':GitConflictChooseOurs<cr>' },
-      { 'ct', ':GitConflictChooseTheirs<cr>' },
-      { 'cb', ':GitConflictChooseBoth<cr>' },
-      { 'c0', ':GitConflictChooseNone<cr>' },
+      { '<leader>gco', ':GitConflictChooseOurs<cr>' },
+      { '<leader>gct', ':GitConflictChooseTheirs<cr>' },
+      { '<leader>gcb', ':GitConflictChooseBoth<cr>' },
+      { '<leader>gc0', ':GitConflictChooseNone<cr>' },
       { ']x', ':GitConflictNextConflict<cr>' },
       { '[x', ':GitConflictPrevConflict<cr>' },
     },
