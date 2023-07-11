@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.19.0...v0.19.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* don't use version restriction for now until more widespread ([8367109](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8367109a8733c0f835b86c0f9d49abfaa3274732))
+
 ## [0.19.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.3...v0.19.0) (2023-07-05)
 
 
