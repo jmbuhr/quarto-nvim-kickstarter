@@ -8,15 +8,13 @@ return {
       {
         'jmbuhr/otter.nvim',
         dev = false,
-        config = function()
-          require 'otter.config'.setup {
+        opts = {
             lsp = {
               hover = {
                 border = require 'misc.style'.border
               }
             }
           }
-        end,
       },
 
       -- optional
@@ -47,29 +45,27 @@ return {
       -- },
 
     },
-    config = function()
-      require 'quarto'.setup {
-        closePreviewOnExit = true,
-        lspFeatures = {
+    opts = {
+      closePreviewOnExit = true,
+      lspFeatures = {
+        enabled = true,
+        chunks = 'curly',
+        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html' },
+        diagnostics = {
           enabled = true,
-          chunks = 'curly',
-          languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html' },
-          diagnostics = {
-            enabled = true,
-            triggers = { "BufWritePost" }
-          },
-          completion = {
-            enabled = true,
-          },
+          triggers = { "BufWritePost" }
         },
-        keymap = {
-          hover = 'K',
-          definition = 'gd',
-          rename = '<leader>lR',
-          references = 'gr',
+        completion = {
+          enabled = true,
         },
-      }
-    end
+      },
+      keymap = {
+        hover = 'K',
+        definition = 'gd',
+        rename = '<leader>lR',
+        references = 'gr',
+      },
+    }
   },
 
 
@@ -393,7 +389,8 @@ return {
       { 'ray-x/cmp-treesitter' },
       { 'kdheepak/cmp-latex-symbols' },
       { 'jmbuhr/cmp-pandoc-references' },
-      { 'L3MON4D3/LuaSnip',
+      {
+        'L3MON4D3/LuaSnip',
         version = nil,
         branch = 'master'
       },
