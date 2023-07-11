@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.19.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.3...v0.19.0) (2023-07-05)
+
+
+### Features
+
+* symbol outline (lazyloaded) ([5e7eb0c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/5e7eb0c7d45831f5b2b0915740e851c8a7ce7e63))
+
+
+### Bug Fixes
+
+* disambiguate keybindings for git conflict ([b858124](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/b8581242dc54f857a9a5b9c2231adba54c0ec8dd))
+* vim-slime delim for R ([ba01fb4](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ba01fb4ac1fd05fb0df97605adbe77a859052c8f))
+
 ## [0.18.3](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.2...v0.18.3) (2023-07-03)
 
 
