@@ -275,6 +275,12 @@ return {
         flags = lsp_flags
       }
 
+      lspconfig.yamlls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
       local function strsplit(s, delimiter)
         local result = {}
         for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
