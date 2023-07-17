@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.20.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.19.1...v0.20.0) (2023-07-17)
+
+
+### Features
+
+* move neodev next to lspconfig and enable ([e7d7f2a](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/e7d7f2a1ad2c9593dab4cc755bb52b39e970bea6))
+* yamlls ([7edd387](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/7edd387649f912d1315181e7687a1954b57b5331))
+
 ## [0.19.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.19.0...v0.19.1) (2023-07-11)
 
 
