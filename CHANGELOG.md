@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.20.0...v0.20.1) (2023-07-17)
+
+
+### Bug Fixes
+
+* fix on_attach ([ba10d9e](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ba10d9e9463a6c2505ab1d9c9c29e757affc0d70))
+
 ## [0.20.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.19.1...v0.20.0) (2023-07-17)
 
 
