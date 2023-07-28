@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.20.1...v0.21.0) (2023-07-28)
+
+
+### Features
+
+* nvim-spectre for global search and replace ([f441014](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f441014e1ae9d3e268160a408f4281588cb22446))
+
 ## [0.20.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.20.0...v0.20.1) (2023-07-17)
 
 
