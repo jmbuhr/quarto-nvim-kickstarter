@@ -49,15 +49,20 @@ return {
   },
   {
     "chrishrb/gx.nvim",
+    event = { "BufEnter" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
   },
-
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
+    opts = {
+      modes = {
+        search = {
+          enabled = false,
+        },
+      },
+    },
     keys = {
       {
         "s",
@@ -76,12 +81,14 @@ return {
     },
   },
 
-  -- {
-  --   "ggandor/leap.nvim",
-  --   event = { "BufEnter" },
-  --   config = function()
-  --     require('leap').add_default_mappings()
-  --   end
-  -- }
+  -- interactive global search and replace
+  {
+    'nvim-pack/nvim-spectre',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+
+  },
+
 
 }

@@ -3,23 +3,20 @@ return {
   {
     'quarto-dev/quarto-nvim',
     dev = false,
-    -- tag = nil,
-    -- branch = 'nightly',
     dependencies = {
-      { 'hrsh7th/nvim-cmp' },
       {
         'jmbuhr/otter.nvim',
+        dependencies = {
+          { 'neovim/nvim-lspconfig' },
+        },
         dev = false,
-        config = function()
-          require 'otter.config'.setup {
+        opts = {
             lsp = {
               hover = {
                 border = require 'misc.style'.border
               }
             }
           }
-          vim.api.nvim_set_keymap('n', '<leader>oa', ':lua require"otter".dev_setup()<cr>', {})
-        end,
       },
 
       -- optional
@@ -50,68 +47,25 @@ return {
       -- },
 
     },
-    config = function()
-      vim.opt.conceallevel = 1
-
-      require 'quarto'.setup {
-        closePreviewOnExit = true,
-        lspFeatures = {
-          enabled = true,
-          languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'css', 'javascript', 'lua', 'vim', 'yaml' },
-          chunks = 'curly', -- 'curly' or 'all'
-          diagnostics = {
-            enabled = true,
-            triggers = { "BufWritePost" }
-          },
-          completion = {
-            enabled = true,
-          },
-        },
-        keymap = {
-          hover = 'K',
-          definition = 'gd'
-        },
-      }
-    end
+    opts = {
+      lspFeatures = {
+        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html' },
+      },
+    }
   },
 
 
   {
     'nvim-treesitter/nvim-treesitter',
-    dev = false,
     tag = nil,
     branch = 'master',
     run = ':TSUpdate',
     config = function()
-      -- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-      -- parser_config.quarto = {
-      --   install_info = {
-      --     url = "~/projects/tree-sitter-quarto/tree-sitter-quarto", -- local path or git repo
-      --     files = { "src/parser.c", "src/scanner.c" },              -- note that some parsers also require src/scanner.c or src/scanner.cc
-      --     -- optional entries:
-      --     branch = "main",                                          -- default branch in case of git repo if different from master
-      --     generate_requires_npm = false,                            -- if stand-alone parser without npm dependencies
-      --     requires_generate_from_grammar = false,                   -- if folder contains pre-generated src/parser.c
-      --   },
-      --   filetype = "quarto",                                        -- if filetype does not match the parser name
-      -- }
-      -- parser_config.quarto_inline = {
-      --   install_info = {
-      --     url = "~/projects/tree-sitter-quarto/tree-sitter-quarto-inline", -- local path or git repo
-      --     files = { "src/parser.c", "src/scanner.c" },                     -- note that some parsers also require src/scanner.c or src/scanner.cc
-      --     -- optional entries:
-      --     branch = "main",                                                 -- default branch in case of git repo if different from master
-      --     generate_requires_npm = false,                                   -- if stand-alone parser without npm dependencies
-      --     requires_generate_from_grammar = false,                          -- if folder contains pre-generated src/parser.c
-      --   }
-      -- }
-
       require 'nvim-treesitter.configs'.setup {
-        auto_install = true,
         ensure_installed = {
           'r', 'python', 'markdown', 'markdown_inline',
           'julia', 'bash', 'yaml', 'lua', 'vim',
-          'query', 'vimdoc', 'latex', 'html', 'css'
+          'query', 'vimdoc', 'latex', 'html', 'css',
         },
         highlight = {
           enable = true,
@@ -146,8 +100,6 @@ return {
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ic'] = '@class.inner',
-              ['ao'] = '@codechunk.outer',
-              ['io'] = '@codechunk.inner',
             },
           },
           move = {
@@ -155,8 +107,7 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               [']m'] = '@function.outer',
-              [']c'] = '@codechunk.inner',
-              [']]'] = '@class.outer',
+              [']]'] = '@class.inner',
             },
             goto_next_end = {
               [']M'] = '@function.outer',
@@ -164,8 +115,7 @@ return {
             },
             goto_previous_start = {
               ['[m'] = '@function.outer',
-              ['[c'] = '@codechunk.inner',
-              ['[['] = '@class.outer',
+              ['[['] = '@class.inner',
             },
             goto_previous_end = {
               ['[M'] = '@function.outer',
@@ -187,7 +137,7 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
       { "williamboman/mason.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "folke/neoconf.nvim",               opts = {} },
+      { "folke/neodev.nvim", opt = {} },
     },
     config = function()
       require('mason').setup()
@@ -206,6 +156,7 @@ return {
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         local opts = { noremap = true, silent = true }
 
+        buf_set_keymap('n', 'gS', '<cmd>Telescope lsp_document_symbols<CR>', opts)
         buf_set_keymap('n', 'gD', '<cmd>Telescope lsp_type_definitions<CR>', opts)
         buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
         buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -219,22 +170,27 @@ return {
         client.server_capabilities.document_formatting = true
       end
 
-
-      local on_attach2 = function(client, bufnr)
+      local on_attach_qmd = function(client, bufnr)
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
         local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         local opts = { noremap = true, silent = true }
 
-        buf_set_keymap('n', 'gD', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+        -- buf_set_keymap('n', 'gS', '<cmd>Telescope lsp_document_symbols<CR>', opts)
+        -- buf_set_keymap('n', 'gD', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+        -- buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+        -- buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
         buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
+        -- buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
         buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
+        buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
         client.server_capabilities.document_formatting = true
       end
+
 
       local lsp_flags = {
         allow_incremental_sync = true,
@@ -261,7 +217,7 @@ return {
       -- [core]
       -- markdown.file_extensions = ["md", "markdown", "qmd"]
       lspconfig.marksman.setup {
-        on_attach = on_attach2,
+        on_attach = on_attach_qmd,
         capabilities = capabilities,
         filetypes = { 'markdown', 'quarto' },
         root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
@@ -270,7 +226,7 @@ return {
       -- -- another optional language server for grammar and spelling
       -- -- <https://github.com/valentjn/ltex-ls>
       -- lspconfig.ltex.setup {
-      --   on_attach = on_attach2,
+      --   on_attach = on_attach_qmd,
       --   capabilities = capabilities,
       --   filetypes = { "markdown", "tex", "quarto" },
       -- }
@@ -300,6 +256,24 @@ return {
         flags = lsp_flags
       }
 
+      lspconfig.html.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
+      lspconfig.emmet_ls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
+      lspconfig.yamlls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
       local function strsplit(s, delimiter)
         local result = {}
         for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
@@ -316,10 +290,14 @@ return {
       end
 
       local lua_library_files = vim.api.nvim_get_runtime_file("", true)
-      local resource_path = get_quarto_resource_path()
-      table.insert(lua_library_files, resource_path .. '/lua-types')
       local lua_plugin_paths = {}
-      table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
+      local resource_path = get_quarto_resource_path()
+      if resource_path == nil then
+        vim.notify_once("quarto not found, lua library files not loaded")
+      else
+        table.insert(lua_library_files, resource_path .. '/lua-types')
+        table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
+      end
 
       -- not upadated yet in automatic mason-lspconfig install,
       -- open mason manually with `<space>vm` and `/` search for lua.
@@ -358,10 +336,9 @@ return {
         settings = {
           python = {
             analysis = {
-              autoSearchPaths = false,
+              autoSearchPaths = true,
               useLibraryCodeForTypes = false,
-              diagnosticMode = 'openFilesOnly', -- 'workspace'
-              autoImportCompletions = true,
+              diagnosticMode = 'openFilesOnly',
             },
           },
         },
@@ -370,35 +347,6 @@ return {
               util.path.dirname(fname)
         end
       }
-
-      -- lspconfig.pylsp.setup {
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      --   settings = {
-      --     pylsp = {
-      --       plugins = {
-      --         pylint = {
-      --           enabled = true,
-      --           executable = "pylint"
-      --         },
-      --         pyflakes = { enabled = false },
-      --         pycodestyle = {
-      --           enabled = false,
-      --           ignore = { 'W391', 'E741' },
-      --           maxLineLength = 100
-      --         },
-      --         jedi_completion = { fuzzy = true },
-      --         pyls_isort = { enabled = true },
-      --         pylsp_mypy = { enabled = true },
-      --         -- have to install:
-      --         -- jedi,
-      --         -- mypy
-      --         -- with Mason as well.
-      --       },
-      --     }
-      --   }
-      -- }
 
       lspconfig.julials.setup {
         on_attach = on_attach,
@@ -421,39 +369,6 @@ return {
       --   capabilities = capabilities,
       --   flags = lsp_flags
       -- }
-
-      lspconfig.denols.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.cssls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.html.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-
-      lspconfig.yamlls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-          yaml = {
-            schemas = {
-              ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-              -- ["https://raw.githubusercontent.com/quarto-dev/quarto-cli/main/src/resources/schema/document-attributes.yml"] = "*.qmd-tmp.yml",
-            },
-          },
-        }
-      }
     end
   },
 
@@ -473,10 +388,13 @@ return {
       { 'ray-x/cmp-treesitter' },
       { 'kdheepak/cmp-latex-symbols' },
       { 'jmbuhr/cmp-pandoc-references' },
-      { 'L3MON4D3/LuaSnip' },
+      {
+        'L3MON4D3/LuaSnip',
+        version = nil,
+        branch = 'master'
+      },
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
-      { 'petertriho/cmp-git',                 opts = {} },
 
       -- optional
       -- more things to try:
@@ -489,6 +407,7 @@ return {
             suggestion = {
               enabled = true,
               auto_trigger = true,
+              debounce = 75,
               keymap = {
                 accept = "<c-a>",
                 accept_word = false,
@@ -541,9 +460,6 @@ return {
           end, { "i", "s" }),
           -- ['<c-e>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<c-a>'] = cmp.mapping.confirm({
-            select = true,
-          }),
           ['<CR>'] = cmp.mapping.confirm({
             select = true,
           }),
@@ -588,7 +504,6 @@ return {
         sources = {
           -- { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
-          { name = "git" },
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
@@ -613,7 +528,10 @@ return {
       -- for friendly snippets
       require("luasnip.loaders.from_vscode").lazy_load()
       -- for custom snippets
-      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snips" } })
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
+      -- link quarto and rmarkdown to markdown snippets
+      luasnip.filetype_extend("quarto", { "markdown" })
+      luasnip.filetype_extend("rmarkdown", { "markdown" })
     end
   },
 
@@ -623,15 +541,17 @@ return {
   {
     'jpalardy/vim-slime',
     init = function()
+      vim.b['quarto_is_' .. 'python' .. '_chunk'] = false
       Quarto_is_in_python_chunk = function()
         require 'otter.tools.functions'.is_otter_language_context('python')
       end
 
       vim.cmd [[
+      let g:slime_dispatch_ipython_pause = 100
       function SlimeOverride_EscapeText_quarto(text)
       call v:lua.Quarto_is_in_python_chunk()
       if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
-      return ["%cpaste -q", "\n", a:text, "--", "\n"]
+      return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
       else
       return a:text
       end
@@ -647,7 +567,7 @@ return {
         vim.b.slime_config = { jobid = vim.g.slime_last_channel }
       end
 
-      vim.b.slime_cell_delimiter = "#%%"
+      vim.b.slime_cell_delimiter = "# %%"
 
       -- slime, neovvim terminal
       vim.g.slime_target = "neovim"

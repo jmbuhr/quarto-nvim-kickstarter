@@ -141,7 +141,6 @@ wk.register(
       a    = { vim.lsp.buf.code_action, 'coda action' },
       e    = { vim.diagnostic.open_float, 'diagnostics' },
       f    = { vim.lsp.buf.format, 'format' },
-      o    = { ':SymbolsOutline<cr>', 'outline' },
       d    = {
         name = 'diagnostics',
         d = { vim.diagnostic.disable, 'disable' },
@@ -150,13 +149,25 @@ wk.register(
       g    = { ':Neogen<cr>', 'neogen docstring' },
       s    = { ':ls!<cr>', 'list all buffers' },
     },
+    o = {
+      name    = 'otter & code',
+      a       = { require 'otter'.dev_setup, 'otter activate' },
+      ['o'] = { 'o# %%<cr>', 'new code chunk below' },
+      ['O'] = { 'O# %%<cr>', 'new code chunk above' },
+      ['b'] = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
+      ['r'] = { 'o```{r}<cr>```<esc>O', "r code chunk" },
+      ['p'] = { 'o```{python}<cr>```<esc>O', "python code chunk" },
+      ['j'] = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+      ['l'] = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+    },
     q = {
       name = 'quarto',
       a = { ":QuartoActivate<cr>", 'activate' },
       p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
       q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
       h = { ":QuartoHelp ", 'help' },
-      r = { name = 'run',
+      r = {
+        name = 'run',
         r = { ':QuartoSendAbove<cr>', 'to cursor' },
         a = { ':QuartoSendAll<cr>', 'all' },
       },
@@ -251,7 +262,9 @@ wk.register({
   ['<m-i>']         = { 'o```{r}<cr>```<esc>O', "r code chunk" },
   ['<cm-i>']        = { 'o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>']         = { 'o```{python}<cr>```<esc>O', "r code chunk" },
-}, { mode = 'n' })
+  [']q']            = {':silent cnext<cr>', 'quickfix next'},
+  ['[q']            = {':silent cprev<cr>', 'quickfix prev'},
+}, { mode = 'n', silent = true })
 
 
 -- visual mode
