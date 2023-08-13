@@ -4,3 +4,9 @@ require 'config.autocommands'
 require 'config.keymap'
 require 'config.color'
 
+vim.filetype.add{
+    extension = {
+      webr = 'r',
+    }
+}
+
