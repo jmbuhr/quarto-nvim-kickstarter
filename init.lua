@@ -10,3 +10,5 @@ vim.filetype.add{
     }
 }
 
+otter = require'otter'
+

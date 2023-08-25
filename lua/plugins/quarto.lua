@@ -49,7 +49,7 @@ return {
     },
     opts = {
       lspFeatures = {
-        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'haskell' },
+        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'haskell', 'javascript' },
       },
     }
   },
