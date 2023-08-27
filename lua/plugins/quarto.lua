@@ -169,6 +169,7 @@ return {
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
         buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
         client.server_capabilities.document_formatting = true
       end
 
@@ -189,6 +190,7 @@ return {
         buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
+        -- buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
         client.server_capabilities.document_formatting = true
       end
 
