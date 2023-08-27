@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.22.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.21.0...v0.22.0) (2023-08-27)
+
+
+### Features
+
+* **editing:** wrap markdown by words ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+* format code chunk in qmd document ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+* preview equations ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+* **theme:** add onedark ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+
+
+### Bug Fixes
+
+* cleanup ([f2bc9af](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f2bc9afa092a16ef963db9ab9b6e22bec51102e7))
+
 ## [0.21.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.20.1...v0.21.0) (2023-07-28)
 
 
