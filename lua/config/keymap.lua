@@ -117,6 +117,13 @@ wk.register(
       i = { ':split term://ipython<cr>', 'new ipython terminal' },
       j = { ':split term://julia<cr>', 'new julia terminal' },
     },
+  ['coo']            = { 'o# %%<cr>', 'new code chunk below' },
+  ['cOo']            = { 'O# %%<cr>', 'new code chunk above' },
+  ['cob']           = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
+  ['cor']           = { 'o```{r}<cr>```<esc>O', "r code chunk" },
+  ['cop']           = { 'o```{python}<cr>```<esc>O', "python code chunk" },
+  ['coj']           = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+  ['col']           = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
     v = {
       name = 'vim',
       t = { toggle_light_dark_theme, 'switch theme' },
@@ -133,7 +140,6 @@ wk.register(
       D    = { vim.lsp.buf.type_definition, 'type definition' },
       a    = { vim.lsp.buf.code_action, 'coda action' },
       e    = { vim.diagnostic.open_float, 'diagnostics' },
-      f    = { vim.lsp.buf.format, 'format' },
       d    = {
         name = 'diagnostics',
         d = { vim.diagnostic.disable, 'disable' },
@@ -281,4 +287,5 @@ wk.register({
   ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
   ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
   ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
+  ['<c-x><c-x>'] = { '<c-x><c-o>', "omnifunc completion" },
 }, { mode = 'i' })

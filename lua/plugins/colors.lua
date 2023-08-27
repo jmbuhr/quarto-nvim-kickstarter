@@ -7,6 +7,11 @@ return {
     name = "catppuccin",
     priority = 1000,
   },
+  {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000
+  },
+
   -- color html colors
   {
     'norcalli/nvim-colorizer.lua',

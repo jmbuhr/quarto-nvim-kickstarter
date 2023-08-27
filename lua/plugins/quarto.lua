@@ -6,10 +6,10 @@ return {
     dependencies = {
       {
         'jmbuhr/otter.nvim',
+        dev = false,
         dependencies = {
           { 'neovim/nvim-lspconfig' },
         },
-        dev = false,
         opts = {
             lsp = {
               hover = {
@@ -167,6 +167,7 @@ return {
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
         buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
         client.server_capabilities.document_formatting = true
       end
 
@@ -187,7 +188,7 @@ return {
         buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
-        buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        -- buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
         client.server_capabilities.document_formatting = true
       end
 
@@ -364,13 +365,27 @@ return {
       -- Add additional languages here.
       -- See `:h lspconfig-all` for the configuration.
       -- Like e.g. Haskell:
-      -- lspconfig.hls.setup {
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   flags = lsp_flags
-      -- }
+      lspconfig.hls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
+
+      lspconfig.rust_analyzer.setup{
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = false;
+            }
+          }
+        }
+      }
+
     end
   },
+
 
   -- completion
   {
@@ -399,9 +414,7 @@ return {
       -- optional
       -- more things to try:
       {
-        "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
-        dependencies = { "zbirenbaum/copilot.lua" },
+        "zbirenbaum/copilot.lua",
         config = function()
           require("copilot").setup({
             suggestion = {
@@ -419,7 +432,6 @@ return {
             },
             panel = { enabled = false },
           })
-          -- require("copilot_cmp").setup()
         end
       },
 
@@ -429,7 +441,6 @@ return {
       local luasnip = require 'luasnip'
       local lspkind = require "lspkind"
       lspkind.init()
-
 
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -458,7 +469,6 @@ return {
               fallback()
             end
           end, { "i", "s" }),
-          -- ['<c-e>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({
             select = true,
@@ -486,7 +496,6 @@ return {
             with_text = true,
             menu = {
               otter = "[🦦]",
-              copilot = '[]',
               luasnip = "[snip]",
               nvim_lsp = "[LSP]",
               buffer = "[buf]",
@@ -502,7 +511,6 @@ return {
           },
         },
         sources = {
-          -- { name = 'copilot',                keyword_length = 0, max_item_count = 3 },
           { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
@@ -525,6 +533,7 @@ return {
           },
         },
       })
+
       -- for friendly snippets
       require("luasnip.loaders.from_vscode").lazy_load()
       -- for custom snippets
@@ -613,5 +622,14 @@ return {
   -- paste an image to markdown from the clipboard
   -- :PasteImg,
   { 'ekickx/clipboard-image.nvim' },
+
+  -- preview equations
+  {'jbyuki/nabla.nvim',
+    keys = {
+      { '<leader>ee', ':lua require"nabla".toggle_virt()<cr>' },
+      { '<leader>eh', ':lua require"nabla".popup()<cr>' },
+    },
+  },
+
 
 }
