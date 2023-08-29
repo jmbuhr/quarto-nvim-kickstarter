@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.0...v0.22.1) (2023-08-29)
+
+
+### Bug Fixes
+
+* Update welcome-screen.lua ([#55](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/55)) ([ce92480](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ce92480f82228ec0896a1af94794c0116cb38841))
+
 ## [0.22.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.21.0...v0.22.0) (2023-08-27)
 
 
