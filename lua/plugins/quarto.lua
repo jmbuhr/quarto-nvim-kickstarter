@@ -2,11 +2,9 @@ return {
 
   {
     'quarto-dev/quarto-nvim',
-    dev = false,
     dependencies = {
       {
         'jmbuhr/otter.nvim',
-        dev = false,
         dependencies = {
           { 'neovim/nvim-lspconfig' },
         },
