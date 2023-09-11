@@ -66,6 +66,15 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     config = function()
+
+      local function macro_recording()
+        local reg = vim.fn.reg_recording()
+        if reg == '' then
+          return ''
+        end
+        return '📷[' .. reg .. ']'
+      end
+
       require('lualine').setup {
         options = {
           section_separators = '',
@@ -73,9 +82,9 @@ return {
           globalstatus = true,
         },
         sections = {
-          lualine_a = { 'mode' },
-          -- lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_b = {},
+          lualine_a = { 'mode', macro_recording },
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          -- lualine_b = {},
           lualine_c = { 'searchcount' },
           lualine_x = { 'filetype' },
           lualine_y = { 'progress' },
