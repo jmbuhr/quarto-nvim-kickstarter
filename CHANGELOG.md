@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.1...v0.22.2) (2023-09-15)
+
+
+### Bug Fixes
+
+* make neotest quit keymap buffer local ([fc9b431](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fc9b43152457174dabcb05ae7b5a1628d8ac246c))
+
 ## [0.22.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.0...v0.22.1) (2023-08-29)
 
 
