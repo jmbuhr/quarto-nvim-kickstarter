@@ -9,12 +9,12 @@ return {
           { 'neovim/nvim-lspconfig' },
         },
         opts = {
-            lsp = {
-              hover = {
-                border = require 'misc.style'.border
-              }
+          lsp = {
+            hover = {
+              border = require 'misc.style'.border
             }
           }
+        }
       },
 
       -- optional
@@ -47,7 +47,7 @@ return {
     },
     opts = {
       lspFeatures = {
-        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'haskell', 'javascript' },
+        languages = { 'yaml', 'r', 'python', 'julia', 'bash', 'lua', 'html', 'haskell', 'javascript' },
       },
     }
   },
@@ -137,7 +137,7 @@ return {
       { "williamboman/mason-lspconfig.nvim" },
       { "williamboman/mason.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "folke/neodev.nvim", opt = {} },
+      { "folke/neodev.nvim",                opt = {} },
     },
     config = function()
       require('mason').setup()
@@ -246,11 +246,11 @@ return {
         },
       }
 
-      lspconfig.emmet_ls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags
-      }
+      -- lspconfig.emmet_ls.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags
+      -- }
 
       lspconfig.cssls.setup {
         on_attach = on_attach,
@@ -264,17 +264,20 @@ return {
         flags = lsp_flags
       }
 
-      lspconfig.emmet_ls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags
-      }
-
       lspconfig.yamlls.setup {
         on_attach = on_attach,
         capabilities = capabilities,
-        flags = lsp_flags
+        flags = lsp_flags,
+        settings = {
+          yaml = {
+            schemas = {
+              -- ["/opt/quarto/share/schema/schema.yml"] = "*.otter.yml",
+            }
+          }
+        }
       }
+
+      -- /opt/quarto/share/schema/schema.yml
 
       local function strsplit(s, delimiter)
         local result = {}
@@ -372,18 +375,17 @@ return {
         flags = lsp_flags
       }
 
-      lspconfig.rust_analyzer.setup{
+      lspconfig.rust_analyzer.setup {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           ['rust-analyzer'] = {
             diagnostics = {
-              enable = false;
+              enable = false,
             }
           }
         }
       }
-
     end
   },
 
@@ -625,7 +627,8 @@ return {
   { 'ekickx/clipboard-image.nvim' },
 
   -- preview equations
-  {'jbyuki/nabla.nvim',
+  {
+    'jbyuki/nabla.nvim',
     keys = {
       { '<leader>ee', ':lua require"nabla".toggle_virt()<cr>' },
       { '<leader>eh', ':lua require"nabla".popup()<cr>' },

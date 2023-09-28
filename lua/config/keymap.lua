@@ -249,6 +249,33 @@ wk.register(
   }, { mode = 'n', prefix = '<leader>' }
 )
 
+
+local is_code_chunk = function ()
+  local current, range = require 'otter.keeper'.get_current_language_context()
+  if current then
+    return true
+  else
+    return false
+  end
+end
+
+local insert_code_chunk = function (lang)
+  vim.api.nvim_input[[<esc>]]
+  if is_code_chunk() then
+    vim.api.nvim_input([[o```<cr><cr>```{]] .. lang .. [[}<esc>o]])
+  else
+    vim.api.nvim_input([[o```{]] .. lang .. [[}<cr>```<esc>O]])
+  end
+end
+
+local insert_r_chunk = function ()
+  insert_code_chunk('r')
+end
+
+local insert_py_chunk = function ()
+  insert_code_chunk('python')
+end
+
 -- normal mode
 wk.register({
   ['<c-LeftMouse>'] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'go to definition' },
@@ -258,9 +285,9 @@ wk.register({
   ['gN']            = { 'Nzzzv', 'center search' },
   ['gl']            = { '<c-]>', 'open help link' },
   ['gf']            = { ':e <cfile><CR>', 'edit file' },
-  ['<m-i>']         = { 'o```{r}<cr>```<esc>O', "r code chunk" },
-  ['<cm-i>']        = { 'o```{python}<cr>```<esc>O', "r code chunk" },
-  ['<m-I>']         = { 'o```{python}<cr>```<esc>O', "r code chunk" },
+  ['<m-i>']         = { insert_r_chunk, "r code chunk" },
+  ['<cm-i>']        = { insert_py_chunk, "python code chunk" },
+  ['<m-I>']         = { insert_py_chunk, "python code chunk" },
   [']q']            = {':silent cnext<cr>', 'quickfix next'},
   ['[q']            = {':silent cprev<cr>', 'quickfix prev'},
 }, { mode = 'n', silent = true })
@@ -280,12 +307,13 @@ wk.register({
   ['p'] = { '"_dP', 'replace without overwriting reg' },
 }, { mode = 'v', prefix = "<leader>" })
 
+-- insert mode
 wk.register({
   -- ['<c-e>'] = { "<esc>:FeMaco<cr>i", "edit code" },
   ['<m-->'] = { ' <- ', "assign" },
   ['<m-m>'] = { ' |>', "pipe" },
-  ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
-  ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
-  ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
+  ['<m-i>']         = { insert_r_chunk, "r code chunk" },
+  ['<cm-i>']        = { insert_py_chunk, "python code chunk" },
+  ['<m-I>']         = { insert_py_chunk, "python code chunk" },
   ['<c-x><c-x>'] = { '<c-x><c-o>', "omnifunc completion" },
 }, { mode = 'i' })

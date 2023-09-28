@@ -1,8 +1,11 @@
+
+
 local pickers = require "telescope.pickers"
 local finders = require "telescope.finders"
 local conf = require("telescope.config").values
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
+local ts_utils = require 'nvim-treesitter.ts_utils'
 
 vim.filetype.add {
   extension = {
@@ -13,8 +16,34 @@ vim.filetype.add {
 otter = require 'otter'
 
 
+
+local function find_identifier_at_pipe_start()
+  local result = "hello"
+
+  local node = vim.treesitter.get_node({ignore_injections = false})
+
+  -- found first pipe up from cursor
+  while node:parent() ~= nil and node:type() ~= "pipe" do
+    node = node:parent()
+  end
+  -- go to earliest pipe
+  while node:parent() ~= nil and node:type() == "pipe" do
+    node = node:parent()
+  end
+
+  print(node)
+  print(node:child(0))
+  print(node:child(1))
+  print(node:child(2))
+  
+end
+
+
+
 local function get_r_colnames()
-  local cword = vim.fn.expand('<cword>')
+  -- local cword = vim.fn.expand('<cword>')
+  local cword = find_identifier_at_pipe_start()
+
   local r_cmd = 'names(' .. cword .. ')\n'
   local id = vim.g.slime_last_channel
 
@@ -72,6 +101,13 @@ local function get_r_colnames()
   }):find()
 end
 
-vim.keymap.set("n", "<leader>r", get_r_colnames, { noremap = true, silent = true })
 
+
+local reload = function()
+  package.loaded['config.experimental'] = nil
+  require'config.experimental'
+end
+
+vim.keymap.set("n", "<leader>x", reload, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>r", find_identifier_at_pipe_start, { noremap = true, silent = true })
 

@@ -102,14 +102,14 @@ return {
     end
   },
 
-  -- {
-  --   'dstein64/nvim-scrollview',
-  --   config = function()
-  --     require('scrollview').setup({
-  --       current_only = true,
-  --     })
-  --   end
-  -- },
+  {
+    'dstein64/nvim-scrollview',
+    config = function()
+      require('scrollview').setup({
+        current_only = true,
+      })
+    end
+  },
 
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
 
@@ -185,13 +185,13 @@ return {
     config = function()
       require("headlines").setup {
         quarto = {
-          -- query = vim.treesitter.query.parse(
-          --   "markdown",
-          --   [[
-          --       (fenced_code_block) @codeblock
-          --   ]]),
-          -- codeblock_highlight = "CodeBlock",
-          -- treesitter_language = "markdown",
+          query = vim.treesitter.query.parse(
+            "markdown",
+            [[
+                (fenced_code_block) @codeblock
+            ]]),
+          codeblock_highlight = "CodeBlock",
+          treesitter_language = "markdown",
         },
       }
     end
