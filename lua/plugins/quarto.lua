@@ -47,7 +47,7 @@ return {
     },
     opts = {
       lspFeatures = {
-        languages = { 'yaml', 'r', 'python', 'julia', 'bash', 'lua', 'html', 'haskell', 'javascript' },
+        languages = { 'r', 'python', 'julia', 'bash', 'lua' },
       },
     }
   },
