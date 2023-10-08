@@ -117,7 +117,7 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     keys = {
-      { '<c-b>', ':NvimTreeToggle<cr>' },
+      { '<c-b>', ':NvimTreeToggle<cr>', desc='toggle nvim-tree' },
     },
     config = function()
       require 'nvim-tree'.setup {
