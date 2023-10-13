@@ -2,6 +2,7 @@ return {
 
   -- { "folke/neodev.nvim", opts = {} },
   -- { "nvim-treesitter/playground" },
+  -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
 
   -- {'stevearc/profile.nvim',
   --   config = function()
@@ -32,5 +33,7 @@ return {
   --     vim.keymap.set("", "<f1>", toggle_profile)
   --   end
   -- }
+
+
 
 }

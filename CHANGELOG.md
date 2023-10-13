@@ -1,5 +1,174 @@
 # Changelog
 
+## [0.22.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.21.0...v0.22.0) (2023-08-27)
+
+
+### Features
+
+* **editing:** wrap markdown by words ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+* format code chunk in qmd document ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+* preview equations ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+* **theme:** add onedark ([4ae6c9f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/4ae6c9f2d74e22d84ffc76398b25f104d9005986))
+
+
+### Bug Fixes
+
+* cleanup ([f2bc9af](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f2bc9afa092a16ef963db9ab9b6e22bec51102e7))
+
+## [0.21.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.20.1...v0.21.0) (2023-07-28)
+
+
+### Features
+
+* nvim-spectre for global search and replace ([f441014](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f441014e1ae9d3e268160a408f4281588cb22446))
+
+## [0.20.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.20.0...v0.20.1) (2023-07-17)
+
+
+### Bug Fixes
+
+* fix on_attach ([ba10d9e](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ba10d9e9463a6c2505ab1d9c9c29e757affc0d70))
+
+## [0.20.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.19.1...v0.20.0) (2023-07-17)
+
+
+### Features
+
+* move neodev next to lspconfig and enable ([e7d7f2a](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/e7d7f2a1ad2c9593dab4cc755bb52b39e970bea6))
+* yamlls ([7edd387](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/7edd387649f912d1315181e7687a1954b57b5331))
+
+## [0.19.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.19.0...v0.19.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* don't use version restriction for now until more widespread ([8367109](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8367109a8733c0f835b86c0f9d49abfaa3274732))
+
+## [0.19.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.3...v0.19.0) (2023-07-05)
+
+
+### Features
+
+* symbol outline (lazyloaded) ([5e7eb0c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/5e7eb0c7d45831f5b2b0915740e851c8a7ce7e63))
+
+
+### Bug Fixes
+
+* disambiguate keybindings for git conflict ([b858124](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/b8581242dc54f857a9a5b9c2231adba54c0ec8dd))
+* vim-slime delim for R ([ba01fb4](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ba01fb4ac1fd05fb0df97605adbe77a859052c8f))
+
+## [0.18.3](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.2...v0.18.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* back to vim.loop instead of vim.uv until nvim v0.10 is released ([1f14aa1](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1f14aa10775aa9cb828eb1e72efc0326d8482565))
+
+## [0.18.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.1...v0.18.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix git diffview keybindings ([1c3570f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1c3570fd6f1561003bc5ad4368e7507c55cb3b39))
+* neogit moved to new user/org ([9b1e426](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9b1e42612d9606e96aebf2bd322ca0927b4367ff))
+
+
+### Performance Improvements
+
+* disable scrollview ([0c49ab8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/0c49ab801cad2a127a78205860248d894c810271))
+* faster pyright config ([760feff](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/760feff4838a293e5eb96c642d6fbc6a50d6a16c))
+
+## [0.18.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.18.0...v0.18.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* luasnip package.json ([eaf9688](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/eaf96886724d0a6d6b812e854235da6808c6034d))
+
+## [0.18.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.17.0...v0.18.0) (2023-06-30)
+
+
+### Features
+
+* highlight code chunks with headlines.nvim ([7eb3d01](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/7eb3d01d2113359820321be064ff0b0a1f378c43))
+* **keys:** next/previous quickfix item ([c2f0ae0](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c2f0ae0ebf0c63b6ab1fb26282ec1446e3f068ee))
+* show more of the file path in windowline ([8ee2436](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8ee2436d785ebeaba0c47b28755d881a15c86d98))
+
+## [0.17.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.16.1...v0.17.0) (2023-06-28)
+
+
+### Features
+
+* keybindings for qmd document_symbols and type_definition ([c99a52c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c99a52c5950b953bccf16f85fe3efc479ec42ce6))
+
+## [0.16.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.16.0...v0.16.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* ts textobjects for plain python/r file code chunks ([24021b8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/24021b8ca25b569592cf8dc8174a1cc00ab29e30))
+
+## [0.16.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.15.0...v0.16.0) (2023-06-27)
+
+
+### Features
+
+* re-use [@class](https://github.com/class) textobject for nicer keybindings ([ab63d0d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ab63d0d6fff43903c65bf849a86a4999380a9215))
+
+## [0.15.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.2...v0.15.0) (2023-06-24)
+
+
+### Features
+
+* warn if quarto resource path is not found ([c166dd2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c166dd2400bea07474f4d514e810ef0f9d83c944)), closes [#36](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/36)
+
+## [0.14.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.1...v0.14.2) (2023-06-16)
+
+
+### Bug Fixes
+
+* delete broken symlink ([ebb15b8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ebb15b867119afb9f82df1b25442b76abb1c93cc))
+* re-introduce quarto snippets ([6131c25](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/6131c2515509a00df1ccbdd530bcf3cfb2ac441d))
+
+## [0.14.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.14.0...v0.14.1) (2023-06-07)
+
+
+### Bug Fixes
+
+* properly use vim slime ipython pause ([378b376](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/378b3761a74480d6fe05fd5bc83609d38670e49b))
+
+## [0.14.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.13.0...v0.14.0) (2023-06-06)
+
+
+### Features
+
+* revert to only completing curly code chunks, but also add html ([fa372b6](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fa372b68dded03e08735a0c7786c62110c6b91a1))
+
+## [0.13.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.12.0...v0.13.0) (2023-06-05)
+
+
+### Features
+
+* enable completion for all chunks by default ([15023f2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/15023f25b68930db951e15f478d0082ccfb2ce72))
+
+
+### Bug Fixes
+
+* remove (deprecated?) vim-slime option ([896c432](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/896c432ba0ad5676bf36c918f050f9193a87586b))
+* respect .ignore file for finding files ([1bf09f2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1bf09f2e9d16c0c398d7bebb4b5965b15fe2e98c))
+
+## [0.12.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.11.0...v0.12.0) (2023-06-03)
+
+
+### Features
+
+* add leap.nvim ([ef6fdde](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ef6fdde2c011d7703bc7e345c4cf1d5f5cf9887d))
+
+
+### Performance Improvements
+
+* disable slower plugins by default ([7912423](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/7912423229bc360b1673b65e3743397a85200103))
+
 ## [0.11.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.10.0...v0.11.0) (2023-05-26)
 
 

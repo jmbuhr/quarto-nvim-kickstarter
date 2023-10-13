@@ -108,7 +108,7 @@ end
 --show up in the popup as well
 wk.register(
   {
-    c = {
+    c       = {
       name = 'code',
       c = { ':SlimeConfig<cr>', 'slime config' },
       n = { ':split term://$SHELL<cr>', 'new terminal' },
@@ -117,7 +117,14 @@ wk.register(
       i = { ':split term://ipython<cr>', 'new ipython terminal' },
       j = { ':split term://julia<cr>', 'new julia terminal' },
     },
-    v = {
+    ['coo'] = { 'o# %%<cr>', 'new code chunk below' },
+    ['cOo'] = { 'O# %%<cr>', 'new code chunk above' },
+    ['cob'] = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
+    ['cor'] = { 'o```{r}<cr>```<esc>O', "r code chunk" },
+    ['cop'] = { 'o```{python}<cr>```<esc>O', "python code chunk" },
+    ['coj'] = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+    ['col'] = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+    v       = {
       name = 'vim',
       t = { toggle_light_dark_theme, 'switch theme' },
       c = { ':Telescope colorscheme<cr>', 'colortheme' },
@@ -126,15 +133,13 @@ wk.register(
       s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', 'Settings' },
       h = { ':execute "h " . expand("<cword>")<cr>', 'help' }
     },
-    l = {
+    l       = {
       name = 'language/lsp',
       r    = { '<cmd>Telescope lsp_references<cr>', 'references' },
       R    = { 'rename' },
       D    = { vim.lsp.buf.type_definition, 'type definition' },
       a    = { vim.lsp.buf.code_action, 'coda action' },
       e    = { vim.diagnostic.open_float, 'diagnostics' },
-      f    = { vim.lsp.buf.format, 'format' },
-      o    = { ':SymbolsOutline<cr>', 'outline' },
       d    = {
         name = 'diagnostics',
         d = { vim.diagnostic.disable, 'disable' },
@@ -143,20 +148,32 @@ wk.register(
       g    = { ':Neogen<cr>', 'neogen docstring' },
       s    = { ':ls!<cr>', 'list all buffers' },
     },
-    q = {
+    o       = {
+      name  = 'otter & code',
+      a     = { require 'otter'.dev_setup, 'otter activate' },
+      ['o'] = { 'o# %%<cr>', 'new code chunk below' },
+      ['O'] = { 'O# %%<cr>', 'new code chunk above' },
+      ['b'] = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
+      ['r'] = { 'o```{r}<cr>```<esc>O', "r code chunk" },
+      ['p'] = { 'o```{python}<cr>```<esc>O', "python code chunk" },
+      ['j'] = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+      ['l'] = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
+    },
+    q       = {
       name = 'quarto',
       a = { ":QuartoActivate<cr>", 'activate' },
       p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
       q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
       h = { ":QuartoHelp ", 'help' },
-      r = { name = 'run',
+      r = {
+        name = 'run',
         r = { ':QuartoSendAbove<cr>', 'to cursor' },
         a = { ':QuartoSendAll<cr>', 'all' },
       },
       e = { ":lua require'otter'.export()<cr>", 'export' },
       E = { ":lua require'otter'.export(true)<cr>", 'export overwrite' },
     },
-    f = {
+    f       = {
       name = 'find (telescope)',
       f = { '<cmd>Telescope find_files<cr>', 'files' },
       h = { '<cmd>Telescope help_tags<cr>', 'help' },
@@ -174,7 +191,7 @@ wk.register(
       j = { "<cmd>Telescope jumplist<cr>", "marks" },
       p = { "project" },
     },
-    h = {
+    h       = {
       name = 'help/debug/conceal',
       c = {
         name = 'conceal',
@@ -188,7 +205,7 @@ wk.register(
         n = { ':=vim.treesitter.get_node():type()<cr>', 'show node' },
       }
     },
-    s = {
+    s       = {
       name = "spellcheck",
       s = { "<cmd>Telescope spell_suggest<cr>", "spelling" },
       ['/'] = { '<cmd>setlocal spell!<cr>', 'spellcheck' },
@@ -200,7 +217,7 @@ wk.register(
       b = { 'zw', 'bad' },
       ['?'] = { '<cmd>Telescope spell_suggest<cr>', 'suggest' },
     },
-    g = {
+    g       = {
       name = "git",
       c = { ":GitConflictRefresh<cr>", 'conflict' },
       g = { ":Neogit<cr>", "neogit" },
@@ -213,18 +230,54 @@ wk.register(
         name = 'diff',
         o = { ':DiffviewOpen<cr>', 'open' },
         c = { ':DiffviewClose<cr>', 'close' },
+      },
+      b = {
+        name = 'blame',
+        b = { ':GitBlameToggle<cr>', 'toggle' },
+        o = { ':GitBlameOpenCommitURL<cr>', 'open' },
+        c = { ':GitBlameCopyCommitURL<cr>', 'copy' },
       }
     },
-    w = {
+    w       = {
       name = 'write',
       w = { ":w<cr>", "write" },
     },
-    x = {
+    x       = {
       name = 'execute',
       x = { ':w<cr>:source %<cr>', 'file' }
     }
   }, { mode = 'n', prefix = '<leader>' }
 )
+
+
+local is_code_chunk = function()
+  local current, range = require 'otter.keeper'.get_current_language_context()
+  if current then
+    return true
+  else
+    return false
+  end
+end
+
+local insert_code_chunk = function(lang)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<esc>', true, false, true), 'n', true)
+  local keys
+  if is_code_chunk() then
+    keys = [[o```<cr><cr>```{]] .. lang .. [[}<esc>o]]
+  else
+    keys = [[o```{]] .. lang .. [[}<cr>```<esc>O]]
+  end
+  keys = vim.api.nvim_replace_termcodes(keys, true, false, true)
+  vim.api.nvim_feedkeys(keys, 'n', false)
+end
+
+local insert_r_chunk = function()
+  insert_code_chunk('r')
+end
+
+local insert_py_chunk = function()
+  insert_code_chunk('python')
+end
 
 -- normal mode
 wk.register({
@@ -235,17 +288,12 @@ wk.register({
   ['gN']            = { 'Nzzzv', 'center search' },
   ['gl']            = { '<c-]>', 'open help link' },
   ['gf']            = { ':e <cfile><CR>', 'edit file' },
-  ['coo']            = { 'o# %%<cr>', 'new code chunk below' },
-  ['cOo']            = { 'O# %%<cr>', 'new code chunk above' },
-  ['cob']           = { 'o```{bash}<cr>```<esc>O', "bash code chunk" },
-  ['cor']           = { 'o```{r}<cr>```<esc>O', "r code chunk" },
-  ['cop']           = { 'o```{python}<cr>```<esc>O', "python code chunk" },
-  ['coj']           = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
-  ['col']           = { 'o```{julia}<cr>```<esc>O', "julia code chunk" },
-  ['<m-i>']         = { 'o```{r}<cr>```<esc>O', "r code chunk" },
-  ['<cm-i>']        = { 'o```{python}<cr>```<esc>O', "r code chunk" },
-  ['<m-I>']         = { 'o```{python}<cr>```<esc>O', "r code chunk" },
-}, { mode = 'n' })
+  ['<m-i>']         = { insert_r_chunk, "r code chunk" },
+  ['<cm-i>']        = { insert_py_chunk, "python code chunk" },
+  ['<m-I>']         = { insert_py_chunk, "python code chunk" },
+  [']q']            = { ':silent cnext<cr>', 'quickfix next' },
+  ['[q']            = { ':silent cprev<cr>', 'quickfix prev' },
+}, { mode = 'n', silent = true })
 
 
 -- visual mode
@@ -262,12 +310,13 @@ wk.register({
   ['p'] = { '"_dP', 'replace without overwriting reg' },
 }, { mode = 'v', prefix = "<leader>" })
 
+-- insert mode
 wk.register({
   -- ['<c-e>'] = { "<esc>:FeMaco<cr>i", "edit code" },
-  ['<m-->'] = { ' <- ', "assign" },
-  ['<m-m>'] = { ' |>', "pipe" },
-  ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
-  ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
-  ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
+  ['<m-->']      = { ' <- ', "assign" },
+  ['<m-m>']      = { ' |>', "pipe" },
+  ['<m-i>']      = { insert_r_chunk, "r code chunk" },
+  ['<cm-i>']     = { insert_py_chunk, "python code chunk" },
+  ['<m-I>']      = { insert_py_chunk, "python code chunk" },
   ['<c-x><c-x>'] = { '<c-x><c-o>', "omnifunc completion" },
 }, { mode = 'i' })

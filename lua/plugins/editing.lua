@@ -4,9 +4,9 @@ return {
     init = function()
       -- default config
       require("bigfile").setup {
-        filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+        filesize = 2,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
         pattern = { "*" }, -- autocmd pattern
-        features = { -- features to disable
+        features = {       -- features to disable
           "indent_blankline",
           "illuminate",
           "lsp",
@@ -49,14 +49,46 @@ return {
   },
   {
     "chrishrb/gx.nvim",
+    event = { "BufEnter" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
   },
+  -- {
+  --   "folke/flash.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     modes = {
+  --       search = {
+  --         enabled = false,
+  --       },
+  --     },
+  --   },
+  --   keys = {
+  --     {
+  --       "s",
+  --       mode = { "n", "x", "o" },
+  --       function()
+  --         require("flash").jump()
+  --       end,
+  --     },
+  --     {
+  --       "S",
+  --       mode = { "o", "x" },
+  --       function()
+  --         require("flash").treesitter()
+  --       end,
+  --     },
+  --   },
+  -- },
+
+  -- interactive global search and replace
   {
-    "ggandor/leap.nvim",
-    event = { "BufEnter" },
-    config = function()
-      require('leap').add_default_mappings()
-    end
-  }
+    'nvim-pack/nvim-spectre',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+
+  },
+
+
 }

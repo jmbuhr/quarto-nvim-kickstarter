@@ -16,10 +16,12 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("plugins", {
   defaults = {
-    version = "*",
+    version = false,
   },
   dev = {
     path = "~/projects",
+    patterns = { "jmbuhr", "quarto-dev" },
+    fallback = true,
   },
   install = { colorscheme = { "catppuccin", "habamax" } },
   -- checker = { enabled = true },
