@@ -1,4 +1,3 @@
-
 -- proper colors
 vim.opt.termguicolors = true
 
@@ -8,9 +7,9 @@ vim.opt.mouse = 'a'                    -- enable mouse
 vim.opt.mousefocus = true
 vim.opt.clipboard:append 'unnamedplus' -- use system clipboard
 
- 
-vim.opt.timeoutlen = 400               -- until which-key pops up
-vim.opt.updatetime = 250               -- for autocommands and hovers
+
+vim.opt.timeoutlen = 400 -- until which-key pops up
+vim.opt.updatetime = 250 -- for autocommands and hovers
 
 -- don't ask about existing swap files
 vim.opt.shortmess:append 'A'
@@ -77,8 +76,11 @@ vim.opt.winbar = '%f'
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
 
 -- hide cmdline when not used
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 
 -- scroll before end of window
 vim.opt.scrolloff = 5
+
+-- (don't) replace certain elements with prettier ones
+vim.opt.conceallevel = 0
 

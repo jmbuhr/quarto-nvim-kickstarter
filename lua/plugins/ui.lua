@@ -40,19 +40,26 @@ return {
         },
         pickers = {
           find_files = {
-            hidden = true,
+            hidden = false,
             find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*",
-              '--glob', '!**/.Rproj.user/*', '-L' },
+              '--glob', '!**/.Rproj.user/*', "--glob", "!_site/*",
+              "--glob", "!docs/**/*.html",
+              '-L' },
           }
         },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),
           },
+          -- fzf = {
+          --   fuzzy = true,                   -- false will only do exact matching
+          --   override_generic_sorter = true, -- override the generic sorter
+          --   override_file_sorter = true,    -- override the file sorter
+          --   case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+          -- },
         }
       }
-      telescope.load_extension('ui-select')
-      telescope.load_extension('fzf')
+      -- telescope.load_extension('fzf')
       telescope.load_extension('ui-select')
       telescope.load_extension('file_browser')
       telescope.load_extension('dap')
@@ -66,7 +73,6 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     config = function()
-
       local function macro_recording()
         local reg = vim.fn.reg_recording()
         if reg == '' then
@@ -117,7 +123,7 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     keys = {
-      { '<c-b>', ':NvimTreeToggle<cr>', desc='toggle nvim-tree' },
+      { '<c-b>', ':NvimTreeToggle<cr>', desc = 'toggle nvim-tree' },
     },
     config = function()
       require 'nvim-tree'.setup {
@@ -173,8 +179,6 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
       require("ibl").setup {
-        show_current_context = true,
-        show_current_context_start = false,
       }
     end
   },
@@ -195,7 +199,40 @@ return {
         },
       }
     end
+  },
+
+
+  {
+    'jmbuhr/image.nvim',
+    config = function()
+      -- setup
+      -- Example for configuring Neovim to load user-installed installed Lua rocks:
+      package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+      package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
+      require("image").setup({
+        backend = "kitty",
+        integrations = {
+          markdown = {
+            enabled = true,
+            clear_in_insert_mode = true,
+            download_remote_images = true,
+            only_render_image_at_cursor = true,
+            filetypes = { "markdown", "vimwiki", "quarto" },
+          },
+        },
+        max_width = 90,
+        max_height = 90,
+        max_width_window_percentage = nil,
+        max_height_window_percentage = 50,
+        window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
+        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+      })
+    end
   }
+
+
+
 
 
 }

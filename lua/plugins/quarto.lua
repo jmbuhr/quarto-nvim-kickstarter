@@ -624,7 +624,7 @@ return {
 
   -- paste an image to markdown from the clipboard
   -- :PasteImg,
-  { 'ekickx/clipboard-image.nvim' },
+  { 'dfendr/clipboard-image.nvim' },
 
   -- preview equations
   {
