@@ -1,5 +1,7 @@
 return {
 
+  -- { "folke/neodev.nvim", opts = {} },
+  -- { "nvim-treesitter/playground" },
   -- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
 
   -- {'stevearc/profile.nvim',
