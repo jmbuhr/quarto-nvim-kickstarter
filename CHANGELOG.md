@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.4](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.3...v0.22.4) (2023-10-17)
+
+
+### Bug Fixes
+
+* remove outdated indent-blankline settings ([8413978](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8413978ad750b40c599e8f1b6b15a15f964ef01b)), closes [#95](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/95)
+
 ## [0.22.3](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.2...v0.22.3) (2023-09-28)
 
 
