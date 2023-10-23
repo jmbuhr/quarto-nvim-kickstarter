@@ -117,7 +117,8 @@ return {
           enable = true,
         },
         git                 = {
-          enable = true,
+          -- enable = true,
+          enable = false,
           ignore = false,
           timeout = 500,
         },

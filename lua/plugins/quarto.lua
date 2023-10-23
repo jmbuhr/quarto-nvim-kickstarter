@@ -178,18 +178,11 @@ return {
         buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
         local opts = { noremap = true, silent = true }
 
-        -- buf_set_keymap('n', 'gS', '<cmd>Telescope lsp_document_symbols<CR>', opts)
-        -- buf_set_keymap('n', 'gD', '<cmd>Telescope lsp_type_definitions<CR>', opts)
-        -- buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-        -- buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         buf_set_keymap('n', 'gh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
         buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-        -- buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
         buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
         buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
         buf_set_keymap('n', '<leader>ll', '<cmd>lua vim.lsp.codelens.run()<cr>', opts)
-        -- buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        -- buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
         client.server_capabilities.document_formatting = true
       end
 
@@ -244,12 +237,6 @@ return {
             },
           },
         },
-      }
-
-      lspconfig.emmet_ls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags
       }
 
       lspconfig.cssls.setup {
@@ -366,23 +353,23 @@ return {
       -- Add additional languages here.
       -- See `:h lspconfig-all` for the configuration.
       -- Like e.g. Haskell:
-      lspconfig.hls.setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags
-      }
+      -- lspconfig.hls.setup {
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags
+      -- }
 
-      lspconfig.rust_analyzer.setup{
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = false;
-            }
-          }
-        }
-      }
+      -- lspconfig.rust_analyzer.setup{
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   settings = {
+      --     ['rust-analyzer'] = {
+      --       diagnostics = {
+      --         enable = false;
+      --       }
+      --     }
+      --   }
+      -- }
 
     end
   },
