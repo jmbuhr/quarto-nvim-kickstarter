@@ -33,15 +33,18 @@ return {
       { '<leader>gct', ':GitConflictChooseTheirs<cr>' },
       { '<leader>gcb', ':GitConflictChooseBoth<cr>' },
       { '<leader>gc0', ':GitConflictChooseNone<cr>' },
-      { ']x', ':GitConflictNextConflict<cr>' },
-      { '[x', ':GitConflictPrevConflict<cr>' },
+      { ']x',          ':GitConflictNextConflict<cr>' },
+      { '[x',          ':GitConflictPrevConflict<cr>' },
     },
   },
   {
     'f-person/git-blame.nvim',
     init = function()
+      require('gitblame').setup {
+        enabled = false,
+      }
       vim.g.gitblame_display_virtual_text = 1
-      vim.g.gitblame_enabled = 0
+      -- vim.g.gitblame_enabled = 0
     end
   },
   -- github PRs and the like with gh-cli

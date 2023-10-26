@@ -51,12 +51,12 @@ return {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown(),
           },
-          -- fzf = {
-          --   fuzzy = true,                   -- false will only do exact matching
-          --   override_generic_sorter = true, -- override the generic sorter
-          --   override_file_sorter = true,    -- override the file sorter
-          --   case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-          -- },
+          fzf = {
+            fuzzy = true,                   -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+          },
         }
       }
       -- telescope.load_extension('fzf')
@@ -108,14 +108,14 @@ return {
     end
   },
 
-  {
-    'dstein64/nvim-scrollview',
-    config = function()
-      require('scrollview').setup({
-        current_only = true,
-      })
-    end
-  },
+  -- {
+  --   'dstein64/nvim-scrollview',
+  --   config = function()
+  --     require('scrollview').setup({
+  --       current_only = true,
+  --     })
+  --   end
+  -- },
 
   -- { 'RRethy/vim-illuminate' }, -- highlight current word
 
@@ -179,6 +179,7 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
       require("ibl").setup {
+      indent = { char = "│" }
       }
     end
   },
@@ -203,8 +204,11 @@ return {
 
 
   {
-    'jmbuhr/image.nvim',
+    '3rd/image.nvim',
     config = function()
+      if true then
+        return
+      end
       -- setup
       -- Example for configuring Neovim to load user-installed installed Lua rocks:
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
@@ -215,9 +219,9 @@ return {
         integrations = {
           markdown = {
             enabled = true,
-            clear_in_insert_mode = true,
-            download_remote_images = true,
-            only_render_image_at_cursor = true,
+            -- clear_in_insert_mode = true,
+            -- download_remote_images = true,
+            -- only_render_image_at_cursor = true,
             filetypes = { "markdown", "vimwiki", "quarto" },
           },
         },

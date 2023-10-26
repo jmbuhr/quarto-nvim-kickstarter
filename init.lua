@@ -4,5 +4,5 @@ require 'config.autocommands'
 require 'config.keymap'
 require 'config.color'
 
-require'config.experimental'
+-- require'config.experimental'
 
