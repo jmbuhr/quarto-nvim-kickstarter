@@ -250,6 +250,15 @@ return {
 				on_attach = on_attach,
 				capabilities = capabilities,
 				flags = lsp_flags,
+				settings = {
+					yaml = {
+						schemas = {
+							-- add custom schemas here
+							-- e.g.
+							["https://raw.githubusercontent.com/hits-mbm-dev/kimmdy/main/src/kimmdy/kimmdy-yaml-schema.json"] = "kimmdy.yml",
+						},
+					},
+				},
 			})
 
 			local function strsplit(s, delimiter)
