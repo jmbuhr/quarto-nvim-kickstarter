@@ -225,7 +225,18 @@ return {
 	{
 		"3rd/image.nvim",
 		config = function()
+			-- Requirements
+			-- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
+
 			local backend = "kitty"
+
+			-- check if imagemagick is available
+			local obj = vim.system({ "convert", "-version" }, { text = true }):wait()
+			if obj.code ~= 0 then
+				-- print("imagemagick is not available")
+				return
+			end
+
 			if backend == "kitty" then
 				local obj = vim.system({ "kitty", "--version" }, { text = true }):wait()
 				local v = vim.version.parse(obj.stdout:match("(%d+%.%d+%.%d+)"))
@@ -262,8 +273,16 @@ return {
 
 			-- setup
 			-- Example for configuring Neovim to load user-installed installed Lua rocks:
+			--$ luarocks --local --lua-version=5.1 install magick
 			package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 			package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+
+			-- check if magick luarock is available
+			local ok, magick = pcall(require, "magick")
+			if not ok then
+				-- print("magick luarock is not available")
+				return
+			end
 
 			require("image").setup({
 				backend = backend,
@@ -276,12 +295,10 @@ return {
 						filetypes = { "markdown", "vimwiki", "quarto" },
 					},
 				},
-				max_width = 90,
-				max_height = 90,
-				max_width_window_percentage = nil,
-				max_height_window_percentage = 50,
-				window_overlap_clear_enabled = false,
-				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+				max_width = 100,
+				max_height = 15,
+				editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
+				tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
 			})
 		end,
 	},
