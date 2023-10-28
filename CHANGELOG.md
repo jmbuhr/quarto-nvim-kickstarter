@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.23.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.4...v0.23.0) (2023-10-28)
+
+
+### Features
+
+* implement many tweaks from dev and format with stylua ([e903301](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/e90330100606514908c216f40235df247ae7a4f2))
+* test image.lua requirements ([f6a6059](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f6a605973bb6d1eecd98a1e18ae79999f3178f31))
+
+
+### Bug Fixes
+
+* add example for custom yaml schema ([d2e3d5e](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d2e3d5e4262e678015c393d7b9a7eeb4d453fa2d))
+
 ## [0.22.4](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.3...v0.22.4) (2023-10-17)
 
 
