@@ -70,36 +70,36 @@ return {
   { 'nvim-telescope/telescope-dap.nvim' },
   { 'nvim-telescope/telescope-file-browser.nvim' },
 
-  {
-    'nvim-lualine/lualine.nvim',
-    config = function()
-      local function macro_recording()
-        local reg = vim.fn.reg_recording()
-        if reg == '' then
-          return ''
-        end
-        return '📷[' .. reg .. ']'
-      end
-
-      require('lualine').setup {
-        options = {
-          section_separators = '',
-          component_separators = '',
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = { 'mode', macro_recording },
-          lualine_b = { 'branch', 'diff', 'diagnostics' },
-          -- lualine_b = {},
-          lualine_c = { 'searchcount' },
-          lualine_x = { 'filetype' },
-          lualine_y = { 'progress' },
-          lualine_z = { 'location' }
-        },
-        extensions = { 'nvim-tree' },
-      }
-    end
-  },
+  -- {
+  --   'nvim-lualine/lualine.nvim',
+  --   config = function()
+  --     local function macro_recording()
+  --       local reg = vim.fn.reg_recording()
+  --       if reg == '' then
+  --         return ''
+  --       end
+  --       return '📷[' .. reg .. ']'
+  --     end
+  --
+  --     require('lualine').setup {
+  --       options = {
+  --         section_separators = '',
+  --         component_separators = '',
+  --         globalstatus = true,
+  --       },
+  --       sections = {
+  --         lualine_a = { 'mode', macro_recording },
+  --         lualine_b = { 'branch', 'diff', 'diagnostics' },
+  --         -- lualine_b = {},
+  --         lualine_c = { 'searchcount' },
+  --         lualine_x = { 'filetype' },
+  --         lualine_y = { 'progress' },
+  --         lualine_z = { 'location' }
+  --       },
+  --       extensions = { 'nvim-tree' },
+  --     }
+  --   end
+  -- },
 
   {
     'nanozuki/tabby.nvim',
@@ -178,9 +178,9 @@ return {
   {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-      require("ibl").setup {
-      indent = { char = "│" }
-      }
+      -- require("ibl").setup {
+      -- indent = { char = "│" }
+      -- }
     end
   },
 
@@ -206,16 +206,48 @@ return {
   {
     '3rd/image.nvim',
     config = function()
-      if true then
-        return
+      local backend = "kitty"
+      if backend == "kitty" then
+        local obj = vim.system({ 'kitty', '--version' }, { text = true }):wait()
+        local v = vim.version.parse(obj.stdout:match('(%d+%.%d+%.%d+)'))
+        local minimal = vim.version.parse('0.30.1')
+        if v and vim.version.cmp(v, minimal) < 0 then
+          -- print("kitty version is too old")
+          return
+        end
       end
+      local tmux = vim.fn.getenv("TMUX")
+      if tmux ~= vim.NIL then
+        -- tmux uses number.number.(maybe letter)
+        -- e.g. 3.3a
+        -- but 3.3 comes before 3.3a
+        -- so we replace a with 1
+        local offset = 96
+        local obj = vim.system({ 'tmux', '-V' }, { text = true }):wait()
+        local out = obj.stdout:gsub("\n", "")
+        local letter = out:match("tmux %d+%.%d+([a-z])")
+        local number
+        if letter == nil then
+          number = 0
+        else
+          number = string.byte(letter) - offset
+        end
+        local version = out:gsub("tmux (%d+%.%d+)([a-z])", "%1." .. number)
+        local v = vim.version.parse(version)
+        local minimal = vim.version.parse('3.3.1')
+        if v and vim.version.cmp(v, minimal) < 0 then
+          -- print("tmux version is too old")
+          return
+        end
+      end
+
       -- setup
       -- Example for configuring Neovim to load user-installed installed Lua rocks:
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
       require("image").setup({
-        backend = "kitty",
+        backend = backend,
         integrations = {
           markdown = {
             enabled = true,
@@ -229,7 +261,7 @@ return {
         max_height = 90,
         max_width_window_percentage = nil,
         max_height_window_percentage = 50,
-        window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
+        window_overlap_clear_enabled = false,
         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
       })
     end

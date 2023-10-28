@@ -53,33 +53,33 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
   },
-  -- {
-  --   "folke/flash.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     modes = {
-  --       search = {
-  --         enabled = false,
-  --       },
-  --     },
-  --   },
-  --   keys = {
-  --     {
-  --       "s",
-  --       mode = { "n", "x", "o" },
-  --       function()
-  --         require("flash").jump()
-  --       end,
-  --     },
-  --     {
-  --       "S",
-  --       mode = { "o", "x" },
-  --       function()
-  --         require("flash").treesitter()
-  --       end,
-  --     },
-  --   },
-  -- },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      modes = {
+        search = {
+          enabled = false,
+        },
+      },
+    },
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+      },
+      {
+        "S",
+        mode = { "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+      },
+    },
+  },
 
   -- interactive global search and replace
   {
