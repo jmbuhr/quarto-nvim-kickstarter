@@ -1,4 +1,4 @@
 return {
-  -- common dependencies
-  { 'nvim-lua/plenary.nvim' },
+	-- common dependencies
+	{ "nvim-lua/plenary.nvim" },
 }
