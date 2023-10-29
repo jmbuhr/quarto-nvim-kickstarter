@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.0...v0.23.1) (2023-10-29)
+
+
+### Bug Fixes
+
+* check nvim version before usage of vim.system. fixes [#63](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/63) ([524f453](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/524f453000d5393e7bac07a0925bd8ed5c9b5a42))
+
 ## [0.23.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.4...v0.23.0) (2023-10-28)
 
 
