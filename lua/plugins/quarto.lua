@@ -2,9 +2,11 @@ return {
 
 	{
 		"quarto-dev/quarto-nvim",
+		dev = false,
 		dependencies = {
 			{
 				"jmbuhr/otter.nvim",
+				dev = false,
 				dependencies = {
 					{ "neovim/nvim-lspconfig" },
 				},
@@ -14,38 +16,8 @@ return {
 							border = require("misc.style").border,
 						},
 					},
-          buffers = {
-            set_filetype = true,
-          },
 				},
 			},
-
-			-- optional
-			-- { 'quarto-dev/quarto-vim',
-			--   ft = 'quarto',
-			--   dependencies = { 'vim-pandoc/vim-pandoc-syntax' },
-			--   -- note: needs additional syntax highlighting enabled for markdown
-			--   --       in `nvim-treesitter`
-			--   config = function()
-			-- conceal can be tricky because both
-			-- the treesitter highlighting and the
-			-- regex vim syntax files can define conceals
-			--
-			-- -- see `:h conceallevel`
-			-- vim.opt.conceallevel = 1
-			--
-			-- -- disable conceal in markdown/quarto
-			-- vim.g['pandoc#syntax#conceal#use'] = false
-			--
-			-- -- embeds are already handled by treesitter injectons
-			-- vim.g['pandoc#syntax#codeblocks#embeds#use'] = false
-			-- vim.g['pandoc#syntax#conceal#blacklist'] = { 'codeblock_delim', 'codeblock_start' }
-			--
-			-- -- but allow some types of conceal in math regions:
-			-- -- see `:h g:tex_conceal`
-			-- vim.g['tex_conceal'] = 'gm'
-			-- --   end
-			-- },
 		},
 		opts = {
 			lspFeatures = {
@@ -56,16 +28,11 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dev = true,
-		-- tag = nil,
-		-- branch = 'master',
+		tag = nil,
+		branch = "master",
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
-        modules = {},
-        sync_install = true,
-        ignore_install = {},
-        auto_install = true,
 				ensure_installed = {
 					"r",
 					"python",
@@ -81,7 +48,6 @@ return {
 					"latex",
 					"html",
 					"css",
-					"haskell",
 				},
 				highlight = {
 					enable = true,
@@ -262,12 +228,6 @@ return {
 				},
 			})
 
-			-- lspconfig.emmet_ls.setup {
-			--   on_attach = on_attach,
-			--   capabilities = capabilities,
-			--   flags = lsp_flags
-			-- }
-
 			lspconfig.cssls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -280,6 +240,12 @@ return {
 				flags = lsp_flags,
 			})
 
+			lspconfig.emmet_ls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				flags = lsp_flags,
+			})
+
 			lspconfig.yamlls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
@@ -287,6 +253,8 @@ return {
 				settings = {
 					yaml = {
 						schemas = {
+							-- add custom schemas here
+							-- e.g.
 							["https://raw.githubusercontent.com/hits-mbm-dev/kimmdy/main/src/kimmdy/kimmdy-yaml-schema.json"] = "kimmdy.yml",
 						},
 					},
@@ -384,23 +352,23 @@ return {
 			-- Add additional languages here.
 			-- See `:h lspconfig-all` for the configuration.
 			-- Like e.g. Haskell:
-			lspconfig.hls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				flags = lsp_flags,
-			})
+			-- lspconfig.hls.setup {
+			--   on_attach = on_attach,
+			--   capabilities = capabilities,
+			--   flags = lsp_flags
+			-- }
 
-			lspconfig.rust_analyzer.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					["rust-analyzer"] = {
-						diagnostics = {
-							enable = false,
-						},
-					},
-				},
-			})
+			-- lspconfig.rust_analyzer.setup{
+			--   on_attach = on_attach,
+			--   capabilities = capabilities,
+			--   settings = {
+			--     ['rust-analyzer'] = {
+			--       diagnostics = {
+			--         enable = false;
+			--       }
+			--     }
+			--   }
+			-- }
 		end,
 	},
 
@@ -641,8 +609,8 @@ return {
 	{
 		"jbyuki/nabla.nvim",
 		keys = {
-			{ "<leader>ee", ':lua require"nabla".toggle_virt()<cr>' },
-			{ "<leader>eh", ':lua require"nabla".popup()<cr>' },
+			{ "<leader>ee", ':lua require"nabla".toggle_virt()<cr>', "toggle equations" },
+			{ "<leader>eh", ':lua require"nabla".popup()<cr>', "hover equation" },
 		},
 	},
 }

@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.23.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.0...v0.23.1) (2023-10-29)
+
+
+### Bug Fixes
+
+* check nvim version before usage of vim.system. fixes [#63](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/63) ([524f453](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/524f453000d5393e7bac07a0925bd8ed5c9b5a42))
+
+## [0.23.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.4...v0.23.0) (2023-10-28)
+
+
+### Features
+
+* implement many tweaks from dev and format with stylua ([e903301](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/e90330100606514908c216f40235df247ae7a4f2))
+* test image.lua requirements ([f6a6059](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f6a605973bb6d1eecd98a1e18ae79999f3178f31))
+
+
+### Bug Fixes
+
+* add example for custom yaml schema ([d2e3d5e](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d2e3d5e4262e678015c393d7b9a7eeb4d453fa2d))
+
+## [0.22.4](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.3...v0.22.4) (2023-10-17)
+
+
+### Bug Fixes
+
+* remove outdated indent-blankline settings ([8413978](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8413978ad750b40c599e8f1b6b15a15f964ef01b)), closes [#95](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/95)
+
+## [0.22.3](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.2...v0.22.3) (2023-09-28)
+
+
+### Bug Fixes
+
+* indent blankline v3 setup ([#59](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/59)) ([8fd3b54](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8fd3b54822fb7817acf4613dd1ce6f51b3889d1a))
+
+## [0.22.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.1...v0.22.2) (2023-09-15)
+
+
+### Bug Fixes
+
+* make neotest quit keymap buffer local ([fc9b431](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/fc9b43152457174dabcb05ae7b5a1628d8ac246c))
+
+## [0.22.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.22.0...v0.22.1) (2023-08-29)
+
+
+### Bug Fixes
+
+* Update welcome-screen.lua ([#55](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/55)) ([ce92480](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ce92480f82228ec0896a1af94794c0116cb38841))
+
 ## [0.22.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.21.0...v0.22.0) (2023-08-27)
 
 
