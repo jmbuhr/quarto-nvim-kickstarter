@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.1...v0.23.2) (2023-11-03)
+
+
+### Bug Fixes
+
+* tmux version check ([0a3d522](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/0a3d522f605766f985d565d669a679b5513201c6))
+
 ## [0.23.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.0...v0.23.1) (2023-10-29)
 
 
