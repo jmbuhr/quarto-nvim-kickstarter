@@ -285,7 +285,7 @@ return {
           -- print("tmux is not available")
           return
         end
-        out = out.stdout:gsub("\n", "")
+        out = out:gsub("\n", "")
         local letter = out:match("tmux %d+%.%d+([a-z])")
         local number
         if letter == nil then
