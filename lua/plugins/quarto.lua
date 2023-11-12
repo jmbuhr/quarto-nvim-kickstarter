@@ -16,6 +16,12 @@ return {
               border = require("misc.style").border,
             },
           },
+          buffers = {
+            -- if set to true, the filetype of the otterbuffers will be set.
+            -- otherwise only the autocommand of lspconfig that attaches
+            -- the language server will be executed without setting the filetype
+            set_filetype = true,
+          },
         },
       },
       {
@@ -332,18 +338,82 @@ return {
         },
       })
 
-      lspconfig.pyright.setup({
+      -- lspconfig.pyright.setup({
+      -- 	on_attach = on_attach,
+      -- 	capabilities = capabilities,
+      -- 	flags = lsp_flags,
+      -- 	settings = {
+      -- 		python = {
+      -- 			analysis = {
+      -- 				autoSearchPaths = true,
+      -- 				useLibraryCodeForTypes = false,
+      -- 				diagnosticMode = "openFilesOnly",
+      -- 			},
+      -- 		},
+      -- 	},
+      -- 	root_dir = function(fname)
+      -- 		return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+      -- 			fname
+      -- 		) or util.path.dirname(fname)
+      -- 	end,
+      -- })
+
+      -- lspconfig.jedi_language_server.setup({
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      --   settings = {
+      --   },
+      --   root_dir = function(fname)
+      --     return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+      --       fname
+      --     ) or util.path.dirname(fname)
+      --   end,
+      -- })
+
+      -- to install pylsp plugins run:
+      -- cd ~/.local/share/nvim/mason/packages/python-lsp-server
+      -- source venv/bin/activate
+      -- pip install mypy
+      -- pip install rope
+      -- pip install pylsp-rope
+      -- pip install python-lsp-black
+      -- pip install pylsp-mypy
+      lspconfig.pylsp.setup({
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
         settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = false,
-              diagnosticMode = "openFilesOnly",
+          pylsp = {
+            configurationSources = {
             },
-          },
+            plugins = {
+              pycodestyle = {
+                ignore = {
+                  'W391',
+                  'W292', -- no blank line after file
+                  'E303', -- blank lines in otter document
+                  'E302', -- blank lines in otter document
+                  'E305', -- blank lines in otter document
+                  'E111', -- indentation is not a multiple of four
+                  'E402', -- imports not at top
+                  'E741', -- ambiguous variable name
+                },
+                maxLineLength = 120
+              },
+              black = {
+                enabled = true
+              },
+              mypy = {
+                enabled = true,
+                dmypy = true,
+                live_mode = false,
+              },
+              rope = {
+
+              },
+            }
+          }
         },
         root_dir = function(fname)
           return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
@@ -387,6 +457,7 @@ return {
       -- }
     end,
   },
+
 
   -- completion
   {

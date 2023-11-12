@@ -194,14 +194,14 @@ return {
     end,
   },
 
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("ibl").setup({
-        indent = { char = "│" },
-      })
-    end,
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   config = function()
+  --     require("ibl").setup({
+  --       indent = { char = "│" },
+  --     })
+  --   end,
+  -- },
 
   {
     "lukas-reineke/headlines.nvim",
