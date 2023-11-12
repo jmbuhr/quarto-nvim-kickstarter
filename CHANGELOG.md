@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.2...v1.0.0) (2023-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* pyright somehow manages to block the editor even when just scrolling and leads to blocking at startup.
+
+### Bug Fixes
+
+* disable indent-blankline due to performance issues ([3d7d1b4](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/3d7d1b4979c5e3432084251862dca6d806ef35ff))
+
+
+### Performance Improvements
+
+* replace pyright with python-lsp-server and mypy plugin ([9a48780](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9a48780d43a479c53ad8153e06c6b1c6c9e43540))
+
 ## [0.23.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.1...v0.23.2) (2023-11-03)
 
 
