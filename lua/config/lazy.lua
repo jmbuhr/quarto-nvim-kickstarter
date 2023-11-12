@@ -19,7 +19,7 @@ require("lazy").setup("plugins", {
 	},
 	dev = {
 		path = "~/projects",
-		-- patterns = { "jmbuhr", "quarto-dev" },
+		patterns = { "jmbuhr", "quarto-dev" },
 		fallback = true,
 	},
 	install = { colorscheme = { "catppuccin", "habamax" } },
