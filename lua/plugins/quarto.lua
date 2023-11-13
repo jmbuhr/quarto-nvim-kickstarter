@@ -147,7 +147,7 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup({
         automatic_installation = {
-          exclude = {},
+          exclude = {'pylsp'}
         },
       })
 
@@ -382,12 +382,18 @@ return {
       end
       vim.api.nvim_create_user_command("InstallPylspPlugins", add_pylsp_plugins, {})
 
-      -- to install pylsp plugins run:
-      -- cd ~/.local/share/nvim/mason/packages/python-lsp-server
-      -- source venv/bin/activate
+      -- Install python-lsp-server to each venv project manually:
+      --
+      -- source .venv/bin/activate
+      -- pip install python-lsp-server
       -- pip install pylsp-rope
       -- pip install python-lsp-black
       -- pip install pylsp-mypy
+      --
+      -- or install with mason and install
+      -- in mason python-lsp-server venv
+      -- cd ~/.local/share/nvim/mason/packages/python-lsp-server
+      --
       lspconfig.pylsp.setup({
         on_attach = on_attach,
         capabilities = capabilities,
