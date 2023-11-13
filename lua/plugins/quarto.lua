@@ -6,7 +6,7 @@ return {
     dependencies = {
       {
         "jmbuhr/otter.nvim",
-        dev = false,
+        dev = true,
         dependencies = {
           { "neovim/nvim-lspconfig" },
         },
@@ -21,6 +21,7 @@ return {
             -- otherwise only the autocommand of lspconfig that attaches
             -- the language server will be executed without setting the filetype
             set_filetype = true,
+            write_to_disk = true,
           },
         },
       },
@@ -40,10 +41,10 @@ return {
       },
       codeRunner = {
         enabled = true,
-        default_method = 'molten', -- 'molten' or 'slime'
-        ft_runners = {},        -- filetype to runner, ie. `{ python = "molten" }`.
+        default_method = 'slime', -- 'molten' or 'slime'
+        ft_runners = {},          -- filetype to runner, ie. `{ python = "molten" }`.
         -- Takes precedence over `default_method`
-        never_run = { "yaml" }, -- filetypes which are never sent to a code runner
+        never_run = { "yaml" },   -- filetypes which are never sent to a code runner
       },
     },
   },
@@ -145,7 +146,9 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        automatic_installation = true,
+        automatic_installation = {
+          exclude = {},
+        },
       })
 
       local lspconfig = require("lspconfig")
@@ -358,18 +361,25 @@ return {
       -- 	end,
       -- })
 
-      -- lspconfig.jedi_language_server.setup({
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      --   settings = {
-      --   },
-      --   root_dir = function(fname)
-      --     return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
-      --       fname
-      --     ) or util.path.dirname(fname)
-      --   end,
-      -- })
+      -- add pylsp dependencies
+      local function add_pylsp_plugins()
+        local function mason_package_path(package)
+          local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
+          return path
+        end
+
+        local command = "./venv/bin/pip"
+        local args = { "install", "pylsp-rope", "python-lsp-ruff", "pyls-isort", "python-lsp-black", "pylsp-mypy",
+          "black", "mypy" }
+        local cwd = mason_package_path("python-lsp-server")
+        require("plenary.job")
+            :new({
+              command = command,
+              args = args,
+              cwd = cwd,
+            })
+            :start()
+      end
 
       -- to install pylsp plugins run:
       -- cd ~/.local/share/nvim/mason/packages/python-lsp-server
@@ -421,6 +431,10 @@ return {
           ) or util.path.dirname(fname)
         end,
       })
+      vim.api.nvim_create_user_command("InstallPylspPlugins", add_pylsp_plugins, {})
+
+
+
 
       lspconfig.julials.setup({
         on_attach = on_attach,
