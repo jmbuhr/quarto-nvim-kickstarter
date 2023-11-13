@@ -380,12 +380,11 @@ return {
             })
             :start()
       end
+      vim.api.nvim_create_user_command("InstallPylspPlugins", add_pylsp_plugins, {})
 
       -- to install pylsp plugins run:
       -- cd ~/.local/share/nvim/mason/packages/python-lsp-server
       -- source venv/bin/activate
-      -- pip install mypy
-      -- pip install rope
       -- pip install pylsp-rope
       -- pip install python-lsp-black
       -- pip install pylsp-mypy
@@ -431,7 +430,6 @@ return {
           ) or util.path.dirname(fname)
         end,
       })
-      vim.api.nvim_create_user_command("InstallPylspPlugins", add_pylsp_plugins, {})
 
 
 
