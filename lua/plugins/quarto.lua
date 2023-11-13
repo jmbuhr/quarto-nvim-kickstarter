@@ -380,6 +380,7 @@ return {
                   'E302', -- blank lines in otter document
                   'E305', -- blank lines in otter document
                   'E111', -- indentation is not a multiple of four
+                  'E265', -- magic comments
                   'E402', -- imports not at top
                   'E741', -- ambiguous variable name
                 },
