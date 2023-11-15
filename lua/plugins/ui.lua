@@ -266,7 +266,12 @@ return {
           -- print("kitty is not available")
           return
         end
-        local v = vim.version.parse(out:match("(%d+%.%d+%.%d+)"))
+        local kitty_version = out:match("(%d+%.%d+%.%d+)")
+        if kitty_version == nil then
+          -- print("kitty version is not available")
+          return
+        end
+        local v = vim.version.parse(kitty_version)
         local minimal = vim.version.parse("0.30.1")
         if v and vim.version.cmp(v, minimal) < 0 then
           -- print("kitty version is too old")

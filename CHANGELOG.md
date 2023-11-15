@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v1.0.0...v2.0.0) (2023-11-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **python:** back to pyright as the default ls for python
+
+### Features
+
+* **python:** back to pyright as the default ls for python ([2cc48a8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/2cc48a84855b462d360ea5607237a284ba1d85ba))
+
+
+### Bug Fixes
+
+* hide quarto magic comments from python linter warnings ([5d11e60](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/5d11e607352f49b02d9f9fb3caddc96dfba6ef4d))
+* maybe fix [#69](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/69) ([1c2e986](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1c2e9864e995efd5aaa151e8bb60c908a2584570))
+
+## [1.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.2...v1.0.0) (2023-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* pyright somehow manages to block the editor even when just scrolling and leads to blocking at startup.
+
+### Bug Fixes
+
+* disable indent-blankline due to performance issues ([3d7d1b4](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/3d7d1b4979c5e3432084251862dca6d806ef35ff))
+
+
+### Performance Improvements
+
+* replace pyright with python-lsp-server and mypy plugin ([9a48780](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9a48780d43a479c53ad8153e06c6b1c6c9e43540))
+
 ## [0.23.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v0.23.1...v0.23.2) (2023-11-03)
 
 

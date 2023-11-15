@@ -341,46 +341,46 @@ return {
         },
       })
 
-      -- lspconfig.pyright.setup({
-      -- 	on_attach = on_attach,
-      -- 	capabilities = capabilities,
-      -- 	flags = lsp_flags,
-      -- 	settings = {
-      -- 		python = {
-      -- 			analysis = {
-      -- 				autoSearchPaths = true,
-      -- 				useLibraryCodeForTypes = false,
-      -- 				diagnosticMode = "openFilesOnly",
-      -- 			},
-      -- 		},
-      -- 	},
-      -- 	root_dir = function(fname)
-      -- 		return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
-      -- 			fname
-      -- 		) or util.path.dirname(fname)
-      -- 	end,
-      -- })
+      lspconfig.pyright.setup({
+      	on_attach = on_attach,
+      	capabilities = capabilities,
+      	flags = lsp_flags,
+      	settings = {
+      		python = {
+      			analysis = {
+      				autoSearchPaths = true,
+      				useLibraryCodeForTypes = false,
+      				diagnosticMode = "openFilesOnly",
+      			},
+      		},
+      	},
+      	root_dir = function(fname)
+      		return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+      			fname
+      		) or util.path.dirname(fname)
+      	end,
+      })
 
       -- add pylsp dependencies
-      local function add_pylsp_plugins()
-        local function mason_package_path(package)
-          local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
-          return path
-        end
-
-        local command = "./venv/bin/pip"
-        local args = { "install", "pylsp-rope", "python-lsp-ruff", "pyls-isort", "python-lsp-black", "pylsp-mypy",
-          "black", "mypy" }
-        local cwd = mason_package_path("python-lsp-server")
-        require("plenary.job")
-            :new({
-              command = command,
-              args = args,
-              cwd = cwd,
-            })
-            :start()
-      end
-      vim.api.nvim_create_user_command("InstallPylspPlugins", add_pylsp_plugins, {})
+      -- local function add_pylsp_plugins()
+      --   local function mason_package_path(package)
+      --     local path = vim.fn.resolve(vim.fn.stdpath("data") .. "/mason/packages/" .. package)
+      --     return path
+      --   end
+      --
+      --   local command = "./venv/bin/pip"
+      --   local args = { "install", "pylsp-rope", "python-lsp-ruff", "pyls-isort", "python-lsp-black", "pylsp-mypy",
+      --     "black", "mypy" }
+      --   local cwd = mason_package_path("python-lsp-server")
+      --   require("plenary.job")
+      --       :new({
+      --         command = command,
+      --         args = args,
+      --         cwd = cwd,
+      --       })
+      --       :start()
+      -- end
+      -- vim.api.nvim_create_user_command("InstallPylspPlugins", add_pylsp_plugins, {})
 
       -- Install python-lsp-server to each venv project manually:
       --
@@ -390,52 +390,49 @@ return {
       -- pip install python-lsp-black
       -- pip install pylsp-mypy
       --
-      -- or install with mason and install
-      -- in mason python-lsp-server venv
-      -- cd ~/.local/share/nvim/mason/packages/python-lsp-server
+      -- lspconfig.pylsp.setup({
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      --   settings = {
+      --     pylsp = {
+      --       configurationSources = {
+      --       },
+      --       plugins = {
+      --         pycodestyle = {
+      --           ignore = {
+      --             'W391',
+      --             'W292', -- no blank line after file
+      --             'E303', -- blank lines in otter document
+      --             'E302', -- blank lines in otter document
+      --             'E305', -- blank lines in otter document
+      --             'E111', -- indentation is not a multiple of four
+      --             'E265', -- magic comments
+      --             'E402', -- imports not at top
+      --             'E741', -- ambiguous variable name
+      --           },
+      --           maxLineLength = 120
+      --         },
+      --         black = {
+      --           enabled = true
+      --         },
+      --         mypy = {
+      --           enabled = true,
+      --           dmypy = true,
+      --           live_mode = false,
+      --         },
+      --         rope = {
       --
-      lspconfig.pylsp.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-          pylsp = {
-            configurationSources = {
-            },
-            plugins = {
-              pycodestyle = {
-                ignore = {
-                  'W391',
-                  'W292', -- no blank line after file
-                  'E303', -- blank lines in otter document
-                  'E302', -- blank lines in otter document
-                  'E305', -- blank lines in otter document
-                  'E111', -- indentation is not a multiple of four
-                  'E402', -- imports not at top
-                  'E741', -- ambiguous variable name
-                },
-                maxLineLength = 120
-              },
-              black = {
-                enabled = true
-              },
-              mypy = {
-                enabled = true,
-                dmypy = true,
-                live_mode = false,
-              },
-              rope = {
-
-              },
-            }
-          }
-        },
-        root_dir = function(fname)
-          return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
-            fname
-          ) or util.path.dirname(fname)
-        end,
-      })
+      --         },
+      --       }
+      --     }
+      --   },
+      --   root_dir = function(fname)
+      --     return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+      --       fname
+      --     ) or util.path.dirname(fname)
+      --   end,
+      -- })
 
 
 
