@@ -322,25 +322,25 @@ return {
         },
       })
 
-      -- lspconfig.pyright.setup({
-      -- 	on_attach = on_attach,
-      -- 	capabilities = capabilities,
-      -- 	flags = lsp_flags,
-      -- 	settings = {
-      -- 		python = {
-      -- 			analysis = {
-      -- 				autoSearchPaths = true,
-      -- 				useLibraryCodeForTypes = false,
-      -- 				diagnosticMode = "openFilesOnly",
-      -- 			},
-      -- 		},
-      -- 	},
-      -- 	root_dir = function(fname)
-      -- 		return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
-      -- 			fname
-      -- 		) or util.path.dirname(fname)
-      -- 	end,
-      -- })
+      lspconfig.pyright.setup({
+      	on_attach = on_attach,
+      	capabilities = capabilities,
+      	flags = lsp_flags,
+      	settings = {
+      		python = {
+      			analysis = {
+      				autoSearchPaths = true,
+      				useLibraryCodeForTypes = false,
+      				diagnosticMode = "openFilesOnly",
+      			},
+      		},
+      	},
+      	root_dir = function(fname)
+      		return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+      			fname
+      		) or util.path.dirname(fname)
+      	end,
+      })
 
       -- lspconfig.jedi_language_server.setup({
       --   on_attach = on_attach,
@@ -363,49 +363,50 @@ return {
       -- pip install pylsp-rope
       -- pip install python-lsp-black
       -- pip install pylsp-mypy
-      lspconfig.pylsp.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-          pylsp = {
-            configurationSources = {
-            },
-            plugins = {
-              pycodestyle = {
-                ignore = {
-                  'W391',
-                  'W292', -- no blank line after file
-                  'E303', -- blank lines in otter document
-                  'E302', -- blank lines in otter document
-                  'E305', -- blank lines in otter document
-                  'E111', -- indentation is not a multiple of four
-                  'E265', -- magic comments
-                  'E402', -- imports not at top
-                  'E741', -- ambiguous variable name
-                },
-                maxLineLength = 120
-              },
-              black = {
-                enabled = true
-              },
-              mypy = {
-                enabled = true,
-                dmypy = true,
-                live_mode = false,
-              },
-              rope = {
-
-              },
-            }
-          }
-        },
-        root_dir = function(fname)
-          return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
-            fname
-          ) or util.path.dirname(fname)
-        end,
-      })
+      --
+      -- lspconfig.pylsp.setup({
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      --   settings = {
+      --     pylsp = {
+      --       configurationSources = {
+      --       },
+      --       plugins = {
+      --         pycodestyle = {
+      --           ignore = {
+      --             'W391',
+      --             'W292', -- no blank line after file
+      --             'E303', -- blank lines in otter document
+      --             'E302', -- blank lines in otter document
+      --             'E305', -- blank lines in otter document
+      --             'E111', -- indentation is not a multiple of four
+      --             'E265', -- magic comments
+      --             'E402', -- imports not at top
+      --             'E741', -- ambiguous variable name
+      --           },
+      --           maxLineLength = 120
+      --         },
+      --         black = {
+      --           enabled = true
+      --         },
+      --         mypy = {
+      --           enabled = true,
+      --           dmypy = true,
+      --           live_mode = false,
+      --         },
+      --         rope = {
+      --
+      --         },
+      --       }
+      --     }
+      --   },
+      --   root_dir = function(fname)
+      --     return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+      --       fname
+      --     ) or util.path.dirname(fname)
+      --   end,
+      -- })
 
       lspconfig.julials.setup({
         on_attach = on_attach,
