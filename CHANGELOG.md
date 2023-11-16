@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.0.0...v2.0.1) (2023-11-16)
+
+
+### Performance Improvements
+
+* improve pyright performance ([edee5bc](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/edee5bc5b38ac08e5a7893f5a4f57b6f797e41f9))
+
 ## [2.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v1.0.0...v2.0.0) (2023-11-15)
 
 
