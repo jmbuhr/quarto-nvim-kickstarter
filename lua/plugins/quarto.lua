@@ -142,6 +142,10 @@ return {
       { "williamboman/mason.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "folke/neodev.nvim",                opt = {} },
+      {
+        "microsoft/python-type-stubs",
+        cond = false
+      }
     },
     config = function()
       require("mason").setup()
@@ -220,6 +224,12 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
       capabilities.textDocument.completion.completionItem.snippetSupport = true
+      -- See https://github.com/neovim/neovim/issues/23291
+      if capabilities.workspace == nil then
+        capabilities.workspace = {}
+        capabilities.workspace.didChangeWatchedFiles = {}
+      end
+      capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
       -- also needs:
       -- $home/.config/marksman/config.toml :
@@ -280,7 +290,8 @@ return {
             schemas = {
               -- add custom schemas here
               -- e.g.
-              ["https://raw.githubusercontent.com/hits-mbm-dev/kimmdy/main/src/kimmdy/kimmdy-yaml-schema.json"] = "kimmdy.yml",
+              ["https://raw.githubusercontent.com/hits-mbm-dev/kimmdy/main/src/kimmdy/kimmdy-yaml-schema.json"] =
+              "kimmdy.yml",
             },
           },
         },
@@ -341,24 +352,40 @@ return {
         },
       })
 
+      -- See https://github.com/neovim/neovim/issues/23291
+      -- disable lsp watcher.
+      -- Too slow on linux for
+      -- python projects
+      -- where pyright and nvim both create many watchers otherwise
+      -- if it is not fixed by  
+      -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+      -- up top
+      -- local ok, wf = pcall(require, "vim.lsp._watchfiles")
+      -- if ok then
+      --   wf._watchfunc = function()
+      --     return function() end
+      --   end
+      -- end
+
       lspconfig.pyright.setup({
-      	on_attach = on_attach,
-      	capabilities = capabilities,
-      	flags = lsp_flags,
-      	settings = {
-      		python = {
-      			analysis = {
-      				autoSearchPaths = true,
-      				useLibraryCodeForTypes = false,
-      				diagnosticMode = "openFilesOnly",
-      			},
-      		},
-      	},
-      	root_dir = function(fname)
-      		return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
-      			fname
-      		) or util.path.dirname(fname)
-      	end,
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+        settings = {
+          python = {
+            stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = false,
+              diagnosticMode = "openFilesOnly",
+            },
+          },
+        },
+        root_dir = function(fname)
+          return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(
+            fname
+          ) or util.path.dirname(fname)
+        end,
       })
 
       -- add pylsp dependencies
