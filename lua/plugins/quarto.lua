@@ -256,7 +256,7 @@ return {
         flags = lsp_flags,
       })
 
-      lspconfig.emmet_ls.setup({
+      lspconfig.emmet_language_server.setup({
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
@@ -338,7 +338,7 @@ return {
       -- Too slow on linux for
       -- python projects
       -- where pyright and nvim both create many watchers otherwise
-      -- if it is not fixed by  
+      -- if it is not fixed by
       -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
       -- up top
       -- local ok, wf = pcall(require, "vim.lsp._watchfiles")
@@ -488,11 +488,7 @@ return {
       { "ray-x/cmp-treesitter" },
       { "kdheepak/cmp-latex-symbols" },
       { "jmbuhr/cmp-pandoc-references" },
-      {
-        "L3MON4D3/LuaSnip",
-        version = nil,
-        branch = "master",
-      },
+      { "L3MON4D3/LuaSnip" },
       { "rafamadriz/friendly-snippets" },
       { "onsails/lspkind-nvim" },
 
@@ -581,8 +577,8 @@ return {
             with_text = true,
             menu = {
               otter = "[🦦]",
-              luasnip = "[snip]",
               nvim_lsp = "[LSP]",
+              luasnip = "[snip]",
               buffer = "[buf]",
               path = "[path]",
               spell = "[spell]",
