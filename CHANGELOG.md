@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.0.1...v2.1.0) (2023-11-21)
+
+
+### Features
+
+* exempt markdown headings from `]]` `[[` ts textobjects jumps ([c80622d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c80622d6a51a1108cfad1fff51ea60fd5e0780c7))
+
 ## [2.0.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.0.0...v2.0.1) (2023-11-16)
 
 
