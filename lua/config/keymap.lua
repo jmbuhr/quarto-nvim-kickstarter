@@ -210,7 +210,7 @@ wk.register({
 		n = { "]s", "next" },
 		p = { "[s", "previous" },
 		g = { "zg", "good" },
-		r = { "zg", "rigth" },
+		r = { "zg", "right" },
 		w = { "zw", "wrong" },
 		b = { "zw", "bad" },
 		["?"] = { "<cmd>Telescope spell_suggest<cr>", "suggest" },
