@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.1.0...v2.2.0) (2023-11-28)
+
+
+### Features
+
+* configure paste image plugin for quarto and add molten example ([24470a6](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/24470a63bd03745a792f316c98adca79f1cd8951))
+
 ## [2.1.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.0.1...v2.1.0) (2023-11-21)
 
 
