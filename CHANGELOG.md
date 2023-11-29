@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.2.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.1.0...v2.2.0) (2023-11-28)
+
+
+### Features
+
+* configure paste image plugin for quarto and add molten example ([24470a6](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/24470a63bd03745a792f316c98adca79f1cd8951))
+
+## [2.1.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.0.1...v2.1.0) (2023-11-21)
+
+
+### Features
+
+* exempt markdown headings from `]]` `[[` ts textobjects jumps ([c80622d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c80622d6a51a1108cfad1fff51ea60fd5e0780c7))
+
+## [2.0.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.0.0...v2.0.1) (2023-11-16)
+
+
+### Performance Improvements
+
+* improve pyright performance ([edee5bc](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/edee5bc5b38ac08e5a7893f5a4f57b6f797e41f9))
+
 ## [2.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v1.0.0...v2.0.0) (2023-11-15)
 
 
