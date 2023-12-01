@@ -4,4 +4,3 @@
 
 (paragraph) @function.outer @function.inner
 
-
