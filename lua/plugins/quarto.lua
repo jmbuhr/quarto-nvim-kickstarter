@@ -46,6 +46,11 @@ return {
     branch = "master",
     run = ":TSUpdate",
     config = function()
+      local function disable_ts(lang, bufnr) -- Disable in large buffers
+        local large_file = vim.api.nvim_buf_line_count(bufnr) > 50000
+        return large_file
+      end
+
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "r",
@@ -65,9 +70,10 @@ return {
         },
         highlight = {
           enable = true,
+          disable = disable_ts,
           additional_vim_regex_highlighting = false,
           -- optional (with quarto-vim extension and pandoc-syntax)
-          -- additional_vim_regex_highlighting = { 'markdown' },
+          -- additional_vim_regex_highlighting = { 'quarto', 'markdown' },
 
           -- note: the vim regex based highlighting from
           -- quarto-vim / vim-pandoc sets the wrong comment character
@@ -75,9 +81,11 @@ return {
         },
         indent = {
           enable = true,
+          disable = disable_ts,
         },
         incremental_selection = {
           enable = true,
+          disable = disable_ts,
           keymaps = {
             init_selection = "gnn",
             node_incremental = "grn",
@@ -88,6 +96,7 @@ return {
         textobjects = {
           select = {
             enable = true,
+            disable = disable_ts,
             lookahead = true,
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
@@ -99,6 +108,7 @@ return {
           },
           move = {
             enable = true,
+            disable = disable_ts,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
@@ -477,13 +487,13 @@ return {
         flags = lsp_flags
       }
 
-      lspconfig.rust_analyzer.setup{
+      lspconfig.rust_analyzer.setup {
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           ['rust-analyzer'] = {
             diagnostics = {
-              enable = false;
+              enable = false,
             }
           }
         }
