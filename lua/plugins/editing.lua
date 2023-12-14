@@ -51,7 +51,11 @@ return {
 		"chrishrb/gx.nvim",
 		event = { "BufEnter" },
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = true, -- default settings
+    opts = {
+      handler_options = {
+        search_engine = "duckduckgo",
+      }
+    },
 	},
 	{
 		"folke/flash.nvim",
