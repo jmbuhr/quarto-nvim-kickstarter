@@ -28,7 +28,7 @@ return {
     },
     opts = {
       lspFeatures = {
-        languages = { "r", "python", "julia", "bash", "lua", "html" },
+        languages = { "r", "python", "julia", "bash", "lua", "html", "dot" },
       },
       codeRunner = {
         enabled = true,
@@ -67,6 +67,7 @@ return {
           "latex",
           "html",
           "css",
+          "dot"
         },
         highlight = {
           enable = true,
@@ -294,6 +295,12 @@ return {
             },
           },
         },
+      })
+
+      lspconfig.dotls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
       })
 
       local function strsplit(s, delimiter)
