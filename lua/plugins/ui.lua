@@ -7,6 +7,7 @@ return {
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       local previewers = require("telescope.previewers")
+      local action_state = require "telescope.actions.state"
       local new_maker = function(filepath, bufnr, opts)
         opts = opts or {}
         filepath = vim.fn.expand(filepath)
@@ -44,6 +45,11 @@ return {
               ["<esc>"] = actions.close,
               ["<c-j>"] = actions.move_selection_next,
               ["<c-k>"] = actions.move_selection_previous,
+              ["<c-s>"] = function(_)
+                local entry = action_state.get_selected_entry()
+                local path = entry[1]
+                vim.fn.system("xdg-open " .. path)
+              end
             },
           },
         },
@@ -71,10 +77,10 @@ return {
             require("telescope.themes").get_dropdown(),
           },
           fzf = {
-            fuzzy = true,             -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
           },
         },
       })
@@ -334,7 +340,7 @@ return {
         max_width = 100,
         max_height = 15,
         editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
-        tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+        tmux_show_only_in_active_window = true,  -- auto show/hide images in the correct Tmux window (needs visual-activity off)
       })
     end,
   },

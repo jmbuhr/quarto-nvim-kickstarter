@@ -67,7 +67,8 @@ return {
           "latex",
           "html",
           "css",
-          "dot"
+          "dot",
+          "javascript"
         },
         highlight = {
           enable = true,
@@ -298,6 +299,12 @@ return {
       })
 
       lspconfig.dotls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      })
+
+      lspconfig.denols.setup({
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
