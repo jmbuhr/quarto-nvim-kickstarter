@@ -15,11 +15,7 @@ Download one here: <https://www.nerdfonts.com/> and set it as your terminal font
 git clone https://github.com/grandjeanlab/quarto-nvim-kickstarter.git ~/.config/nvim
 ```
 
-### Windows Powershell Installation
 
-```bash
-git clone https://github.com/grandjeanlab/quarto-nvim-kickstarter.git "$env:LOCALAPPDATA\nvim"
-```
 
 The telescope file finder uses `fzf` for fuzzy finding via the [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) extension.
 It will automatically install `fzf`, but needs some requirements which are not pre-installed on Windows.
