@@ -187,6 +187,7 @@ wk.register({
 		q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
 		l = { "<cmd>Telescope loclist<cr>", "loclist" },
 		j = { "<cmd>Telescope jumplist<cr>", "marks" },
+		n = { "<cmd>ObsidianQuickSwitch<cr>", "notes" },
 		p = { "project" },
 	},
 	h = {
