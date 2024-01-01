@@ -146,5 +146,5 @@ return {
     require("trouble").setup {}
   end
   },
-  { 'lukas-reineke/indent-blankline.nvim' },
+  -- { 'lukas-reineke/indent-blankline.nvim' },
 }

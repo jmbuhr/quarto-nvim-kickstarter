@@ -2,7 +2,7 @@
   "sys:sans": {
     "prefix": "sys:sans",
     "body": [
-      "font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;",
+      "font-family:  Source Code Pro Medium, roboto, noto, segoe ui, arial, sans-serif;",
       ""
     ],
     "description": "sys:sans"
@@ -10,7 +10,7 @@
   "sys:serif": {
     "prefix": "sys:serif",
     "body": [
-      "font-family: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;",
+      "font-family: Source Code Pro Medium,  Times New Roman, Source Serif Pro, serif, Segoe UI Emoji, Segoe UI Symbol;",
       ""
     ],
     "description": "sys:serif"
@@ -18,7 +18,7 @@
   "sys:mono": {
     "prefix": "sys:mono",
     "body": [
-      "font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;",
+      "font-family: Source Code Pro Medium,  monospace;",
       "",
       ""
     ],
