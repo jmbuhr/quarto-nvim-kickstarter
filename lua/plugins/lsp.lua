@@ -66,17 +66,6 @@ return {
       flags = lsp_flags
     }
 
-    lspconfig.emmet_ls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = lsp_flags
-    }
-
-    lspconfig.cssls.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = lsp_flags
-    }
 
     local function strsplit(s, delimiter)
       local result = {}
@@ -98,34 +87,6 @@ return {
     table.insert(lua_library_files, resource_path .. '/lua-types')
     local lua_plugin_paths = {}
     table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
-
-    lspconfig.sumneko_lua.setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      flags = lsp_flags,
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = "Replace"
-          },
-          runtime = {
-            version = 'LuaJIT',
-            plugin = lua_plugin_paths[1],
-          },
-          diagnostics = {
-            globals = { 'vim', 'quarto', 'pandoc', 'io', 'string', 'print', 'require', 'table' },
-            disable = { 'trailing-space' },
-          },
-          workspace = {
-            library = lua_library_files,
-            checkThirdParty = false,
-          },
-          telemetry = {
-            enable = false,
-          },
-        },
-      },
-    }
 
     lspconfig.pyright.setup {
       on_attach = on_attach,
