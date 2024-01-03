@@ -12,6 +12,7 @@ return {
   -- },
   {
     "epwalsh/obsidian.nvim",
+		-- n = { "<cmd>ObsidianQuickSwitch<cr>", "notes" },
     ft = "markdown",
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
