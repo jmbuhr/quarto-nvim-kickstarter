@@ -694,24 +694,26 @@ return {
     end,
   },
 
-  -- paste an image to markdown from the clipboard
-  -- :PasteImg,
+  -- paste an image from the clipboard or drag-and-drop
   {
-    "dfendr/clipboard-image.nvim",
-    keys = {
-      { "<leader>ip", ":PasteImg<cr>", desc = "image paste" },
+    "HakonHarnes/img-clip.nvim",
+    event = "BufEnter",
+    opts = {
+      markdown = {
+        url_encode_path = true,
+        template = "![$CURSOR]($FILE_PATH)",
+        drag_and_drop = {
+          download_images = false,
+        },
+      },
+      quarto = {
+        url_encode_path = true,
+        template = "![$CURSOR]($FILE_PATH)",
+        drag_and_drop = {
+          download_images = false,
+        },
+      },
     },
-    cmd = {
-      "PasteImg",
-    },
-    config = function()
-      require 'clipboard-image'.setup {
-        quarto = {
-          img_dir = "img",
-          affix = "![](%s)"
-        }
-      }
-    end
   },
 
   -- preview equations
