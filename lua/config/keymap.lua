@@ -106,6 +106,9 @@ end
 --add your own here if you want them to
 --show up in the popup as well
 wk.register({
+  n = {
+    name = 'notes (obsidian)',
+  },
   c = {
     name = "code",
     c = { ":SlimeConfig<cr>", "slime config" },
@@ -251,7 +254,6 @@ wk.register({
 }, { mode = "n", prefix = "<leader>" })
 
 
-		-- n = { "<cmd>ObsidianQuickSwitch<cr>", "notes" },
 
 local is_code_chunk = function()
   local current, range = require("otter.keeper").get_current_language_context()

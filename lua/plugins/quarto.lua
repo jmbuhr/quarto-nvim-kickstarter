@@ -21,7 +21,7 @@ return {
             -- otherwise only the autocommand of lspconfig that attaches
             -- the language server will be executed without setting the filetype
             set_filetype = true,
-            write_to_disk = true,
+            write_to_disk = false,
           },
         },
       },
