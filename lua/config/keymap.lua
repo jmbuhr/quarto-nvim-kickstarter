@@ -172,8 +172,9 @@ wk.register({
     h = { ":QuartoHelp ", "help" },
     r = {
       name = "run",
-      r = { ":QuartoSendAbove<cr>", "to cursor" },
-      a = { ":QuartoSendAll<cr>", "all" },
+      a = { ":QuartoSendAbove<cr>", "above" },
+      b = { ":QuartoSendBelow<cr>", "below" },
+      A = { ":QuartoSendAll<cr>", "All" },
     },
     e = { ":lua require'otter'.export()<cr>", "export" },
     E = { ":lua require'otter'.export(true)<cr>", "export overwrite" },
@@ -306,7 +307,14 @@ wk.register({
   ["<M-j>"] = { ":m'>+<cr>`<my`>mzgv`yo`z", "move line down" },
   ["<M-k>"] = { ":m'<-2<cr>`>my`<mzgv`yo`z", "move line up" },
   ["."] = { ":norm .<cr>", "repat last normal mode command" },
-  ["q"] = { ":norm @q<cr>", "repat q macro" },
+  ["@"] = { ":norm @q<cr>", "repat q macro" },
+  q = {
+    name = "quarto",
+    r = {
+      name = "run",
+      R = { ":QuartoSendRange<cr>", "All" },
+    },
+  },
 }, { mode = "v" })
 
 wk.register({
@@ -324,4 +332,3 @@ wk.register({
   ["<m-I>"] = { insert_py_chunk, "python code chunk" },
   ["<c-x><c-x>"] = { "<c-x><c-o>", "omnifunc completion" },
 }, { mode = "i" })
-
