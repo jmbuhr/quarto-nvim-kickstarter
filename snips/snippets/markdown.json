@@ -1,6 +1,6 @@
 {
-  "eq": {
-    "prefix": ["eq"],
+  "eqation": {
+    "prefix": ["equation"],
     "body": ["\\$\\$", "$1", "\\$\\$ {#eq-${2: label}}"]
   },
   "Insert Block Equation": {
@@ -16,7 +16,7 @@
     "body": ["<br/>"]
   },
   "todo": {
-    "prefix": ["todo"],
-    "body": ["* [ ] ${1:task} -- due:${2:today} ${3: project:}"]
+    "prefix": ["todo"]
+    "body": ["- [ ] ${1:task}"]
   }
 }

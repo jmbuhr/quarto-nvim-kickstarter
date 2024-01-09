@@ -33,35 +33,40 @@ return {
       { "<leader>ns", ':ObsidianSearch<cr>',      "obsidian search" },
       { "<leader>no", ':ObsidianQuickSwitch<cr>', "obsidian quickswitch" },
     },
-    opts = {
-      workspaces = {
-        {
-          name = "notes",
-          path = "~/notes",
+    config = function()
+      require("obsidian").setup {
+        workspaces = {
+          {
+            name = "notes",
+            path = "~/notes",
+          },
         },
-      },
-      mappings = {
-        -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-        ["gf"] = {
-          action = function()
-            return require("obsidian").util.gf_passthrough()
-          end,
-          opts = { noremap = false, expr = true, buffer = true },
+        mappings = {
+          -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+          ["gf"] = {
+            action = function()
+              return require("obsidian").util.gf_passthrough()
+            end,
+            opts = { noremap = false, expr = true, buffer = true },
+          },
+          -- create and toggle checkboxes
+          ["<cr>"] = {
+            action = function()
+              local line = vim.api.nvim_get_current_line()
+              if line:match("%s*- %[") then
+                require("obsidian").util.toggle_checkbox()
+              elseif line:match("%s*-") then
+                vim.cmd [[s/-/- [ ]/]]
+                vim.cmd.nohlsearch()
+              end
+            end,
+            opts = { buffer = true },
+          },
         },
-        -- create and toggle checkboxes
-        ["<cr>"] = {
-          action = function()
-            local line = vim.api.nvim_get_current_line()
-            if line:match("%s*- %[") then
-              require("obsidian").util.toggle_checkbox()
-            elseif line:match("%s*-") then
-              vim.cmd [[s/-/- [ ]/]]
-              vim.cmd.nohlsearch()
-            end
-          end,
-          opts = { buffer = true },
-        },
-      },
-    }
+      }
+
+    vim.wo.conceallevel = 1
+
+    end,
   }
 }

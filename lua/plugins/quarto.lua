@@ -238,12 +238,12 @@ return {
       -- $home/.config/marksman/config.toml :
       -- [core]
       -- markdown.file_extensions = ["md", "markdown", "qmd"]
-      lspconfig.marksman.setup({
-        on_attach = on_attach_qmd,
-        capabilities = capabilities,
-        filetypes = { "markdown", "quarto" },
-        root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
-      })
+      -- lspconfig.marksman.setup({
+      --   on_attach = on_attach_qmd,
+      --   capabilities = capabilities,
+      --   filetypes = { "markdown", "quarto" },
+      --   root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+      -- })
 
       -- -- another optional language server for grammar and spelling
       -- -- <https://github.com/valentjn/ltex-ls>
