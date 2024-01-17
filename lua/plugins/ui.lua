@@ -224,6 +224,9 @@ return {
           codeblock_highlight = "CodeBlock",
           treesitter_language = "markdown",
         },
+        markdown = {
+          fat_headlines = false,
+        }
       })
     end,
   },

@@ -16,6 +16,7 @@ return {
               border = require("misc.style").border,
             },
           },
+          strip_wrapping_quote_characters = {},
           buffers = {
             -- if set to true, the filetype of the otterbuffers will be set.
             -- otherwise only the autocommand of lspconfig that attaches
