@@ -21,14 +21,14 @@ return {
             -- otherwise only the autocommand of lspconfig that attaches
             -- the language server will be executed without setting the filetype
             set_filetype = true,
-            write_to_disk = true,
+            write_to_disk = false,
           },
         },
       },
     },
     opts = {
       lspFeatures = {
-        languages = { "r", "python", "julia", "bash", "lua", "html" },
+        languages = { "r", "python", "julia", "bash", "lua", "html", "dot" },
       },
       codeRunner = {
         enabled = true,
@@ -46,6 +46,11 @@ return {
     branch = "master",
     run = ":TSUpdate",
     config = function()
+      local function disable_ts(lang, bufnr) -- Disable in large buffers
+        local large_file = vim.api.nvim_buf_line_count(bufnr) > 50000
+        return large_file
+      end
+
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "r",
@@ -62,12 +67,15 @@ return {
           "latex",
           "html",
           "css",
+          "dot",
+          "javascript"
         },
         highlight = {
           enable = true,
+          disable = disable_ts,
           additional_vim_regex_highlighting = false,
           -- optional (with quarto-vim extension and pandoc-syntax)
-          -- additional_vim_regex_highlighting = { 'markdown' },
+          -- additional_vim_regex_highlighting = { 'quarto', 'markdown' },
 
           -- note: the vim regex based highlighting from
           -- quarto-vim / vim-pandoc sets the wrong comment character
@@ -75,9 +83,11 @@ return {
         },
         indent = {
           enable = true,
+          disable = disable_ts,
         },
         incremental_selection = {
           enable = true,
+          disable = disable_ts,
           keymaps = {
             init_selection = "gnn",
             node_incremental = "grn",
@@ -88,6 +98,7 @@ return {
         textobjects = {
           select = {
             enable = true,
+            disable = disable_ts,
             lookahead = true,
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
@@ -99,6 +110,7 @@ return {
           },
           move = {
             enable = true,
+            disable = disable_ts,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
@@ -226,12 +238,12 @@ return {
       -- $home/.config/marksman/config.toml :
       -- [core]
       -- markdown.file_extensions = ["md", "markdown", "qmd"]
-      lspconfig.marksman.setup({
-        on_attach = on_attach_qmd,
-        capabilities = capabilities,
-        filetypes = { "markdown", "quarto" },
-        root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
-      })
+      -- lspconfig.marksman.setup({
+      --   on_attach = on_attach_qmd,
+      --   capabilities = capabilities,
+      --   filetypes = { "markdown", "quarto" },
+      --   root_dir = util.root_pattern(".git", ".marksman.toml", "_quarto.yml"),
+      -- })
 
       -- -- another optional language server for grammar and spelling
       -- -- <https://github.com/valentjn/ltex-ls>
@@ -278,14 +290,24 @@ return {
         flags = lsp_flags,
         settings = {
           yaml = {
-            schemas = {
-              -- add custom schemas here
-              -- e.g.
-              ["https://raw.githubusercontent.com/hits-mbm-dev/kimmdy/main/src/kimmdy/kimmdy-yaml-schema.json"] =
-              "kimmdy.yml",
+            schemaStore = {
+              enable = true,
+              url = "",
             },
           },
         },
+      })
+
+      lspconfig.dotls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      })
+
+      lspconfig.denols.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
       })
 
       local function strsplit(s, delimiter)
@@ -471,23 +493,23 @@ return {
       -- Add additional languages here.
       -- See `:h lspconfig-all` for the configuration.
       -- Like e.g. Haskell:
-      -- lspconfig.hls.setup {
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   flags = lsp_flags
-      -- }
+      lspconfig.hls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags
+      }
 
-      -- lspconfig.rust_analyzer.setup{
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   settings = {
-      --     ['rust-analyzer'] = {
-      --       diagnostics = {
-      --         enable = false;
-      --       }
-      --     }
-      --   }
-      -- }
+      lspconfig.rust_analyzer.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = false,
+            }
+          }
+        }
+      }
     end,
   },
 
@@ -717,24 +739,26 @@ return {
     end,
   },
 
-  -- paste an image to markdown from the clipboard
-  -- :PasteImg,
+  -- paste an image from the clipboard or drag-and-drop
   {
-    "dfendr/clipboard-image.nvim",
-    keys = {
-      { "<leader>ip", ":PasteImg<cr>", desc = "image paste" },
+    "HakonHarnes/img-clip.nvim",
+    event = "BufEnter",
+    opts = {
+      markdown = {
+        url_encode_path = true,
+        template = "![$CURSOR]($FILE_PATH)",
+        drag_and_drop = {
+          download_images = false,
+        },
+      },
+      quarto = {
+        url_encode_path = true,
+        template = "![$CURSOR]($FILE_PATH)",
+        drag_and_drop = {
+          download_images = false,
+        },
+      },
     },
-    cmd = {
-      "PasteImg",
-    },
-    config = function()
-      require 'clipboard-image'.setup {
-        quarto = {
-          img_dir = "img",
-          affix = "![](%s)"
-        }
-      }
-    end
   },
 
   -- preview equations
@@ -760,6 +784,5 @@ return {
   --     { "<leader>mr", ":MoltenReevaluateCell<cr>",      desc = "molten re-eval cell" },
   --   }
   -- },
-
 
 }
