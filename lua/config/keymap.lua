@@ -49,15 +49,37 @@ imap(";", ";<c-g>u")
 
 nmap("Q", "<Nop>")
 
+local M = {}
+M.reticulate_running = false
+local function send_cell()
+  if vim.b["quarto_is_" .. "r" .. "_mode"] == nil then
+    vim.cmd [[call slime#send_cell()]]
+    return
+  end
+  if vim.b["quarto_is_" .. "r" .. "_mode"] == true then
+    vim.g.slime_python_ipython = 0
+    local is_python = require("otter.tools.functions").is_otter_language_context("python")
+    if is_python and not M.reticulate_running then
+      vim.cmd[[call slime#send("reticulate::repl_python()" . "\r")]]
+      M.reticulate_running = true
+    end
+    if not is_python and M.reticulate_running then
+      vim.cmd[[call slime#send("exit" . "\r")]]
+      M.reticulate_running = false
+    end
+    vim.cmd [[call slime#send_cell()]]
+  end
+end
+
 -- send code with ctrl+Enter
 -- just like in e.g. RStudio
 -- needs kitty (or other terminal) config:
 -- map shift+enter send_text all \x1b[13;2u
 -- map ctrl+enter send_text all \x1b[13;5u
-nmap("<c-cr>", "<Plug>SlimeSendCell")
-nmap("<s-cr>", "<Plug>SlimeSendCell")
-imap("<c-cr>", "<esc><Plug>SlimeSendCell<cr>i")
-imap("<s-cr>", "<esc><Plug>SlimeSendCell<cr>i")
+nmap("<c-cr>", send_cell)
+nmap("<s-cr>", send_cell)
+imap("<c-cr>", send_cell)
+imap("<s-cr>", send_cell)
 
 -- send code with Enter and leader Enter
 vmap("<cr>", "<Plug>SlimeRegionSend")
@@ -102,6 +124,7 @@ local function toggle_light_dark_theme()
   end
 end
 
+vim.b["quarto_is_" .. "r" .. "_mode"] = nil
 --show kepbindings with whichkey
 --add your own here if you want them to
 --show up in the popup as well
@@ -110,7 +133,10 @@ wk.register({
     name = "code",
     c = { ":SlimeConfig<cr>", "slime config" },
     n = { ":vsplit term://$SHELL<cr>", "new terminal" },
-    r = { ":vsplit term://R<cr>", "new R terminal" },
+    r = { function()
+      vim.b["quarto_is_" .. "r" .. "_mode"] = true
+      vim.cmd "vsplit term://R"
+    end, "new R terminal" },
     p = { ":vsplit term://python<cr>", "new python terminal" },
     i = { ":vsplit term://ipython<cr>", "new ipython terminal" },
     j = { ":vsplit term://julia<cr>", "new julia terminal" },

@@ -54,7 +54,10 @@ return {
           "latex",
           "html",
           "css",
-          "dot"
+          "dot",
+          "javascript",
+          "mermaid",
+          "norg",
         },
         highlight = {
           enable = true,
@@ -644,7 +647,7 @@ return {
       let g:slime_dispatch_ipython_pause = 100
       function SlimeOverride_EscapeText_quarto(text)
       call v:lua.Quarto_is_in_python_chunk()
-      if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk
+      if exists('g:slime_python_ipython') && len(split(a:text,"\n")) > 1 && b:quarto_is_python_chunk && !b:quarto_is_r_mode
       return ["%cpaste -q\n", g:slime_dispatch_ipython_pause, a:text, "--", "\n"]
       else
       return a:text
