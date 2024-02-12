@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.3.0...v2.4.0) (2024-02-12)
+
+
+### Features
+
+* automatically open and close reticulate python repl in R terminal when R ([23c5536](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/23c5536b0106d4d3cd000bb475c8ba7acf38f9f6))
+* new image paste plugin ([8486169](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/84861698bca25d6f181dbba74ded734a7208f75e))
+
 ## [2.3.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.2.0...v2.3.0) (2023-12-22)
 
 
