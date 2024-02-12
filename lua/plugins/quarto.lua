@@ -513,6 +513,32 @@ return {
           }
         }
       }
+
+
+      local configs = require 'lspconfig.configs'
+      if not configs.cp2k then
+        configs.cp2k = {
+          default_config = {
+            cmd = { 'cp2k-language-server' },
+            filetypes = { 'cp2k' },
+            single_file_support = true,
+            root_dir = function(fname)
+              local root_files = {
+                'cp2k.inp',
+                'cp2k.template.inp',
+              }
+              return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+            end,
+            settings = {},
+          },
+        }
+      end
+
+      lspconfig.cp2k.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
     end,
   },
 
