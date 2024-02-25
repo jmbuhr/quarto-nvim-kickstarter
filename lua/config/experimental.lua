@@ -5,11 +5,6 @@ local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local ts_utils = require("nvim-treesitter.ts_utils")
 
-vim.filetype.add({
-	extension = {
-		webr = "r",
-	},
-})
 
 local otter = require("otter")
 

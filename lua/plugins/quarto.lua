@@ -27,7 +27,7 @@ return {
     },
     opts = {
       lspFeatures = {
-        languages = { "r", "python", "julia", "bash", "lua", "html", "dot" },
+        languages = { "r", "python", "julia", "bash", "lua", "html", "dot", "javascript", "typescript", "ojs" },
       },
     },
   },
@@ -58,6 +58,7 @@ return {
           "javascript",
           "mermaid",
           "norg",
+          "typescript"
         },
         highlight = {
           enable = true,
@@ -284,6 +285,13 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
+      })
+
+      lspconfig.tsserver.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        flags = lsp_flags,
+        filetypes = { "javascript", "typescript", "ojs" },
       })
 
       local function strsplit(s, delimiter)

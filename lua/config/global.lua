@@ -82,3 +82,12 @@ vim.opt.scrolloff = 5
 
 -- (don't == 0) replace certain elements with prettier ones
 vim.opt.conceallevel = 0
+
+
+-- add new filetypes
+vim.filetype.add({
+	extension = {
+		ojs = "javascript",
+	},
+})
+
