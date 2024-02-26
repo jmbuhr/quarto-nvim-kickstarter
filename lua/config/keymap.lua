@@ -27,8 +27,8 @@ local imap = function(key, effect)
 end
 
 -- save with ctrl+s
-imap("<C-s>", "<cmd>:w<cr><esc>")
-nmap("<C-s>", "<cmd>:w<cr><esc>")
+imap("<C-s>", "<esc>:update<cr><esc>")
+nmap("<C-s>", "<cmd>:update<cr><esc>")
 
 -- Move between windows using <ctrl> direction
 nmap("<C-j>", "<C-W>j")
