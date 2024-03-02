@@ -85,6 +85,16 @@ imap("<s-cr>", send_cell)
 vmap("<cr>", "<Plug>SlimeRegionSend")
 nmap("<leader><cr>", "<Plug>SlimeSendCell")
 
+
+local function show_table()
+  local node = vim.treesitter.get_node({ignore_injections = false})
+  local text = vim.treesitter.get_node_text(node, 0)
+  local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
+  vim.cmd(cmd)
+end
+
+nmap("<leader>rt", show_table)
+
 -- keep selection after indent/dedent
 vmap(">", ">gv")
 vmap("<", "<gv")
