@@ -94,6 +94,9 @@ local function show_table()
   vim.cmd(cmd)
 end
 
+-- might not use what you think should be your default web browser
+-- because it is a plain html file, not a link
+-- see https://askubuntu.com/a/864698 for places to look for
 vim.keymap.set("n", "<leader>rt", show_table, {desc = "[r] show [t]able"})
 
 -- keep selection after indent/dedent
