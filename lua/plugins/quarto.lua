@@ -408,7 +408,7 @@ return {
 	-- completion
 	{
 		"hrsh7th/nvim-cmp",
-		branch = "main",
+		event = "InsertEnter",
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
