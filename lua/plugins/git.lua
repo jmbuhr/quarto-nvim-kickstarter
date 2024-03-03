@@ -1,10 +1,16 @@
+-- git plugins
+
 return {
-	-- git and projects
 	{ "sindrets/diffview.nvim" },
+
+  -- handy git ui
 	{
 		"NeogitOrg/neogit",
 		lazy = true,
 		cmd = "Neogit",
+    keys = {
+      { "<leader>gg", ":Neogit<cr>", desc = "neo[g]it" },
+    },
 		config = function()
 			require("neogit").setup({
 				disable_commit_confirmation = true,
@@ -14,6 +20,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()

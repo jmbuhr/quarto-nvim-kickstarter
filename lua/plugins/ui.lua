@@ -87,6 +87,10 @@ return {
   { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
   { "nvim-telescope/telescope-dap.nvim" },
 
+
+  -- Highlight todo, notes, etc in comments
+  { 'folke/todo-comments.nvim', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+
   -- statusline
   -- chose one, or none of these
   -- and define in global.lua

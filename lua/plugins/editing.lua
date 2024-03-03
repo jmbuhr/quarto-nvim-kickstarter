@@ -1,32 +1,17 @@
 return {
-  {
-    "LunarVim/bigfile.nvim",
-    init = function()
-      -- default config
-      require("bigfile").setup({
-        filesize = 2,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
-        pattern = { "*" }, -- autocmd pattern
-        features = {       -- features to disable
-          "indent_blankline",
-          "illuminate",
-          "lsp",
-          "treesitter",
-          "syntax",
-          "matchparen",
-          "vimopts",
-          "filetype",
-        },
-      })
-    end,
-  },
-  { "tpope/vim-repeat" },
+
+  -- disables hungry features for files larget than 2MB
+  { "LunarVim/bigfile.nvim" },
+
+
+  -- add/delete/change can be done with the keymaps
+  -- ys{motion}{char}, ds{char}, and cs{target}{replacement}
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    opts = {},
   },
+
   {
     "windwp/nvim-autopairs",
     config = function()
@@ -42,8 +27,10 @@ return {
     branch = "master",
     config = true, -- default settings
   },
+
   {
     "danymat/neogen",
+    enabled = false,
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = true,
   },

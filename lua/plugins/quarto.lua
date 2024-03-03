@@ -3,6 +3,11 @@ return {
   {
     "quarto-dev/quarto-nvim",
     dev = false,
+    opts = {
+      lspFeatures = {
+        languages = { "r", "python", "julia", "bash", "lua", "html", "dot", "javascript", "typescript", "ojs" },
+      },
+    },
     dependencies = {
       {
         "jmbuhr/otter.nvim",
@@ -26,11 +31,6 @@ return {
         },
       },
     },
-    opts = {
-      lspFeatures = {
-        languages = { "r", "python", "julia", "bash", "lua", "html", "dot", "javascript", "typescript", "ojs" },
-      },
-    },
   },
 
   {
@@ -39,7 +39,11 @@ return {
     branch = "master",
     run = ":TSUpdate",
     config = function()
+
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
+        -- Autoinstall languages that are not installed
+        auto_install = true,
         ensure_installed = {
           "r",
           "python",

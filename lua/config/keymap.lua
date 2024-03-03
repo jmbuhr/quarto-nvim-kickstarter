@@ -1,7 +1,8 @@
 local wk = require("which-key")
 
-vim.b["quarto_is_r_mode"] = nil
-vim.b['reticulate_running'] = false
+vim.g["quarto_is_r_mode"] = nil
+vim.g['reticulate_running'] = false
+
 
 P = function(x)
   print(vim.inspect(x))
@@ -217,75 +218,59 @@ wk.register({
   },
   f = {
     name = "[f]ind (telescope)",
-    f = { "<cmd>Telescope find_files<cr>", "files" },
-    h = { "<cmd>Telescope help_tags<cr>", "help" },
-    k = { "<cmd>Telescope keymaps<cr>", "keymaps" },
-    r = { "<cmd>Telescope lsp_references<cr>", "references" },
-    g = { "<cmd>Telescope live_grep<cr>", "grep" },
-    b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "fuzzy" },
-    m = { "<cmd>Telescope marks<cr>", "marks" },
-    M = { "<cmd>Telescope man_pages<cr>", "man pages" },
-    c = { "<cmd>Telescope git_commits<cr>", "git commits" },
-    s = { "<cmd>Telescope lsp_document_symbols<cr>", "symbols" },
-    d = { "<cmd>Telescope buffers<cr>", "buffers" },
-    q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
-    l = { "<cmd>Telescope loclist<cr>", "loclist" },
-    j = { "<cmd>Telescope jumplist<cr>", "marks" },
+    f = { "<cmd>Telescope find_files<cr>", "[f]iles" },
+    h = { "<cmd>Telescope help_tags<cr>", "[h]elp" },
+    k = { "<cmd>Telescope keymaps<cr>", "[k]eymaps" },
+    r = { "<cmd>Telescope lsp_references<cr>", "[r]eferences" },
+    g = { "<cmd>Telescope live_grep<cr>", "[g]rep" },
+    b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[b]uffer fuzzy find" },
+    m = { "<cmd>Telescope marks<cr>", "[m]arks" },
+    M = { "<cmd>Telescope man_pages<cr>", "[M]an pages" },
+    c = { "<cmd>Telescope git_commits<cr>", "git [c]ommits" },
+    s = { "<cmd>Telescope lsp_document_symbols<cr>", "document [s]ymbols" },
+    ['<space>'] = { "<cmd>Telescope buffers<cr>", "[ ] buffers" },
+    d = { "<cmd>Telescope buffers<cr>", "[d] buffers" },
+    q = { "<cmd>Telescope quickfix<cr>", "[q]uickfix" },
+    l = { "<cmd>Telescope loclist<cr>", "[l]oclist" },
+    j = { "<cmd>Telescope jumplist<cr>", "[j]umplist" },
   },
   h = {
-    name = "help/debug/conceal",
+    name = "[h]elp/debug/conceal",
     c = {
       name = "conceal",
       h = { ":set conceallevel=1<cr>", "hide/conceal" },
       s = { ":set conceallevel=0<cr>", "show/unconceal" },
     },
     t = {
-      name = "treesitter",
-      t = { vim.treesitter.inspect_tree, "show tree" },
-      c = { ":=vim.treesitter.get_captures_at_cursor()<cr>", "show capture" },
-      n = { ":=vim.treesitter.get_node():type()<cr>", "show node" },
+      name = "[t]reesitter",
+      t = { vim.treesitter.inspect_tree, "show [t]ree" },
+      c = { ":=vim.treesitter.get_captures_at_cursor()<cr>", "show [c]apture" },
+      n = { ":=vim.treesitter.get_node():type()<cr>", "show [n]ode" },
     },
   },
-  s = {
-    name = "spellcheck",
-    s = { "<cmd>Telescope spell_suggest<cr>", "spelling" },
-    ["/"] = { "<cmd>setlocal spell!<cr>", "spellcheck" },
-    n = { "]s", "next" },
-    p = { "[s", "previous" },
-    g = { "zg", "good" },
-    r = { "zg", "rigth" },
-    w = { "zw", "wrong" },
-    b = { "zw", "bad" },
-    ["?"] = { "<cmd>Telescope spell_suggest<cr>", "suggest" },
-  },
   g = {
-    name = "git",
+    name = "[g]it",
     c = { ":GitConflictRefresh<cr>", "conflict" },
-    g = { ":Neogit<cr>", "neogit" },
     s = { ":Gitsigns<cr>", "gitsigns" },
     pl = { ":Octo pr list<cr>", "gh pr list" },
     pr = { ":Octo review start<cr>", "gh pr review" },
     wc = { ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "worktree create" },
     ws = { ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", "worktree switch" },
     d = {
-      name = "diff",
+      name = "[d]iff",
       o = { ":DiffviewOpen<cr>", "open" },
       c = { ":DiffviewClose<cr>", "close" },
     },
     b = {
-      name = "blame",
+      name = "[b]lame",
       b = { ":GitBlameToggle<cr>", "toggle" },
       o = { ":GitBlameOpenCommitURL<cr>", "open" },
       c = { ":GitBlameCopyCommitURL<cr>", "copy" },
     },
   },
-  w = {
-    name = "write",
-    w = { ":w<cr>", "write" },
-  },
   x = {
-    name = "execute",
-    x = { ":w<cr>:source %<cr>", "file" },
+    name = "e[x]ecute",
+    x = { ":w<cr>:source %<cr>", "[x] source file" },
   },
 }, { mode = "n", prefix = "<leader>" })
 
@@ -332,6 +317,7 @@ wk.register({
   ["<m-I>"] = { insert_py_chunk, "python code chunk" },
   ["]q"] = { ":silent cnext<cr>", "quickfix next" },
   ["[q"] = { ":silent cprev<cr>", "quickfix prev" },
+  ["z?"] = { ":setlocal spell!<cr>", "toggle spellcheck" },
 }, { mode = "n", silent = true })
 
 -- visual mode
@@ -350,7 +336,6 @@ wk.register({
 
 -- insert mode
 wk.register({
-  -- ['<c-e>'] = { "<esc>:FeMaco<cr>i", "edit code" },
   ["<m-->"] = { " <- ", "assign" },
   ["<m-m>"] = { " |>", "pipe" },
   ["<m-i>"] = { insert_r_chunk, "r code chunk" },
