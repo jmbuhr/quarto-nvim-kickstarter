@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.5.0...v2.5.1) (2024-03-03)
+
+
+### Bug Fixes
+
+* use pyright for whole workspace (might make it slower) ([8a873d4](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8a873d4a49dedfeb4378bdfd1a528c7d4a070fdf))
+
 ## [2.5.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.4.0...v2.5.0) (2024-03-02)
 
 
