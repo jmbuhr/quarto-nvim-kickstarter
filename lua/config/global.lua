@@ -1,14 +1,16 @@
+-- global options
+
 -- proper colors
 vim.opt.termguicolors = true
 
 -- more opinionated
-vim.opt.number = true                   -- show linenumbers
-vim.opt.mouse = "a"                     -- enable mouse
+vim.opt.number = true -- show linenumbers
+vim.opt.mouse = "a" -- enable mouse
 vim.opt.mousefocus = true
 vim.opt.clipboard:append("unnamedplus") -- use system clipboard
 
-vim.opt.timeoutlen = 400                -- until which-key pops up
-vim.opt.updatetime = 250                -- for autocommands and hovers
+vim.opt.timeoutlen = 400 -- until which-key pops up
+vim.opt.updatetime = 250 -- for autocommands and hovers
 
 -- don't ask about existing swap files
 vim.opt.shortmess:append("A")
@@ -88,7 +90,7 @@ vim.opt.conceallevel = 0
 
 -- add new filetypes
 vim.filetype.add({
-  extension = {
-    ojs = "javascript",
-  },
+	extension = {
+		ojs = "javascript",
+	},
 })

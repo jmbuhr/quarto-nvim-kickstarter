@@ -1,5 +1,6 @@
 return {
-	{
+
+	{ -- manage projects
 		"gnikdroy/projections.nvim",
 		keys = {
 			{
@@ -7,11 +8,11 @@ return {
 				function()
 					vim.cmd("Telescope projections")
 				end,
-        desc = "[p]rojects",
+				desc = "[p]rojects",
 			},
 		},
 		config = function()
-      -- Save localoptions to session file
+			-- Save localoptions to session file
 			vim.opt.sessionoptions:append("localoptions")
 			require("projections").setup({
 				store_hooks = {
@@ -29,7 +30,10 @@ return {
 			local Session = require("projections.session")
 			vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
 				callback = function()
-					Session.store(vim.loop.cwd())
+					local cwd = vim.loop.cwd()
+					if cwd ~= nil then
+						Session.store(cwd)
+					end
 				end,
 			})
 
@@ -38,11 +42,13 @@ return {
 			vim.api.nvim_create_autocmd({ "VimEnter" }, {
 				callback = function()
 					if vim.fn.argc() == 0 then
-						switcher.switch(vim.loop.cwd())
+						local cwd = vim.loop.cwd()
+						if cwd ~= nil then
+							switcher.switch(cwd)
+						end
 					end
 				end,
 			})
 		end,
 	},
-
 }
