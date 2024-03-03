@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.5.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.4.0...v2.5.0) (2024-03-02)
+
+
+### Features
+
+* add preliminary completion for observable js chunks ([a9ee42d](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a9ee42d81a3d727d500ec86e5c93d2369afadbc6))
+* example keybinding to ask R console for interactive table of ([b34cc94](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/b34cc94b8fe51ea3edc1ab504e1c3293c55803aa))
+* rust and norg injections ([66c5fbb](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/66c5fbb4c6985be94f0947d40bfcf86600030026))
+
+
+### Bug Fixes
+
+* automatic r/python switching with reticulate ([bd548bf](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/bd548bfa8f915a0f42109d97143a99654f04cca1))
+* set quato_r_mode buffer variable ([cb64ee7](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/cb64ee737a1279ab6a58c6fd2548fb202334063b))
+* update img-clip plugin config for new version ([#85](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/85)) ([d62b8a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d62b8a97574ceb284b1424d02564326945ea4275))
+
+
+### Performance Improvements
+
+* update instead of write for &lt;c-s&gt; keybinding ([b52207c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/b52207c5fc9d2d7d0e985cfb9aac500f941e3de3))
+
 ## [2.4.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.3.0...v2.4.0) (2024-02-12)
 
 
