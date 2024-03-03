@@ -7,10 +7,12 @@ return {
 				function()
 					vim.cmd("Telescope projections")
 				end,
+        desc = "[p]rojects",
 			},
 		},
 		config = function()
-			vim.opt.sessionoptions:append("localoptions") -- Save localoptions to session file
+      -- Save localoptions to session file
+			vim.opt.sessionoptions:append("localoptions")
 			require("projections").setup({
 				store_hooks = {
 					pre = function()
@@ -19,17 +21,9 @@ return {
 						if nvim_tree_present then
 							api.tree.close()
 						end
-
-						-- neo-tree
-						if pcall(require, "neo-tree") then
-							vim.cmd([[Neotree action=close]])
-						end
 					end,
 				},
 			})
-
-			-- Bind <leader>fp to Telescope projections
-			require("telescope").load_extension("projections")
 
 			-- Autostore session on VimExit
 			local Session = require("projections.session")
@@ -50,4 +44,5 @@ return {
 			})
 		end,
 	},
+
 }

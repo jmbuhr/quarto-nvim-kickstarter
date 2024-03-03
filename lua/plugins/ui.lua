@@ -57,7 +57,7 @@ return {
               "--glob",
               "!.git/*",
               "--glob",
-              "!**/.Rproj.user/*",
+              "!**/.Rpro.user/*",
               "--glob",
               "!_site/*",
               "--glob",
@@ -71,26 +71,28 @@ return {
             require("telescope.themes").get_dropdown(),
           },
           fzf = {
-            fuzzy = true,             -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
           },
         },
       })
       -- telescope.load_extension('fzf')
       telescope.load_extension("ui-select")
-      telescope.load_extension("file_browser")
       telescope.load_extension("dap")
     end,
   },
   { "nvim-telescope/telescope-ui-select.nvim" },
   { "nvim-telescope/telescope-fzf-native.nvim",  build = "make" },
   { "nvim-telescope/telescope-dap.nvim" },
-  { "nvim-telescope/telescope-file-browser.nvim" },
 
+  -- statusline
+  -- chose one, or none of these
+  -- and define in global.lua
   {
     "nvim-lualine/lualine.nvim",
+    enabled = false,
     config = function()
       local function macro_recording()
         local reg = vim.fn.reg_recording()
@@ -100,6 +102,7 @@ return {
         return "📷[" .. reg .. "]"
       end
 
+      ---@diagnostic disable-next-line: undefined-field
       require("lualine").setup({
         options = {
           section_separators = "",
@@ -122,21 +125,25 @@ return {
 
   {
     "nanozuki/tabby.nvim",
+    enabled = false,
     config = function()
       require("tabby.tabline").use_preset("tab_only")
     end,
   },
 
-  -- {
-  --   'dstein64/nvim-scrollview',
-  --   config = function()
-  --     require('scrollview').setup({
-  --       current_only = true,
-  --     })
-  --   end
-  -- },
+  {
+    'dstein64/nvim-scrollview',
+    enabled = true,
+    opts = {
+      current_only = true,
+    },
+  },
 
-  -- { 'RRethy/vim-illuminate' }, -- highlight current word
+  -- highlight current word
+  {
+    'RRethy/vim-illuminate',
+    enabled = false,
+  },
 
   -- filetree
   {
@@ -161,6 +168,7 @@ return {
       })
     end,
   },
+
   -- show keybinding help window
   { "folke/which-key.nvim" },
 
@@ -170,56 +178,48 @@ return {
     keys = {
       { "<leader>lo", ":SymbolsOutline<cr>", desc = "symbols outline" },
     },
-    config = function()
-      require("symbols-outline").setup()
-    end,
+    opts = {}
   },
 
   -- terminal
   {
     "akinsho/toggleterm.nvim",
-    version = "*",
-    config = function()
-      require("toggleterm").setup({
-        open_mapping = [[<c-\>]],
-        direction = "float",
-      })
-    end,
+    opts = {
+      open_mapping = [[<c-\>]],
+      direction = "float",
+    },
   },
+
   -- show diagnostics list
   {
     "folke/trouble.nvim",
-    config = function()
-      require("trouble").setup({})
-    end,
+    opts = {}
   },
 
-  -- {
-  --   "lukas-reineke/indent-blankline.nvim",
-  --   config = function()
-  --     require("ibl").setup({
-  --       indent = { char = "│" },
-  --     })
-  --   end,
-  -- },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = 'ibl',
+    opts = {
+      indent = { char = "│" },
+    },
+  },
 
   {
     "lukas-reineke/headlines.nvim",
+    enabled = false,
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("headlines").setup({
-        quarto = {
-          query = vim.treesitter.query.parse(
-            "markdown",
-            [[
+    opts = {
+      quarto = {
+        query = vim.treesitter.query.parse(
+          "markdown",
+          [[
                 (fenced_code_block) @codeblock
-            ]]
-          ),
-          codeblock_highlight = "CodeBlock",
-          treesitter_language = "markdown",
-        },
-      })
-    end,
+                ]]
+        ),
+        codeblock_highlight = "CodeBlock",
+        treesitter_language = "markdown",
+      },
+    },
   },
 
   {
@@ -227,114 +227,29 @@ return {
     config = function()
       -- Requirements
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
-      local backend = "kitty"
-
-      local shell
-      if vim.fn.has("nvim-0.10.0") == 1 then
-        -- print('nvim >= 0.10')
-        shell = function(command)
-          local obj = vim.system(command, { text = true }):wait()
-          if obj.code ~= 0 then
-            return nil
-          end
-          return obj.stdout
-        end
-      else
-        -- print('nvim < 0.10')
-        shell = function(command)
-          command = table.concat(command, " ")
-          local handle = io.popen(command)
-          if handle == nil then
-            return nil
-          end
-          local result = handle:read("*a")
-          handle:close()
-          return result
-        end
-      end
-
-      -- check if imagemagick is available
-      if shell({ "convert", "-version" }) == nil then
-        -- print("imagemagick is not available")
-        return
-      end
-
-      if backend == "kitty" then
-        -- check if kitty is available
-        local out = shell({ "kitty", "--version" })
-        if out == nil then
-          -- print("kitty is not available")
-          return
-        end
-        local kitty_version = out:match("(%d+%.%d+%.%d+)")
-        if kitty_version == nil then
-          -- print("kitty version is not available")
-          return
-        end
-        local v = vim.version.parse(kitty_version)
-        local minimal = vim.version.parse("0.30.1")
-        if v and vim.version.cmp(v, minimal) < 0 then
-          -- print("kitty version is too old")
-          return
-        end
-      end
-      local tmux = vim.fn.getenv("TMUX")
-      if tmux ~= vim.NIL then
-        -- tmux uses number.number.(maybe letter)
-        -- e.g. 3.3a
-        -- but 3.3 comes before 3.3a
-        -- so we replace a with 1
-        local offset = 96
-        local out = shell({ "tmux", "-V" })
-        if out == nil then
-          -- print("tmux is not available")
-          return
-        end
-        out = out:gsub("\n", "")
-        local letter = out:match("tmux %d+%.%d+([a-z])")
-        local number
-        if letter == nil then
-          number = 0
-        else
-          number = string.byte(letter) - offset
-        end
-        local version = out:gsub("tmux (%d+%.%d+)([a-z])", "%1." .. number)
-        local v = vim.version.parse(version)
-        local minimal = vim.version.parse("3.3.1")
-        if v and vim.version.cmp(v, minimal) < 0 then
-          -- print("tmux version is too old")
-          return
-        end
-      end
-
-      -- setup
+      -- check for dependencies with `:checkhealth kickstart`
       -- Example for configuring Neovim to load user-installed installed Lua rocks:
       --$ luarocks --local --lua-version=5.1 install magick
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
       package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 
-      -- check if magick luarock is available
-      local ok, magick = pcall(require, "magick")
-      if not ok then
-        -- print("magick luarock is not available")
-        return
-      end
-
       require("image").setup({
-        backend = backend,
+        backend = "kitty",
         integrations = {
           markdown = {
             enabled = true,
-            -- clear_in_insert_mode = true,
-            -- download_remote_images = true,
             only_render_image_at_cursor = true,
             filetypes = { "markdown", "vimwiki", "quarto" },
           },
         },
         max_width = 100,
         max_height = 15,
-        editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
-        tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+        -- auto show/hide images when the editor gains/looses focus
+        editor_only_render_when_focused = false,
+        -- toggles images when windows are overlapped
+        window_overlap_clear_enabled = false,
+        -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+        tmux_show_only_in_active_window = true,
       })
     end,
   },

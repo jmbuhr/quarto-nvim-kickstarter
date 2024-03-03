@@ -1,7 +1,5 @@
 return {
 
-	-- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-
 	{'stevearc/profile.nvim',
     enabled = false,
 	  config = function()

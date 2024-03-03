@@ -34,6 +34,7 @@ return {
 					{ "Hello from the otter slide!", "", "— Otterdele" },
 					{ "To otter space!", "", "— 🦦" },
 					{ "What if I say I'm not like the otters?", "", "— Foo Fighters" },
+					{ "Nothing is im-paw-sible 🐾", "", "— 🐕" },
 				},
 			})
 

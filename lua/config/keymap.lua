@@ -216,7 +216,7 @@ wk.register({
     E = { ":lua require'otter'.export(true)<cr>", "export overwrite" },
   },
   f = {
-    name = "find (telescope)",
+    name = "[f]ind (telescope)",
     f = { "<cmd>Telescope find_files<cr>", "files" },
     h = { "<cmd>Telescope help_tags<cr>", "help" },
     k = { "<cmd>Telescope keymaps<cr>", "keymaps" },
@@ -231,7 +231,6 @@ wk.register({
     q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
     l = { "<cmd>Telescope loclist<cr>", "loclist" },
     j = { "<cmd>Telescope jumplist<cr>", "marks" },
-    p = { "project" },
   },
   h = {
     name = "help/debug/conceal",
