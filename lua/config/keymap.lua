@@ -1,5 +1,8 @@
 local wk = require("which-key")
 
+vim.b["quarto_is_r_mode"] = nil
+vim.b['reticulate_running'] = false
+
 P = function(x)
   print(vim.inspect(x))
   return x
@@ -49,23 +52,21 @@ imap(";", ";<c-g>u")
 
 nmap("Q", "<Nop>")
 
-local M = {}
-M.reticulate_running = false
 local function send_cell()
-  if vim.b["quarto_is_" .. "r" .. "_mode"] == nil then
+  if vim.b["quarto_is_r_mode"] == nil then
     vim.cmd [[call slime#send_cell()]]
     return
   end
-  if vim.b["quarto_is_" .. "r" .. "_mode"] == true then
+  if vim.b["quarto_is_r_mode"] == true then
     vim.g.slime_python_ipython = 0
     local is_python = require("otter.tools.functions").is_otter_language_context("python")
-    if is_python and not M.reticulate_running then
+    if is_python and not vim.b['reticulate_running'] then
       vim.cmd[[call slime#send("reticulate::repl_python()" . "\r")]]
-      M.reticulate_running = true
+      vim.b['reticulate_running'] = true
     end
-    if not is_python and M.reticulate_running then
+    if not is_python and vim.b['reticulate_running'] then
       vim.cmd[[call slime#send("exit" . "\r")]]
-      M.reticulate_running = false
+      vim.b['reticulate_running'] = false
     end
     vim.cmd [[call slime#send_cell()]]
   end
@@ -93,7 +94,7 @@ local function show_table()
   vim.cmd(cmd)
 end
 
-nmap("<leader>rt", show_table)
+vim.keymap.set("n", "<leader>rt", show_table)
 
 -- keep selection after indent/dedent
 vmap(">", ">gv")
@@ -134,7 +135,6 @@ local function toggle_light_dark_theme()
   end
 end
 
-vim.b["quarto_is_" .. "r" .. "_mode"] = nil
 --show kepbindings with whichkey
 --add your own here if you want them to
 --show up in the popup as well
@@ -144,7 +144,7 @@ wk.register({
     c = { ":SlimeConfig<cr>", "slime config" },
     n = { ":vsplit term://$SHELL<cr>", "new terminal" },
     r = { function()
-      vim.b["quarto_is_" .. "r" .. "_mode"] = true
+      vim.b["quarto_is_r_mode"] = true
       vim.cmd "vsplit term://R"
     end, "new R terminal" },
     p = { ":vsplit term://python<cr>", "new python terminal" },
