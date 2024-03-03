@@ -3,21 +3,6 @@ local wk = require("which-key")
 vim.g["quarto_is_r_mode"] = nil
 vim.g['reticulate_running'] = false
 
-
-P = function(x)
-  print(vim.inspect(x))
-  return x
-end
-
-RELOAD = function(...)
-  return require("plenary.reload").reload_module(...)
-end
-
-R = function(name)
-  RELOAD(name)
-  return require(name)
-end
-
 local nmap = function(key, effect)
   vim.keymap.set("n", key, effect, { silent = true, noremap = true })
 end
@@ -62,11 +47,11 @@ local function send_cell()
     vim.g.slime_python_ipython = 0
     local is_python = require("otter.tools.functions").is_otter_language_context("python")
     if is_python and not vim.b['reticulate_running'] then
-      vim.cmd[[call slime#send("reticulate::repl_python()" . "\r")]]
+      vim.cmd [[call slime#send("reticulate::repl_python()" . "\r")]]
       vim.b['reticulate_running'] = true
     end
     if not is_python and vim.b['reticulate_running'] then
-      vim.cmd[[call slime#send("exit" . "\r")]]
+      vim.cmd [[call slime#send("exit" . "\r")]]
       vim.b['reticulate_running'] = false
     end
     vim.cmd [[call slime#send_cell()]]
@@ -89,7 +74,7 @@ nmap("<leader><cr>", "<Plug>SlimeSendCell")
 
 
 local function show_table()
-  local node = vim.treesitter.get_node({ignore_injections = false})
+  local node = vim.treesitter.get_node({ ignore_injections = false })
   local text = vim.treesitter.get_node_text(node, 0)
   local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
   vim.cmd(cmd)
@@ -98,7 +83,7 @@ end
 -- might not use what you think should be your default web browser
 -- because it is a plain html file, not a link
 -- see https://askubuntu.com/a/864698 for places to look for
-vim.keymap.set("n", "<leader>rt", show_table, {desc = "[r] show [t]able"})
+vim.keymap.set("n", "<leader>rt", show_table, { desc = "[r] show [t]able" })
 
 -- keep selection after indent/dedent
 vmap(">", ">gv")
@@ -143,45 +128,47 @@ end
 --add your own here if you want them to
 --show up in the popup as well
 wk.register({
-  r = {name = "R"},
+  r = { name = "[r] R specific tools" },
   c = {
-    name = "code",
-    c = { ":SlimeConfig<cr>", "slime config" },
-    n = { ":vsplit term://$SHELL<cr>", "new terminal" },
+    name = "[c]ode / [c]ell / [c]hunk",
+    c = { ":SlimeConfig<cr>", "slime [c]onfig" },
+    n = { ":vsplit term://$SHELL<cr>", "[n]ew terminal with shell" },
     r = { function()
       vim.b["quarto_is_r_mode"] = true
       vim.cmd "vsplit term://R"
-    end, "new R terminal" },
-    p = { ":vsplit term://python<cr>", "new python terminal" },
-    i = { ":vsplit term://ipython<cr>", "new ipython terminal" },
-    j = { ":vsplit term://julia<cr>", "new julia terminal" },
-    ["oo"] = { "o# %%<cr>", "new code chunk below" },
-    ["Oo"] = { "O# %%<cr>", "new code chunk above" },
-    ["ob"] = { "o```{bash}<cr>```<esc>O", "bash code chunk" },
-    ["or"] = { "o```{r}<cr>```<esc>O", "r code chunk" },
-    ["op"] = { "o```{python}<cr>```<esc>O", "python code chunk" },
-    ["oj"] = { "o```{julia}<cr>```<esc>O", "julia code chunk" },
-    ["ol"] = { "o```{julia}<cr>```<esc>O", "julia code chunk" },
+    end, "new [R] terminal" },
+    p = { ":vsplit term://python<cr>", "new [p]ython terminal" },
+    i = { ":vsplit term://ipython<cr>", "new [i]python terminal" },
+    j = { ":vsplit term://julia<cr>", "new [j]ulia terminal" },
+    o = {
+      name = "[o]open code chunk",
+      r = { "o```{r}<cr>```<esc>O", "[r] code chunk" },
+      p = { "o```{python}<cr>```<esc>O", "[p]ython code chunk" },
+      j = { "o```{julia}<cr>```<esc>O", "[j]ulia code chunk" },
+      b = { "o```{bash}<cr>```<esc>O", "[b]ash code chunk" },
+      o = { "o```{ojs}<cr>```<esc>O", "[o]bservable js code chunk" },
+      l = { "o```{lua}<cr>```<esc>O", "[l]lua code chunk" },
+    },
   },
   i = {
-    name = "insert",
+    name = "[i]nsert",
     i = { ":PasteImage<cr>", "image from clipboard" },
   },
   v = {
-    name = "vim",
-    t = { toggle_light_dark_theme, "switch theme" },
-    c = { ":Telescope colorscheme<cr>", "colortheme" },
-    l = { ":Lazy<cr>", "Lazy" },
-    m = { ":Mason<cr>", "Mason" },
-    s = { ":e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>", "Settings" },
-    h = { ':execute "h " . expand("<cword>")<cr>', "help" },
+    name = "[v]im",
+    t = { toggle_light_dark_theme, "switch [t]heme" },
+    c = { ":Telescope colorscheme<cr>", "[c]olortheme" },
+    l = { ":Lazy<cr>", "[l]azy package manager" },
+    m = { ":Mason<cr>", "[m]ason software installer" },
+    s = { ":e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>", "[s]ettings, edit vimrc" },
+    h = { ':execute "h " . expand("<cword>")<cr>', "vim [h]elp for current word" },
   },
   l = {
-    name = "language/lsp",
-    r = { "<cmd>Telescope lsp_references<cr>", "references" },
-    R = { "rename" },
-    D = { vim.lsp.buf.type_definition, "type definition" },
-    a = { vim.lsp.buf.code_action, "coda action" },
+    name = "[l]anguage/lsp",
+    r = { "<cmd>Telescope lsp_references<cr>", "[r]eferences" },
+    R = { "[R]ename" },
+    D = { vim.lsp.buf.type_definition, "type [D]efinition" },
+    a = { vim.lsp.buf.code_action, "codr [a]ction" },
     e = { vim.diagnostic.open_float, "diagnostics" },
     d = {
       name = "diagnostics",
