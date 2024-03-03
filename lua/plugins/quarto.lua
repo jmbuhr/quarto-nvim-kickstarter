@@ -291,7 +291,7 @@ return {
         on_attach = on_attach,
         capabilities = capabilities,
         flags = lsp_flags,
-        filetypes = { "javascript", "typescript", "ojs" },
+        filetypes = { "js", "javascript", "typescript", "ojs" },
       })
 
       local function strsplit(s, delimiter)
@@ -370,11 +370,10 @@ return {
         flags = lsp_flags,
         settings = {
           python = {
-            stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = false,
-              diagnosticMode = "openFilesOnly",
+              diagnosticMode = "workspace",
             },
           },
         },
@@ -675,8 +674,6 @@ return {
       local function set_terminal()
         vim.b.slime_config = { jobid = vim.g.slime_last_channel }
       end
-
-      vim.b.slime_cell_delimiter = "# %%"
 
       -- slime, neovvim terminal
       vim.g.slime_target = "neovim"
