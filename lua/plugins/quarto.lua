@@ -22,6 +22,7 @@ return {
             -- the language server will be executed without setting the filetype
             set_filetype = true,
           },
+          handle_leading_whitespace = true,
         },
       },
     },

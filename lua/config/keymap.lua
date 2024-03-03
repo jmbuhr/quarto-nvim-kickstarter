@@ -94,7 +94,7 @@ local function show_table()
   vim.cmd(cmd)
 end
 
-vim.keymap.set("n", "<leader>rt", show_table)
+vim.keymap.set("n", "<leader>rt", show_table, {desc = "[r] show [t]able"})
 
 -- keep selection after indent/dedent
 vmap(">", ">gv")
@@ -139,6 +139,7 @@ end
 --add your own here if you want them to
 --show up in the popup as well
 wk.register({
+  r = {name = "R"},
   c = {
     name = "code",
     c = { ":SlimeConfig<cr>", "slime config" },
