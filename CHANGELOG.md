@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.5.1...v3.0.0) (2024-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* big spring cleaning ([#87](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/87))
+
+### Features
+
+* big spring cleaning ([#87](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/87)) ([22f9c80](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/22f9c80a924382dda9ee29c8c2efda6ae89c826d))
+
 ## [2.5.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.5.0...v2.5.1) (2024-03-03)
 
 
