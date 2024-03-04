@@ -1,1 +1,1 @@
-vim.keymap.set("n", "q", ":close<cr>", { silent = true, buffer = 0 })
+vim.keymap.set('n', 'q', ':close<cr>', { silent = true, buffer = 0 })
