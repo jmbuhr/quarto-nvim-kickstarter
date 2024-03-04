@@ -2,6 +2,7 @@ return {
 
 	{
 		"quarto-dev/quarto-nvim",
+		ft = { "quarto" },
 		dev = false,
 		opts = {
 			lspFeatures = {
@@ -22,9 +23,6 @@ return {
 						},
 					},
 					buffers = {
-						-- if set to true, the filetype of the otterbuffers will be set.
-						-- otherwise only the autocommand of lspconfig that attaches
-						-- the language server will be executed without setting the filetype
 						set_filetype = true,
 					},
 					handle_leading_whitespace = true,
@@ -42,7 +40,6 @@ return {
 		config = function()
 			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
-				-- Autoinstall languages that are not installed
 				auto_install = true,
 				ensure_installed = {
 					"r",
@@ -124,7 +121,7 @@ return {
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 			{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-			{ "j-hui/fidget.nvim", opts = {} },
+			-- { "j-hui/fidget.nvim", opts = {} },
 			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
