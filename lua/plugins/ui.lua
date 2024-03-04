@@ -88,7 +88,11 @@ return {
 	{ "nvim-telescope/telescope-dap.nvim" },
 
 	-- Highlight todo, notes, etc in comments
-	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = { signs = false },
+	},
 
 	-- statusline
 	-- chose one, or none of these
@@ -196,7 +200,19 @@ return {
 	-- show diagnostics list
 	{
 		"folke/trouble.nvim",
-		opts = {},
+		enabled = true,
+		config = function()
+			local trouble = require("trouble")
+			trouble.setup({})
+			local function next()
+				trouble.next({ skip_groups = true, jump = true })
+			end
+			local function previous()
+				trouble.previous({ skip_groups = true, jump = true })
+			end
+			vim.keymap.set("n", "]t", next, { desc = "next [t]rouble item" })
+			vim.keymap.set("n", "[t", previous, { desc = "previous [t]rouble item" })
+		end,
 	},
 
 	{
