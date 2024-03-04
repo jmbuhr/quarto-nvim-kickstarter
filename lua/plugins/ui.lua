@@ -200,7 +200,7 @@ return {
 	-- show diagnostics list
 	{
 		"folke/trouble.nvim",
-		enabled = true,
+		enabled = false,
 		config = function()
 			local trouble = require("trouble")
 			trouble.setup({})
