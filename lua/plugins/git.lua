@@ -3,14 +3,14 @@
 return {
 	{ "sindrets/diffview.nvim" },
 
-  -- handy git ui
+	-- handy git ui
 	{
 		"NeogitOrg/neogit",
 		lazy = true,
 		cmd = "Neogit",
-    keys = {
-      { "<leader>gg", ":Neogit<cr>", desc = "neo[g]it" },
-    },
+		keys = {
+			{ "<leader>gg", ":Neogit<cr>", desc = "neo[g]it" },
+		},
 		config = function()
 			require("neogit").setup({
 				disable_commit_confirmation = true,
@@ -54,8 +54,14 @@ return {
 			-- vim.g.gitblame_enabled = 0
 		end,
 	},
-	-- github PRs and the like with gh-cli
-	-- { 'pwntester/octo.nvim', config = function()
-	--   require "octo".setup()
-	-- end },
+
+	{ -- github PRs and the like with gh - cli
+		"pwntester/octo.nvim",
+		enabled = false,
+		config = function()
+			require("octo").setup()
+			vim.keymap.set("n", "<leader>gpl", ":Octo pr list<cr>", { desc = "octo [p]r list" })
+			vim.keymap.set("n", "<leader>gpr", ":Octo review start<cr>", { desc = "octo [r]eview" })
+		end,
+	},
 }

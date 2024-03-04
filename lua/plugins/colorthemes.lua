@@ -15,6 +15,13 @@ return {
 		priority = 1000,
 	},
 
+	{
+		"neanias/everforest-nvim",
+		enabled = false,
+		lazy = false,
+		priority = 1000,
+	},
+
 	-- color html colors
 	{
 		"NvChad/nvim-colorizer.lua",

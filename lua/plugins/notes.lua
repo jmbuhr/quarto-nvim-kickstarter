@@ -21,6 +21,7 @@ return {
 
 	{
 		"epwalsh/obsidian.nvim",
+		enabled = false,
 		ft = "markdown",
 		event = {
 			-- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
@@ -32,16 +33,16 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		keys = {
-			{ "<leader>nd", ":ObsidianToday<cr>", desc = "obsidian daily" },
-			{ "<leader>nt", ":ObsidianToday 1<cr>", desc = "obsidian tomorrow" },
-			{ "<leader>ny", ":ObsidianToday -1<cr>", desc = "obsidian yesterday" },
-			{ "<leader>nb", ":ObsidianBacklinks<cr>", desc = "obsidian backlinks" },
-			{ "<leader>nl", ":ObsidianLink<cr>", desc = "obsidian link selection" },
-			{ "<leader>nf", ":ObsidianFollowLink<cr>", desc = "obsidian follow link" },
-			{ "<leader>nn", ":ObsidianNew<cr>", desc = "obsidian new" },
-			{ "<leader>ns", ":ObsidianSearch<cr>", desc = "obsidian search" },
-			{ "<leader>no", ":ObsidianQuickSwitch<cr>", desc = "obsidian quickswitch" },
-			{ "<leader>nO", ":ObsidianOpen<cr>", desc = "obsidian open in app" },
+			{ "<leader>nd", ":ObsidianToday<cr>", desc = "obsidian [d]aily" },
+			{ "<leader>nt", ":ObsidianToday 1<cr>", desc = "obsidian [t]omorrow" },
+			{ "<leader>ny", ":ObsidianToday -1<cr>", desc = "obsidian [y]esterday" },
+			{ "<leader>nb", ":ObsidianBacklinks<cr>", desc = "obsidian [b]acklinks" },
+			{ "<leader>nl", ":ObsidianLink<cr>", desc = "obsidian [l]ink selection" },
+			{ "<leader>nf", ":ObsidianFollowLink<cr>", desc = "obsidian [f]ollow link" },
+			{ "<leader>nn", ":ObsidianNew<cr>", desc = "obsidian [n]ew" },
+			{ "<leader>ns", ":ObsidianSearch<cr>", desc = "obsidian [s]earch" },
+			{ "<leader>no", ":ObsidianQuickSwitch<cr>", desc = "obsidian [o]pen quickswitch" },
+			{ "<leader>nO", ":ObsidianOpen<cr>", desc = "obsidian [O]pen in app" },
 		},
 		config = function()
 			---@diagnostic disable-next-line: missing-fields

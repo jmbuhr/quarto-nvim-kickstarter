@@ -38,6 +38,10 @@ imap(";", ";<c-g>u")
 
 nmap("Q", "<Nop>")
 
+--- Send code to terminal with vim-slime
+--- If an R terminal has been opend, this is in r_mode
+--- and will handle python code via reticulate when sent
+--- from a python chunk.
 local function send_cell()
 	if vim.b["quarto_is_r_mode"] == nil then
 		vim.cmd([[call slime#send_cell()]])
@@ -72,6 +76,7 @@ imap("<s-cr>", send_cell)
 vmap("<cr>", "<Plug>SlimeRegionSend")
 nmap("<leader><cr>", "<Plug>SlimeSendCell")
 
+--- Show R dataframe in the browser
 local function show_table()
 	local node = vim.treesitter.get_node({ ignore_injections = false })
 	local text = vim.treesitter.get_node_text(node, 0)
@@ -87,18 +92,6 @@ vim.keymap.set("n", "<leader>rt", show_table, { desc = "[r] show [t]able" })
 -- keep selection after indent/dedent
 vmap(">", ">gv")
 vmap("<", "<gv")
-
--- remove search highlight on esc
-nmap("<esc>", "<cmd>noh<cr>")
-
--- find files with telescope
-nmap("<c-p>", "<cmd>Telescope find_files<cr>")
-
--- paste and without overwriting register
-vmap("<leader>p", '"_dP')
-
--- delete and without overwriting register
-vmap("<leader>d", '"_d')
 
 -- center after search and jumps
 nmap("n", "nzz")
@@ -158,7 +151,7 @@ wk.register({
 	},
 	v = {
 		name = "[v]im",
-		t = { toggle_light_dark_theme, "switch [t]heme" },
+		t = { toggle_light_dark_theme, "[t]oggle light/dark theme" },
 		c = { ":Telescope colorscheme<cr>", "[c]olortheme" },
 		l = { ":Lazy<cr>", "[l]azy package manager" },
 		m = { ":Mason<cr>", "[m]ason software installer" },
@@ -181,7 +174,7 @@ wk.register({
 		s = { ":ls!<cr>", "list all buffers" },
 	},
 	o = {
-		name = "otter & code",
+		name = "[o]tter & c[o]de",
 		a = { require("otter").dev_setup, "otter activate" },
 		["o"] = { "o# %%<cr>", "new code chunk below" },
 		["O"] = { "O# %%<cr>", "new code chunk above" },
@@ -192,18 +185,18 @@ wk.register({
 		["l"] = { "o```{julia}<cr>```<esc>O", "julia code chunk" },
 	},
 	q = {
-		name = "quarto",
-		a = { ":QuartoActivate<cr>", "activate" },
-		p = { ":lua require'quarto'.quartoPreview()<cr>", "preview" },
-		q = { ":lua require'quarto'.quartoClosePreview()<cr>", "close" },
-		h = { ":QuartoHelp ", "help" },
+		name = "[q]uarto",
+		a = { ":QuartoActivate<cr>", "[a]ctivate" },
+		p = { ":lua require'quarto'.quartoPreview()<cr>", "[p]review" },
+		q = { ":lua require'quarto'.quartoClosePreview()<cr>", "[q]uiet preview" },
+		h = { ":QuartoHelp ", "[h]elp" },
 		r = {
-			name = "run",
-			r = { ":QuartoSendAbove<cr>", "to cursor" },
-			a = { ":QuartoSendAll<cr>", "all" },
+			name = "[r]un",
+			r = { ":QuartoSendAbove<cr>", "to cu[r]sor" },
+			a = { ":QuartoSendAll<cr>", "run [a]ll" },
 		},
-		e = { ":lua require'otter'.export()<cr>", "export" },
-		E = { ":lua require'otter'.export(true)<cr>", "export overwrite" },
+		e = { ":lua require'otter'.export()<cr>", "[e]xport" },
+		E = { ":lua require'otter'.export(true)<cr>", "[E]xport with overwrite" },
 	},
 	f = {
 		name = "[f]ind (telescope)",
@@ -224,42 +217,38 @@ wk.register({
 		j = { "<cmd>Telescope jumplist<cr>", "[j]umplist" },
 	},
 	h = {
-		name = "[h]elp/debug/conceal",
+		name = "[h]elp / [h]ide / debug",
 		c = {
-			name = "conceal",
-			h = { ":set conceallevel=1<cr>", "hide/conceal" },
-			s = { ":set conceallevel=0<cr>", "show/unconceal" },
+			name = "[c]onceal",
+			h = { ":set conceallevel=1<cr>", "[h]ide/conceal" },
+			s = { ":set conceallevel=0<cr>", "[s]how/unconceal" },
 		},
 		t = {
 			name = "[t]reesitter",
 			t = { vim.treesitter.inspect_tree, "show [t]ree" },
-			c = { ":=vim.treesitter.get_captures_at_cursor()<cr>", "show [c]apture" },
-			n = { ":=vim.treesitter.get_node():type()<cr>", "show [n]ode" },
 		},
 	},
 	g = {
 		name = "[g]it",
-		c = { ":GitConflictRefresh<cr>", "conflict" },
-		s = { ":Gitsigns<cr>", "gitsigns" },
-		pl = { ":Octo pr list<cr>", "gh pr list" },
-		pr = { ":Octo review start<cr>", "gh pr review" },
+		c = { ":GitConflictRefresh<cr>", "[c]onflict" },
+		s = { ":Gitsigns<cr>", "git [s]igns" },
 		wc = { ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "worktree create" },
 		ws = { ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", "worktree switch" },
 		d = {
 			name = "[d]iff",
-			o = { ":DiffviewOpen<cr>", "open" },
-			c = { ":DiffviewClose<cr>", "close" },
+			o = { ":DiffviewOpen<cr>", "[o]pen" },
+			c = { ":DiffviewClose<cr>", "[c]lose" },
 		},
 		b = {
 			name = "[b]lame",
-			b = { ":GitBlameToggle<cr>", "toggle" },
-			o = { ":GitBlameOpenCommitURL<cr>", "open" },
-			c = { ":GitBlameCopyCommitURL<cr>", "copy" },
+			b = { ":GitBlameToggle<cr>", "[b]lame toggle virtual text" },
+			o = { ":GitBlameOpenCommitURL<cr>", "[o]pen" },
+			c = { ":GitBlameCopyCommitURL<cr>", "[c]opy" },
 		},
 	},
 	x = {
 		name = "e[x]ecute",
-		x = { ":w<cr>:source %<cr>", "[x] source file" },
+		x = { ":w<cr>:source %<cr>", "[x] source %" },
 	},
 }, { mode = "n", prefix = "<leader>" })
 
@@ -272,6 +261,9 @@ local is_code_chunk = function()
 	end
 end
 
+--- Insert code chunk of given language
+--- Splits current chunk if already within a chunk
+--- @param lang string
 local insert_code_chunk = function(lang)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "n", true)
 	local keys
@@ -320,7 +312,8 @@ wk.register({
 
 wk.register({
 	["<leader>"] = { "<Plug>SlimeRegionSend", "run code region" },
-	["p"] = { '"_dP', "replace without overwriting reg" },
+	p = { '"_dP', "replace without overwriting reg" },
+	d = { '"_d', "delete without overwriting reg" },
 }, { mode = "v", prefix = "<leader>" })
 
 -- insert mode
