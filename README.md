@@ -2,7 +2,7 @@
 
 Companion to <https://github.com/quarto-dev/quarto-nvim>.
 
-This requires Neovim >= **v0.9.0** (https://github.com/neovim/neovim/releases/tag/stable)
+This requires Neovim >= **v0.9.5** (https://github.com/neovim/neovim/releases/tag/stable)
 
 ## Videos
 
@@ -56,10 +56,6 @@ rm -r ~/.local/state/nvim
 Use the integrated neovim terminal to execute code chunks:
 
 ![image](https://user-images.githubusercontent.com/17450586/211403680-c60e8e89-ea9b-48bd-881d-37df2bc924a3.png)
-
-Or combine it with [tmux-kickstarter](https://github.com/jmbuhr/tmux-kickstarter) for an even more versatile data science experience!
-
-![image](https://user-images.githubusercontent.com/17450586/210393754-04404e62-15ab-4cb2-afba-deeefc3fec9e.png)
 
 ## Links to the plugins
 
