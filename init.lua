@@ -1,5 +1,5 @@
-require("config.global")
-require("config.lazy")
-require("config.autocommands")
-require("config.keymap")
-require("config.colors")
+require 'config.global'
+require 'config.lazy'
+require 'config.autocommands'
+require 'config.keymap'
+require 'config.colors'
