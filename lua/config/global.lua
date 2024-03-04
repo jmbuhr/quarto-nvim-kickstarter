@@ -82,6 +82,13 @@ vim.opt.scrolloff = 5
 -- (don't == 0) replace certain elements with prettier ones
 vim.opt.conceallevel = 0
 
+-- diagnostics
+vim.diagnostic.config({
+	virtual_text = true,
+	underline = true,
+	signs = true,
+})
+
 -- add new filetypes
 vim.filetype.add({
 	extension = {

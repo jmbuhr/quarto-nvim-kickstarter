@@ -139,6 +139,24 @@ return {
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					assert(client, "LSP client not found")
+
+					---@diagnostic disable-next-line: inject-field
+					client.server_capabilities.document_formatting = true
+
+					if client and client.server_capabilities.documentHighlightProvider then
+						vim.api.nvim_create_autocmd({ "CursorHold" }, {
+							buffer = event.buf,
+							callback = vim.lsp.buf.document_highlight,
+						})
+
+						vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+							buffer = event.buf,
+							callback = vim.lsp.buf.clear_references,
+						})
+					end
+
 					map("gS", telescope.lsp_document_symbols, "[g]o so [S]ymbols")
 					map("gD", telescope.lsp_type_definitions, "[g]o to type [D]efinition")
 					map("gd", telescope.lsp_definitions, "[g]o to [d]efinition")
@@ -151,22 +169,7 @@ return {
 					map("<leader>ll", vim.lsp.codelens.run, "[l]ens run")
 					map("<leader>lR", vim.lsp.buf.rename, "[l]sp [R]ename")
 					map("<leader>lf", vim.lsp.buf.format, "[l]sp [f]ormat")
-
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-					client.server_capabilities.document_formatting = true
-
-					if client and client.server_capabilities.documentHighlightProvider then
-						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-							buffer = event.buf,
-							callback = vim.lsp.buf.document_highlight,
-						})
-
-						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-							buffer = event.buf,
-							callback = vim.lsp.buf.clear_references,
-						})
-					end
+					map("<leader>lq", vim.diagnostic.setqflist, "[l]sp diagnostic [q]uickfix")
 				end,
 			})
 
@@ -187,14 +190,6 @@ return {
 				allow_incremental_sync = true,
 				debounce_text_changes = 150,
 			}
-
-			-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
-			--     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-			--       virtual_text = true,
-			--       signs = true,
-			--       underline = true,
-			--       update_in_insert = false,
-			--     })
 			vim.lsp.handlers["textDocument/hover"] =
 				vim.lsp.with(vim.lsp.handlers.hover, { border = require("misc.style").border })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
@@ -429,7 +424,6 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			local lspkind = require("lspkind")
-			lspkind.init()
 
 			local has_words_before = function()
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -447,6 +441,7 @@ return {
 				mapping = {
 					["<C-f>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
+
 					["<C-n>"] = cmp.mapping(function(fallback)
 						if luasnip.expand_or_jumpable() then
 							luasnip.expand_or_jump()
@@ -464,6 +459,7 @@ return {
 					["<CR>"] = cmp.mapping.confirm({
 						select = true,
 					}),
+
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
@@ -480,6 +476,7 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
+
 					["<C-l>"] = cmp.mapping(function()
 						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
@@ -496,7 +493,7 @@ return {
 				---@diagnostic disable-next-line: missing-fields
 				formatting = {
 					format = lspkind.cmp_format({
-						with_text = true,
+						mode = "symbol",
 						menu = {
 							otter = "[🦦]",
 							nvim_lsp = "[LSP]",
