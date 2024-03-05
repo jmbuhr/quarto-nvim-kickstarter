@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.0.1...v3.0.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* put headlines config in config function instead of opts to avoid running treesitter parsing code before init. fixes [#89](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/89) ([6e4342f](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/6e4342fb0ad9b78b6b4dd7bd1cc383b7f36fb1dd))
+
 ## [3.0.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.0.0...v3.0.1) (2024-03-05)
 
 
