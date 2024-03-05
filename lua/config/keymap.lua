@@ -211,10 +211,6 @@ wk.register({
 
 -- normal mode with <leader>
 wk.register({
-  r = {
-    name = '[r] R specific tools',
-    t = { show_r_table, 'show [t]able' },
-  },
   c = {
     name = '[c]ode / [c]ell / [c]hunk',
     c = { ':SlimeConfig<cr>', 'slime [c]onfig' },
@@ -233,18 +229,60 @@ wk.register({
       name = '[o]open code chunk',
     },
   },
+  d = {
+    name = '[d]ebug',
+  },
+  f = {
+    name = '[f]ind (telescope)',
+    f = { '<cmd>Telescope find_files<cr>', '[f]iles' },
+    h = { '<cmd>Telescope help_tags<cr>', '[h]elp' },
+    k = { '<cmd>Telescope keymaps<cr>', '[k]eymaps' },
+    r = { '<cmd>Telescope lsp_references<cr>', '[r]eferences' },
+    g = { '<cmd>Telescope live_grep<cr>', '[g]rep' },
+    b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', '[b]uffer fuzzy find' },
+    m = { '<cmd>Telescope marks<cr>', '[m]arks' },
+    M = { '<cmd>Telescope man_pages<cr>', '[M]an pages' },
+    c = { '<cmd>Telescope git_commits<cr>', 'git [c]ommits' },
+    s = { '<cmd>Telescope lsp_document_symbols<cr>', 'document [s]ymbols' },
+    ['<space>'] = { '<cmd>Telescope buffers<cr>', '[ ] buffers' },
+    d = { '<cmd>Telescope buffers<cr>', '[d] buffers' },
+    q = { '<cmd>Telescope quickfix<cr>', '[q]uickfix' },
+    l = { '<cmd>Telescope loclist<cr>', '[l]oclist' },
+    j = { '<cmd>Telescope jumplist<cr>', '[j]umplist' },
+  },
+  g = {
+    name = '[g]it',
+    c = { ':GitConflictRefresh<cr>', '[c]onflict' },
+    s = { ':Gitsigns<cr>', 'git [s]igns' },
+    wc = { ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", 'worktree create' },
+    ws = { ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", 'worktree switch' },
+    d = {
+      name = '[d]iff',
+      o = { ':DiffviewOpen<cr>', '[o]pen' },
+      c = { ':DiffviewClose<cr>', '[c]lose' },
+    },
+    b = {
+      name = '[b]lame',
+      b = { ':GitBlameToggle<cr>', '[b]lame toggle virtual text' },
+      o = { ':GitBlameOpenCommitURL<cr>', '[o]pen' },
+      c = { ':GitBlameCopyCommitURL<cr>', '[c]opy' },
+    },
+  },
+  h = {
+    name = '[h]elp / [h]ide / debug',
+    c = {
+      name = '[c]onceal',
+      h = { ':set conceallevel=1<cr>', '[h]ide/conceal' },
+      s = { ':set conceallevel=0<cr>', '[s]how/unconceal' },
+    },
+    t = {
+      name = '[t]reesitter',
+      t = { vim.treesitter.inspect_tree, 'show [t]ree' },
+    },
+  },
   i = {
     name = '[i]nsert',
     i = { ':PasteImage<cr>', '[i]mage from clipboard' },
-  },
-  v = {
-    name = '[v]im',
-    t = { toggle_light_dark_theme, '[t]oggle light/dark theme' },
-    c = { ':Telescope colorscheme<cr>', '[c]olortheme' },
-    l = { ':Lazy<cr>', '[l]azy package manager' },
-    m = { ':Mason<cr>', '[m]ason software installer' },
-    s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', '[s]ettings, edit vimrc' },
-    h = { ':execute "h " . expand("<cword>")<cr>', 'vim [h]elp for current word' },
   },
   l = {
     name = '[l]anguage/lsp',
@@ -287,53 +325,18 @@ wk.register({
     e = { ":lua require'otter'.export()<cr>", '[e]xport' },
     E = { ":lua require'otter'.export(true)<cr>", '[E]xport with overwrite' },
   },
-  f = {
-    name = '[f]ind (telescope)',
-    f = { '<cmd>Telescope find_files<cr>', '[f]iles' },
-    h = { '<cmd>Telescope help_tags<cr>', '[h]elp' },
-    k = { '<cmd>Telescope keymaps<cr>', '[k]eymaps' },
-    r = { '<cmd>Telescope lsp_references<cr>', '[r]eferences' },
-    g = { '<cmd>Telescope live_grep<cr>', '[g]rep' },
-    b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', '[b]uffer fuzzy find' },
-    m = { '<cmd>Telescope marks<cr>', '[m]arks' },
-    M = { '<cmd>Telescope man_pages<cr>', '[M]an pages' },
-    c = { '<cmd>Telescope git_commits<cr>', 'git [c]ommits' },
-    s = { '<cmd>Telescope lsp_document_symbols<cr>', 'document [s]ymbols' },
-    ['<space>'] = { '<cmd>Telescope buffers<cr>', '[ ] buffers' },
-    d = { '<cmd>Telescope buffers<cr>', '[d] buffers' },
-    q = { '<cmd>Telescope quickfix<cr>', '[q]uickfix' },
-    l = { '<cmd>Telescope loclist<cr>', '[l]oclist' },
-    j = { '<cmd>Telescope jumplist<cr>', '[j]umplist' },
+  r = {
+    name = '[r] R specific tools',
+    t = { show_r_table, 'show [t]able' },
   },
-  h = {
-    name = '[h]elp / [h]ide / debug',
-    c = {
-      name = '[c]onceal',
-      h = { ':set conceallevel=1<cr>', '[h]ide/conceal' },
-      s = { ':set conceallevel=0<cr>', '[s]how/unconceal' },
-    },
-    t = {
-      name = '[t]reesitter',
-      t = { vim.treesitter.inspect_tree, 'show [t]ree' },
-    },
-  },
-  g = {
-    name = '[g]it',
-    c = { ':GitConflictRefresh<cr>', '[c]onflict' },
-    s = { ':Gitsigns<cr>', 'git [s]igns' },
-    wc = { ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", 'worktree create' },
-    ws = { ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", 'worktree switch' },
-    d = {
-      name = '[d]iff',
-      o = { ':DiffviewOpen<cr>', '[o]pen' },
-      c = { ':DiffviewClose<cr>', '[c]lose' },
-    },
-    b = {
-      name = '[b]lame',
-      b = { ':GitBlameToggle<cr>', '[b]lame toggle virtual text' },
-      o = { ':GitBlameOpenCommitURL<cr>', '[o]pen' },
-      c = { ':GitBlameCopyCommitURL<cr>', '[c]opy' },
-    },
+  v = {
+    name = '[v]im',
+    t = { toggle_light_dark_theme, '[t]oggle light/dark theme' },
+    c = { ':Telescope colorscheme<cr>', '[c]olortheme' },
+    l = { ':Lazy<cr>', '[l]azy package manager' },
+    m = { ':Mason<cr>', '[m]ason software installer' },
+    s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', '[s]ettings, edit vimrc' },
+    h = { ':execute "h " . expand("<cword>")<cr>', 'vim [h]elp for current word' },
   },
   x = {
     name = 'e[x]ecute',
