@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.0.0...v3.0.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* call which-key setup. refs [#89](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/89) ([846324a](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/846324a030e2baf49a686118ac3b3e66d8b40fed))
+
 ## [3.0.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v2.5.1...v3.0.0) (2024-03-04)
 
 
