@@ -226,20 +226,22 @@ return {
 
   {
     'lukas-reineke/headlines.nvim',
-    enabled = false,
+    enabled = true,
     dependencies = 'nvim-treesitter/nvim-treesitter',
-    opts = {
-      quarto = {
-        query = vim.treesitter.query.parse(
-          'markdown',
-          [[
+    config = function()
+      require('headlines').setup {
+        quarto = {
+          query = vim.treesitter.query.parse(
+            'markdown',
+            [[
                 (fenced_code_block) @codeblock
                 ]]
-        ),
-        codeblock_highlight = 'CodeBlock',
-        treesitter_language = 'markdown',
-      },
-    },
+          ),
+          codeblock_highlight = 'CodeBlock',
+          treesitter_language = 'markdown',
+        },
+      }
+    end,
   },
 
   { -- show images in nvim!
