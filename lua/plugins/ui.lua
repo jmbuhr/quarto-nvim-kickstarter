@@ -94,10 +94,8 @@ return {
     opts = { signs = false },
   },
 
-  -- statusline
-  -- chose one, or none of these
-  -- and define in global.lua
-  {
+  { -- statusline
+    -- PERF: I found this to slow down the editor
     'nvim-lualine/lualine.nvim',
     enabled = false,
     config = function()
@@ -130,7 +128,7 @@ return {
     end,
   },
 
-  {
+  { -- nicer-looking tabs with close icons
     'nanozuki/tabby.nvim',
     enabled = false,
     config = function()
@@ -138,7 +136,7 @@ return {
     end,
   },
 
-  {
+  { -- scrollbar
     'dstein64/nvim-scrollview',
     enabled = true,
     opts = {
@@ -146,14 +144,12 @@ return {
     },
   },
 
-  -- highlight current word
-  {
+  { -- highlight occurences of current word
     'RRethy/vim-illuminate',
     enabled = false,
   },
 
-  -- filetree
-  {
+  { -- filetree
     'nvim-tree/nvim-tree.lua',
     keys = {
       { '<c-b>', ':NvimTreeToggle<cr>', desc = 'toggle nvim-tree' },
@@ -179,7 +175,7 @@ return {
   -- show keybinding help window
   { 'folke/which-key.nvim', opts = {} },
 
-  {
+  { -- show tree of symbols in the current file
     'simrat39/symbols-outline.nvim',
     cmd = 'SymbolsOutline',
     keys = {
@@ -188,8 +184,18 @@ return {
     opts = {},
   },
 
-  -- terminal
-  {
+  { -- or show symbols in the current file as breadcrumbs
+    'Bekaboo/dropbar.nvim',
+    dependencies = {
+      'nvim-telescope/telescope-fzf-native.nvim',
+    },
+    config = function()
+      -- turn off global option for windowline
+      vim.opt.winbar = nil
+    end,
+  },
+
+  { -- terminal
     'akinsho/toggleterm.nvim',
     opts = {
       open_mapping = [[<c-\>]],
@@ -197,8 +203,8 @@ return {
     },
   },
 
-  -- show diagnostics list
-  {
+  { -- show diagnostics list
+    -- PERF: Slows down insert mode if open and there are many diagnostics
     'folke/trouble.nvim',
     enabled = false,
     config = function()
@@ -215,7 +221,7 @@ return {
     end,
   },
 
-  {
+  { -- show indent lines
     'lukas-reineke/indent-blankline.nvim',
     enabled = false,
     main = 'ibl',
@@ -224,7 +230,7 @@ return {
     },
   },
 
-  {
+  { -- highlight markdown headings and code blocks etc.
     'lukas-reineke/headlines.nvim',
     enabled = true,
     dependencies = 'nvim-treesitter/nvim-treesitter',
