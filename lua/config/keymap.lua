@@ -15,6 +15,13 @@ local imap = function(key, effect)
   vim.keymap.set('i', key, effect, { silent = true, noremap = true })
 end
 
+local cmap = function(key, effect)
+  vim.keymap.set('c', key, effect, { silent = true, noremap = true })
+end
+
+-- move in command line
+cmap('<C-a>', '<Home>')
+
 -- save with ctrl+s
 imap('<C-s>', '<esc>:update<cr><esc>')
 nmap('<C-s>', '<cmd>:update<cr><esc>')
@@ -42,23 +49,52 @@ nmap('Q', '<Nop>')
 --- If an R terminal has been opend, this is in r_mode
 --- and will handle python code via reticulate when sent
 --- from a python chunk.
+--- TODO: incorpoarate this into quarto-nvim plugin
+--- such that QuartoRun functions get the same capabilities
 local function send_cell()
   if vim.b['quarto_is_r_mode'] == nil then
-    vim.cmd [[call slime#send_cell()]]
+    vim.fn['slime#send_cell']()
     return
   end
   if vim.b['quarto_is_r_mode'] == true then
     vim.g.slime_python_ipython = 0
     local is_python = require('otter.tools.functions').is_otter_language_context 'python'
     if is_python and not vim.b['reticulate_running'] then
-      vim.cmd [[call slime#send("reticulate::repl_python()" . "\r")]]
+      vim.fn['slime#send']('reticulate::repl_python()' .. '\r')
       vim.b['reticulate_running'] = true
     end
     if not is_python and vim.b['reticulate_running'] then
-      vim.cmd [[call slime#send("exit" . "\r")]]
+      vim.fn['slime#send']('exit' .. '\r')
       vim.b['reticulate_running'] = false
     end
-    vim.cmd [[call slime#send_cell()]]
+    vim.fn['slime#send_cell']()
+  end
+end
+
+--- Send code to terminal with vim-slime
+--- If an R terminal has been opend, this is in r_mode
+--- and will handle python code via reticulate when sent
+--- from a python chunk.
+local slime_send_region_cmd = ':<C-u>call slime#send_op(visualmode(), 1)<CR>'
+slime_send_region_cmd = vim.api.nvim_replace_termcodes(slime_send_region_cmd, true, false, true)
+local function send_region()
+  -- if filetyps is not quarto, just send_region
+  if vim.bo.filetype ~= 'quarto' or vim.b['quarto_is_r_mode'] == nil then
+    vim.cmd('normal' .. slime_send_region_cmd)
+    return
+  end
+  if vim.b['quarto_is_r_mode'] == true then
+    vim.g.slime_python_ipython = 0
+    local is_python = require('otter.tools.functions').is_otter_language_context 'python'
+    if is_python and not vim.b['reticulate_running'] then
+      vim.fn['slime#send']('reticulate::repl_python()' .. '\r')
+      vim.b['reticulate_running'] = true
+    end
+    if not is_python and vim.b['reticulate_running'] then
+      vim.fn['slime#send']('exit' .. '\r')
+      vim.b['reticulate_running'] = false
+    end
+    vim.cmd('normal' .. slime_send_region_cmd)
   end
 end
 
@@ -71,10 +107,6 @@ nmap('<c-cr>', send_cell)
 nmap('<s-cr>', send_cell)
 imap('<c-cr>', send_cell)
 imap('<s-cr>', send_cell)
-
--- send code with Enter and leader Enter
-vmap('<cr>', '<Plug>SlimeRegionSend')
-nmap('<leader><cr>', '<Plug>SlimeSendCell')
 
 --- Show R dataframe in the browser
 -- might not use what you think should be your default web browser
@@ -185,7 +217,7 @@ wk.register({
 
 -- visual mode
 wk.register({
-  ['<cr>'] = { '<Plug>SlimeRegionSend', 'run code region' },
+  ['<cr>'] = { send_region, 'run code region' },
   ['<M-j>'] = { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
   ['<M-k>'] = { ":m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
   ['.'] = { ':norm .<cr>', 'repat last normal mode command' },
@@ -194,7 +226,6 @@ wk.register({
 
 -- visual with <leader>
 wk.register({
-  ['<leader>'] = { '<Plug>SlimeRegionSend', 'run code region' },
   p = { '"_dP', 'replace without overwriting reg' },
   d = { '"_d', 'delete without overwriting reg' },
 }, { mode = 'v', prefix = '<leader>' })
@@ -209,22 +240,25 @@ wk.register({
   ['<c-x><c-x>'] = { '<c-x><c-o>', 'omnifunc completion' },
 }, { mode = 'i' })
 
+nmap('<leader><cr>', send_cell)
+
 -- normal mode with <leader>
 wk.register({
+  ['<cr>'] = { send_cell, 'run code cell' },
   c = {
     name = '[c]ode / [c]ell / [c]hunk',
     c = { ':SlimeConfig<cr>', 'slime [c]onfig' },
-    n = { ':vsplit term://$SHELL<cr>', '[n]ew terminal with shell' },
+    n = { ':split term://$SHELL<cr>', '[n]ew terminal with shell' },
     r = {
       function()
         vim.b['quarto_is_r_mode'] = true
-        vim.cmd 'vsplit term://R'
+        vim.cmd 'split term://R'
       end,
       'new [R] terminal',
     },
-    p = { ':vsplit term://python<cr>', 'new [p]ython terminal' },
-    i = { ':vsplit term://ipython<cr>', 'new [i]python terminal' },
-    j = { ':vsplit term://julia<cr>', 'new [j]ulia terminal' },
+    p = { ':split term://python<cr>', 'new [p]ython terminal' },
+    i = { ':split term://ipython<cr>', 'new [i]python terminal' },
+    j = { ':split term://julia<cr>', 'new [j]ulia terminal' },
     o = {
       name = '[o]open code chunk',
     },
