@@ -104,3 +104,7 @@ vim.filetype.add {
     ojs = 'javascript',
   },
 }
+
+-- additional builtin vim packages
+-- filter quickfix list with Cfilter
+vim.cmd.packadd 'cfilter'
