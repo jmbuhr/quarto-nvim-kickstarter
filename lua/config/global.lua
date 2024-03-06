@@ -1,5 +1,7 @@
 -- global options
 
+local animals = require('misc.style').animals
+
 -- proper colors
 vim.opt.termguicolors = true
 
@@ -61,7 +63,8 @@ let g:currentmode={
        \ 't'  : '%#ModeMsg# TERM ',
        \}
 ]]
-vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% 🦦 '
+
+vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% ' .. animals[math.random(#animals)] .. ' %*'
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 1
