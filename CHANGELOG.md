@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.1.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.0.2...v3.1.0) (2024-03-06)
+
+
+### Features
+
+* packadd cfilter ([d5094d3](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d5094d3aa65c8f320cf11d00035ec1c4b3e3269d))
+* random animal in status line ([20784d1](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/20784d1b3a1b98e2bc17b7f7ba0773a746a706b6))
+* reticulate treatment for sending visual selection ([ed52007](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ed520071a97ae749e23321c38b3727577c9f40cc))
+
 ## [3.0.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.0.1...v3.0.2) (2024-03-05)
 
 
