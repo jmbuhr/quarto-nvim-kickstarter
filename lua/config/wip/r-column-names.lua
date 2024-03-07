@@ -92,10 +92,5 @@ local function get_r_colnames()
     :find()
 end
 
-local reload = function()
-  package.loaded['config.experimental'] = nil
-  require 'config.experimental'
-end
-
 vim.keymap.set('n', '<leader>x', reload, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>r', find_identifier_at_pipe_start, { noremap = true, silent = true })
