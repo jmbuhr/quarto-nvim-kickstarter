@@ -125,8 +125,13 @@ return {
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
       { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-      -- { "j-hui/fidget.nvim", opts = {} },
-      { 'folke/neodev.nvim', opts = {} },
+      { -- nice loading notifications
+        -- PERF: but can slow down startup
+        'j-hui/fidget.nvim',
+        enabled = false,
+        opts = {},
+      },
+      { 'folke/neodev.nvim' },
     },
     config = function()
       local lspconfig = require 'lspconfig'
@@ -195,13 +200,6 @@ return {
         filetypes = { 'markdown', 'quarto' },
         root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
       }
-
-      -- -- another optional language server for grammar and spelling
-      -- -- <https://github.com/valentjn/ltex-ls>
-      -- lspconfig.ltex.setup {
-      --   capabilities = capabilities,
-      --   filetypes = { "markdown", "tex", "quarto" },
-      -- }
 
       lspconfig.r_language_server.setup {
         capabilities = capabilities,
@@ -279,8 +277,8 @@ return {
         table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
       end
 
-      -- not upadated yet in automatic mason-lspconfig install,
-      -- open mason manually with `<space>vm` and `/` search for lua.
+      require('neodev').setup {}
+
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
         flags = lsp_flags,
