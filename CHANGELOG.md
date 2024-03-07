@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.1.0...v3.1.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* put neodev in the correct place ([1599d69](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1599d699a53b99dcbd7cdfb48435a0af834b6a54))
+
 ## [3.1.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.0.2...v3.1.0) (2024-03-06)
 
 
