@@ -333,6 +333,7 @@ wk.register({
   o = {
     name = '[o]tter & c[o]de',
     a = { require('otter').dev_setup, 'otter [a]ctivate' },
+    d = { require('otter').deactivate, 'otter [d]eactivate' },
     c = { 'O# %%<cr>', 'magic [c]omment code chunk # %%' },
     r = { insert_r_chunk, '[r] code chunk' },
     p = { insert_py_chunk, '[p]ython code chunk' },
@@ -353,8 +354,13 @@ wk.register({
       a = { ':QuartoSendAll<cr>', 'run [a]ll' },
       b = { ':QuartoSendBelow<cr>', 'run [b]elow' },
     },
-    e = { ":lua require'otter'.export()<cr>", '[e]xport' },
-    E = { ":lua require'otter'.export(true)<cr>", '[E]xport with overwrite' },
+    e = { require('otter').export, '[e]xport' },
+    E = {
+      function()
+        require('otter').export(true)
+      end,
+      '[E]xport with overwrite',
+    },
   },
   r = {
     name = '[r] R specific tools',
