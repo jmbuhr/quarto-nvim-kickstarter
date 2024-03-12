@@ -78,14 +78,12 @@ return {
           },
         },
       }
-      -- telescope.load_extension('fzf')
+      telescope.load_extension 'fzf'
       telescope.load_extension 'ui-select'
       telescope.load_extension 'dap'
+      telescope.load_extension 'zotero'
     end,
   },
-  { 'nvim-telescope/telescope-ui-select.nvim' },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  { 'nvim-telescope/telescope-dap.nvim' },
 
   -- Highlight todo, notes, etc in comments
   {
