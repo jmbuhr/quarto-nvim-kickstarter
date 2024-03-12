@@ -25,6 +25,7 @@ return {
   -- color html colors
   {
     'NvChad/nvim-colorizer.lua',
+    enabled = true,
     opts = {
       filetypes = { '*' },
       RGB = true, -- #RGB hex codes

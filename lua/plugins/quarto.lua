@@ -156,7 +156,7 @@ return {
           map('gd', telescope.lsp_definitions, '[g]o to [d]efinition')
           map('K', '<cmd>lua vim.lsp.buf.hover()<CR>', '[K] hover documentation')
           map('gh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', '[g]o to signature [h]elp')
-          map('gi', telescope.lsp_implementations, '[g]o to [i]mplementation')
+          map('gI', telescope.lsp_implementations, '[g]o to [I]mplementation')
           map('gr', telescope.lsp_references, '[g]o to [r]eferences')
           map('[d', vim.diagnostic.goto_prev, 'previous [d]iagnostic ')
           map(']d', vim.diagnostic.goto_next, 'next [d]iagnostic ')
