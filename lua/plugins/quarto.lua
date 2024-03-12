@@ -132,8 +132,11 @@ return {
         opts = {},
       },
       { 'folke/neodev.nvim' },
+      { 'folke/neoconf.nvim' },
     },
     config = function()
+      require('neoconf').setup()
+      require('neodev').setup()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
 
@@ -276,8 +279,6 @@ return {
         table.insert(lua_library_files, resource_path .. '/lua-types')
         table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
       end
-
-      require('neodev').setup {}
 
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
@@ -475,6 +476,9 @@ return {
             end
           end, { 'i', 's' }),
           ['<C-e>'] = cmp.mapping.abort(),
+          ['<c-y>'] = cmp.mapping.confirm {
+            select = true,
+          },
           ['<CR>'] = cmp.mapping.confirm {
             select = true,
           },
