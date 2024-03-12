@@ -131,12 +131,10 @@ return {
         enabled = false,
         opts = {},
       },
-      { 'folke/neodev.nvim' },
-      { 'folke/neoconf.nvim' },
+      { 'folke/neodev.nvim', opts = {}, enabled = false },
+      { 'folke/neoconf.nvim', opts = {}, enabled = false },
     },
     config = function()
-      require('neoconf').setup()
-      require('neodev').setup()
       local lspconfig = require 'lspconfig'
       local util = require 'lspconfig.util'
 
