@@ -250,6 +250,15 @@ return {
           codeblock_highlight = 'CodeBlock',
           treesitter_language = 'markdown',
         },
+        markdown = {
+          query = vim.treesitter.query.parse(
+            'markdown',
+            [[
+                (fenced_code_block) @codeblock
+                ]]
+          ),
+          codeblock_highlight = 'CodeBlock',
+        },
       }
     end,
   },
