@@ -7,6 +7,17 @@ return {
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       { 'nvim-telescope/telescope-dap.nvim' },
+      {
+        'jmbuhr/telescope-zotero.nvim',
+        enabled = true,
+        dev = false,
+        dependencies = {
+          { 'kkharji/sqlite.lua' },
+        },
+        config = function()
+          vim.keymap.set('n', '<leader>fz', ':Telescope zotero<cr>', { desc = '[z]otero' })
+        end,
+      },
     },
     config = function()
       local telescope = require 'telescope'
@@ -86,6 +97,7 @@ return {
       telescope.load_extension 'fzf'
       telescope.load_extension 'ui-select'
       telescope.load_extension 'dap'
+      telescope.load_extension 'zotero'
     end,
   },
 
