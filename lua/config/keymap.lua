@@ -240,8 +240,6 @@ wk.register({
   ['<c-x><c-x>'] = { '<c-x><c-o>', 'omnifunc completion' },
 }, { mode = 'i' })
 
-nmap('<leader><cr>', send_cell)
-
 -- normal mode with <leader>
 wk.register({
   ['<cr>'] = { send_cell, 'run code cell' },
@@ -323,7 +321,7 @@ wk.register({
     r = { '<cmd>Telescope lsp_references<cr>', '[r]eferences' },
     R = { '[R]ename' },
     D = { vim.lsp.buf.type_definition, 'type [D]efinition' },
-    a = { vim.lsp.buf.code_action, 'codr [a]ction' },
+    a = { vim.lsp.buf.code_action, 'code [a]ction' },
     e = { vim.diagnostic.open_float, 'diagnostics (show hover [e]rror)' },
     d = {
       name = '[d]iagnostics',
@@ -331,7 +329,6 @@ wk.register({
       e = { vim.diagnostic.enable, '[e]nable' },
     },
     g = { ':Neogen<cr>', 'neo[g]en docstring' },
-    s = { ':ls!<cr>', '[l]ist all buffers' },
   },
   o = {
     name = '[o]tter & c[o]de',
