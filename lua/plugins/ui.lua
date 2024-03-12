@@ -3,6 +3,11 @@ return {
   -- a nice seletion UI also to find and open files
   {
     'nvim-telescope/telescope.nvim',
+    dependencies = {
+      { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      { 'nvim-telescope/telescope-dap.nvim' },
+    },
     config = function()
       local telescope = require 'telescope'
       local actions = require 'telescope.actions'
@@ -81,7 +86,6 @@ return {
       telescope.load_extension 'fzf'
       telescope.load_extension 'ui-select'
       telescope.load_extension 'dap'
-      telescope.load_extension 'zotero'
     end,
   },
 
