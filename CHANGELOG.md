@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.1.1...v3.1.2) (2024-03-13)
+
+
+### Bug Fixes
+
+* set math.randomseed to ensure a different animal in the ([b2c0854](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/b2c085452b6dcc98e3b1554d3192e330ecc5cbc2))
+
 ## [3.1.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.1.0...v3.1.1) (2024-03-07)
 
 
