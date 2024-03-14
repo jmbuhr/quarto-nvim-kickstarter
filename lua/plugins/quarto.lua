@@ -131,7 +131,7 @@ return {
         enabled = false,
         opts = {},
       },
-      { 'folke/neodev.nvim', opts = {}, enabled = false },
+      { 'folke/neodev.nvim', opts = {}, enabled = true },
       { 'folke/neoconf.nvim', opts = {}, enabled = false },
     },
     config = function()
