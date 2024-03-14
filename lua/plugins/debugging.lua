@@ -26,7 +26,7 @@ return {
       {
         'rcarriga/nvim-dap-ui',
         config = function()
-          vim.fn.sign_define('DapBreakpoint', { text = '🦦', texthl = '', linehl = '', numhl = '' })
+          vim.fn.sign_define('DapBreakpoint', { text = '🦆', texthl = '', linehl = '', numhl = '' })
           require('dapui').setup()
         end,
       },
