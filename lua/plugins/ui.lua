@@ -187,7 +187,14 @@ return {
   },
 
   -- show keybinding help window
-  { 'folke/which-key.nvim', opts = {} },
+  {
+    'folke/which-key.nvim',
+    enabled = true,
+    config = function()
+      require('which-key').setup {}
+      require 'config.keymap'
+    end,
+  },
 
   { -- show tree of symbols in the current file
     'simrat39/symbols-outline.nvim',

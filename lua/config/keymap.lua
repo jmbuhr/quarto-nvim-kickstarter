@@ -1,3 +1,4 @@
+-- required in which-key plugin spec in plugins/ui.lua as `require 'config.keymap'`
 local wk = require 'which-key'
 
 P = vim.print
