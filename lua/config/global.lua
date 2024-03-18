@@ -54,6 +54,7 @@ vim.cmd [[
 let g:currentmode={
        \ 'n'  : '%#String# NORMAL ',
        \ 'v'  : '%#Search# VISUAL ',
+       \ 's'  : '%#ModeMsg# VISUAL ',
        \ "\<C-V>" : '%#Title# V·Block ',
        \ 'V'  : '%#IncSearch# V·Line ',
        \ 'Rv' : '%#String# V·Replace ',
