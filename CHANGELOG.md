@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.2.0...v3.2.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* add unicorn ([42d525b](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/42d525b9c0959dce7928540fec4b6fc7902b96f9))
+
 ## [3.2.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.1.2...v3.2.0) (2024-03-18)
 
 
