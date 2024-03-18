@@ -1,5 +1,7 @@
 local wk = require 'which-key'
 
+P = vim.print
+
 vim.g['quarto_is_r_mode'] = nil
 vim.g['reticulate_running'] = false
 
@@ -51,6 +53,7 @@ nmap('Q', '<Nop>')
 --- from a python chunk.
 --- TODO: incorpoarate this into quarto-nvim plugin
 --- such that QuartoRun functions get the same capabilities
+--- TODO: figure out bracketed paste for reticulate python repl.
 local function send_cell()
   if vim.b['quarto_is_r_mode'] == nil then
     vim.fn['slime#send_cell']()
@@ -114,6 +117,7 @@ imap('<s-cr>', send_cell)
 -- see https://askubuntu.com/a/864698 for places to look for
 local function show_r_table()
   local node = vim.treesitter.get_node { ignore_injections = false }
+  assert(node, 'no symbol found under cursor')
   local text = vim.treesitter.get_node_text(node, 0)
   local cmd = [[call slime#send("DT::datatable(]] .. text .. [[)" . "\r")]]
   vim.cmd(cmd)
@@ -240,23 +244,47 @@ wk.register({
   ['<c-x><c-x>'] = { '<c-x><c-o>', 'omnifunc completion' },
 }, { mode = 'i' })
 
+local function new_terminal(lang)
+  vim.cmd('vsplit term://' .. lang)
+end
+
+local function new_terminal_python()
+  new_terminal 'python'
+end
+
+local function new_terminal_r()
+  new_terminal 'R'
+end
+
+local function new_terminal_ipython()
+  new_terminal 'ipython'
+end
+
+local function new_terminal_julia()
+  new_terminal 'julia'
+end
+
+local function new_terminal_shell()
+  new_terminal '$SHELL'
+end
+
 -- normal mode with <leader>
 wk.register({
   ['<cr>'] = { send_cell, 'run code cell' },
   c = {
     name = '[c]ode / [c]ell / [c]hunk',
     c = { ':SlimeConfig<cr>', 'slime [c]onfig' },
-    n = { ':split term://$SHELL<cr>', '[n]ew terminal with shell' },
+    n = { new_terminal_shell, '[n]ew terminal with shell' },
     r = {
       function()
         vim.b['quarto_is_r_mode'] = true
-        vim.cmd 'split term://R'
+        new_terminal_r()
       end,
       'new [R] terminal',
     },
-    p = { ':split term://python<cr>', 'new [p]ython terminal' },
-    i = { ':split term://ipython<cr>', 'new [i]python terminal' },
-    j = { ':split term://julia<cr>', 'new [j]ulia terminal' },
+    p = { new_terminal_python, 'new [p]ython terminal' },
+    i = { new_terminal_ipython, 'new [i]python terminal' },
+    j = { new_terminal_julia, 'new [j]ulia terminal' },
     o = {
       name = '[o]open code chunk',
     },
