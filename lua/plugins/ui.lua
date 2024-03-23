@@ -165,6 +165,7 @@ return {
 
   { -- filetree
     'nvim-tree/nvim-tree.lua',
+    enabled = true,
     keys = {
       { '<c-b>', ':NvimTreeToggle<cr>', desc = 'toggle nvim-tree' },
     },
@@ -184,6 +185,22 @@ return {
         },
       }
     end,
+  },
+
+  -- or a different filetree
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    enabled = false,
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+    },
+    cmd = 'Neotree',
+    keys = {
+      { '<c-b>', ':Neotree toggle<cr>', desc = 'toggle nvim-tree' },
+    },
   },
 
   -- show keybinding help window
@@ -304,8 +321,6 @@ return {
             filetypes = { 'markdown', 'vimwiki', 'quarto' },
           },
         },
-        max_width = 100,
-        max_height = 15,
         -- auto show/hide images when the editor gains/looses focus
         editor_only_render_when_focused = false,
         -- toggles images when windows are overlapped
