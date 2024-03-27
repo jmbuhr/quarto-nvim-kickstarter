@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.2](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.2.1...v3.2.2) (2024-03-27)
+
+
+### Bug Fixes
+
+* only enabled dropar.nvim if nvim version &gt;= 0.10 ([c4b4586](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/c4b45864c811d6304ded738a463670537c6690f3))
+
 ## [3.2.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.2.0...v3.2.1) (2024-03-18)
 
 
