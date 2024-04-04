@@ -57,7 +57,7 @@ return {
           'vim',
           'query',
           'vimdoc',
-          'latex',
+          'latex', -- requires tree-sitter-cli (installed automatically via Mason)
           'html',
           'css',
           'dot',
@@ -148,6 +148,7 @@ return {
           'stylua',
           'shfmt',
           'isort',
+          'tree-sitter-cli',
         },
       }
 
