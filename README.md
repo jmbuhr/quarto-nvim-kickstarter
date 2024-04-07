@@ -14,7 +14,9 @@ https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
 If you already have your own configuration, check out `lua/plugins/quarto.lua`
-for the configuration of all plugins directly relevant to your Quarto experience.
+for the configuration of plugins directly relevant to your Quarto experience.
+The comments in this file will also point to to other plugins required for
+the full functionality.
 
 This configuration can make use of a "Nerd Font" for icons and symbols.
 Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
@@ -48,10 +50,8 @@ rm -r ~/.local/state/nvim
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/17450586/210392216-a99815ac-1872-4c48-bf24-5a50df14c6d2.png)
 ![image](https://user-images.githubusercontent.com/17450586/210392419-3ee2b3e3-e805-4e36-99ab-6922abe3a66b.png)
 ![image](https://user-images.githubusercontent.com/17450586/210392573-57c0ad1c-5db0-4f2a-9119-608bd2398494.png)
-![image](https://user-images.githubusercontent.com/17450586/210392838-1c643a65-e792-4a54-bbdb-3ae959995a79.png)
 
 Use the integrated neovim terminal to execute code chunks:
 

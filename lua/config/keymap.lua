@@ -344,7 +344,6 @@ wk.register({
   },
   i = {
     name = '[i]nsert',
-    i = { ':PasteImage<cr>', '[i]mage from clipboard' },
   },
   l = {
     name = '[l]anguage/lsp',
