@@ -21,7 +21,7 @@ require('lazy').setup('plugins', {
     path = '~/projects',
     fallback = true,
   },
-  install = { colorscheme = { 'catppuccin', 'habamax' } },
+  install = {},
   checker = { enabled = false },
   rtp = {
     disabled_plugins = {

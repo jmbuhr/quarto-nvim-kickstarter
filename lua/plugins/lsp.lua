@@ -1,5 +1,29 @@
 return {
   {
+    -- for lsp features in code cells / embedded code
+    'jmbuhr/otter.nvim',
+    dev = true,
+    dependencies = {
+      {
+        'neovim/nvim-lspconfig',
+        'nvim-treesitter/nvim-treesitter',
+        'hrsh7th/nvim-cmp',
+      },
+    },
+    opts = {
+      lsp = {
+        hover = {
+          border = require('misc.style').border,
+        },
+      },
+      buffers = {
+        set_filetype = true,
+      },
+      handle_leading_whitespace = true,
+    },
+  },
+
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'williamboman/mason.nvim' },

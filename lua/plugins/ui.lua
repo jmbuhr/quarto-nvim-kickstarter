@@ -274,7 +274,7 @@ return {
 
   { -- highlight markdown headings and code blocks etc.
     'lukas-reineke/headlines.nvim',
-    enabled = true,
+    enabled = false,
     dependencies = 'nvim-treesitter/nvim-treesitter',
     config = function()
       require('headlines').setup {
@@ -304,15 +304,24 @@ return {
   { -- show images in nvim!
     '3rd/image.nvim',
     enabled = true,
+    dependencies = {
+      {
+        -- needs:
+        -- sudo apt installl luajit
+        -- <https://github.com/vhyrro/luarocks.nvim>
+        'vhyrro/luarocks.nvim',
+        priority = 1001, -- this plugin needs to run before anything else
+        opts = {
+          rocks = { 'magick' },
+        },
+      },
+    },
     config = function()
       -- Requirements
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
       -- check for dependencies with `:checkhealth kickstart`
-      -- otherwise set `enabled = false` in the plugin spec
-      -- Example for configuring Neovim to load user-installed installed Lua rocks:
-      --$ luarocks --local --lua-version=5.1 install magick
-      package.path = package.path .. ';' .. vim.fn.expand '$HOME' .. '/.luarocks/share/lua/5.1/?/init.lua;'
-      package.path = package.path .. ';' .. vim.fn.expand '$HOME' .. '/.luarocks/share/lua/5.1/?.lua;'
+      -- needs:
+      -- sudo apt install libmagickwand-dev
 
       require('image').setup {
         backend = 'kitty',
