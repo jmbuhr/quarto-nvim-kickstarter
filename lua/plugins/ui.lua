@@ -305,9 +305,6 @@ return {
     enabled = true,
     dependencies = {
       {
-        -- needs:
-        -- sudo apt installl luajit
-        -- <https://github.com/vhyrro/luarocks.nvim>
         'vhyrro/luarocks.nvim',
         priority = 1001, -- this plugin needs to run before anything else
         opts = {
@@ -320,7 +317,10 @@ return {
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
       -- check for dependencies with `:checkhealth kickstart`
       -- needs:
+      -- sudo apt install imagemagick
       -- sudo apt install libmagickwand-dev
+      -- sudo apt install liblua5.1-0-dev
+      -- sudo apt installl luajit
 
       require('image').setup {
         backend = 'kitty',

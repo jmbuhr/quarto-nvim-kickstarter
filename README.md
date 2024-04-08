@@ -27,6 +27,29 @@ Download one here: <https://www.nerdfonts.com/> and set it as your terminal font
 git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git ~/.config/nvim
 ```
 
+For displaying images in your terminal a recent version of [kitty](https://sw.kovidgoyal.net/kitty/) or [wezterm](https://wezfurlong.org/wezterm/index.html) is required
+as well as the dependecies of [image.nvim](https://github.com/3rd/image.nvim) (see `./lua/plugins/ui.lua`).
+Additionally, if you plan to use this through [tmux](https://github.com/tmux/tmux) make sure to have version >= 3.3a.
+
+If you are unable to install those in your enviroment, disable the plugin by setting `enabled = false`.
+
+Example dependencies install on ubuntu-based systems:
+
+```bash
+sudo apt install imagemagick
+sudo apt install libmagickwand-dev
+sudo apt install liblua5.1-0-dev
+sudo apt installl luajit
+```
+
+Manually installing luarocks and the magick rock is no longer required, this is handled by [luarocks.nvim](https://github.com/vhyrro/luarocks.nvim).
+
+> [!NOTE] Do this before opening nvim, otherwise `luarocks.nvim`
+> might pick up the wrong luarocks version.
+> If you forgot this step, you can do `:Lazy build luarocks.nvim` again manually after installation
+> to fix it.
+
+
 ### Windows Powershell Installation
 
 ```bash
@@ -57,23 +80,4 @@ Use the integrated neovim terminal to execute code chunks:
 
 ![image](https://user-images.githubusercontent.com/17450586/211403680-c60e8e89-ea9b-48bd-881d-37df2bc924a3.png)
 
-## Links to the plugins
 
-Some of the plugins included are:
-
-- <https://github.com/folke/lazy.nvim>
-- <https://github.com/jpalardy/vim-slime>
-- <https://github.com/neovim/nvim-lspconfig>
-- <https://github.com/nvim-treesitter/nvim-treesitter>
-- <https://github.com/hrsh7th/nvim-cmp>
-  - <https://github.com/hrsh7th/cmp-nvim-lsp>
-  - <https://github.com/hrsh7th/cmp-buffer>
-  - <https://github.com/hrsh7th/cmp-path>
-  - <https://github.com/hrsh7th/cmp-calc>
-  - <https://github.com/hrsh7th/cmp-emoji>
-  - <https://github.com/f3fora/cmp-spell>
-  - <https://github.com/kdheepak/cmp-latex-symbols>
-  - <https://github.com/jc-doyle/cmp-pandoc-references>
-- <https://github.com/L3MON4D3/LuaSnip>
-  - <https://github.com/saadparwaiz1/cmp_luasnip>
-  - <https://github.com/rafamadriz/friendly-snippets>
