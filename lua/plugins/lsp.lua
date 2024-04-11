@@ -1,5 +1,6 @@
 return {
   {
+
     -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
     dev = true,
@@ -226,13 +227,16 @@ return {
       -- See `:h lspconfig-all` for the configuration.
       -- Like e.g. Haskell:
       -- lspconfig.hls.setup {
-      --   on_attach = on_attach,
       --   capabilities = capabilities,
       --   flags = lsp_flags
       -- }
 
+      -- lspconfig.clangd.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
+
       -- lspconfig.rust_analyzer.setup{
-      --   on_attach = on_attach,
       --   capabilities = capabilities,
       --   settings = {
       --     ['rust-analyzer'] = {
