@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.4.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.3.0...v3.4.0) (2024-04-11)
+
+
+### Features
+
+* exclude quarto docs output dir from telescope grep ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+* highlight quarto code chunks without plugin ([#103](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/103)) ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+* make animals more visible ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+
+
+### Bug Fixes
+
+* colorizer config ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+* don't show mode in cmd line, already in statusline ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+* hide more quarto output dirs from search ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+* lsp examples ([9fc14a9](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/9fc14a91a4ac33d7374ac9109c82f959ba168be2))
+
 ## [3.3.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.2.2...v3.3.0) (2024-04-07)
 
 
