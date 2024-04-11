@@ -51,7 +51,7 @@ return {
           vimgrep_arguments = vimgrep_arguments,
           file_ignore_patterns = {
             'node_modules',
-            '%_files/*.html',
+            '%_files/',
             '%_cache',
             '.git/',
             'site_libs',
