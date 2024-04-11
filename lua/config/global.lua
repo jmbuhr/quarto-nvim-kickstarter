@@ -17,6 +17,9 @@ vim.opt.updatetime = 250 -- for autocommands and hovers
 -- don't ask about existing swap files
 vim.opt.shortmess:append 'A'
 
+-- mode is already in statusline
+vim.opt.showmode = false
+
 -- use less indentation
 local tabsize = 2
 vim.opt.expandtab = true
@@ -67,7 +70,7 @@ let g:currentmode={
 
 math.randomseed(os.time())
 local i = math.random(#animals)
-vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% ' .. animals[i] .. ' %*'
+vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% %#NonText# ' .. animals[i] .. ' %*'
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 1

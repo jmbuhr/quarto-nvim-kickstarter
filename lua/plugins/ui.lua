@@ -37,12 +37,21 @@ return {
           end
         end)
       end
+
+      local telescope_config = require 'telescope.config'
+      -- Clone the default Telescope configuration
+      local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
+      -- I don't want to search in the `docs` directory (rendered quarto output).
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!docs/*')
+
       telescope.setup {
         defaults = {
           buffer_previewer_maker = new_maker,
+          vimgrep_arguments = vimgrep_arguments,
           file_ignore_patterns = {
             'node_modules',
-            '%_files/*.html',
+            '%_files/',
             '%_cache',
             '.git/',
             'site_libs',
