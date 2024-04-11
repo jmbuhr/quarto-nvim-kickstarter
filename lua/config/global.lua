@@ -17,6 +17,9 @@ vim.opt.updatetime = 250 -- for autocommands and hovers
 -- don't ask about existing swap files
 vim.opt.shortmess:append 'A'
 
+-- mode is already in statusline
+vim.opt.showmode = false
+
 -- use less indentation
 local tabsize = 2
 vim.opt.expandtab = true
