@@ -144,10 +144,8 @@ nmap('L', '<cmd>tabnext<cr>')
 local function toggle_light_dark_theme()
   if vim.o.background == 'light' then
     vim.o.background = 'dark'
-    vim.cmd [[Catppuccin mocha]]
   else
     vim.o.background = 'light'
-    vim.cmd [[Catppuccin latte]]
   end
 end
 
