@@ -5,6 +5,9 @@ local animals = require('misc.style').animals
 -- proper colors
 vim.opt.termguicolors = true
 
+-- disable fill chars (the ~ after the buffer)
+vim.o.fillchars = 'eob: '
+
 -- more opinionated
 vim.opt.number = true -- show linenumbers
 vim.opt.mouse = 'a' -- enable mouse
