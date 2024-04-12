@@ -253,11 +253,11 @@ local function new_terminal_python()
 end
 
 local function new_terminal_r()
-  new_terminal 'R'
+  new_terminal 'R --no-save'
 end
 
 local function new_terminal_ipython()
-  new_terminal 'ipython'
+  new_terminal 'ipython --no-confirm-exit'
 end
 
 local function new_terminal_julia()
