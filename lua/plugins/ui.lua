@@ -312,6 +312,7 @@ return {
   { -- show images in nvim!
     '3rd/image.nvim',
     enabled = true,
+    ft = { 'markdown', 'quarto', 'vimwiki' },
     dependencies = {
       {
         'vhyrro/luarocks.nvim',
