@@ -332,7 +332,8 @@ return {
       -- sudo apt install liblua5.1-0-dev
       -- sudo apt installl luajit
 
-      require('image').setup {
+      local image = require 'image'
+      image.setup {
         backend = 'kitty',
         integrations = {
           markdown = {
@@ -341,13 +342,63 @@ return {
             filetypes = { 'markdown', 'vimwiki', 'quarto' },
           },
         },
-        -- auto show/hide images when the editor gains/looses focus
         editor_only_render_when_focused = false,
-        -- toggles images when windows are overlapped
-        window_overlap_clear_enabled = false,
-        -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+        window_overlap_clear_enabled = true,
         tmux_show_only_in_active_window = true,
+        max_width = nil,
+        max_height = nil,
+        max_width_window_percentage = nil,
+        max_height_window_percentage = 30,
+        kitty_method = 'normal',
       }
+
+      local function get_image_at_cursor(buf)
+        local images = image.get_images { buffer = buf }
+        local row = vim.api.nvim_win_get_cursor(0)[1]
+        for _, img in ipairs(images) do
+          if img.geometry ~= nil and img.geometry.y == row then
+            local og_max_height = img.global_state.options.max_height_window_percentage
+            img.global_state.options.max_height_window_percentage = nil
+            return img, og_max_height
+          end
+        end
+        return nil
+      end
+
+      local create_preview_window = function(img, og_max_height)
+        local buf = vim.api.nvim_create_buf(false, true)
+        local win_width = vim.api.nvim_get_option_value('columns', {})
+        local win_height = vim.api.nvim_get_option_value('lines', {})
+        local win = vim.api.nvim_open_win(buf, true, {
+          relative = 'editor',
+          style = 'minimal',
+          width = win_width,
+          height = win_height,
+          row = 0,
+          col = 0,
+          zindex = 1000,
+        })
+        vim.keymap.set('n', 'q', function()
+          vim.api.nvim_win_close(win, true)
+          img.global_state.options.max_height_window_percentage = og_max_height
+        end, { buffer = buf })
+        return { buf = buf, win = win }
+      end
+
+      local handle_zoom = function(bufnr)
+        local img, og_max_height = get_image_at_cursor(bufnr)
+        if img == nil then
+          return
+        end
+
+        local preview = create_preview_window(img, og_max_height)
+        image.hijack_buffer(img.path, preview.win, preview.buf)
+      end
+
+      vim.keymap.set('n', '<leader>io', function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        handle_zoom(bufnr)
+      end, { buffer = true, desc = 'image [o]pen' })
     end,
   },
 }
