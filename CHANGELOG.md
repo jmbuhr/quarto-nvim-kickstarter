@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.5.0...v3.6.0) (2024-04-13)
+
+
+### Features
+
+* preview image under cursor with &lt;leader&gt;io ([a89dc45](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a89dc45106d687213031c7df3851ed79f1324324))
+
 ## [3.5.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.4.0...v3.5.0) (2024-04-12)
 
 
