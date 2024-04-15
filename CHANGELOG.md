@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.7.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.6.0...v3.7.0) (2024-04-15)
+
+
+### Features
+
+* tabularize plugin ([d63759b](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d63759b3552dcc509de705cae0e1c6ff88be5139))
+
+
+### Bug Fixes
+
+* lazy.nvim colorscheme ([b3893cd](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/b3893cd0a57179cd937c5417d75dbe43f948c287))
+
 ## [3.6.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.5.0...v3.6.0) (2024-04-13)
 
 
