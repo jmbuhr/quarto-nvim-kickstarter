@@ -21,7 +21,10 @@ require('lazy').setup('plugins', {
     path = '~/projects',
     fallback = true,
   },
-  install = {},
+  install = {
+    missing = true,
+    colorscheme = { 'default' },
+  },
   checker = { enabled = false },
   rtp = {
     disabled_plugins = {
