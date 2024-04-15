@@ -341,7 +341,7 @@ wk.register({
     },
   },
   i = {
-    name = '[i]nsert',
+    name = '[i]mage',
   },
   l = {
     name = '[l]anguage/lsp',

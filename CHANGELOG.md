@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.6.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.5.0...v3.6.0) (2024-04-13)
+
+
+### Features
+
+* preview image under cursor with &lt;leader&gt;io ([a89dc45](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a89dc45106d687213031c7df3851ed79f1324324))
+
+## [3.5.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.4.0...v3.5.0) (2024-04-12)
+
+
+### Features
+
+* disable eob fill chars for better png previews ([12363f0](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/12363f0555845b1d5b5ba4549b58a96a2fa93e8c))
+
+
+### Bug Fixes
+
+* don't prompt for ipython or R exit/save ([a213e66](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a213e66fbadfaa43b9fc2f011185498ba95d409e))
+* **keymap:** toggle dark/light ([21d554e](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/21d554e3f9599ab40be3d702a49f7a441b9bbb26))
+
+
+### Performance Improvements
+
+* **startup:** only load image.nvim for certain ft ([8377fd8](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/8377fd8833c293bf2ed6583db99a7932bb1fef9a))
+
 ## [3.4.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.3.0...v3.4.0) (2024-04-11)
 
 
