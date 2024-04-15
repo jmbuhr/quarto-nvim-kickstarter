@@ -20,6 +20,10 @@ return {
     config = true,
   },
 
+  { -- format things as tables
+    'godlygeek/tabular',
+  },
+
   { -- Autoformat
     'stevearc/conform.nvim',
     enabled = true,
