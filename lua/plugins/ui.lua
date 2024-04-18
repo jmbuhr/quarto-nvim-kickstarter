@@ -312,6 +312,7 @@ return {
   { -- show images in nvim!
     '3rd/image.nvim',
     enabled = true,
+    dev = false,
     ft = { 'markdown', 'quarto', 'vimwiki' },
     dependencies = {
       {
@@ -344,6 +345,7 @@ return {
         },
         editor_only_render_when_focused = false,
         window_overlap_clear_enabled = true,
+        -- window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', 'scrollview' },
         tmux_show_only_in_active_window = true,
         window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', 'scrollview', 'scrollview_sign' },
         max_width = nil,
