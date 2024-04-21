@@ -39,7 +39,7 @@ Example dependencies install on ubuntu-based systems:
 sudo apt install imagemagick
 sudo apt install libmagickwand-dev
 sudo apt install liblua5.1-0-dev
-sudo apt installl luajit
+sudo apt install luajit
 ```
 
 Manually installing luarocks and the magick rock is no longer required, this is handled by [luarocks.nvim](https://github.com/vhyrro/luarocks.nvim).
