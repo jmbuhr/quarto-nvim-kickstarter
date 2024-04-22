@@ -89,6 +89,9 @@ return {
     event = 'BufEnter',
     ft = { 'markdown', 'quarto', 'latex' },
     opts = {
+      default = {
+        dir_path = 'img',
+      },
       filetypes = {
         markdown = {
           url_encode_path = true,

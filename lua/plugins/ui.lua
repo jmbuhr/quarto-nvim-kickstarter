@@ -355,6 +355,14 @@ return {
         kitty_method = 'normal',
       }
 
+      local function clear_all_images()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local images = image.get_images { buffer = bufnr }
+        for _, img in ipairs(images) do
+          img:clear()
+        end
+      end
+
       local function get_image_at_cursor(buf)
         local images = image.get_images { buffer = buf }
         local row = vim.api.nvim_win_get_cursor(0)[1]
@@ -402,6 +410,8 @@ return {
         local bufnr = vim.api.nvim_get_current_buf()
         handle_zoom(bufnr)
       end, { buffer = true, desc = 'image [o]pen' })
+
+      vim.keymap.set('n', '<leader>ic', clear_all_images, { buffer = true, desc = 'image [c]lear' })
     end,
   },
 }
