@@ -40,9 +40,11 @@ vim.opt.signcolumn = "yes:1"
 -- how to show a autocomplete menu
 vim.opt.completeopt = 'menuone,noinsert'
 
+-- https://us02web.zoom.us/j/88530778507?pwd=WWNUSUhwVThkQzBlZVdxcnNPemZjZz09
+
 -- add folds with treesitter grammar
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- but open all by default
 vim.opt.foldlevel = 99
 
