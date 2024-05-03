@@ -26,19 +26,15 @@ return {
       {
         'nvim-neotest/nvim-nio',
         'rcarriga/nvim-dap-ui',
-        config = function()
-          vim.fn.sign_define('DapBreakpoint', { text = '🦆', texthl = '', linehl = '', numhl = '' })
-          require('dapui').setup()
-        end,
-      },
-      {
         'mfussenegger/nvim-dap-python',
-        config = function()
-          require('dap-python').setup()
-          require('dap.ext.vscode').load_launchjs 'launch.json'
-        end,
       },
     },
+    config = function()
+      vim.fn.sign_define('DapBreakpoint', { text = '🦆', texthl = '', linehl = '', numhl = '' })
+      require('dapui').setup()
+      require('dap-python').setup()
+      require('dap.ext.vscode').load_launchjs 'launch.json'
+    end,
     keys = {
       { '<leader>db', ":lua require'dap'.toggle_breakpoint()<cr>", desc = 'debug breakpoint' },
       { '<leader>dc', ": lua require'dap'.continue()<cr>", desc = 'debug' },
