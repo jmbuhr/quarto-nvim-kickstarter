@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.8.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.7.0...v3.8.0) (2024-05-03)
+
+
+### Features
+
+* add jupytext ([d31943c](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/d31943cbf8bddb9def4f1612761d2dac69c0ffeb))
+* clear all images keybind ([6bbe017](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/6bbe017e534f4c8e98df859a2a0102bb52304ec3))
+
+
+### Bug Fixes
+
+* Correct readme typo ([#109](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/109)) ([0cb40f2](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/0cb40f2aaf8e83f88765223f852406104cca12b1))
+* dap config ([f90111e](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f90111e5ec95f550b7619a829cc752da59f08482))
+* only enable custom code cell highlights for nvim &gt;= 0.10. fixes [#110](https://github.com/jmbuhr/quarto-nvim-kickstarter/issues/110) ([a5ad7e1](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a5ad7e1d83981d1991dc7d486924a64741630c39))
+
 ## [3.7.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.6.0...v3.7.0) (2024-04-15)
 
 
