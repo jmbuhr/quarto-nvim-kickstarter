@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.8.0...v3.8.1) (2024-05-13)
+
+
+### Bug Fixes
+
+* terminal switching with vim-slime update ([919cc02](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/919cc02d816f496588ea9f7a9d7ef5122e9e71f0))
+
 ## [3.8.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.7.0...v3.8.0) (2024-05-03)
 
 
