@@ -285,8 +285,14 @@ wk.register({
     i = { new_terminal_ipython, 'new [i]python terminal' },
     j = { new_terminal_julia, 'new [j]ulia terminal' },
   },
+  e = {
+    name = '[e]dit',
+  },
   d = {
     name = '[d]ebug',
+    t = {
+      name = '[t]est',
+    },
   },
   f = {
     name = '[f]ind (telescope)',
