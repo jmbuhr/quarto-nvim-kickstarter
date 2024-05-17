@@ -55,6 +55,7 @@ return {
           'shfmt',
           'isort',
           'tree-sitter-cli',
+          'jupytext',
         },
       }
 
