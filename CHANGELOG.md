@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.9.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.8.1...v3.9.0) (2024-05-18)
+
+
+### Features
+
+* kanagawa colorscheme ([a9995a0](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a9995a0cecc5f16a041c1b5259b99bb91a8b6cdd))
+* oil.nvim to edit the filesystem as a buffer ([69b73eb](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/69b73ebb52ab5f794af31fa345aa590137045771))
+* virtual text for dap ([1bdaab3](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1bdaab3f54ee03084e291bb7cf1b2fab37f7401a))
+
+
+### Bug Fixes
+
+* full screen image preview ([ef0bbee](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ef0bbeee56434969a8c0c4cec86527a6e820c199))
+* no signcolumn for terminal windows ([bb3fa64](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/bb3fa644d6516b4fc060042c74878f1af81d0774))
+
 ## [3.8.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.8.0...v3.8.1) (2024-05-13)
 
 
