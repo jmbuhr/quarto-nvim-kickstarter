@@ -385,7 +385,7 @@ return {
 
       local function get_image_at_cursor(buf)
         local images = image.get_images { buffer = buf }
-        local row = vim.api.nvim_win_get_cursor(0)[1]
+        local row = vim.api.nvim_win_get_cursor(0)[1] - 1
         for _, img in ipairs(images) do
           if img.geometry ~= nil and img.geometry.y == row then
             local og_max_height = img.global_state.options.max_height_window_percentage
