@@ -88,6 +88,8 @@ return {
 
   {
     'chrishrb/gx.nvim',
+    enabled = false,
+    -- default gx sometimes more useful
     keys = { { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' } } },
     cmd = { 'Browse' },
     init = function()
