@@ -144,10 +144,15 @@ return {
           yaml = {
             schemaStore = {
               enable = true,
-              url = '',
+              -- url = '',
             },
           },
         },
+      }
+
+      lspconfig.jsonls.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
       }
 
       lspconfig.dotls.setup {
