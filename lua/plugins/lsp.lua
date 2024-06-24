@@ -248,6 +248,11 @@ return {
       --   }
       -- }
 
+      -- lspconfig.ruff_lsp.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
+
       -- See https://github.com/neovim/neovim/issues/23291
       -- disable lsp watcher.
       -- Too lags on linux for python projects
