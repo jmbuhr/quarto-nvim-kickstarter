@@ -333,15 +333,6 @@ return {
     enabled = true,
     dev = false,
     ft = { 'markdown', 'quarto', 'vimwiki' },
-    dependencies = {
-      {
-        'vhyrro/luarocks.nvim',
-        priority = 1001, -- this plugin needs to run before anything else
-        opts = {
-          rocks = { 'magick' },
-        },
-      },
-    },
     config = function()
       -- Requirements
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
@@ -350,6 +341,7 @@ return {
       -- sudo apt install imagemagick
       -- sudo apt install libmagickwand-dev
       -- sudo apt install liblua5.1-0-dev
+      -- sudo apt install lua5.1
       -- sudo apt installl luajit
 
       local image = require 'image'
