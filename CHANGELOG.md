@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.9.0...v3.10.0) (2024-06-29)
+
+
+### Features
+
+* json ls ([887f798](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/887f7986091c386fba8d44f0414930250b4022d5))
+
 ## [3.9.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.8.1...v3.9.0) (2024-05-18)
 
 
