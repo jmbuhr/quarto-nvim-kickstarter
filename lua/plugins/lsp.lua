@@ -87,9 +87,11 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          local telescope = require 'telescope.builtin'
           local function map(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
+          local function vmap(keys, func, desc)
+            vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -110,6 +112,7 @@ return {
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
+          vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
           map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
         end,
       })
@@ -119,11 +122,10 @@ return {
         debounce_text_changes = 150,
       }
 
-      local telescope_builtin = require 'telescope.builtin'
       vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = require('misc.style').border })
       vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = require('misc.style').border })
       -- TODO: handle this
-      vim.lsp.handlers['textDocument/references'] = telescope_builtin.lsp_references
+      -- vim.lsp.handlers['textDocument/references'] = telescope_builtin.lsp_references
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
@@ -133,11 +135,11 @@ return {
       -- $home/.config/marksman/config.toml :
       -- [core]
       -- markdown.file_extensions = ["md", "markdown", "qmd"]
-      -- lspconfig.marksman.setup {
-      --   capabilities = capabilities,
-      --   filetypes = { 'markdown', 'quarto' },
-      --   root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
-      -- }
+      lspconfig.marksman.setup {
+        capabilities = capabilities,
+        filetypes = { 'markdown', 'quarto' },
+        root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
+      }
 
       lspconfig.r_language_server.setup {
         capabilities = capabilities,

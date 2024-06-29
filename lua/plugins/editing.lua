@@ -39,6 +39,7 @@ return {
         formatters_by_ft = {
           lua = { 'mystylua' },
           python = { 'isort', 'black' },
+          quarto = { 'injected' },
         },
         formatters = {
           mystylua = {
