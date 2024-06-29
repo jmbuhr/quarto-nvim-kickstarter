@@ -1,4 +1,5 @@
 return {
+
   {
 
     -- for lsp features in code cells / embedded code
@@ -8,21 +9,9 @@ return {
       {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter',
-        'hrsh7th/nvim-cmp',
       },
     },
-    opts = {
-      lsp = {
-        hover = {
-          border = require('misc.style').border,
-        },
-      },
-      buffers = {
-        set_filetype = true,
-        write_to_disk = false,
-      },
-      handle_leading_whitespace = true,
-    },
+    opts = {},
   },
 
   {
@@ -37,7 +26,31 @@ return {
         enabled = false,
         opts = {},
       },
-      { 'folke/neodev.nvim', opts = {}, enabled = true },
+      {
+        {
+          'folke/lazydev.nvim',
+          ft = 'lua', -- only load on lua files
+          opts = {
+            library = {
+              -- See the configuration section for more details
+              -- Load luvit types when the `vim.uv` word is found
+              { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+            },
+          },
+        },
+        { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
+        { -- optional completion source for require statements and module annotations
+          'hrsh7th/nvim-cmp',
+          opts = function(_, opts)
+            opts.sources = opts.sources or {}
+            table.insert(opts.sources, {
+              name = 'lazydev',
+              group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            })
+          end,
+        },
+        -- { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
+      },
       { 'folke/neoconf.nvim', opts = {}, enabled = false },
     },
     config = function()
@@ -62,9 +75,11 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          local telescope = require 'telescope.builtin'
           local function map(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
+          local function vmap(keys, func, desc)
+            vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -73,18 +88,19 @@ return {
           ---@diagnostic disable-next-line: inject-field
           client.server_capabilities.document_formatting = true
 
-          map('gS', telescope.lsp_document_symbols, '[g]o so [S]ymbols')
-          map('gD', telescope.lsp_type_definitions, '[g]o to type [D]efinition')
-          map('gd', telescope.lsp_definitions, '[g]o to [d]efinition')
-          map('K', '<cmd>lua vim.lsp.buf.hover()<CR>', '[K] hover documentation')
-          map('gh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', '[g]o to signature [h]elp')
-          map('gI', telescope.lsp_implementations, '[g]o to [I]mplementation')
-          map('gr', telescope.lsp_references, '[g]o to [r]eferences')
+          map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
+          map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
+          map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+          map('K', vim.lsp.buf.hover, '[K] hover documentation')
+          map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
+          map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
+          map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
           map('[d', vim.diagnostic.goto_prev, 'previous [d]iagnostic ')
           map(']d', vim.diagnostic.goto_next, 'next [d]iagnostic ')
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
+          vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
           map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
         end,
       })
@@ -93,8 +109,11 @@ return {
         allow_incremental_sync = true,
         debounce_text_changes = 150,
       }
+
       vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = require('misc.style').border })
       vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = require('misc.style').border })
+      -- TODO: handle this
+      -- vim.lsp.handlers['textDocument/references'] = telescope_builtin.lsp_references
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
@@ -150,6 +169,11 @@ return {
         },
       }
 
+      lspconfig.jsonls.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
       lspconfig.dotls.setup {
         capabilities = capabilities,
         flags = lsp_flags,
@@ -196,15 +220,17 @@ return {
             },
             runtime = {
               version = 'LuaJIT',
-              plugin = lua_plugin_paths,
+              -- plugin = lua_plugin_paths,
             },
             diagnostics = {
-              globals = { 'vim', 'quarto', 'pandoc', 'io', 'string', 'print', 'require', 'table' },
               disable = { 'trailing-space' },
             },
             workspace = {
-              library = lua_library_files,
+              -- library = lua_library_files,
               checkThirdParty = false,
+            },
+            doc = {
+              privateName = { '^_' },
             },
             telemetry = {
               enable = false,
@@ -246,6 +272,11 @@ return {
       --       }
       --     }
       --   }
+      -- }
+
+      -- lspconfig.ruff_lsp.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
       -- }
 
       -- See https://github.com/neovim/neovim/issues/23291

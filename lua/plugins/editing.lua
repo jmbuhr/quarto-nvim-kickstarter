@@ -39,6 +39,7 @@ return {
         formatters_by_ft = {
           lua = { 'mystylua' },
           python = { 'isort', 'black' },
+          quarto = { 'injected' },
         },
         formatters = {
           mystylua = {
@@ -88,6 +89,7 @@ return {
 
   {
     'chrishrb/gx.nvim',
+    enabled = false,
     keys = { { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' } } },
     cmd = { 'Browse' },
     init = function()

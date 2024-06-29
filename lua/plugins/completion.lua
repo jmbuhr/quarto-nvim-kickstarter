@@ -120,7 +120,7 @@ return {
           },
         },
         sources = {
-          { name = 'otter' }, -- for code chunks in quarto
+          -- { name = 'otter' }, -- for code chunks in quarto
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
@@ -155,7 +155,7 @@ return {
 
   { -- gh copilot
     'zbirenbaum/copilot.lua',
-    enabled = false,
+    enabled = true,
     config = function()
       require('copilot').setup {
         suggestion = {
