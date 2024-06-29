@@ -4,10 +4,10 @@ return {
     -- for complete functionality (language features)
     'quarto-dev/quarto-nvim',
     ft = { 'quarto' },
-    dev = true,
+    dev = false,
     opts = {
       lspFeatures = {
-        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'dot', 'javascript', 'typescript', 'ojs' },
+        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'dot', 'javascript', 'typescript', 'ojs', 'lua' },
       },
       codeRunner = {
         enabled = true,

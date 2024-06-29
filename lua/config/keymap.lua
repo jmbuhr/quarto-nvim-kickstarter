@@ -352,14 +352,19 @@ wk.register({
     e = { vim.diagnostic.open_float, 'diagnostics (show hover [e]rror)' },
     d = {
       name = '[d]iagnostics',
-      d = { vim.diagnostic.disable, '[d]isable' },
+      d = {
+        function()
+          vim.diagnostic.enable(false)
+        end,
+        '[d]isable',
+      },
       e = { vim.diagnostic.enable, '[e]nable' },
     },
     g = { ':Neogen<cr>', 'neo[g]en docstring' },
   },
   o = {
     name = '[o]tter & c[o]de',
-    a = { require('otter').dev_setup, 'otter [a]ctivate' },
+    a = { require('otter').activate, 'otter [a]ctivate' },
     d = { require('otter').deactivate, 'otter [d]eactivate' },
     c = { 'O# %%<cr>', 'magic [c]omment code chunk # %%' },
     r = { insert_r_chunk, '[r] code chunk' },
