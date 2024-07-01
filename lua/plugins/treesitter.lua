@@ -3,12 +3,9 @@ return {
     'nvim-treesitter/nvim-treesitter',
     dev = false,
     dependencies = {
-      -- {
-      --   -- currently broken for R
-      --   'nvim-treesitter/nvim-treesitter-textobjects',
-      --   dev = false,
-      --   enabled = false,
-      -- },
+      {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+      },
     },
     run = ':TSUpdate',
     config = function()
