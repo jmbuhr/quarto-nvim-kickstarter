@@ -422,7 +422,7 @@ return {
         handle_zoom(bufnr)
       end, { buffer = true, desc = 'image [o]pen' })
 
-      vim.keymap.set('n', '<leader>ic', clear_all_images, { buffer = true, desc = 'image [c]lear' })
+      vim.keymap.set('n', '<leader>ic', clear_all_images, { desc = 'image [c]lear' })
     end,
   },
 }
