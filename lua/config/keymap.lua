@@ -1,5 +1,6 @@
 -- required in which-key plugin spec in plugins/ui.lua as `require 'config.keymap'`
 local wk = require 'which-key'
+local ms = vim.lsp.protocol.Methods
 
 P = vim.print
 
@@ -24,6 +25,9 @@ end
 
 -- move in command line
 cmap('<C-a>', '<Home>')
+
+-- exit insert mode with jk
+imap('jk', '<esc>')
 
 -- save with ctrl+s
 imap('<C-s>', '<esc>:update<cr><esc>')
@@ -267,6 +271,29 @@ end
 local function new_terminal_shell()
   new_terminal '$SHELL'
 end
+
+local function get_otter_symbols_lang()
+  local otterkeeper = require'otter.keeper'
+  local main_nr = vim.api.nvim_get_current_buf()
+  local langs = {}
+  for i,l in ipairs(otterkeeper.rafts[main_nr].languages) do
+    langs[i] = i .. ': ' .. l
+  end
+  -- promt to choose one of langs
+  local i = vim.fn.inputlist(langs)
+  local lang = otterkeeper.rafts[main_nr].languages[i]
+  local params = {
+    textDocument = vim.lsp.util.make_text_document_params(),
+    otter = {
+      lang = lang
+    }
+  }
+  -- don't pass a handler, as we want otter to use it's own handlers
+  vim.lsp.buf_request(main_nr, ms.textDocument_documentSymbol, params, nil)
+end
+
+vim.keymap.set("n", "<leader>os", get_otter_symbols_lang, {desc = "otter [s]ymbols"})
+
 
 -- normal mode with <leader>
 wk.register({
