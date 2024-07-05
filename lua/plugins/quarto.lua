@@ -4,18 +4,8 @@ return {
     -- for complete functionality (language features)
     'quarto-dev/quarto-nvim',
     ft = { 'quarto' },
-    enabled = true,
-    dev = true,
-    opts = {
-      lspFeatures = {
-        languages = { 'python', 'r', 'julia', 'bash', 'lua', 'html', 'dot', 'javascript', 'typescript', 'ojs' },
-        chunks = 'curly',
-      },
-      codeRunner = {
-        enabled = true,
-        default_method = 'slime',
-      },
-    },
+    dev = false,
+    opts = {},
     dependencies = {
       -- for language features in code cells
       -- configured in lua/plugins/lsp.lua and
