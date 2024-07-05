@@ -1,3 +1,6 @@
+local ms = vim.lsp.protocol.Methods
+local handlers = require 'misc.handlers'
+
 return {
 
   {
