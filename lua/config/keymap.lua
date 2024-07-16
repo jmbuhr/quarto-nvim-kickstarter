@@ -27,7 +27,7 @@ end
 cmap('<C-a>', '<Home>')
 
 -- exit insert mode with jk
-imap('jk', '<esc>')
+imap('kj', '<esc>')
 
 -- save with ctrl+s
 imap('<C-s>', '<esc>:update<cr><esc>')
@@ -223,29 +223,52 @@ wk.register({
   ['zl'] = { ':Telescope spell_suggest<cr>', '[l]ist spelling suggestions' },
 }, { mode = 'n', silent = true })
 
+wk.add({
+    { "<c-LeftMouse>", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
+    { "<c-q>", "<cmd>q<cr>", desc = "close buffer" },
+    { "<cm-i>", insert_py_chunk, desc = "python code chunk" },
+    { "<esc>", "<cmd>noh<cr>", desc = "remove search highlight" },
+    { "<m-I>", insert_py_chunk, desc = "python code chunk" },
+    { "<m-i>", insert_r_chunk, desc = "r code chunk" },
+    { "[q", ":silent cprev<cr>", desc = "[q]uickfix prev" },
+    { "]q", ":silent cnext<cr>", desc = "[q]uickfix next" },
+    { "gN", "Nzzzv", desc = "center search" },
+    { "gf", ":e <cfile><CR>", desc = "edit file" },
+    { "gl", "<c-]>", desc = "open help link" },
+    { "n", "nzzzv", desc = "center search" },
+    { "z?", ":setlocal spell!<cr>", desc = "toggle [z]pellcheck" },
+    { "zl", ":Telescope spell_suggest<cr>", desc = "[l]ist spelling suggestions" },
+}, { mode = 'n', silent = true })
+
 -- visual mode
-wk.register({
-  ['<cr>'] = { send_region, 'run code region' },
-  ['<M-j>'] = { ":m'>+<cr>`<my`>mzgv`yo`z", 'move line down' },
-  ['<M-k>'] = { ":m'<-2<cr>`>my`<mzgv`yo`z", 'move line up' },
-  ['.'] = { ':norm .<cr>', 'repat last normal mode command' },
-  ['q'] = { ':norm @q<cr>', 'repat q macro' },
-}, { mode = 'v' })
+wk.add({
+    {
+      mode = { "v" },
+      { ".", ":norm .<cr>", desc = "repat last normal mode command" },
+      { "<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z", desc = "move line down" },
+      { "<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z", desc = "move line up" },
+      { "<cr>", send_region, desc = "run code region" },
+      { "q", ":norm @q<cr>", desc = "repat q macro" },
+    },
+})
 
 -- visual with <leader>
-wk.register({
-  p = { '"_dP', 'replace without overwriting reg' },
-  d = { '"_d', 'delete without overwriting reg' },
-}, { mode = 'v', prefix = '<leader>' })
+wk.add({
+    { "<leader>d", '"_d', desc = "delete without overwriting reg", mode = "v" },
+    { "<leader>p", '"_dP', desc = "replace without overwriting reg", mode = "v" },
+}, { mode = 'v' })
 
 -- insert mode
-wk.register({
-  ['<m-->'] = { ' <- ', 'assign' },
-  ['<m-m>'] = { ' |>', 'pipe' },
-  ['<m-i>'] = { insert_r_chunk, 'r code chunk' },
-  ['<cm-i>'] = { insert_py_chunk, 'python code chunk' },
-  ['<m-I>'] = { insert_py_chunk, 'python code chunk' },
-  ['<c-x><c-x>'] = { '<c-x><c-o>', 'omnifunc completion' },
+wk.add({
+    {
+      mode = { "i" },
+      { "<c-x><c-x>", "<c-x><c-o>", desc = "omnifunc completion" },
+      { "<cm-i>", insert_py_chunk, desc = "python code chunk" },
+      { "<m-->", " <- ", desc = "assign" },
+      { "<m-I>", insert_py_chunk, desc = "python code chunk" },
+      { "<m-i>", insert_r_chunk, desc = "r code chunk" },
+      { "<m-m>", " |>", desc = "pipe" },
+    },
 }, { mode = 'i' })
 
 local function new_terminal(lang)
@@ -296,146 +319,92 @@ vim.keymap.set("n", "<leader>os", get_otter_symbols_lang, {desc = "otter [s]ymbo
 
 
 -- normal mode with <leader>
-wk.register({
-  ['<cr>'] = { send_cell, 'run code cell' },
-  c = {
-    name = '[c]ode / [c]ell / [c]hunk',
-    n = { new_terminal_shell, '[n]ew terminal with shell' },
-    r = {
-      function()
-        vim.b['quarto_is_r_mode'] = true
-        new_terminal_r()
-      end,
-      'new [R] terminal',
-    },
-    p = { new_terminal_python, 'new [p]ython terminal' },
-    i = { new_terminal_ipython, 'new [i]python terminal' },
-    j = { new_terminal_julia, 'new [j]ulia terminal' },
-  },
-  e = {
-    name = '[e]dit',
-  },
-  d = {
-    name = '[d]ebug',
-    t = {
-      name = '[t]est',
-    },
-  },
-  f = {
-    name = '[f]ind (telescope)',
-    f = { '<cmd>Telescope find_files<cr>', '[f]iles' },
-    h = { '<cmd>Telescope help_tags<cr>', '[h]elp' },
-    k = { '<cmd>Telescope keymaps<cr>', '[k]eymaps' },
-    g = { '<cmd>Telescope live_grep<cr>', '[g]rep' },
-    b = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', '[b]uffer fuzzy find' },
-    m = { '<cmd>Telescope marks<cr>', '[m]arks' },
-    M = { '<cmd>Telescope man_pages<cr>', '[M]an pages' },
-    c = { '<cmd>Telescope git_commits<cr>', 'git [c]ommits' },
-    ['<space>'] = { '<cmd>Telescope buffers<cr>', '[ ] buffers' },
-    d = { '<cmd>Telescope buffers<cr>', '[d] buffers' },
-    q = { '<cmd>Telescope quickfix<cr>', '[q]uickfix' },
-    l = { '<cmd>Telescope loclist<cr>', '[l]oclist' },
-    j = { '<cmd>Telescope jumplist<cr>', '[j]umplist' },
-  },
-  g = {
-    name = '[g]it',
-    c = { ':GitConflictRefresh<cr>', '[c]onflict' },
-    s = { ':Gitsigns<cr>', 'git [s]igns' },
-    wc = { ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", 'worktree create' },
-    ws = { ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", 'worktree switch' },
-    d = {
-      name = '[d]iff',
-      o = { ':DiffviewOpen<cr>', '[o]pen' },
-      c = { ':DiffviewClose<cr>', '[c]lose' },
-    },
-    b = {
-      name = '[b]lame',
-      b = { ':GitBlameToggle<cr>', '[b]lame toggle virtual text' },
-      o = { ':GitBlameOpenCommitURL<cr>', '[o]pen' },
-      c = { ':GitBlameCopyCommitURL<cr>', '[c]opy' },
-    },
-  },
-  h = {
-    name = '[h]elp / [h]ide / debug',
-    c = {
-      name = '[c]onceal',
-      h = { ':set conceallevel=1<cr>', '[h]ide/conceal' },
-      s = { ':set conceallevel=0<cr>', '[s]how/unconceal' },
-    },
-    t = {
-      name = '[t]reesitter',
-      t = { vim.treesitter.inspect_tree, 'show [t]ree' },
-    },
-  },
-  i = {
-    name = '[i]mage',
-  },
-  l = {
-    name = '[l]anguage/lsp',
-    r = { vim.lsp.buf.references, '[r]eferences' },
-    R = { '[R]ename' },
-    D = { vim.lsp.buf.type_definition, 'type [D]efinition' },
-    a = { vim.lsp.buf.code_action, 'code [a]ction' },
-    e = { vim.diagnostic.open_float, 'diagnostics (show hover [e]rror)' },
-    d = {
-      name = '[d]iagnostics',
-      d = {
-        function()
-          vim.diagnostic.enable(false)
-        end,
-        '[d]isable',
-      },
-      e = { vim.diagnostic.enable, '[e]nable' },
-    },
-    g = { ':Neogen<cr>', 'neo[g]en docstring' },
-  },
-  o = {
-    name = '[o]tter & c[o]de',
-    a = { require('otter').activate, 'otter [a]ctivate' },
-    d = { require('otter').deactivate, 'otter [d]eactivate' },
-    c = { 'O# %%<cr>', 'magic [c]omment code chunk # %%' },
-    r = { insert_r_chunk, '[r] code chunk' },
-    p = { insert_py_chunk, '[p]ython code chunk' },
-    j = { insert_julia_chunk, '[j]ulia code chunk' },
-    b = { insert_bash_chunk, '[b]ash code chunk' },
-    o = { insert_ojs_chunk, '[o]bservable js code chunk' },
-    l = { insert_lua_chunk, '[l]lua code chunk' },
-  },
-  q = {
-    name = '[q]uarto',
-    a = { ':QuartoActivate<cr>', '[a]ctivate' },
-    p = { ":lua require'quarto'.quartoPreview()<cr>", '[p]review' },
-    q = { ":lua require'quarto'.quartoClosePreview()<cr>", '[q]uiet preview' },
-    h = { ':QuartoHelp ', '[h]elp' },
-    r = {
-      name = '[r]un',
-      r = { ':QuartoSendAbove<cr>', 'to cu[r]sor' },
-      a = { ':QuartoSendAll<cr>', 'run [a]ll' },
-      b = { ':QuartoSendBelow<cr>', 'run [b]elow' },
-    },
-    e = { require('otter').export, '[e]xport' },
-    E = {
-      function()
-        require('otter').export(true)
-      end,
-      '[E]xport with overwrite',
-    },
-  },
-  r = {
-    name = '[r] R specific tools',
-    t = { show_r_table, 'show [t]able' },
-  },
-  v = {
-    name = '[v]im',
-    t = { toggle_light_dark_theme, '[t]oggle light/dark theme' },
-    c = { ':Telescope colorscheme<cr>', '[c]olortheme' },
-    l = { ':Lazy<cr>', '[l]azy package manager' },
-    m = { ':Mason<cr>', '[m]ason software installer' },
-    s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', '[s]ettings, edit vimrc' },
-    h = { ':execute "h " . expand("<cword>")<cr>', 'vim [h]elp for current word' },
-  },
-  x = {
-    name = 'e[x]ecute',
-    x = { ':w<cr>:source %<cr>', '[x] source %' },
-  },
-}, { mode = 'n', prefix = '<leader>' })
+wk.add({
+  {
+    { "<leader><cr>", send_cell, desc = "run code cell" },
+    { "<leader>c", group = "[c]ode / [c]ell / [c]hunk" },
+    { "<leader>ci", new_terminal_ipython, desc = "new [i]python terminal" },
+    { "<leader>cj", new_terminal_julia, desc = "new [j]ulia terminal" },
+    { "<leader>cn", new_terminal_shell, desc = "[n]ew terminal with shell" },
+    { "<leader>cp", new_terminal_python, desc = "new [p]ython terminal" },
+    { "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
+    { "<leader>d", group = "[d]ebug" },
+    { "<leader>dt", group = "[t]est" },
+    { "<leader>e", group = "[e]dit" },
+    { "<leader>f", group = "[f]ind (telescope)" },
+    { "<leader>f<space>", "<cmd>Telescope buffers<cr>", desc = "[ ] buffers" },
+    { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "[M]an pages" },
+    { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[b]uffer fuzzy find" },
+    { "<leader>fc", "<cmd>Telescope git_commits<cr>", desc = "git [c]ommits" },
+    { "<leader>fd", "<cmd>Telescope buffers<cr>", desc = "[d] buffers" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]iles" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "[g]rep" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "[h]elp" },
+    { "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "[j]umplist" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "[k]eymaps" },
+    { "<leader>fl", "<cmd>Telescope loclist<cr>", desc = "[l]oclist" },
+    { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "[m]arks" },
+    { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "[q]uickfix" },
+    { "<leader>g", group = "[g]it" },
+    { "<leader>gb", group = "[b]lame" },
+    { "<leader>gbb", ":GitBlameToggle<cr>", desc = "[b]lame toggle virtual text" },
+    { "<leader>gbc", ":GitBlameCopyCommitURL<cr>", desc = "[c]opy" },
+    { "<leader>gbo", ":GitBlameOpenCommitURL<cr>", desc = "[o]pen" },
+    { "<leader>gc", ":GitConflictRefresh<cr>", desc = "[c]onflict" },
+    { "<leader>gd", group = "[d]iff" },
+    { "<leader>gdc", ":DiffviewClose<cr>", desc = "[c]lose" },
+    { "<leader>gdo", ":DiffviewOpen<cr>", desc = "[o]pen" },
+    { "<leader>gs", ":Gitsigns<cr>", desc = "git [s]igns" },
+    { "<leader>gwc", ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", desc = "worktree create" },
+    { "<leader>gws", ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", desc = "worktree switch" },
+    { "<leader>h", group = "[h]elp / [h]ide / debug" },
+    { "<leader>hc", group = "[c]onceal" },
+    { "<leader>hch", ":set conceallevel=1<cr>", desc = "[h]ide/conceal" },
+    { "<leader>hcs", ":set conceallevel=0<cr>", desc = "[s]how/unconceal" },
+    { "<leader>ht", group = "[t]reesitter" },
+    { "<leader>htt", vim.treesitter.inspect_tree, desc = "show [t]ree" },
+    { "<leader>i", group = "[i]mage" },
+    { "<leader>l", group = "[l]anguage/lsp" },
+    { "<leader>lD", vim.lsp.buf.type_definition, desc = "type [D]efinition" },
+    { "<leader>lR", desc = "[R]ename" },
+    { "<leader>la", vim.lsp.buf.code_action, desc = "code [a]ction" },
+    { "<leader>ld", group = "[d]iagnostics" },
+    { "<leader>ldd", function() vim.diagnostic.enable(false) end, desc = "[d]isable" },
+    { "<leader>lde", vim.diagnostic.enable, desc = "[e]nable" },
+    { "<leader>le", vim.diagnostic.open_float, desc = "diagnostics (show hover [e]rror)" },
+    { "<leader>lg", ":Neogen<cr>", desc = "neo[g]en docstring" },
+    { "<leader>lr", vim.lsp.buf.references, desc = "[r]eferences" },
+    { "<leader>o", group = "[o]tter & c[o]de" },
+    { "<leader>oa", require'otter'.activate, desc = "otter [a]ctivate" },
+    { "<leader>ob", insert_bash_chunk, desc = "[b]ash code chunk" },
+    { "<leader>oc", "O# %%<cr>", desc = "magic [c]omment code chunk # %%" },
+    { "<leader>od", require'otter'.activate, desc = "otter [d]eactivate" },
+    { "<leader>oj", insert_julia_chunk, desc = "[j]ulia code chunk" },
+    { "<leader>ol", insert_lua_chunk, desc = "[l]lua code chunk" },
+    { "<leader>oo", insert_ojs_chunk, desc = "[o]bservable js code chunk" },
+    { "<leader>op", insert_py_chunk, desc = "[p]ython code chunk" },
+    { "<leader>or", insert_r_chunk, desc = "[r] code chunk" },
+    { "<leader>q", group = "[q]uarto" },
+    { "<leader>qE", function() require('otter').export(true) end, desc = "[E]xport with overwrite" },
+    { "<leader>qa", ":QuartoActivate<cr>", desc = "[a]ctivate" },
+    { "<leader>qe", require('otter').export, desc = "[e]xport" },
+    { "<leader>qh", ":QuartoHelp ", desc = "[h]elp" },
+    { "<leader>qp", ":lua require'quarto'.quartoPreview()<cr>", desc = "[p]review" },
+    { "<leader>qq", ":lua require'quarto'.quartoClosePreview()<cr>", desc = "[q]uiet preview" },
+    { "<leader>qr", group = "[r]un" },
+    { "<leader>qra", ":QuartoSendAll<cr>", desc = "run [a]ll" },
+    { "<leader>qrb", ":QuartoSendBelow<cr>", desc = "run [b]elow" },
+    { "<leader>qrr", ":QuartoSendAbove<cr>", desc = "to cu[r]sor" },
+    { "<leader>r", group = "[r] R specific tools" },
+    { "<leader>rt", show_r_table, desc = "show [t]able" },
+    { "<leader>v", group = "[v]im" },
+    { "<leader>vc", ":Telescope colorscheme<cr>", desc = "[c]olortheme" },
+    { "<leader>vh", ':execute "h " . expand("<cword>")<cr>', desc = "vim [h]elp for current word" },
+    { "<leader>vl", ":Lazy<cr>", desc = "[l]azy package manager" },
+    { "<leader>vm", ":Mason<cr>", desc = "[m]ason software installer" },
+    { "<leader>vs", ":e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>", desc = "[s]ettings, edit vimrc" },
+    { "<leader>vt", toggle_light_dark_theme, desc = "[t]oggle light/dark theme" },
+    { "<leader>x", group = "e[x]ecute" },
+    { "<leader>xx", ":w<cr>:source %<cr>", desc = "[x] source %" },
+  }
+}, { mode = 'n'})

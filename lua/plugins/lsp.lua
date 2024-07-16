@@ -7,14 +7,18 @@ return {
 
     -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = false,
+    dev = true,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter',
       },
     },
-    opts = {},
+    opts = {
+      verbose = {
+        no_code_found = false,
+      }
+    },
   },
 
   {
@@ -98,8 +102,8 @@ return {
           map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
           map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
           map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          map('[d', vim.diagnostic.goto_prev, 'previous [d]iagnostic ')
-          map(']d', vim.diagnostic.goto_next, 'next [d]iagnostic ')
+          map('[d', function () vim.diagnostic.jump({count = 1}) end,'previous [d]iagnostic ')
+          map(']d', function () vim.diagnostic.jump({count = -1}) end, 'next [d]iagnostic ')
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
@@ -226,13 +230,13 @@ return {
             },
             runtime = {
               version = 'LuaJIT',
-              -- plugin = lua_plugin_paths,
+              -- plugin = lua_plugin_paths, -- handled by lazydev
             },
             diagnostics = {
               disable = { 'trailing-space' },
             },
             workspace = {
-              -- library = lua_library_files,
+              -- library = lua_library_files, -- handled by lazydev
               checkThirdParty = false,
             },
             doc = {
@@ -244,6 +248,12 @@ return {
           },
         },
       }
+
+      lspconfig.vimls.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
 
       lspconfig.julials.setup {
         capabilities = capabilities,
@@ -269,16 +279,16 @@ return {
       --   flags = lsp_flags,
       -- }
 
-      -- lspconfig.rust_analyzer.setup{
-      --   capabilities = capabilities,
-      --   settings = {
-      --     ['rust-analyzer'] = {
-      --       diagnostics = {
-      --         enable = false;
-      --       }
-      --     }
-      --   }
-      -- }
+      lspconfig.rust_analyzer.setup{
+        capabilities = capabilities,
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = false;
+            }
+          }
+        }
+     }
 
       -- lspconfig.ruff_lsp.setup {
       --   capabilities = capabilities,

@@ -95,10 +95,10 @@ return {
             require('telescope.themes').get_dropdown(),
           },
           fzf = {
-            fuzzy = true, -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
           },
         },
       }
@@ -129,7 +129,7 @@ return {
     },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
-      { '-', ':Oil<cr>', desc = 'oil' },
+      { '-',          ':Oil<cr>', desc = 'oil' },
       { '<leader>ef', ':Oil<cr>', desc = 'edit [f]iles' },
     },
     cmd = 'Oil',
@@ -188,6 +188,11 @@ return {
   { -- highlight occurences of current word
     'RRethy/vim-illuminate',
     enabled = false,
+  },
+
+  {
+    "NStefan002/screenkey.nvim",
+    lazy = false,
   },
 
   { -- filetree
@@ -331,6 +336,7 @@ return {
   { -- show images in nvim!
     '3rd/image.nvim',
     enabled = true,
+    commit = 'deb158d',
     dev = false,
     ft = { 'markdown', 'quarto', 'vimwiki' },
     config = function()
@@ -356,7 +362,6 @@ return {
         },
         editor_only_render_when_focused = false,
         window_overlap_clear_enabled = true,
-        -- window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', 'scrollview' },
         tmux_show_only_in_active_window = true,
         window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', 'scrollview', 'scrollview_sign' },
         max_width = nil,

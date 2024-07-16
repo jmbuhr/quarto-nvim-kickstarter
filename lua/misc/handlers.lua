@@ -22,25 +22,6 @@ local apply_action_handler = function(action, items, opts)
   return items
 end
 
----@param items vim.lsp.util.locations_to_items.ret[]
----@param opts table
----@return vim.lsp.util.locations_to_items.ret[]
-local function filter_file_ignore_patters(items, opts)
-  local file_ignore_patterns = vim.F.if_nil(opts.file_ignore_patterns, conf.file_ignore_patterns)
-  file_ignore_patterns = file_ignore_patterns or {}
-  if vim.tbl_isempty(file_ignore_patterns) then
-    return items
-  end
-
-  return vim.tbl_filter(function(item)
-    for _, patt in ipairs(file_ignore_patterns) do
-      if string.match(item.filename, patt) then
-        return false
-      end
-    end
-    return true
-  end, items)
-end
 
 --- convert `item` type back to something we can pass to `vim.lsp.util.jump_to_location`
 --- stopgap for pre-nvim 0.10 - after which we can simply use the `user_data`
@@ -178,7 +159,6 @@ M.telescope_handler_factory = function(action, title)
       local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
       local items = vim.lsp.util.locations_to_items(locations, offset_encoding)
       items = apply_action_handler(action, items, opts)
-      items = filter_file_ignore_patters(items, opts)
 
       if vim.tbl_isempty(items) then
         utils.notify(title, {

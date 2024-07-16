@@ -13,3 +13,13 @@
 require 'config.global'
 require 'config.lazy'
 require 'config.autocommands'
+require 'config.redir'
+
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+    desc = "Activate Otter on Buf Enter",
+    pattern = "*.norg",
+    group = vim.api.nvim_create_augroup("NorgOtter", {}),
+    callback = function(_)
+      require'otter'.activate()
+    end,
+})
