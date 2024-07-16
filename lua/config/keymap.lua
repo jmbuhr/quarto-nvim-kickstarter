@@ -206,23 +206,6 @@ end
 --show up in the popup as well
 
 -- normal mode
-wk.register({
-  ['<c-LeftMouse>'] = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'go to definition' },
-  ['<c-q>'] = { '<cmd>q<cr>', 'close buffer' },
-  ['<esc>'] = { '<cmd>noh<cr>', 'remove search highlight' },
-  ['n'] = { 'nzzzv', 'center search' },
-  ['gN'] = { 'Nzzzv', 'center search' },
-  ['gl'] = { '<c-]>', 'open help link' },
-  ['gf'] = { ':e <cfile><CR>', 'edit file' },
-  ['<m-i>'] = { insert_r_chunk, 'r code chunk' },
-  ['<cm-i>'] = { insert_py_chunk, 'python code chunk' },
-  ['<m-I>'] = { insert_py_chunk, 'python code chunk' },
-  [']q'] = { ':silent cnext<cr>', '[q]uickfix next' },
-  ['[q'] = { ':silent cprev<cr>', '[q]uickfix prev' },
-  ['z?'] = { ':setlocal spell!<cr>', 'toggle [z]pellcheck' },
-  ['zl'] = { ':Telescope spell_suggest<cr>', '[l]ist spelling suggestions' },
-}, { mode = 'n', silent = true })
-
 wk.add({
     { "<c-LeftMouse>", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
     { "<c-q>", "<cmd>q<cr>", desc = "close buffer" },
