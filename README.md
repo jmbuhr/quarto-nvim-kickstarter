@@ -40,6 +40,7 @@ sudo apt install imagemagick
 sudo apt install libmagickwand-dev
 sudo apt install liblua5.1-0-dev
 sudo apt install luajit
+sudo apt install tree-sitter-cli
 ```
 
 Manually installing luarocks and the magick rock is no longer required, this is handled by [luarocks.nvim](https://github.com/vhyrro/luarocks.nvim).
