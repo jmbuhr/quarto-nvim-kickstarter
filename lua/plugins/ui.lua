@@ -246,12 +246,25 @@ return {
   },
 
   { -- show tree of symbols in the current file
-    'simrat39/symbols-outline.nvim',
-    cmd = 'SymbolsOutline',
+    'hedyhli/outline.nvim',
+    cmd = 'Outline',
     keys = {
-      { '<leader>lo', ':SymbolsOutline<cr>', desc = 'symbols outline' },
+      { '<leader>lo', ':Outline<cr>', desc = 'symbols outline' },
     },
-    opts = {},
+    opts = {
+      providers = {
+        priority = { 'markdown', 'lsp',  'norg' },
+        -- Configuration for each provider (3rd party providers are supported)
+        lsp = {
+          -- Lsp client names to ignore
+          blacklist_clients = {},
+        },
+        markdown = {
+          -- List of supported ft's to use the markdown provider
+          filetypes = { 'markdown', 'quarto' },
+        },
+      },
+    },
   },
 
   { -- or show symbols in the current file as breadcrumbs
