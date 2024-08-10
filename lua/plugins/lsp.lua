@@ -1,5 +1,3 @@
-local ms = vim.lsp.protocol.Methods
-local handlers = require 'misc.handlers'
 
 return {
 
@@ -14,7 +12,11 @@ return {
         'nvim-treesitter/nvim-treesitter',
       },
     },
-    opts = {},
+    opts = {
+      verbose = {
+        no_code_found = false,
+      }
+    },
   },
 
   {
@@ -98,8 +100,8 @@ return {
           map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
           map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
           map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          map('[d', vim.diagnostic.goto_prev, 'previous [d]iagnostic ')
-          map(']d', vim.diagnostic.goto_next, 'next [d]iagnostic ')
+          map('[d', function () vim.diagnostic.jump({count = 1}) end,'previous [d]iagnostic ')
+          map(']d', function () vim.diagnostic.jump({count = -1}) end, 'next [d]iagnostic ')
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
@@ -115,11 +117,6 @@ return {
 
       vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = require('misc.style').border })
       vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = require('misc.style').border })
-      vim.lsp.handlers[ms.textDocument_definition] = handlers.telescope_handler_factory(ms.textDocument_definition, "Definition")
-      vim.lsp.handlers[ms.textDocument_typeDefinition] = handlers.telescope_handler_factory(ms.textDocument_typeDefinition, "Type Definition")
-      vim.lsp.handlers[ms.textDocument_references] = handlers.telescope_handler_factory(ms.textDocument_references, "References")
-      vim.lsp.handlers[ms.textDocument_implementation] = handlers.telescope_handler_factory(ms.textDocument_implementation, "Implementations")
-      vim.lsp.handlers[ms.textDocument_documentSymbol] = handlers.telescope_handler_factory(ms.textDocument_documentSymbol, "Document Symbols")
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
@@ -226,13 +223,13 @@ return {
             },
             runtime = {
               version = 'LuaJIT',
-              -- plugin = lua_plugin_paths,
+              -- plugin = lua_plugin_paths, -- handled by lazydev
             },
             diagnostics = {
               disable = { 'trailing-space' },
             },
             workspace = {
-              -- library = lua_library_files,
+              -- library = lua_library_files, -- handled by lazydev
               checkThirdParty = false,
             },
             doc = {
@@ -244,6 +241,12 @@ return {
           },
         },
       }
+
+      lspconfig.vimls.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
 
       lspconfig.julials.setup {
         capabilities = capabilities,
@@ -269,16 +272,16 @@ return {
       --   flags = lsp_flags,
       -- }
 
-      -- lspconfig.rust_analyzer.setup{
-      --   capabilities = capabilities,
-      --   settings = {
-      --     ['rust-analyzer'] = {
-      --       diagnostics = {
-      --         enable = false;
-      --       }
-      --     }
-      --   }
-      -- }
+      lspconfig.rust_analyzer.setup{
+        capabilities = capabilities,
+        settings = {
+          ['rust-analyzer'] = {
+            diagnostics = {
+              enable = false;
+            }
+          }
+        }
+     }
 
       -- lspconfig.ruff_lsp.setup {
       --   capabilities = capabilities,
