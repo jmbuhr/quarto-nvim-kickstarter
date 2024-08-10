@@ -26,9 +26,6 @@ end
 -- move in command line
 cmap('<C-a>', '<Home>')
 
--- exit insert mode with jk
-imap('kj', '<esc>')
-
 -- save with ctrl+s
 imap('<C-s>', '<esc>:update<cr><esc>')
 nmap('<C-s>', '<cmd>:update<cr><esc>')
@@ -348,15 +345,12 @@ wk.add({
     { "<leader>htt", vim.treesitter.inspect_tree, desc = "show [t]ree" },
     { "<leader>i", group = "[i]mage" },
     { "<leader>l", group = "[l]anguage/lsp" },
-    { "<leader>lD", vim.lsp.buf.type_definition, desc = "type [D]efinition" },
-    { "<leader>lR", desc = "[R]ename" },
     { "<leader>la", vim.lsp.buf.code_action, desc = "code [a]ction" },
     { "<leader>ld", group = "[d]iagnostics" },
     { "<leader>ldd", function() vim.diagnostic.enable(false) end, desc = "[d]isable" },
     { "<leader>lde", vim.diagnostic.enable, desc = "[e]nable" },
     { "<leader>le", vim.diagnostic.open_float, desc = "diagnostics (show hover [e]rror)" },
     { "<leader>lg", ":Neogen<cr>", desc = "neo[g]en docstring" },
-    { "<leader>lr", vim.lsp.buf.references, desc = "[r]eferences" },
     { "<leader>o", group = "[o]tter & c[o]de" },
     { "<leader>oa", require'otter'.activate, desc = "otter [a]ctivate" },
     { "<leader>ob", insert_bash_chunk, desc = "[b]ash code chunk" },
