@@ -1,3 +1,7 @@
+-- Custom handlers for LSP actions
+-- using telescope.nvim
+-- TODO: Some of theses don't work reliably
+-- so they are not used, yet.
 local pickers = require "telescope.pickers"
 local conf = require("telescope.config").values
 local finders = require "telescope.finders"
