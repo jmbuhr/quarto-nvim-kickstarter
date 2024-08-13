@@ -114,6 +114,8 @@ vim.diagnostic.config {
 vim.filetype.add {
   extension = {
     ojs = 'javascript',
+    pyodide = 'python',
+    webr = 'r',
   },
 }
 
