@@ -354,6 +354,15 @@ return {
     commit = 'deb158d',
     dev = false,
     ft = { 'markdown', 'quarto', 'vimwiki' },
+    -- dependencies = {
+    --   {
+    --     'vhyrro/luarocks.nvim',
+    --     priority = 1001, -- this plugin needs to run before anything else
+    --     opts = {
+    --       rocks = { 'magick' },
+    --     },
+    --   },
+    -- },
     config = function()
       -- Requirements
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
