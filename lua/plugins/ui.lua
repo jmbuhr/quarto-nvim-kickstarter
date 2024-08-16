@@ -349,20 +349,18 @@ return {
   { -- show images in nvim!
     '3rd/image.nvim',
     enabled = true,
+    dev = false,
     -- fix to commit to keep using the rockspeck for image magick
     -- TODO: check back on this later
-    commit = 'deb158d',
-    dev = false,
+    -- commit = 'deb158d',
     ft = { 'markdown', 'quarto', 'vimwiki' },
-    -- dependencies = {
-    --   {
-    --     'vhyrro/luarocks.nvim',
-    --     priority = 1001, -- this plugin needs to run before anything else
-    --     opts = {
-    --       rocks = { 'magick' },
-    --     },
-    --   },
-    -- },
+    cond = function()
+      -- Disable on Windows system
+       return vim.fn.has 'win32' ~= 1 
+    end,
+    dependencies = {
+       'leafo/magick', -- that's a lua rock
+    },
     config = function()
       -- Requirements
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
@@ -372,7 +370,7 @@ return {
       -- sudo apt install libmagickwand-dev
       -- sudo apt install liblua5.1-0-dev
       -- sudo apt install lua5.1
-      -- sudo apt installl luajit
+      -- sudo apt install luajit
 
       local image = require 'image'
       image.setup {
