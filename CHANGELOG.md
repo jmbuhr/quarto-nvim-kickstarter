@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.11.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.10.0...v3.11.0) (2024-07-05)
+
+
+### Features
+
+* use telescope for some lsp handlers ([f1a04a5](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/f1a04a56be42e6e24c0af93b3d600653138f7988))
+
+## [3.10.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.9.0...v3.10.0) (2024-06-29)
+
+
+### Features
+
+* json ls ([887f798](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/887f7986091c386fba8d44f0414930250b4022d5))
+
+## [3.9.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.8.1...v3.9.0) (2024-05-18)
+
+
+### Features
+
+* kanagawa colorscheme ([a9995a0](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/a9995a0cecc5f16a041c1b5259b99bb91a8b6cdd))
+* oil.nvim to edit the filesystem as a buffer ([69b73eb](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/69b73ebb52ab5f794af31fa345aa590137045771))
+* virtual text for dap ([1bdaab3](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/1bdaab3f54ee03084e291bb7cf1b2fab37f7401a))
+
+
+### Bug Fixes
+
+* full screen image preview ([ef0bbee](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/ef0bbeee56434969a8c0c4cec86527a6e820c199))
+* no signcolumn for terminal windows ([bb3fa64](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/bb3fa644d6516b4fc060042c74878f1af81d0774))
+
 ## [3.8.1](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.8.0...v3.8.1) (2024-05-13)
 
 
