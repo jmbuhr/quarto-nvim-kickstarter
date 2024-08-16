@@ -433,4 +433,10 @@ return {
       vim.keymap.set('n', '<leader>ic', clear_all_images, { buffer = true, desc = 'image [c]lear' })
     end,
   },
+
+  { -- interface with databases
+    'tpope/vim-dadbod',
+    'kristijanhusak/vim-dadbod-completion',
+    'kristijanhusak/vim-dadbod-ui',
+  },
 }
