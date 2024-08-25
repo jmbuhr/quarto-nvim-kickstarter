@@ -5,7 +5,12 @@ return {
     'quarto-dev/quarto-nvim',
     ft = { 'quarto' },
     dev = false,
-    opts = {},
+    opts = {
+      codeRunner = {
+        enabled = true,
+        default_method = "molten"
+      }
+    },
     dependencies = {
       -- for language features in code cells
       -- configured in lua/plugins/lsp.lua and
@@ -122,7 +127,7 @@ return {
 
   {
     'benlubas/molten-nvim',
-    enabled = false,
+    enabled = true,
     build = ':UpdateRemotePlugins',
     init = function()
       vim.g.molten_image_provider = 'image.nvim'
@@ -131,6 +136,7 @@ return {
     end,
     keys = {
       { '<leader>mi', ':MoltenInit<cr>', desc = '[m]olten [i]nit' },
+      { '<leader>md', ':MoltenDeinit<cr>', desc = '[m]olten [d]einit' },
       {
         '<leader>mv',
         ':<C-u>MoltenEvaluateVisual<cr>',
