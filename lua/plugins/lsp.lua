@@ -274,13 +274,7 @@ return {
 
       lspconfig.rust_analyzer.setup{
         capabilities = capabilities,
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = false;
-            }
-          }
-        }
+        flags = lsp_flags,
      }
 
       -- lspconfig.ruff_lsp.setup {
