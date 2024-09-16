@@ -7,14 +7,14 @@ return {
     config = function()
       require 'quarto'.setup {
         lspFeatures = {
-          enabled = true,
+          enabled = false,
           languages = { 'r', 'python' },
           diagnostics = {
             enabled = false,
             triggers = { "BufWrite" }
           },
           completion = {
-            enabled = true
+            enabled = false
           }
         }
       }
