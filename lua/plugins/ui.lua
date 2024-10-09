@@ -349,11 +349,15 @@ return {
   { -- show images in nvim!
     '3rd/image.nvim',
     enabled = true,
-    -- fix to commit to keep using the rockspeck for image magick
-    -- TODO: check back on this later
-    commit = 'deb158d',
     dev = false,
     ft = { 'markdown', 'quarto', 'vimwiki' },
+    cond = function()
+      -- Disable on Windows system
+       return vim.fn.has 'win32' ~= 1 
+    end,
+    dependencies = {
+       'leafo/magick', -- that's a lua rock
+    },
     config = function()
       -- Requirements
       -- https://github.com/3rd/image.nvim?tab=readme-ov-file#requirements
@@ -363,7 +367,7 @@ return {
       -- sudo apt install libmagickwand-dev
       -- sudo apt install liblua5.1-0-dev
       -- sudo apt install lua5.1
-      -- sudo apt installl luajit
+      -- sudo apt install luajit
 
       local image = require 'image'
       image.setup {
@@ -372,6 +376,7 @@ return {
           markdown = {
             enabled = true,
             only_render_image_at_cursor = true,
+            -- only_render_image_at_cursor_mode = "popup",
             filetypes = { 'markdown', 'vimwiki', 'quarto' },
           },
         },
