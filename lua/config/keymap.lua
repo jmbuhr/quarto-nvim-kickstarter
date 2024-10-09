@@ -58,11 +58,13 @@ nmap('Q', '<Nop>')
 --- TODO: figure out bracketed paste for reticulate python repl.
 local function send_cell()
   local has_molten, molten_status = pcall(require, 'molten.status')
+  local molten_works = false
   local molten_active = ""
   if has_molten then
-    molten_active = molten_status.kernels()
+    molten_works, molten_active = pcall(molten_status.kernels)
   end
-  if molten_active ~= vim.NIL and molten_active ~= "" then
+  if molten_works and molten_active ~= vim.NIL and molten_active ~= "" then
+    print('using quarto send')
     vim.cmd.QuartoSend()
     return
   end

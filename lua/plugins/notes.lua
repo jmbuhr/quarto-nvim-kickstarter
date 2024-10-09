@@ -21,7 +21,7 @@ return {
 
   {
     'epwalsh/obsidian.nvim',
-    enabled = false,
+    enabled = true,
     ft = 'markdown',
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.

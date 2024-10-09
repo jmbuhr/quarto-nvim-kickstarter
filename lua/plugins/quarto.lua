@@ -127,12 +127,13 @@ return {
 
   {
     'benlubas/molten-nvim',
+    dev = true,
     enabled = true,
     build = ':UpdateRemotePlugins',
     init = function()
       vim.g.molten_image_provider = 'image.nvim'
       vim.g.molten_output_win_max_height = 20
-      vim.g.molten_auto_open_output = false
+      vim.g.molten_auto_open_output = true
     end,
     keys = {
       { '<leader>mi', ':MoltenInit<cr>', desc = '[m]olten [i]nit' },

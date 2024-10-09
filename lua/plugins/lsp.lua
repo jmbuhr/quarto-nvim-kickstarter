@@ -5,7 +5,7 @@ return {
 
     -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = true,
+    dev = false,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
@@ -100,8 +100,8 @@ return {
           map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
           map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
           map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          map('[d', function () vim.diagnostic.jump({count = 1}) end,'previous [d]iagnostic ')
-          map(']d', function () vim.diagnostic.jump({count = -1}) end, 'next [d]iagnostic ')
+          map(']d', function () vim.diagnostic.jump({count = 1}) end,'previous [d]iagnostic ')
+          map('[d', function () vim.diagnostic.jump({count = -1}) end, 'next [d]iagnostic ')
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
@@ -182,7 +182,7 @@ return {
         flags = lsp_flags,
       }
 
-      lspconfig.tsserver.setup {
+      lspconfig.ts_ls.setup {
         capabilities = capabilities,
         flags = lsp_flags,
         filetypes = { 'js', 'javascript', 'typescript', 'ojs' },

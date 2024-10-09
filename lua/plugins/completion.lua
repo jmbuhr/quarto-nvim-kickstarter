@@ -123,11 +123,11 @@ return {
           { name = 'path' },
           { name = 'nvim_lsp_signature_help' },
           { name = 'nvim_lsp' },
-          { name = 'luasnip', keyword_length = 3, max_item_count = 3 },
+          { name = 'luasnip',                keyword_length = 3, max_item_count = 3 },
           { name = 'pandoc_references' },
-          { name = 'buffer', keyword_length = 5, max_item_count = 3 },
+          { name = 'buffer',                 keyword_length = 5, max_item_count = 3 },
           { name = 'spell' },
-          { name = 'treesitter', keyword_length = 5, max_item_count = 3 },
+          { name = 'treesitter',             keyword_length = 5, max_item_count = 3 },
           { name = 'calc' },
           { name = 'latex_symbols' },
           { name = 'emoji' },
@@ -174,4 +174,44 @@ return {
       }
     end,
   },
+
+  { -- LLMs
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim",
+      {
+        "stevearc/dressing.nvim", -- Optional: Improves the default Neovim UI
+        opts = {},
+      },
+    },
+    keys = {
+      { '<leader>ac', ':CodeCompanionChat<cr>', desc = '[a]i chat' },
+    },
+    config = function()
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "anthropic",
+          },
+          inline = {
+            adapter = "anthropic",
+          },
+          agent = {
+            adapter = "anthropic",
+          },
+        },
+        adapters = {
+          anthropic = function()
+            return require("codecompanion.adapters").extend("anthropic", {
+              env = {
+                api_key = os.getenv("ANTHROPIC_API_KEY")
+              },
+            })
+          end,
+        },
+      })
+    end
+  }
 }
