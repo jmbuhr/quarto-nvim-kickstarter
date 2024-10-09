@@ -351,8 +351,6 @@ return {
     enabled = true,
     dev = false,
     -- fix to commit to keep using the rockspeck for image magick
-    -- TODO: check back on this later
-    -- commit = 'deb158d',
     ft = { 'markdown', 'quarto', 'vimwiki' },
     cond = function()
       -- Disable on Windows system
