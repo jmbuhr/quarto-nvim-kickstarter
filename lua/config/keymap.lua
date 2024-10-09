@@ -64,7 +64,9 @@ local function send_cell()
     molten_works, molten_active = pcall(molten_status.kernels)
   end
   if molten_works and molten_active ~= vim.NIL and molten_active ~= "" then
-    print('using quarto send')
+    molten_active = molten_status.initialized()
+  end
+  if molten_active ~= vim.NIL and molten_active ~= "" and molten_status.kernels() ~= "Molten" then
     vim.cmd.QuartoSend()
     return
   end
