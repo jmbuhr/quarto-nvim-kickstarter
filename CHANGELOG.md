@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.11.0...v3.12.0) (2024-10-09)
+
+
+### Features
+
+* use rockspec for magick ([deb0bc5](https://github.com/jmbuhr/quarto-nvim-kickstarter/commit/deb0bc56dbdbc5627c640e36f2adea69018e92c3))
+
 ## [3.11.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.10.0...v3.11.0) (2024-07-05)
 
 
