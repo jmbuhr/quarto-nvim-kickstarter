@@ -6,13 +6,10 @@ return {
     ft = { 'quarto' },
     dev = false,
     opts = {
-      lspFeatures = {
-        languages = { 'r', 'python', 'julia', 'bash', 'lua', 'html', 'dot', 'javascript', 'typescript', 'ojs' },
-      },
       codeRunner = {
         enabled = true,
-        default_method = 'slime',
-      },
+        default_method = "molten"
+      }
     },
     dependencies = {
       -- for language features in code cells
@@ -130,15 +127,17 @@ return {
 
   {
     'benlubas/molten-nvim',
-    enabled = false,
+    dev = true,
+    enabled = true,
     build = ':UpdateRemotePlugins',
     init = function()
       vim.g.molten_image_provider = 'image.nvim'
       vim.g.molten_output_win_max_height = 20
-      vim.g.molten_auto_open_output = false
+      vim.g.molten_auto_open_output = true
     end,
     keys = {
       { '<leader>mi', ':MoltenInit<cr>', desc = '[m]olten [i]nit' },
+      { '<leader>md', ':MoltenDeinit<cr>', desc = '[m]olten [d]einit' },
       {
         '<leader>mv',
         ':<C-u>MoltenEvaluateVisual<cr>',
