@@ -222,7 +222,7 @@ return {
     },
     config = function()
       require('nvim-tree').setup {
-        disable_netrw = true,
+        disable_netrw = false,
         update_focused_file = {
           enable = true,
         },
