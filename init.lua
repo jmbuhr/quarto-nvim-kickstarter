@@ -16,9 +16,9 @@ require 'config.autocommands'
 require 'config.redir'
 
 
-vim.treesitter.language.add('pandoc_markdown', { path = "/usr/local/lib/libtree-sitter-pandoc-markdown.so" })
-vim.treesitter.language.add('pandoc_markdown_inline', { path = "/usr/local/lib/libtree-sitter-pandoc-markdown-inline.so" })
-vim.treesitter.language.register('pandoc_markdown', { 'quarto', 'rmarkdown' })
+-- vim.treesitter.language.add('pandoc_markdown', { path = "/usr/local/lib/libtree-sitter-pandoc-markdown.so" })
+-- vim.treesitter.language.add('pandoc_markdown_inline', { path = "/usr/local/lib/libtree-sitter-pandoc-markdown-inline.so" })
+-- vim.treesitter.language.register('pandoc_markdown', { 'quarto', 'rmarkdown' })
 
 vim.treesitter.language.register("markdown", 'text')
 

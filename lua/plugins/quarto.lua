@@ -127,7 +127,7 @@ return {
 
   {
     'benlubas/molten-nvim',
-    dev = true,
+    dev = false,
     enabled = false,
     build = ':UpdateRemotePlugins',
     init = function()
