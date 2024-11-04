@@ -33,17 +33,25 @@ local check_external_reqs = function()
   return true
 end
 
+local function maybe_system(command)
+  local success, obj = pcall(vim.system, command, { text = true })
+  if not success then
+    return nil
+  end
+  local res = obj:wait()
+  if res.code ~= 0 then
+    return nil
+  end
+  return res.stdout
+end
+
 local check_image_dependencies = function()
   local backend = 'kitty'
 
   local shell
   if vim.fn.has 'nvim-0.10.0' == 1 then
     shell = function(command)
-      local obj = vim.system(command, { text = true }):wait()
-      if obj.code ~= 0 then
-        return nil
-      end
-      return obj.stdout
+      return maybe_system(command)
     end
   else
     vim.health.warn 'nvim < 0.10'
@@ -67,6 +75,7 @@ local check_image_dependencies = function()
 
   if backend == 'kitty' then
     -- check if kitty is available
+    print('kitty')
     local out = shell { 'kitty', '--version' }
     if out == nil then
       vim.health.warn 'kitty is not available'
