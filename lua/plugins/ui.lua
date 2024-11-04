@@ -45,6 +45,21 @@ return {
       table.insert(vimgrep_arguments, '--glob')
       table.insert(vimgrep_arguments, '!docs/*')
 
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_site/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!*_files/libs/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!.obsidian/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!.quarto/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_freeze/*')
+
       telescope.setup {
         defaults = {
           buffer_previewer_maker = new_maker,
@@ -55,6 +70,10 @@ return {
             '.git/',
             'site_libs',
             '.venv',
+            '_files/libs/',
+            '.obsidian',
+            '.quarto',
+            '._freeze',
           },
           layout_strategy = 'flex',
           sorting_strategy = 'ascending',

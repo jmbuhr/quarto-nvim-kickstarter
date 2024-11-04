@@ -3,6 +3,10 @@
     "prefix": ["eq"],
     "body": ["\\$\\$", "$1", "\\$\\$ {#eq-${2: label}}"]
   },
+  "def": {
+    "prefix": ["def"],
+    "body": [":::{#def-$1}", "## $2\n", "$3", ":::"]
+  },
   "Insert Block Equation": {
     "prefix": "$$",
     "body": ["\\$$", "${0}", "\\$$"]

@@ -8,7 +8,7 @@ return {
     opts = {
       codeRunner = {
         enabled = true,
-        default_method = "molten"
+        default_method = "slime"
       }
     },
     dependencies = {
@@ -128,7 +128,7 @@ return {
   {
     'benlubas/molten-nvim',
     dev = true,
-    enabled = true,
+    enabled = false,
     build = ':UpdateRemotePlugins',
     init = function()
       vim.g.molten_image_provider = 'image.nvim'
