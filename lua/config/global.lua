@@ -2,6 +2,9 @@
 
 local animals = require('misc.style').animals
 
+DefaultConcealLevel = 0
+FullConcealLevel = 3
+
 -- proper colors
 vim.opt.termguicolors = true
 
@@ -101,7 +104,7 @@ vim.opt.formatoptions:remove 'o'
 vim.opt.scrolloff = 5
 
 -- (don't == 0) replace certain elements with prettier ones
-vim.opt.conceallevel = 0
+vim.opt.conceallevel = DefaultConcealLevel
 
 -- diagnostics
 vim.diagnostic.config {

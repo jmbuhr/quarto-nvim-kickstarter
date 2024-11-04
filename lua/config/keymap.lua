@@ -312,6 +312,15 @@ end
 
 vim.keymap.set("n", "<leader>os", get_otter_symbols_lang, { desc = "otter [s]ymbols" })
 
+local function toggle_conceal()
+  local lvl = vim.o.conceallevel
+  if lvl > DefaultConcealLevel then
+    vim.o.conceallevel = DefaultConcealLevel
+  else
+    vim.o.conceallevel = FullConcealLevel
+  end
+end
+
 
 -- normal mode with <leader>
 wk.add({
@@ -354,8 +363,7 @@ wk.add({
     { "<leader>gws",      ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",       desc = "worktree switch" },
     { "<leader>h",        group = "[h]elp / [h]ide / debug" },
     { "<leader>hc",       group = "[c]onceal" },
-    { "<leader>hch",      ":set conceallevel=1<cr>",                                                     desc = "[h]ide/conceal" },
-    { "<leader>hcs",      ":set conceallevel=0<cr>",                                                     desc = "[s]how/unconceal" },
+    { "<leader>hc",       toggle_conceal,                                                     desc = "[c]onceal toggle" },
     { "<leader>ht",       group = "[t]reesitter" },
     { "<leader>htt",      vim.treesitter.inspect_tree,                                                   desc = "show [t]ree" },
     { "<leader>i",        group = "[i]mage" },
