@@ -45,16 +45,35 @@ return {
       table.insert(vimgrep_arguments, '--glob')
       table.insert(vimgrep_arguments, '!docs/*')
 
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_site/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!*_files/libs/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!.obsidian/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!.quarto/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_freeze/*')
+
       telescope.setup {
         defaults = {
           buffer_previewer_maker = new_maker,
           vimgrep_arguments = vimgrep_arguments,
           file_ignore_patterns = {
-            'node_modules',
+            'node%_modules',
             '%_cache',
-            '.git/',
-            'site_libs',
-            '.venv',
+            '%.git/',
+            'site%_libs',
+            '%.venv/',
+            '%_files/libs/',
+            '%.obsidian/',
+            '%.quarto/',
+            '%_freeze/',
           },
           layout_strategy = 'flex',
           sorting_strategy = 'ascending',
@@ -203,7 +222,7 @@ return {
     },
     config = function()
       require('nvim-tree').setup {
-        disable_netrw = true,
+        disable_netrw = false,
         update_focused_file = {
           enable = true,
         },
