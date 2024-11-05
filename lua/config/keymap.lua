@@ -46,7 +46,7 @@ function _G.set_terminal_keymaps()
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+---vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local nmap = function(key, effect)
   vim.keymap.set('n', key, effect, { silent = true, noremap = true })
@@ -82,16 +82,6 @@ nmap('<s-cr>', '<Plug>SlimeSendCell')
 imap('<c-cr>', '<esc><Plug>SlimeSendCell<cr>i')
 imap('<s-cr>', '<esc><Plug>SlimeSendCell<cr>i')
 
--- send code with Enter and leader Enter
-vmap('<cr>', '<Plug>SlimeRegionSend')
-nmap('<leader><cr>', '<Plug>SlimeSendCell')
-
--- list hidden buffers
-nmap('<leader>ls', ':ls!<cr>')
-nmap('<leader>vh', ':execute "h " . expand("<cword>")<cr>')
-
--- source entire file
-nmap('<leader>xx', ':w<cr>:source %<cr>')
 
 -- keep selection after indent/dedent
 vmap('>', '>gv')
@@ -133,110 +123,99 @@ nmap('<c-k>', '<c-w>k')
 nmap('H', '<cmd>tabprevious<cr>')
 nmap('L', '<cmd>tabnext<cr>')
 
--- R bindings added by JG
--- imap("<C-n>", "%>%")
-
-local function open_plugin()
-  local word = vim.fn.expand('<cWORD>')
-  -- url = string.match(url, '".+"')
-  local url = string.match(word, '%b""')
-  if url ~= nil then
-    url = string.gsub(url, '["\']', '')
-  else
-    url = string.match(word, "%b''")
-    if url ~= nil then
-      url = string.gsub(url, '["\']', '')
-    end
-  end
-  url = 'https://github.com/' .. url
-  local cmd = "!brave-browser " .. url
-  vim.cmd(cmd)
-end
-
-vim.keymap.set('n', '<leader>vp', open_plugin)
-
 --show kepbindings with whichkey
 --add your own here if you want them to
 --show up in the popup as well
-wk.register(
-  {
-    c = {
-      name = 'code',
-      c = { ':SlimeSendCurrentLine<cr>', 'run line' },
-      n = {  ':vsplit term://$SHELL<cr>', 'new terminal' },
-      r = {  ':vsplit term://R<cr>', 'new R terminal' },
-      p = {  ':vsplit term://python<cr>', 'new python terminal' },
-      i = {  ':vsplit term://ipython<cr>', 'new ipython terminal' },
-      s = {  ':echo b:terminal_job_id<cr>', 'show terminal id' },
-    },
-    v = {
-      name = 'vim',
-      t = { switchTheme, 'switch theme' },
-      l = { ':Lazy<cr>', 'Lazy' },
-      s = { ':e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>', 'Settings' },
-    },
-    q = {
-      name = 'quarto',
-      p = { ":lua require'quarto'.quartoPreview()<cr>", 'preview' },
-      q = { ":lua require'quarto'.quartoClosePreview()<cr>", 'close' },
-      h = { ":QuartoHelp ", 'help' },
-      e = { ":lua require'otter'.export()<cr>", 'export' },
-      E = { ":lua require'otter'.export(true)<cr>", 'export overwrite' },
-    },
-    f = {
-      name = 'find (telescope)',
-      f = { '<cmd>Telescope find_files<cr>', 'files' },
-      h = { '<cmd>Telescope help_tags<cr>', 'help' },
-      k = { '<cmd>Telescope keymaps<cr>', 'keymaps' },
-      g = { "<cmd>Telescope live_grep<cr>", "grep" },
-      b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "fuzzy" },
-      m = { "<cmd>Telescope marks<cr>", "marks" },
-      M = { "<cmd>Telescope man_pages<cr>", "man pages" },
-      c = { "<cmd>Telescope git_commits<cr>", "git commits" },
-      d = { "<cmd>Telescope buffers<cr>", "buffers" },
-      q = { "<cmd>Telescope quickfix<cr>", "quickfix" },
-      l = { "<cmd>Telescope loclist<cr>", "loclist" },
-      j = { "<cmd>Telescope jumplist<cr>", "marks" },
-      p = { "<cmd>Telescope project<cr>", "project" },
-    },
-    w = {
-      name = 'write',
-      w = { ":w<cr>", "write" },
-    },
-  }, { mode = 'n', prefix = '<leader>' }
+wk.add(
+{
+    { "<leader><cr>", "<Plug>SlimeSendCell", desc = "Run cell"},
+    { "<leader>c", group = "code" },
+    { "<leader>cc", ":SlimeSendCurrentLine<cr>", desc = "run line" },
+    { "<leader>cvi", ":vsplit term://ipython<cr>", desc = "new ipython terminal" },
+    { "<leader>cvn", ":vsplit term://$SHELL<cr>", desc = "new terminal" },
+    { "<leader>cvp", ":vsplit term://python<cr>", desc = "new python terminal" },
+    { "<leader>cvr", ":vsplit term://R<cr>", desc = "new R terminal" },
+    { "<leader>cti", ":tabnew term://ipython<cr>", desc = "new ipython terminal" },
+    { "<leader>ctn", ":tabnew term://$SHELL<cr>", desc = "new terminal" },
+    { "<leader>ctp", ":tabnew term://python<cr>", desc = "new python terminal" },
+    { "<leader>ctr", ":tabnew term://R<cr>", desc = "new R terminal" },
+    { "<leader>cs", ":echo b:terminal_job_id<cr>", desc = "show terminal id" },
+
+    { "<leader>d", group = "add chunck"},
+    { "<leader>dc", "<Plug>SlimeSendCell", desc = "run cell" },
+    { "<leader>dr", "o```{r}<cr>```<esc>O", desc = "r code chunk"},
+    { "<leader>dp", "o```{python}<cr>```<esc>O", desc = "python code chunk"},
+
+    { "<leader>f", group = "find (telescope)" },
+    { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "man pages" },
+    { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "fuzzy" },
+    { "<leader>fc", "<cmd>Telescope git_commits<cr>", desc = "git commits" },
+    { "<leader>fd", "<cmd>Telescope buffers<cr>", desc = "buffers" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "files" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "grep" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "help" },
+    { "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "marks" },
+    { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "keymaps" },
+    { "<leader>fl", "<cmd>Telescope loclist<cr>", desc = "loclist" },
+    { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "marks" },
+    { "<leader>fp", "<cmd>Telescope project<cr>", desc = "project" },
+    { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "quickfix" },
+
+    { "<leader>q", group = "quarto" },
+    { "<leader>qr", ":!quarto render % <cr>", desc = "render" },
+    { "<leader>qp", ":!quarto preview % <cr>", desc = "preview" },
+    { "<leader>qq", ":lua require'quarto'.quartoClosePreview()<cr>", desc = "close" },
+
+    { "<leader>v", group = "vim" },
+    { "<leader>vl", ":Lazy<cr>", desc = "Lazy" },
+    { "<leader>vs", ":e $MYVIMRC | :cd %:p:h | split . | wincmd k<cr>", desc = "Settings" },
+    { "<leader>vt", switchTheme, desc = "switch theme" },
+
+    { "<leader>w", group = "write" },
+    { "<leader>ww", ":w<cr>", desc = "write" },
+
+    { "<leader>t", group = "tab"},
+    { "<leader>tn", ":tabnew<cr>", desc = "[n]ew tab" },
+    { "<leader>tc", ":tabclose<cr>", desc = "[c]lose tab" },
+    { "<leader>to", ":tabonly<cr>", desc = "close [o]ther tabs" },
+    { "<leader>ts", ":tab split<cr>", desc = "[s]plit tab" },
+    { "<leader>te", ":tabnext<cr>", desc = "n[e]xt tab" },
+  }
 )
 
 -- normal mode
-wk.register({
-  ['gx']            = { ':!xdg-open <c-r><c-a><cr>', 'open file' },
-  ["<c-q>"]         = { '<cmd>q<cr>', 'close buffer' },
-  ['<esc>']         = { '<cmd>noh<cr>', 'remove search highlight' },
-  ['n']             = { 'nzzzv', 'center search' },
-  ['gN']            = { 'Nzzzv', 'center search' },
-  ['gl']            = { '<c-]>', 'open help link' },
-  ['gf']            = { ':e <cfile><CR>', 'edit file' },
-  ['co']            = { 'o#%%<cr>', 'new code chunk below' },
-  ['cO']            = { 'O#%%<cr>', 'new code chunk above' },
-  ['<m-i>']         = { 'o```{r}<cr>```<esc>O', "r code chunk" },
-  ['<cm-i>']        = { 'o```{python}<cr>```<esc>O', "python code chunk" },
-  ['<m-I>']         = { 'o```{python}<cr>```<esc>O', "python code chunk" },
-}, { mode = 'n' })
+wk.add({
+    { "<c-q>", "<cmd>q<cr>", desc = "close buffer" },
+    { "<cm-i>", "o```{python}<cr>```<esc>O", desc = "python code chunk" },
+    { "<esc>", "<cmd>noh<cr>", desc = "remove search highlight" },
+    { "<m-I>", "o```{python}<cr>```<esc>O", desc = "python code chunk" },
+    { "<m-i>", "o```{r}<cr>```<esc>O", desc = "r code chunk" },
+    { "cO", "O#%%<cr>", desc = "new code chunk above" },
+    { "co", "o#%%<cr>", desc = "new code chunk below" },
+    { "gN", "Nzzzv", desc = "center search" },
+    { "gf", ":e <cfile><CR>", desc = "edit file" },
+    { "gl", "<c-]>", desc = "open help link" },
+    { "gx", ":!xdg-open <c-r><c-a><cr>", desc = "open file" },
+    { "n", "nzzzv", desc = "center search" },
+  })
+
 
 -- visual mode
-wk.register({
-  ['<cr>'] = { '<Plug>SlimeRegionSend', 'run code region' },
-}, { mode = 'v' })
+wk.add({
+    { "<cr>", "<Plug>SlimeRegionSend", desc = "run code region", mode = "v" },
+    { "<leader><leader>", "<Plug>SlimeRegionSend", desc = "run code region", mode = "v" },
+  }
+)
 
-wk.register({
-  ['<leader>'] = { '<Plug>SlimeRegionSend', 'run code region' },
-}, { mode = 'v', prefix = "<leader>" })
-
-wk.register({
-  ['<m-->'] = { ' <- ', "assign" },
-  ['<m-m>'] = { ' %>%', "pipe" },
-  ['<m-i>'] = { '```{r}<cr>```<esc>O', "r code chunk" },
-  ['<cm-i>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
-  ['<m-I>'] = { '<esc>o```{python}<cr>```<esc>O', "r code chunk" },
-}, { mode = 'i' })
+wk.add({
+    {
+      mode = { "i" },
+      { "<cm-i>", "<esc>o```{python}<cr>```<esc>O", desc = "r code chunk" },
+      { "<m-->", " <- ", desc = "assign" },
+      { "<m-I>", "<esc>o```{python}<cr>```<esc>O", desc = "r code chunk" },
+      { "<m-i>", "<esc>o```{r}<cr>```<esc>O", desc = "r code chunk" },
+      { "<m-m>", " %>%", desc = "pipe" },
+    },
+  })
 
 
