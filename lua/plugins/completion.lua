@@ -14,14 +14,23 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       { 'rafamadriz/friendly-snippets' },
-      { 'saghen/blink.compat' },
-      { 'jmbuhr/cmp-pandoc-references',
-        dev = true,
-        ft = {'quarto', 'markdown', 'rmarkdown'},
-        config = function ()
+      {
+        'saghen/blink.compat',
+        dev = false,
+        opts = {
+          impersonate_nvim_cmp = false,
+          enable_events = false,
+          debug = false,
+        },
+      },
+      {
+        'jmbuhr/cmp-pandoc-references',
+        dev = false,
+        ft = { 'quarto', 'markdown', 'rmarkdown' },
+        config = function()
           vim.api.nvim_create_autocmd('FileType', {
-            pattern = {"markdown", "quarto", "rmarkdown"},
-            callback = function ()
+            pattern = { "markdown", "quarto", "rmarkdown" },
+            callback = function()
               require('cmp-pandoc-references.lsp').start()
             end
           })

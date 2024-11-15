@@ -7,12 +7,11 @@ return {
     lazy = false,
     opts = {
       styles = {},
-      -- disables hungry features for files larget than 1.5MB
       bigfile = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
       statuscolumn = { enabled = false },
-      words = { enabled = true },
+      words = { enabled = false },
     },
   },
 }
