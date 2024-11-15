@@ -7,8 +7,99 @@ return {
     end,
   },
 
+  { -- new completion plugin
+    'saghen/blink.cmp',
+    enabled = true,
+    lazy = false, -- lazy loading handled internally
+    -- optional: provides snippets for the snippet source
+    dependencies = {
+      { 'rafamadriz/friendly-snippets' },
+      {
+        'saghen/blink.compat',
+        dev = false,
+        opts = {
+          impersonate_nvim_cmp = false,
+          enable_events = false,
+          debug = false,
+        },
+      },
+      {
+        'jmbuhr/cmp-pandoc-references',
+        dev = false,
+        ft = { 'quarto', 'markdown', 'rmarkdown' },
+        config = function()
+          vim.api.nvim_create_autocmd('FileType', {
+            pattern = { "markdown", "quarto", "rmarkdown" },
+            callback = function()
+              require('cmp-pandoc-references.lsp').start()
+            end
+          })
+        end
+      },
+      { 'hrsh7th/cmp-emoji' },
+      { 'kdheepak/cmp-latex-symbols' },
+    },
+
+    -- use a release tag to download pre-built binaries
+    version = 'v0.*',
+    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' for mappings similar to built-in completion
+      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+      -- see the "default configuration" section below for full documentation on how to define
+      -- your own keymap.
+      keymap = { preset = 'enter' },
+
+      sources = {
+        completion = {
+          enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev", "references", "emoji", "symbols" },
+        },
+        providers = {
+          -- dont show LuaLS require statements when lazydev has items
+          lsp = { fallback_for = { "lazydev" } },
+          lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+          -- references = {
+          --   name = "pandoc_references",
+          --   module = "blink.compat.source",
+          --   opts = {
+          --     impersonate_nvim_cmp = true,
+          --     enable_events = true,
+          --     debug = true,
+          --   }
+          -- },
+          emoji = { name = "emoji", module = "blink.compat.source" },
+          symbols = { name = "symbols", module = "blink.compat.source" },
+        },
+      },
+
+      highlight = {
+        -- sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release, assuming themes add support
+        use_nvim_cmp_as_default = true,
+      },
+      -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- adjusts spacing to ensure icons are aligned
+      nerd_font_variant = 'mono',
+
+      -- experimental auto-brackets support
+      accept = { auto_brackets = { enabled = true } },
+
+      -- experimental signature help support
+      trigger = { signature_help = { enabled = true } },
+    }
+  },
+
   { -- completion
     'hrsh7th/nvim-cmp',
+    enabled = false,
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
@@ -154,7 +245,7 @@ return {
 
   { -- gh copilot
     'zbirenbaum/copilot.lua',
-    enabled = false,
+    enabled = true,
     config = function()
       require('copilot').setup {
         suggestion = {
@@ -177,6 +268,7 @@ return {
 
   { -- LLMs
     "olimorris/codecompanion.nvim",
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",

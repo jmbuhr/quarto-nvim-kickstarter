@@ -1,4 +1,14 @@
 return {
+
+  { -- nice quickfix list
+    'stevearc/quicker.nvim',
+    event = "FileType qf",
+    opts = {},
+  },
+  { -- more qf improvements
+    'romainl/vim-qf'
+  },
+
   -- telescope
   -- a nice seletion UI also to find and open files
   {
@@ -273,7 +283,7 @@ return {
     },
     opts = {
       providers = {
-        priority = { 'markdown', 'lsp',  'norg' },
+        priority = { 'markdown', 'lsp', 'norg' },
         -- Configuration for each provider (3rd party providers are supported)
         lsp = {
           -- Lsp client names to ignore
@@ -374,10 +384,10 @@ return {
     ft = { 'markdown', 'quarto', 'vimwiki' },
     cond = function()
       -- Disable on Windows system
-       return vim.fn.has 'win32' ~= 1 
+      return vim.fn.has 'win32' ~= 1
     end,
     dependencies = {
-       'leafo/magick', -- that's a lua rock
+      'leafo/magick', -- that's a lua rock
     },
     config = function()
       -- Requirements
