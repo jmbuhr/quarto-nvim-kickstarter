@@ -7,8 +7,8 @@ return {
     lazy = false,
     opts = {
       styles = {},
-      bigfile = { enabled = true },
-      notifier = { enabled = true },
+      bigfile = { enabled = true, notify = false },
+      notifier = { enabled = false },
       quickfile = { enabled = true },
       statuscolumn = { enabled = false },
       words = { enabled = false },

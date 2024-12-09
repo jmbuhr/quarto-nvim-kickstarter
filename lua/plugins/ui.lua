@@ -3,11 +3,14 @@ return {
   { -- nice quickfix list
     'stevearc/quicker.nvim',
     event = "FileType qf",
-    opts = {},
+    opts = {
+      winfixheight = false,
+      wrap = true,
+    },
   },
-  { -- more qf improvements
-    'romainl/vim-qf'
-  },
+  -- { -- more qf improvements
+  --   'romainl/vim-qf'
+  -- },
 
   -- telescope
   -- a nice seletion UI also to find and open files
@@ -229,7 +232,7 @@ return {
     'nvim-tree/nvim-tree.lua',
     enabled = true,
     keys = {
-      { '<c-b>', ':NvimTreeToggle<cr>', desc = 'toggle nvim-tree' },
+      { '<leader>ft', ':NvimTreeToggle<cr>', desc = 'toggle file [t]ree' },
     },
     config = function()
       require('nvim-tree').setup {

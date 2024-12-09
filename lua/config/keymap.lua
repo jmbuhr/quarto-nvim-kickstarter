@@ -321,7 +321,7 @@ local function toggle_conceal()
   end
 end
 
-
+-- eval "$(tmux showenv -s DISPLAY)"
 -- normal mode with <leader>
 wk.add({
   {
@@ -335,6 +335,8 @@ wk.add({
     { "<leader>d",        group = "[d]ebug" },
     { "<leader>dt",       group = "[t]est" },
     { "<leader>e",        group = "[e]dit" },
+    { "<leader>e",        group = "[t]mux" },
+    { "<leader>fd",       [[eval "$(tmux showenv -s DISPLAY)"]],                                                               desc = "[d]isplay fix" },
     { "<leader>f",        group = "[f]ind (telescope)" },
     { "<leader>f<space>", "<cmd>Telescope buffers<cr>",                                                  desc = "[ ] buffers" },
     { "<leader>fM",       "<cmd>Telescope man_pages<cr>",                                                desc = "[M]an pages" },
@@ -363,7 +365,7 @@ wk.add({
     { "<leader>gws",      ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",       desc = "worktree switch" },
     { "<leader>h",        group = "[h]elp / [h]ide / debug" },
     { "<leader>hc",       group = "[c]onceal" },
-    { "<leader>hc",       toggle_conceal,                                                     desc = "[c]onceal toggle" },
+    { "<leader>hc",       toggle_conceal,                                                                desc = "[c]onceal toggle" },
     { "<leader>ht",       group = "[t]reesitter" },
     { "<leader>htt",      vim.treesitter.inspect_tree,                                                   desc = "show [t]ree" },
     { "<leader>i",        group = "[i]mage" },

@@ -28,12 +28,12 @@ return {
         dev = false,
         ft = { 'quarto', 'markdown', 'rmarkdown' },
         config = function()
-          vim.api.nvim_create_autocmd('FileType', {
-            pattern = { "markdown", "quarto", "rmarkdown" },
-            callback = function()
-              require('cmp-pandoc-references.lsp').start()
-            end
-          })
+          -- vim.api.nvim_create_autocmd('FileType', {
+          --   pattern = { "markdown", "quarto", "rmarkdown" },
+          --   callback = function()
+          --     require('cmp-pandoc-references.lsp').start()
+          --   end
+          -- })
         end
       },
       { 'hrsh7th/cmp-emoji' },
