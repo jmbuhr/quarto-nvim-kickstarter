@@ -265,15 +265,16 @@ return {
       -- Add additional languages here.
       -- See `:h lspconfig-all` for the configuration.
       -- Like e.g. Haskell:
-      -- lspconfig.hls.setup {
-      --   capabilities = capabilities,
-      --   flags = lsp_flags
-      -- }
+      lspconfig.hls.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+        filetypes = { 'haskell', 'lhaskell', 'cabal' },
+      }
 
-      -- lspconfig.clangd.setup {
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      -- }
+      lspconfig.clangd.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
 
       lspconfig.rust_analyzer.setup{
         capabilities = capabilities,
