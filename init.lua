@@ -22,4 +22,3 @@ require 'config.redir'
 
 vim.treesitter.language.register("markdown", 'quarto')
 vim.treesitter.language.register("markdown", 'text')
-
