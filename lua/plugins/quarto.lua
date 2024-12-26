@@ -4,7 +4,7 @@ return {
     -- for complete functionality (language features)
     'quarto-dev/quarto-nvim',
     ft = { 'quarto' },
-    dev = true,
+    dev = false,
     opts = {
       codeRunner = {
         enabled = true,
