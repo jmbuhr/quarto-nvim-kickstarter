@@ -14,18 +14,6 @@ return {
     -- optional: provides snippets for the snippet source
     dependencies = {
       { 'rafamadriz/friendly-snippets' },
-      {'L3MON4D3/LuaSnip',
-        config = function ()
-          local luasnip = require 'luasnip'
-          -- for friendly snippets
-          require('luasnip.loaders.from_vscode').lazy_load()
-          -- for custom snippets
-          require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.fn.stdpath 'config' .. '/snips' } }
-          -- link quarto and rmarkdown to markdown snippets
-          luasnip.filetype_extend('quarto', { 'markdown' })
-          luasnip.filetype_extend('rmarkdown', { 'markdown' })
-        end
-      },
       {
         'saghen/blink.compat',
         dev = false,
@@ -33,8 +21,8 @@ return {
       },
       {
         'jmbuhr/cmp-pandoc-references',
-        dev = false,
-        ft = { 'quarto', 'markdown', 'rmarkdown' },
+        dev = true,
+        -- ft = { 'quarto', 'markdown', 'rmarkdown' },
       },
       {
         "allaman/emoji.nvim",
@@ -42,52 +30,47 @@ return {
       },
       { 'kdheepak/cmp-latex-symbols' },
     },
-
     -- use a release tag to download pre-built binaries
-    version = 'v0.*',
-    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
-    -- If you use nix, you can build from source using latest nightly rust with:
-    -- build = 'nix run .#build-plugin',
-
+    -- version = 'v0.*',
+    build = 'cargo build --release',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- 'default' for mappings similar to built-in completion
-      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-      -- see the "default configuration" section below for full documentation on how to define
-      -- your own keymap.
       keymap = { preset = 'enter' },
-      snippets = {
-        expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require('luasnip').jumpable(filter.direction)
-          end
-          return require('luasnip').in_snippet()
-        end,
-        jump = function(direction) require('luasnip').jump(direction) end,
-      },
       sources = {
-        completion = {
-          enabled_providers = { "lsp", "path", "luasnip", "buffer", "lazydev", "pandoc_references", "emoji", "latex_symbols", "codecompanion", }
-        },
+        default = { "lsp", "path", "references", "snippets", "lazydev", "emoji", "latex_symbols", "codecompanion", "buffer" },
+        cmdline = {},
         providers = {
           lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-          pandoc_references = { name = "pandoc_references", module = "blink.compat.source", opts = {impersonate_nvim_cmp = true} },
+          references = { name = "references", module = "cmp-pandoc-references.blink" },
           emoji = { name = "emoji", module = "blink.compat.source", opts = {impersonate_nvim_cmp = true} },
           latex_symbols = { name = "latex_symbols", module = "blink.compat.source", opts = {impersonate_nvim_cmp = true} },
           codecompanion = { name = 'CodeCompanion', module = 'codecompanion.providers.completion.blink', enabled = true },
         },
       },
-
-      highlight = {
-        use_nvim_cmp_as_default = true,
+      completion = {
+        accept = { auto_brackets = { enabled = true } },
+        menu = {
+          draw = {
+            treesitter = {'lsp'},
+            columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, {'source_name'} },
+            components = {
+              label_description = {
+                width = { max = 30 },
+                text = function(ctx)
+                  -- print(vim.inspect(ctx.label_description()))
+                  return ctx.label_description
+                end,
+                highlight = 'BlinkCmpLabelDescription',
+              },
+            },
+          },
+        },
       },
-      nerd_font_variant = 'mono',
-      completion = { accept = { auto_brackets = { enabled = true } } },
       signature = { enabled = true },
+      appearance = {
+        use_nvim_cmp_as_default = false,
+      }
     }
   },
 
@@ -284,6 +267,10 @@ return {
             adapter = "copilot",
           },
         },
+        diff = {
+          enabled = true,
+          close_chat_at = 40
+        }
       })
     end
   }

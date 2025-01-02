@@ -180,6 +180,11 @@ return {
         filetypes = { 'js', 'javascript', 'typescript', 'ojs' },
       }
 
+      lspconfig.svelte.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
+
       local function get_quarto_resource_path()
         local function strsplit(s, delimiter)
           local result = {}

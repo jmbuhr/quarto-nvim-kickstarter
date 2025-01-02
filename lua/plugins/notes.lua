@@ -22,7 +22,7 @@ return {
   {
     'epwalsh/obsidian.nvim',
     enabled = true,
-    ft = 'markdown',
+    -- ft = 'markdown',
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
@@ -49,6 +49,10 @@ return {
       require('obsidian').setup {
         ui = {
           enable = false,
+        },
+        completion = {
+          nvim_cmp = false,
+          min_chars = 2,
         },
         workspaces = {
           {
