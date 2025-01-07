@@ -22,7 +22,7 @@ return {
   {
     'epwalsh/obsidian.nvim',
     enabled = true,
-    -- ft = 'markdown',
+    ft = 'markdown',
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
@@ -43,6 +43,7 @@ return {
       { '<leader>ns', ':ObsidianSearch<cr>',      desc = 'obsidian [s]earch' },
       { '<leader>no', ':ObsidianQuickSwitch<cr>', desc = 'obsidian [o]pen quickswitch' },
       { '<leader>nO', ':ObsidianOpen<cr>',        desc = 'obsidian [O]pen in app' },
+      -- { '<leader>nO', ':ObsidianToggleCheckbox<cr>', desc = 'obsidian toggle checkbox' },
     },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
