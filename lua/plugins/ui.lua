@@ -17,7 +17,7 @@ return {
       --- Put your configuration here
       ---@type Neominimap.UserConfig
       vim.g.neominimap = {
-        auto_enable = true,
+        auto_enable = false,
       }
     end,
   },
@@ -45,7 +45,7 @@ return {
       {
         'jmbuhr/telescope-zotero.nvim',
         enabled = true,
-        dev = true,
+        dev = false,
         dependencies = {
           { 'kkharji/sqlite.lua' },
         },

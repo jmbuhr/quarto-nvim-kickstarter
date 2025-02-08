@@ -10,8 +10,8 @@ return {
   { -- new completion plugin
     'saghen/blink.cmp',
     enabled = true,
-    -- version = 'v0.*',
-    dev = true,
+    version = 'v0.*',
+    dev = false,
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     lazy = false, -- lazy loading handled internally
@@ -43,6 +43,11 @@ return {
         cmdline = {
           enabled = false,
         },
+        min_keyword_length = function(ctx)
+          -- only applies when typing a command, doesn't apply to arguments
+          if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+          return 0
+        end,
         providers = {
           emoji = {
             module = "blink-emoji",
@@ -77,7 +82,13 @@ return {
           auto_show_delay_ms = 100,
           treesitter_highlighting = true,
         },
-        menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end },
+        menu = {
+          auto_show = function(ctx)
+            vim.print('hello')
+            vim.print(vim.fn.getcmdtype())
+            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+          end,
+        },
       },
       signature = { enabled = true }
     },

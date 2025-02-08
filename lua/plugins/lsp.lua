@@ -3,7 +3,7 @@ return {
 
   { -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = true,
+    dev = false,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
