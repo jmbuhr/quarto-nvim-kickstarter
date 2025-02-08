@@ -85,8 +85,8 @@ vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y
 vim.opt.cmdheight = 1
 
 -- split right and below by default
-vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 --tabline
 vim.opt.showtabline = 1

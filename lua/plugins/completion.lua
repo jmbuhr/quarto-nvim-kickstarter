@@ -10,6 +10,10 @@ return {
   { -- new completion plugin
     'saghen/blink.cmp',
     enabled = true,
+    -- version = 'v0.*',
+    dev = true,
+    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
     lazy = false, -- lazy loading handled internally
     -- optional: provides snippets for the snippet source
     dependencies = {
@@ -27,13 +31,13 @@ return {
       },
       { 'kdheepak/cmp-latex-symbols' },
     },
-    version = 'v0.*',
-    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      keymap = { preset = 'enter' },
+      keymap = {
+        preset = 'enter',
+        ['<c-y>'] = { 'show_documentation', 'hide_documentation' },
+      },
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer", "emoji" },
         cmdline = {
@@ -70,7 +74,7 @@ return {
       completion = {
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 500,
+          auto_show_delay_ms = 100,
           treesitter_highlighting = true,
         },
         menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end },
@@ -104,6 +108,7 @@ return {
 
   { -- LLMs
     "olimorris/codecompanion.nvim",
+    version = "*",
     enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -112,25 +117,29 @@ return {
     },
     keys = {
       { '<leader>ac', ':CodeCompanionChat Toggle<cr>', desc = '[a]i [c]hat' },
-      { '<leader>aa', ':CodeCompanionActions<cr>', desc = '[a]i [a]actions' },
+      { '<leader>aa', ':CodeCompanionActions<cr>',     desc = '[a]i [a]actions' },
     },
     config = function()
       require("codecompanion").setup({
+        display = {
+          diff = {
+            enabled = true,
+          },
+        },
         strategies = {
           chat = {
+            -- adapter = "ollama",
             adapter = "copilot",
           },
           inline = {
+            -- adapter = "ollama",
             adapter = "copilot",
           },
           agent = {
+            -- adapter = "ollama",
             adapter = "copilot",
           },
         },
-        diff = {
-          enabled = true,
-          close_chat_at = 40
-        }
       })
     end
   }

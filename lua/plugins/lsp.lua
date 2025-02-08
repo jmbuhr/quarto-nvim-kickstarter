@@ -1,9 +1,7 @@
 
 return {
 
-  {
-
-    -- for lsp features in code cells / embedded code
+  { -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
     dev = true,
     dependencies = {
@@ -13,10 +11,11 @@ return {
       },
     },
     opts = {
-      verbose = {
-        no_code_found = false,
+      buffers = {
+        -- set_filetype = true,
+        -- write_to_disk = true
       }
-    },
+    }
   },
 
   {
@@ -104,10 +103,10 @@ return {
         debounce_text_changes = 150,
       }
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-      capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+      local capabilities = require('blink.cmp').get_lsp_capabilities({}, true)
 
       -- also needs:
       -- $home/.config/marksman/config.toml :
@@ -136,15 +135,15 @@ return {
         flags = lsp_flags,
       }
 
-      lspconfig.html.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
+      -- lspconfig.html.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
 
-      lspconfig.emmet_language_server.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
+      -- lspconfig.emmet_language_server.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
 
       lspconfig.svelte.setup {
         capabilities = capabilities,
@@ -275,6 +274,11 @@ return {
         flags = lsp_flags,
      }
 
+      -- lspconfig.ruff.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
+
       -- lspconfig.ruff_lsp.setup {
       --   capabilities = capabilities,
       --   flags = lsp_flags,
@@ -306,6 +310,7 @@ return {
           return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or util.path.dirname(fname)
         end,
       }
+
     end,
   },
 }

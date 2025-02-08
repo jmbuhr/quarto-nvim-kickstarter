@@ -1,5 +1,27 @@
 return {
 
+  ---@module "neominimap.config.meta"
+  {
+    "Isrothy/neominimap.nvim",
+    version = "v3.*.*",
+    enabled = true,
+    dependencies = {
+      'lewis6991/gitsigns.nvim',
+    },
+    -- Optional
+    init = function()
+      -- The following options are recommended when layout == "float"
+      vim.opt.wrap = false
+      vim.opt.sidescrolloff = 36 -- Set a large value
+
+      --- Put your configuration here
+      ---@type Neominimap.UserConfig
+      vim.g.neominimap = {
+        auto_enable = true,
+      }
+    end,
+  },
+
   { -- nice quickfix list
     'stevearc/quicker.nvim',
     event = "FileType qf",
@@ -23,7 +45,7 @@ return {
       {
         'jmbuhr/telescope-zotero.nvim',
         enabled = true,
-        dev = false,
+        dev = true,
         dependencies = {
           { 'kkharji/sqlite.lua' },
         },
@@ -60,6 +82,12 @@ return {
 
       table.insert(vimgrep_arguments, '--glob')
       table.insert(vimgrep_arguments, '!_site/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_reference/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_inv/*')
 
       table.insert(vimgrep_arguments, '--glob')
       table.insert(vimgrep_arguments, '!*_files/libs/*')
@@ -110,7 +138,7 @@ return {
               'rg',
               '--files',
               '--hidden',
-              '--no-ignore',
+              -- '--no-ignore',
               '--glob',
               '!.git/*',
               '--glob',
@@ -302,9 +330,6 @@ return {
 
   { -- or show symbols in the current file as breadcrumbs
     'Bekaboo/dropbar.nvim',
-    enabled = function()
-      return vim.fn.has 'nvim-0.10' == 1
-    end,
     dependencies = {
       'nvim-telescope/telescope-fzf-native.nvim',
     },
