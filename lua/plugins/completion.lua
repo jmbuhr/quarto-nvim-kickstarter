@@ -40,14 +40,7 @@ return {
       },
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer", "emoji" },
-        cmdline = {
-          enabled = false,
-        },
-        min_keyword_length = function(ctx)
-          -- only applies when typing a command, doesn't apply to arguments
-          if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
-          return 0
-        end,
+        cmdline = {},
         providers = {
           emoji = {
             module = "blink-emoji",
@@ -83,11 +76,7 @@ return {
           treesitter_highlighting = true,
         },
         menu = {
-          auto_show = function(ctx)
-            vim.print('hello')
-            vim.print(vim.fn.getcmdtype())
-            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
-          end,
+          auto_show = true
         },
       },
       signature = { enabled = true }
