@@ -5,6 +5,10 @@ return {
     'quarto-dev/quarto-nvim',
     dev = false,
     opts = {
+      lspFeatures = {
+        enabled = true,
+        chunks = "all",
+      },
       codeRunner = {
         enabled = true,
         default_method = "slime"
@@ -138,14 +142,14 @@ return {
     end,
     config = function()
       local init = function()
-        local quarto_cfg = require'quarto.config'.config
+        local quarto_cfg = require 'quarto.config'.config
         quarto_cfg.codeRunner.default_method = "molten"
-        vim.cmd[[MoltenInit]]
+        vim.cmd [[MoltenInit]]
       end
       local deinit = function()
-        local quarto_cfg = require'quarto.config'.config
+        local quarto_cfg = require 'quarto.config'.config
         quarto_cfg.codeRunner.default_method = "slime"
-        vim.cmd[[MoltenDeinit]]
+        vim.cmd [[MoltenDeinit]]
       end
       vim.keymap.set("n", "<localleader>mi", init,
         { silent = true, desc = "Initialize molten" })
@@ -156,9 +160,9 @@ return {
       vim.keymap.set("n", "<localleader>mb", ":MoltenOpenInBrowser<CR>",
         { silent = true, desc = "molten open in browser" })
       vim.keymap.set("n", "<localleader>mh", ":MoltenHideOutput<CR>",
-          { silent = true, desc = "hide output" })
+        { silent = true, desc = "hide output" })
       vim.keymap.set("n", "<localleader>ms", ":noautocmd MoltenEnterOutput<CR>",
-          { silent = true, desc = "show/enter output" })
+        { silent = true, desc = "show/enter output" })
     end,
   },
 }

@@ -20,4 +20,4 @@ require 'config.lazy'
 require 'config.autocommands'
 -- require 'config.redir'
 
-
+vim.cmd.colorscheme 'alabaster'
