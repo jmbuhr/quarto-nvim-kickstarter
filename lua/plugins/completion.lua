@@ -10,14 +10,15 @@ return {
   { -- new completion plugin
     'saghen/blink.cmp',
     enabled = true,
-    version = '*',
-    dev = false,
+    -- version = '*',
+    dev = true,
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-    -- build = 'cargo build --release',
+    build = 'cargo build --release',
     lazy = false,
     dependencies = {
       { 'rafamadriz/friendly-snippets' },
       { 'moyiz/blink-emoji.nvim' },
+      { 'Kaiser-Yang/blink-cmp-git' },
       {
         'saghen/blink.compat',
         dev = false,
@@ -38,7 +39,7 @@ return {
         ['<c-y>'] = { 'show_documentation', 'hide_documentation' },
       },
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "emoji" },
+        default = { "lazydev", "lsp", "path", "git", "snippets", "buffer", "emoji" },
         cmdline = {},
         providers = {
           emoji = {
@@ -51,6 +52,14 @@ return {
             module = "lazydev.integrations.blink",
             -- make lazydev completions top priority (see `:h blink.cmp`)
             score_offset = 100,
+          },
+          git = {
+            module = 'blink-cmp-git',
+            name = 'Git',
+            opts = {},
+            enabled = function()
+                return vim.tbl_contains({ 'octo', 'gitcommit', 'git' }, vim.bo.filetype)
+            end,
           },
           references = {
             name = "pandoc_references",

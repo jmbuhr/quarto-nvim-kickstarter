@@ -1,9 +1,8 @@
-
 return {
 
   { -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = false,
+    dev = true,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
@@ -13,7 +12,7 @@ return {
     opts = {
       buffers = {
         set_filetype = true,
-        write_to_disk = true
+        write_to_disk = false
       }
     }
   },
@@ -52,7 +51,12 @@ return {
 
       require('mason').setup()
       require('mason-lspconfig').setup {
-        automatic_installation = true,
+        automatic_installation = {
+          exclude = {
+            'rust_analyzer',
+          }
+        },
+
       }
       require('mason-tool-installer').setup {
         ensure_installed = {
@@ -88,8 +92,12 @@ return {
           map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
           map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
           map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          map(']d', function () if vim.fn.has("nvim-0.11.0") == 1 then vim.diagnostic.jump({count = 1}) else vim.diagnostic.goto_next() end end,'next [d]iagnostic ')
-          map('[d', function () if vim.fn.has("nvim-1.11.0") == 1 then vim.diagnostic.jump({count = -1}) else vim.diagnostic.goto_prev() end end,'previous [d]iagnostic ')
+          map(']d',
+            function() if vim.fn.has("nvim-0.11.0") == 1 then vim.diagnostic.jump({ count = 1 }) else vim.diagnostic
+                    .goto_next() end end, 'next [d]iagnostic ')
+          map('[d',
+            function() if vim.fn.has("nvim-1.11.0") == 1 then vim.diagnostic.jump({ count = -1 }) else vim.diagnostic
+                    .goto_prev() end end, 'previous [d]iagnostic ')
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
@@ -121,6 +129,7 @@ return {
       lspconfig.r_language_server.setup {
         capabilities = capabilities,
         flags = lsp_flags,
+        filetypes = { 'r', 'rmd', 'rmarkdown' }, -- not directly using it for quarto (as that is handled by otter and often contains more languanges than just R)
         settings = {
           r = {
             lsp = {
@@ -269,15 +278,10 @@ return {
         flags = lsp_flags,
       }
 
-      lspconfig.rust_analyzer.setup{
+      lspconfig.rust_analyzer.setup {
         capabilities = capabilities,
         flags = lsp_flags,
-     }
-
-      -- lspconfig.ruff.setup {
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      -- }
+      }
 
       -- lspconfig.ruff_lsp.setup {
       --   capabilities = capabilities,
@@ -307,10 +311,9 @@ return {
           },
         },
         root_dir = function(fname)
-          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or util.path.dirname(fname)
+          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname)
         end,
       }
-
     end,
   },
 }

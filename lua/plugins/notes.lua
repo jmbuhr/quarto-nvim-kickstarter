@@ -22,12 +22,14 @@ return {
   {
     'epwalsh/obsidian.nvim',
     enabled = true,
+    -- lazy = false,
+    ft = 'markdown',
     dependencies = {
-      'nvim-lua/plenary.nvim',
+     'nvim-lua/plenary.nvim',
     },
     keys = {
       { '<leader>nd', ':ObsidianToday<cr>',       desc = 'obsidian [d]aily' },
-      { '<leader>nt', ':ObsidianToday 1<cr>',     desc = 'obsidian [t]omorrow' },
+      { '<leader>nt', ':e ~/notes/readme.md<cr>',     desc = 'obsidian [t]odo' },
       { '<leader>ny', ':ObsidianToday -1<cr>',    desc = 'obsidian [y]esterday' },
       { '<leader>nb', ':ObsidianBacklinks<cr>',   desc = 'obsidian [b]acklinks' },
       { '<leader>nl', ':ObsidianLink<cr>',        desc = 'obsidian [l]ink selection' },
