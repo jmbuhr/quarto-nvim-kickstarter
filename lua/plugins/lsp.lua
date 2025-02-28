@@ -2,19 +2,14 @@ return {
 
   { -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = true,
+    dev = false,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter',
       },
     },
-    opts = {
-      buffers = {
-        set_filetype = true,
-        write_to_disk = false
-      }
-    }
+    opts = {}
   },
 
   {
@@ -93,11 +88,23 @@ return {
           map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
           map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
           map(']d',
-            function() if vim.fn.has("nvim-0.11.0") == 1 then vim.diagnostic.jump({ count = 1 }) else vim.diagnostic
-                    .goto_next() end end, 'next [d]iagnostic ')
+            function()
+              if vim.fn.has("nvim-0.11.0") == 1 then
+                vim.diagnostic.jump({ count = 1 })
+              else
+                vim.diagnostic
+                    .goto_next()
+              end
+            end, 'next [d]iagnostic ')
           map('[d',
-            function() if vim.fn.has("nvim-1.11.0") == 1 then vim.diagnostic.jump({ count = -1 }) else vim.diagnostic
-                    .goto_prev() end end, 'previous [d]iagnostic ')
+            function()
+              if vim.fn.has("nvim-1.11.0") == 1 then
+                vim.diagnostic.jump({ count = -1 })
+              else
+                vim.diagnostic
+                    .goto_prev()
+              end
+            end, 'previous [d]iagnostic ')
           map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
           map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
           map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')

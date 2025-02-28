@@ -7,12 +7,10 @@ return {
     lazy = false,
     opts = {
       styles = {},
-      bigfile = { enabled = true, notify = false },
-      notifier = { enabled = false },
-      quickfile = { enabled = true },
-      statuscolumn = { enabled = false },
-      words = { enabled = false },
-      picker = {}
+      bigfile = { notify = false },
+      quickfile = {},
+      picker = {},
+      indent = {}
     },
   },
 }

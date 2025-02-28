@@ -18,6 +18,7 @@
 require 'config.global'
 require 'config.lazy'
 require 'config.autocommands'
--- require 'config.redir'
+require 'config.redir'
 
-vim.cmd.colorscheme 'kanagawa'
+vim.cmd.colorscheme 'rusty'
+vim.api.nvim_set_hl(0, 'TermCursor', { fg = '#A6E3A1', bg = '#A6E3A1' })

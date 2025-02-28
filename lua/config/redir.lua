@@ -140,39 +140,8 @@ vim.api.nvim_create_user_command("Redir", redir, {
   range = true,
   bang = true,
 })
-vim.cmd([[cabbrev R Redir]])
 
-vim.api.nvim_create_user_command("Mes", function()
+vim.api.nvim_create_user_command("Messsages", function()
   vim.cmd("Redir messages")
 end, { bar = true })
-vim.cmd([[cabbrev M Mes]])
 
-local function evaler(range)
-  return function(bang)
-    local line = vim.fn.getline(1)
-    local it = string.match(line, "^#!(.*)")
-
-    local cmd = string.format("%sRedir%s !", range, bang and "!" or "")
-
-    if it and it ~= "" then
-      vim.cmd(cmd .. it)
-    else
-      vim.fn.feedkeys(":" .. cmd, "tn")
-    end
-  end
-end
-
-vim.api.nvim_create_user_command("EvalFile", function(args)
-  local bang = args.bang
-  evaler("%")(bang)
-end, { bar = true, bang = true })
-
-vim.api.nvim_create_user_command("EvalLine", function(args)
-  local bang = args.bang
-  evaler(".")(bang)
-end, { bar = true, bang = true })
-
-vim.api.nvim_create_user_command("EvalRange", function(args)
-  local bang = args.bang
-  evaler("'<,'>")(bang)
-end, { bar = true, bang = true, range = true })

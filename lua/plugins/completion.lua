@@ -26,7 +26,7 @@ return {
       },
       {
         'jmbuhr/cmp-pandoc-references',
-        dev = false,
+        dev = true,
         ft = { 'quarto', 'markdown', 'rmarkdown' },
       },
       { 'kdheepak/cmp-latex-symbols' },
@@ -39,13 +39,13 @@ return {
         ['<c-y>'] = { 'show_documentation', 'hide_documentation' },
       },
       sources = {
-        default = { "lazydev", "lsp", "path", "git", "snippets", "buffer", "emoji" },
+        default = { "lazydev", "lsp", "path", "references", "git", "snippets", "buffer", "emoji" },
         cmdline = {},
         providers = {
           emoji = {
             module = "blink-emoji",
             name = "Emoji",
-            score_offset = 15, -- Tune by preference
+            score_offset = -1,
           },
           lazydev = {
             name = "LazyDev",
@@ -63,7 +63,8 @@ return {
           },
           references = {
             name = "pandoc_references",
-            module = "blink.compat.source",
+            module = "cmp-pandoc-references.blink",
+            score_offset = 2,
           },
           symbols = { name = "symbols", module = "blink.compat.source" },
         },

@@ -79,6 +79,7 @@ local check_image_dependencies = function()
     end
     local v = vim.version.parse(kitty_version)
     local minimal = vim.version.parse '0.30.1'
+    assert(minimal, 'failed to parse version')
     if v and vim.version.cmp(v, minimal) < 0 then
       vim.health.warn 'kitty version is too old'
       return
@@ -107,6 +108,7 @@ local check_image_dependencies = function()
     local version = out:gsub('tmux (%d+%.%d+)([a-z])', '%1.' .. number)
     local v = vim.version.parse(version)
     local minimal = vim.version.parse '3.3.1'
+    assert(minimal, 'failed to parse version')
     if v and vim.version.cmp(v, minimal) < 0 then
       vim.health.warn 'tmux version is too old'
       return
@@ -114,7 +116,7 @@ local check_image_dependencies = function()
   end
 
   -- check if magick luarock is available
-  local ok, magick = pcall(require, 'magick')
+  local ok, _ = pcall(require, 'magick')
   if not ok then
     vim.health.warn 'magick luarock is not available'
     return

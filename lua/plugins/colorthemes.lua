@@ -12,6 +12,17 @@ return {
   },
 
   {
+    "armannikoyan/rusty",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = true,
+      italic_comments = true,
+      underline_current_line = true,
+    },
+  },
+
+  {
     'oxfist/night-owl.nvim',
     enabled = false,
     lazy = false,

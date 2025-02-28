@@ -40,6 +40,8 @@ return {
           lua = { 'mystylua' },
           python = { 'isort', 'black' },
           quarto = { 'injected' },
+          markdown = { 'injected' },
+          r = { 'styler' },
         },
         formatters = {
           mystylua = {
