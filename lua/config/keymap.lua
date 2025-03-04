@@ -103,6 +103,85 @@ local function send_region()
   end
 end
 
+--- Move to the next chunk
+local function move_inside_next_chunk()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local lines = vim.api.nvim_buf_get_lines(0, cursor[1], -1, false)
+
+  for i, line in ipairs(lines) do
+    if line:match("^```{") then
+      vim.api.nvim_win_set_cursor(0, { cursor[1] + i + 1, 0 }) -- Move one line inside
+      return
+    end
+  end
+end
+
+local function send_and_move()
+  send_cell()
+  vim.defer_fn(move_inside_next_chunk, 100) -- Small delay to allow execution
+end
+
+local function jump_to_next_chunk()
+  vim.defer_fn(move_inside_next_chunk, 50)
+end
+
+local function jump_to_previous_chunk()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local lines = vim.api.nvim_buf_get_lines(0, 0, cursor[1] - 1, false) -- Get all lines above cursor
+  local in_chunk = false
+
+  for i = #lines, 1, -1 do
+    if lines[i]:match("^```$") then
+      -- If we hit a chunk end, assume we're inside a chunk and should skip it
+      in_chunk = true
+    elseif lines[i]:match("^```{") then
+      if in_chunk then
+        -- Found the previous chunk header, move the cursor there
+        vim.api.nvim_win_set_cursor(0, { i, 0 })
+        return
+      end
+    end
+  end
+end
+
+--- Evaulate code chunks above this one, but not those with eval: false
+--- Don't run any code in the current chunk either, and run them in order
+local function send_above_chunks()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local lines = vim.api.nvim_buf_get_lines(0, 0, cursor[1] - 1, false) -- Get all lines above cursor
+  local chunks = {}
+  local current_chunk = {}
+  local in_chunk = false
+  local send_chunk = true
+
+  for _, line in ipairs(lines) do
+    if line:match("^```{") then
+      -- Start a new chunk
+      in_chunk = true
+      current_chunk = {} -- Reset chunk (excluding opening line)
+      send_chunk = true  -- Assume it's valid until proven otherwise
+    elseif line:match("^```$") then
+      -- End of a chunk
+      if in_chunk and send_chunk and #current_chunk > 0 then
+        table.insert(chunks, table.concat(current_chunk, "\n")) -- Store valid chunk
+      end
+      in_chunk = false
+      current_chunk = {}
+    elseif in_chunk then
+      -- Inside a chunk, check for eval: false
+      if line:match("^#|%s*eval:%s*false") then
+        send_chunk = false  -- Mark chunk to be skipped
+      end
+      table.insert(current_chunk, line) -- Store chunk content (excluding ```{r})
+    end
+  end
+
+  -- Send all collected chunks in order
+  for _, chunk in ipairs(chunks) do
+    vim.fn['slime#send'](chunk .. "\r")
+  end
+end
+
 -- send code with ctrl+Enter
 -- just like in e.g. RStudio
 -- needs kitty (or other terminal) config:
@@ -310,7 +389,12 @@ wk.add({
     { "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
     { "<leader>d", group = "[d]ebug" },
     { "<leader>dt", group = "[t]est" },
-    { "<leader>e", group = "[e]dit" },
+    { "<leader>e", group = "[e]val code chunks" },
+    { "<leader>ee", send_cell, desc = "[e]val current chunk" },
+    { "<leader>ea", send_above_chunks, desc = "Eval chunk [a]bove" },
+    { "<leader>en", send_and_move, desc = "Eval chunk and move to [n]ext" },
+    { "<leader>ej", jump_to_next_chunk, desc = "[j]ump to next chunk" },
+    { "<leader>ep", jump_to_previous_chunk, desc = "jump to [p]revious chunk" },
     { "<leader>f", group = "[f]ind (telescope)" },
     { "<leader>f<space>", "<cmd>Telescope buffers<cr>", desc = "[ ] buffers" },
     { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "[M]an pages" },
