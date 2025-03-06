@@ -38,9 +38,11 @@ return {
         preset = 'enter',
         ['<c-y>'] = { 'show_documentation', 'hide_documentation' },
       },
+      cmdline = {
+        enabled = false,
+      },
       sources = {
         default = { "lazydev", "lsp", "path", "references", "git", "snippets", "buffer", "emoji" },
-        cmdline = {},
         providers = {
           emoji = {
             module = "blink-emoji",
