@@ -39,13 +39,11 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
-      { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       { 'nvim-telescope/telescope-dap.nvim' },
       {
         'jmbuhr/telescope-zotero.nvim',
-        enabled = true,
-        dev = false,
+        dev = true,
         dependencies = {
           { 'kkharji/sqlite.lua' },
         },
@@ -152,9 +150,6 @@ return {
           },
         },
         extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
           fzf = {
             fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
@@ -164,7 +159,6 @@ return {
         },
       }
       telescope.load_extension 'fzf'
-      telescope.load_extension 'ui-select'
       telescope.load_extension 'dap'
       telescope.load_extension 'zotero'
     end,
