@@ -43,7 +43,7 @@ return {
       { 'nvim-telescope/telescope-dap.nvim' },
       {
         'jmbuhr/telescope-zotero.nvim',
-        dev = true,
+        dev = false,
         dependencies = {
           { 'kkharji/sqlite.lua' },
         },

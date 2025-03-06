@@ -11,7 +11,7 @@ return {
     'saghen/blink.cmp',
     enabled = true,
     -- version = '*',
-    dev = true,
+    dev = false,
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     build = 'cargo build --release',
     lazy = false,
@@ -26,7 +26,7 @@ return {
       },
       {
         'jmbuhr/cmp-pandoc-references',
-        dev = true,
+        dev = false,
         ft = { 'quarto', 'markdown', 'rmarkdown' },
       },
       { 'kdheepak/cmp-latex-symbols' },

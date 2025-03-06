@@ -3,7 +3,7 @@ return {
   { 'nvim-lua/plenary.nvim' },
   {
     "folke/snacks.nvim",
-    dev = true,
+    dev = false,
     priority = 1000,
     lazy = false,
     opts = {
