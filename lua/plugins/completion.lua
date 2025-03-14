@@ -27,6 +27,7 @@ return {
       {
         'jmbuhr/cmp-pandoc-references',
         dev = false,
+        branch = 'main',
         ft = { 'quarto', 'markdown', 'rmarkdown' },
       },
       { 'kdheepak/cmp-latex-symbols' },
