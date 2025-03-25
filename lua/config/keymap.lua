@@ -7,21 +7,24 @@ P = vim.print
 vim.g['quarto_is_r_mode'] = nil
 vim.g['reticulate_running'] = false
 
-local nmap = function(key, effect)
-  vim.keymap.set('n', key, effect, { silent = true, noremap = true })
+local nmap = function(key, effect, desc)
+  vim.keymap.set('n', key, effect, { silent = true, noremap = true, desc = desc })
 end
 
-local vmap = function(key, effect)
-  vim.keymap.set('v', key, effect, { silent = true, noremap = true })
+local vmap = function(key, effect, desc)
+  vim.keymap.set('v', key, effect, { silent = true, noremap = true, desc = desc })
 end
 
-local imap = function(key, effect)
-  vim.keymap.set('i', key, effect, { silent = true, noremap = true })
+local imap = function(key, effect, desc)
+  vim.keymap.set('i', key, effect, { silent = true, noremap = true, desc = desc })
 end
 
-local cmap = function(key, effect)
-  vim.keymap.set('c', key, effect, { silent = true, noremap = true })
+local cmap = function(key, effect, desc)
+  vim.keymap.set('c', key, effect, { silent = true, noremap = true, desc = desc })
 end
+
+-- select last paste
+nmap('gV', '`[v`]')
 
 -- move in command line
 cmap('<C-a>', '<Home>')
