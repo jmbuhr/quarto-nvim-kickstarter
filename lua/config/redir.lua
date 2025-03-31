@@ -1,18 +1,18 @@
 -- by: https://gist.github.com/Leenuus/7a2ea47b88bfe16430b42e4e48122718
 
 vim.g.DEBUG = false
-local log = require("plenary.log").new({
-  plugin = "redir",
-})
+local log = require('plenary.log').new {
+  plugin = 'redir',
+}
 
 local function redir_open_win(buf, vertical, stderr_p)
-  local wn = stderr_p and "redir_sterr_win" or "redir_win"
+  local wn = stderr_p and 'redir_sterr_win' or 'redir_win'
   if vim.g[wn] == nil then
     local win = vim.api.nvim_open_win(buf, true, {
       vertical = vertical,
     })
-    vim.api.nvim_create_autocmd("WinClosed", {
-      pattern = { string.format("%d", win) },
+    vim.api.nvim_create_autocmd('WinClosed', {
+      pattern = { string.format('%d', win) },
       callback = function()
         vim.g[wn] = nil
       end,
@@ -24,10 +24,10 @@ local function redir_open_win(buf, vertical, stderr_p)
 end
 
 local function redir_vim_command(cmd, vertical)
-  vim.cmd("redir => output")
-  vim.cmd("silent " .. cmd)
-  vim.cmd("redir END")
-  local output = vim.fn.split(vim.g.output, "\n")
+  vim.cmd 'redir => output'
+  vim.cmd('silent ' .. cmd)
+  vim.cmd 'redir END'
+  local output = vim.fn.split(vim.g.output, '\n')
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buf, 0, 0, false, output)
 
@@ -36,8 +36,8 @@ end
 
 local function redir_shell_command(cmd, lines, vertical, stderr_p)
   local shell_cmd = {
-    "sh",
-    "-c",
+    'sh',
+    '-c',
     cmd,
   }
 
@@ -47,20 +47,20 @@ local function redir_shell_command(cmd, lines, vertical, stderr_p)
   end
 
   local stdout_buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_set_option_value("ft", "redir_stdout", { buf = stdout_buf })
+  vim.api.nvim_set_option_value('ft', 'redir_stdout', { buf = stdout_buf })
   redir_open_win(stdout_buf, vertical)
 
   local stderr = nil
   if stderr_p then
     local stderr_buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_set_option_value("ft", "redir_sterr", { buf = stderr_buf })
+    vim.api.nvim_set_option_value('ft', 'redir_sterr', { buf = stderr_buf })
     redir_open_win(stderr_buf, vertical, true)
     stderr = function(err, data)
       vim.schedule_wrap(function()
         if data ~= nil then
-          local output = vim.fn.split(data, "\n")
+          local output = vim.fn.split(data, '\n')
           if vim.g.DEBUG then
-            log.info("stdout: " .. vim.inspect(output))
+            log.info('stdout: ' .. vim.inspect(output))
           end
           vim.api.nvim_buf_set_lines(stderr_buf, -2, -1, false, output)
         end
@@ -90,9 +90,9 @@ shell_cmd: %s
     stdout = function(err, stdout)
       vim.schedule_wrap(function()
         if stdout ~= nil then
-          local output = vim.fn.split(stdout, "\n")
+          local output = vim.fn.split(stdout, '\n')
           if vim.g.DEBUG then
-            log.info("stdout: " .. vim.inspect(output))
+            log.info('stdout: ' .. vim.inspect(output))
           end
           vim.api.nvim_buf_set_lines(stdout_buf, -2, -1, false, output)
         end
@@ -115,7 +115,7 @@ local function redir(args)
     log.info(vim.inspect(args))
   end
 
-  if cmd:sub(1, 1) == "!" then
+  if cmd:sub(1, 1) == '!' then
     local range = args.range
     local lines
     if range == 0 then
@@ -134,14 +134,13 @@ local function redir(args)
   end
 end
 
-vim.api.nvim_create_user_command("Redir", redir, {
-  nargs = "+",
-  complete = "command",
+vim.api.nvim_create_user_command('Redir', redir, {
+  nargs = '+',
+  complete = 'command',
   range = true,
   bang = true,
 })
 
-vim.api.nvim_create_user_command("Messsages", function()
-  vim.cmd("Redir messages")
+vim.api.nvim_create_user_command('Messsages', function()
+  vim.cmd 'Redir messages'
 end, { bar = true })
-

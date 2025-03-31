@@ -2,14 +2,14 @@ return {
 
   { -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = false,
+    dev = true,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter',
       },
     },
-    opts = {}
+    opts = {},
   },
 
   {
@@ -49,9 +49,8 @@ return {
         automatic_installation = {
           exclude = {
             'rust_analyzer',
-          }
+          },
         },
-
       }
       require('mason-tool-installer').setup {
         ensure_installed = {
@@ -80,36 +79,19 @@ return {
           ---@diagnostic disable-next-line: inject-field
           client.server_capabilities.document_formatting = true
 
-          map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
-          map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
-          map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
-          map('K', vim.lsp.buf.hover, '[K] hover documentation')
-          map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
-          map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
-          map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          map(']d',
-            function()
-              if vim.fn.has("nvim-0.11.0") == 1 then
-                vim.diagnostic.jump({ count = 1 })
-              else
-                vim.diagnostic
-                    .goto_next()
-              end
-            end, 'next [d]iagnostic ')
-          map('[d',
-            function()
-              if vim.fn.has("nvim-1.11.0") == 1 then
-                vim.diagnostic.jump({ count = -1 })
-              else
-                vim.diagnostic
-                    .goto_prev()
-              end
-            end, 'previous [d]iagnostic ')
-          map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
-          map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
-          map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
-          vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
-          map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
+          --now builtin v0.11
+          -- map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
+          -- map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
+          -- map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+          -- map('K', vim.lsp.buf.hover, '[K] hover documentation')
+          -- map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
+          -- map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
+          -- map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
+          -- map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
+          -- map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
+          -- map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
+          -- vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
+          -- map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
         end,
       })
 
@@ -258,7 +240,6 @@ return {
         capabilities = capabilities,
         flags = lsp_flags,
       }
-
 
       lspconfig.julials.setup {
         capabilities = capabilities,

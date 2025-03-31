@@ -2,7 +2,7 @@ return {
   -- common dependencies
   { 'nvim-lua/plenary.nvim' },
   {
-    "folke/snacks.nvim",
+    'folke/snacks.nvim',
     dev = false,
     priority = 1000,
     lazy = false,
@@ -13,7 +13,7 @@ return {
       picker = {
         -- ui_select = false, -- replace `vim.ui.select` with the snacks picker
       },
-      indent = {}
+      indent = {},
     },
   },
 }

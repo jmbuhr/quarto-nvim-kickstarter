@@ -2,8 +2,8 @@ return {
 
   ---@module "neominimap.config.meta"
   {
-    "Isrothy/neominimap.nvim",
-    version = "v3.*.*",
+    'Isrothy/neominimap.nvim',
+    version = 'v3.*.*',
     enabled = true,
     dependencies = {
       'lewis6991/gitsigns.nvim',
@@ -24,7 +24,7 @@ return {
 
   { -- nice quickfix list
     'stevearc/quicker.nvim',
-    event = "FileType qf",
+    event = 'FileType qf',
     opts = {
       winfixheight = false,
       wrap = true,
@@ -151,10 +151,10 @@ return {
         },
         extensions = {
           fzf = {
-            fuzzy = true,                   -- false will only do exact matching
+            fuzzy = true, -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true,    -- override the file sorter
-            case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
+            override_file_sorter = true, -- override the file sorter
+            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
           },
         },
       }
@@ -184,7 +184,7 @@ return {
     },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
-      { '-',          ':Oil<cr>', desc = 'oil' },
+      { '-', ':Oil<cr>', desc = 'oil' },
       { '<leader>ef', ':Oil<cr>', desc = 'edit [f]iles' },
     },
     cmd = 'Oil',
@@ -246,15 +246,15 @@ return {
   },
 
   {
-    "NStefan002/screenkey.nvim",
+    'NStefan002/screenkey.nvim',
     lazy = false,
     opts = {
       win_opts = {
         row = 1,
         col = vim.o.columns - 1,
-        anchor = "NE",
-      }
-    }
+        anchor = 'NE',
+      },
+    },
   },
 
   { -- filetree

@@ -27,7 +27,7 @@ return {
     'stevearc/conform.nvim',
     enabled = true,
     keys = {
-      { '<leader>cf', '<cmd>lua require("conform").format()<cr>', desc = "[f]ormat" },
+      { '<leader>cf', '<cmd>lua require("conform").format()<cr>', desc = '[f]ormat' },
     },
     config = function()
       require('conform').setup {
@@ -37,17 +37,17 @@ return {
         --   lsp_fallback = true,
         -- },
         formatters_by_ft = {
-          lua = { 'mystylua' },
+          lua = { 'stylua' },
           python = { 'isort', 'black' },
           quarto = { 'injected' },
           markdown = { 'injected' },
           r = { 'styler' },
         },
         formatters = {
-          mystylua = {
-            command = 'stylua',
-            args = { '--indent-type', 'Spaces', '--indent-width', '2', '-' },
-          },
+          -- mystylua = {
+          --   command = 'stylua',
+          --   args = { '--indent-type', 'Spaces', '--indent-width', '2', '-' },
+          -- },
         },
       }
       -- Customize the "injected" formatter

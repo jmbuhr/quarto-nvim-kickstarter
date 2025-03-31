@@ -7,12 +7,12 @@ return {
     opts = {
       lspFeatures = {
         enabled = true,
-        chunks = "curly",
+        chunks = 'curly',
       },
       codeRunner = {
         enabled = true,
-        default_method = "slime"
-      }
+        default_method = 'slime',
+      },
     },
     dependencies = {
       -- for language features in code cells
@@ -131,7 +131,7 @@ return {
     'benlubas/molten-nvim',
     dev = false,
     enabled = true,
-    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+    version = '^1.0.0', -- use version <2.0.0 to avoid breaking changes
     build = ':UpdateRemotePlugins',
     init = function()
       vim.g.molten_image_provider = 'image.nvim'
@@ -142,27 +142,21 @@ return {
     end,
     config = function()
       local init = function()
-        local quarto_cfg = require 'quarto.config'.config
-        quarto_cfg.codeRunner.default_method = "molten"
+        local quarto_cfg = require('quarto.config').config
+        quarto_cfg.codeRunner.default_method = 'molten'
         vim.cmd [[MoltenInit]]
       end
       local deinit = function()
-        local quarto_cfg = require 'quarto.config'.config
-        quarto_cfg.codeRunner.default_method = "slime"
+        local quarto_cfg = require('quarto.config').config
+        quarto_cfg.codeRunner.default_method = 'slime'
         vim.cmd [[MoltenDeinit]]
       end
-      vim.keymap.set("n", "<localleader>mi", init,
-        { silent = true, desc = "Initialize molten" })
-      vim.keymap.set("n", "<localleader>md", deinit,
-        { silent = true, desc = "Stop molten" })
-      vim.keymap.set("n", "<localleader>mp", ":MoltenImagePopup<CR>",
-        { silent = true, desc = "molten image popup" })
-      vim.keymap.set("n", "<localleader>mb", ":MoltenOpenInBrowser<CR>",
-        { silent = true, desc = "molten open in browser" })
-      vim.keymap.set("n", "<localleader>mh", ":MoltenHideOutput<CR>",
-        { silent = true, desc = "hide output" })
-      vim.keymap.set("n", "<localleader>ms", ":noautocmd MoltenEnterOutput<CR>",
-        { silent = true, desc = "show/enter output" })
+      vim.keymap.set('n', '<localleader>mi', init, { silent = true, desc = 'Initialize molten' })
+      vim.keymap.set('n', '<localleader>md', deinit, { silent = true, desc = 'Stop molten' })
+      vim.keymap.set('n', '<localleader>mp', ':MoltenImagePopup<CR>', { silent = true, desc = 'molten image popup' })
+      vim.keymap.set('n', '<localleader>mb', ':MoltenOpenInBrowser<CR>', { silent = true, desc = 'molten open in browser' })
+      vim.keymap.set('n', '<localleader>mh', ':MoltenHideOutput<CR>', { silent = true, desc = 'hide output' })
+      vim.keymap.set('n', '<localleader>ms', ':noautocmd MoltenEnterOutput<CR>', { silent = true, desc = 'show/enter output' })
     end,
   },
 }
