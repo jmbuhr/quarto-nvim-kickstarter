@@ -154,9 +154,19 @@ return {
       vim.keymap.set('n', '<localleader>mi', init, { silent = true, desc = 'Initialize molten' })
       vim.keymap.set('n', '<localleader>md', deinit, { silent = true, desc = 'Stop molten' })
       vim.keymap.set('n', '<localleader>mp', ':MoltenImagePopup<CR>', { silent = true, desc = 'molten image popup' })
-      vim.keymap.set('n', '<localleader>mb', ':MoltenOpenInBrowser<CR>', { silent = true, desc = 'molten open in browser' })
+      vim.keymap.set(
+        'n',
+        '<localleader>mb',
+        ':MoltenOpenInBrowser<CR>',
+        { silent = true, desc = 'molten open in browser' }
+      )
       vim.keymap.set('n', '<localleader>mh', ':MoltenHideOutput<CR>', { silent = true, desc = 'hide output' })
-      vim.keymap.set('n', '<localleader>ms', ':noautocmd MoltenEnterOutput<CR>', { silent = true, desc = 'show/enter output' })
+      vim.keymap.set(
+        'n',
+        '<localleader>ms',
+        ':noautocmd MoltenEnterOutput<CR>',
+        { silent = true, desc = 'show/enter output' }
+      )
     end,
   },
 }

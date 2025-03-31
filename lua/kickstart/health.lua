@@ -8,14 +8,18 @@
 
 local check_version = function()
   if not vim.version.cmp then
-    vim.health.error(string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version())))
+    vim.health.error(
+      string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version()))
+    )
     return
   end
 
   if vim.version.cmp(vim.version(), { 0, 9, 4 }) >= 0 then
     vim.health.ok(string.format("Neovim version is: '%s'", tostring(vim.version())))
   else
-    vim.health.error(string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version())))
+    vim.health.error(
+      string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version()))
+    )
   end
 end
 

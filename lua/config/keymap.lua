@@ -363,8 +363,16 @@ wk.add({
     { '<leader>gdc', ':DiffviewClose<cr>', desc = '[c]lose' },
     { '<leader>gdo', ':DiffviewOpen<cr>', desc = '[o]pen' },
     { '<leader>gs', ':Gitsigns<cr>', desc = 'git [s]igns' },
-    { '<leader>gwc', ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", desc = 'worktree create' },
-    { '<leader>gws', ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", desc = 'worktree switch' },
+    {
+      '<leader>gwc',
+      ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>",
+      desc = 'worktree create',
+    },
+    {
+      '<leader>gws',
+      ":lua require('telescope').extensions.git_worktree.git_worktrees()<cr>",
+      desc = 'worktree switch',
+    },
     { '<leader>h', group = '[h]elp / [h]ide / debug' },
     { '<leader>hc', group = '[c]onceal' },
     { '<leader>hc', toggle_conceal, desc = '[c]onceal toggle' },
