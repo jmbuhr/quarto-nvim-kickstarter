@@ -13,7 +13,10 @@ local main = function()
   if ft == 'quarto' then
     local cell_lang, start_row, _, end_row, _ = otter.get_current_language_context(buf)
     if cell_lang ~= 'r' then
-      vim.notify_once('[qnk] targets refactoring only works in R files or R cells in quarto files.', vim.log.levels.WARN)
+      vim.notify_once(
+        '[qnk] targets refactoring only works in R files or R cells in quarto files.',
+        vim.log.levels.WARN
+      )
       return
     end
     if start_row == nil or end_row == nil then

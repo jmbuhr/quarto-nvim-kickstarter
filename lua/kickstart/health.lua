@@ -8,14 +8,18 @@
 
 local check_version = function()
   if not vim.version.cmp then
-    vim.health.error(string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version())))
+    vim.health.error(
+      string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version()))
+    )
     return
   end
 
   if vim.version.cmp(vim.version(), { 0, 9, 4 }) >= 0 then
     vim.health.ok(string.format("Neovim version is: '%s'", tostring(vim.version())))
   else
-    vim.health.error(string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version())))
+    vim.health.error(
+      string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", tostring(vim.version()))
+    )
   end
 end
 
@@ -88,6 +92,7 @@ local check_image_dependencies = function()
     end
     local v = vim.version.parse(kitty_version)
     local minimal = vim.version.parse '0.30.1'
+    assert(minimal, 'failed to parse version')
     if v and vim.version.cmp(v, minimal) < 0 then
       vim.health.warn 'kitty version is too old'
       return
@@ -116,6 +121,7 @@ local check_image_dependencies = function()
     local version = out:gsub('tmux (%d+%.%d+)([a-z])', '%1.' .. number)
     local v = vim.version.parse(version)
     local minimal = vim.version.parse '3.3.1'
+    assert(minimal, 'failed to parse version')
     if v and vim.version.cmp(v, minimal) < 0 then
       vim.health.warn 'tmux version is too old'
       return
@@ -123,7 +129,7 @@ local check_image_dependencies = function()
   end
 
   -- check if magick luarock is available
-  local ok, magick = pcall(require, 'magick')
+  local ok, _ = pcall(require, 'magick')
   if not ok then
     vim.health.warn 'magick luarock is not available'
     return

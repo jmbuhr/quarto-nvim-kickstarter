@@ -2,6 +2,9 @@
 
 local animals = require('misc.style').animals
 
+DefaultConcealLevel = 0
+FullConcealLevel = 3
+
 -- proper colors
 vim.opt.termguicolors = true
 
@@ -76,14 +79,16 @@ let g:currentmode={
 
 math.randomseed(os.time())
 local i = math.random(#animals)
-vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% %#NonText# ' .. animals[i] .. ' %*'
+vim.opt.statusline = '%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% %#NonText# '
+  .. animals[i]
+  .. ' %*'
 
 -- hide cmdline when not used
 vim.opt.cmdheight = 1
 
 -- split right and below by default
-vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 --tabline
 vim.opt.showtabline = 1
@@ -92,16 +97,25 @@ vim.opt.showtabline = 1
 vim.opt.winbar = '%f'
 
 -- don't continue comments automagically
--- https://neovim.io/doc/user/options.html#'formatoptions'
 vim.opt.formatoptions:remove 'c'
 vim.opt.formatoptions:remove 'r'
 vim.opt.formatoptions:remove 'o'
+
+-- set formatoptions again in an autocmd to override
+-- ft specific plugins
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+  callback = function(_)
+    vim.opt.formatoptions:remove 'c'
+    vim.opt.formatoptions:remove 'r'
+    vim.opt.formatoptions:remove 'o'
+  end,
+})
 
 -- scroll before end of window
 vim.opt.scrolloff = 5
 
 -- (don't == 0) replace certain elements with prettier ones
-vim.opt.conceallevel = 0
+vim.opt.conceallevel = DefaultConcealLevel
 
 -- diagnostics
 vim.diagnostic.config {
@@ -114,6 +128,8 @@ vim.diagnostic.config {
 vim.filetype.add {
   extension = {
     ojs = 'javascript',
+    pyodide = 'python',
+    webr = 'r',
   },
 }
 

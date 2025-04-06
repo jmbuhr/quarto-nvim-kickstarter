@@ -1,22 +1,15 @@
-
 return {
 
-  {
-
-    -- for lsp features in code cells / embedded code
+  { -- for lsp features in code cells / embedded code
     'jmbuhr/otter.nvim',
-    dev = false,
+    dev = true,
     dependencies = {
       {
         'neovim/nvim-lspconfig',
         'nvim-treesitter/nvim-treesitter',
       },
     },
-    opts = {
-      verbose = {
-        no_code_found = false,
-      }
-    },
+    opts = {},
   },
 
   {
@@ -44,17 +37,6 @@ return {
           },
         },
         { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
-        { -- optional completion source for require statements and module annotations
-          'hrsh7th/nvim-cmp',
-          opts = function(_, opts)
-            opts.sources = opts.sources or {}
-            table.insert(opts.sources, {
-              name = 'lazydev',
-              group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-            })
-          end,
-        },
-        -- { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
       },
       { 'folke/neoconf.nvim', opts = {}, enabled = false },
     },
@@ -64,7 +46,11 @@ return {
 
       require('mason').setup()
       require('mason-lspconfig').setup {
-        automatic_installation = true,
+        automatic_installation = {
+          exclude = {
+            'rust_analyzer',
+          },
+        },
       }
       require('mason-tool-installer').setup {
         ensure_installed = {
@@ -93,20 +79,19 @@ return {
           ---@diagnostic disable-next-line: inject-field
           client.server_capabilities.document_formatting = true
 
-          map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
-          map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
-          map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
-          map('K', vim.lsp.buf.hover, '[K] hover documentation')
-          map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
-          map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
-          map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          map('[d', function () vim.diagnostic.jump({count = 1}) end,'previous [d]iagnostic ')
-          map(']d', function () vim.diagnostic.jump({count = -1}) end, 'next [d]iagnostic ')
-          map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
-          map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
-          map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
-          vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
-          map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
+          --now builtin v0.11
+          -- map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
+          -- map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
+          -- map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+          -- map('K', vim.lsp.buf.hover, '[K] hover documentation')
+          -- map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
+          -- map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
+          -- map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
+          -- map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
+          -- map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
+          -- map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
+          -- vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
+          -- map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
         end,
       })
 
@@ -115,12 +100,10 @@ return {
         debounce_text_changes = 150,
       }
 
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = require('misc.style').border })
-      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = require('misc.style').border })
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+      local capabilities = require('blink.cmp').get_lsp_capabilities({}, true)
 
       -- also needs:
       -- $home/.config/marksman/config.toml :
@@ -135,10 +118,11 @@ return {
       lspconfig.r_language_server.setup {
         capabilities = capabilities,
         flags = lsp_flags,
+        filetypes = { 'r', 'rmd', 'rmarkdown' }, -- not directly using it for quarto (as that is handled by otter and often contains more languanges than just R)
         settings = {
           r = {
             lsp = {
-              rich_documentation = false,
+              rich_documentation = true,
             },
           },
         },
@@ -149,12 +133,17 @@ return {
         flags = lsp_flags,
       }
 
-      lspconfig.html.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
+      -- lspconfig.html.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
 
-      lspconfig.emmet_language_server.setup {
+      -- lspconfig.emmet_language_server.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      -- }
+
+      lspconfig.svelte.setup {
         capabilities = capabilities,
         flags = lsp_flags,
       }
@@ -186,6 +175,11 @@ return {
         capabilities = capabilities,
         flags = lsp_flags,
         filetypes = { 'js', 'javascript', 'typescript', 'ojs' },
+      }
+
+      lspconfig.svelte.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
       }
 
       local function get_quarto_resource_path()
@@ -247,7 +241,6 @@ return {
         flags = lsp_flags,
       }
 
-
       lspconfig.julials.setup {
         capabilities = capabilities,
         flags = lsp_flags,
@@ -264,24 +257,19 @@ return {
       -- Like e.g. Haskell:
       -- lspconfig.hls.setup {
       --   capabilities = capabilities,
-      --   flags = lsp_flags
-      -- }
-
-      -- lspconfig.clangd.setup {
-      --   capabilities = capabilities,
       --   flags = lsp_flags,
+      --   filetypes = { 'haskell', 'lhaskell', 'cabal' },
       -- }
 
-      lspconfig.rust_analyzer.setup{
+      lspconfig.clangd.setup {
         capabilities = capabilities,
-        settings = {
-          ['rust-analyzer'] = {
-            diagnostics = {
-              enable = false;
-            }
-          }
-        }
-     }
+        flags = lsp_flags,
+      }
+
+      lspconfig.rust_analyzer.setup {
+        capabilities = capabilities,
+        flags = lsp_flags,
+      }
 
       -- lspconfig.ruff_lsp.setup {
       --   capabilities = capabilities,
@@ -311,7 +299,7 @@ return {
           },
         },
         root_dir = function(fname)
-          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or util.path.dirname(fname)
+          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname)
         end,
       }
     end,

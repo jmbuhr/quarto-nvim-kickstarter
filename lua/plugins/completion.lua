@@ -7,151 +7,91 @@ return {
     end,
   },
 
-  { -- completion
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+  { -- new completion plugin
+    'saghen/blink.cmp',
+    enabled = true,
+    version = '*',
+    dev = false,
+    -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    lazy = false,
     dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-emoji',
-      'saadparwaiz1/cmp_luasnip',
-      'f3fora/cmp-spell',
-      'ray-x/cmp-treesitter',
-      'kdheepak/cmp-latex-symbols',
-      'jmbuhr/cmp-pandoc-references',
-      'L3MON4D3/LuaSnip',
-      'rafamadriz/friendly-snippets',
-      'onsails/lspkind-nvim',
-      'jmbuhr/otter.nvim',
+      { 'rafamadriz/friendly-snippets' },
+      { 'moyiz/blink-emoji.nvim' },
+      { 'Kaiser-Yang/blink-cmp-git' },
+      {
+        'saghen/blink.compat',
+        dev = false,
+        opts = { impersonate_nvim_cmp = true, enable_events = true, debug = true },
+      },
+      {
+        'jmbuhr/cmp-pandoc-references',
+        dev = true,
+        ft = { 'quarto', 'markdown', 'rmarkdown' },
+      },
+      { 'kdheepak/cmp-latex-symbols' },
     },
-    config = function()
-      local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
-      local lspkind = require 'lspkind'
-
-      local has_words_before = function()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
-      end
-
-      cmp.setup {
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        completion = { completeopt = 'menu,menuone,noinsert' },
-        mapping = {
-          ['<C-f>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-
-          ['<C-n>'] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<C-p>'] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<c-y>'] = cmp.mapping.confirm {
-            select = true,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = {
+        preset = 'enter',
+        ['<c-y>'] = { 'show_documentation', 'hide_documentation' },
+      },
+      cmdline = {
+        enabled = false,
+      },
+      sources = {
+        default = { 'lazydev', 'lsp', 'path', 'references', 'git', 'snippets', 'buffer', 'emoji' },
+        providers = {
+          emoji = {
+            module = 'blink-emoji',
+            name = 'Emoji',
+            score_offset = -1,
           },
-          ['<CR>'] = cmp.mapping.confirm {
-            select = true,
+          lazydev = {
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
           },
-
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
-        },
-        autocomplete = false,
-
-        ---@diagnostic disable-next-line: missing-fields
-        formatting = {
-          format = lspkind.cmp_format {
-            mode = 'symbol',
-            menu = {
-              otter = '[🦦]',
-              nvim_lsp = '[LSP]',
-              nvim_lsp_signature_help = '[sig]',
-              luasnip = '[snip]',
-              buffer = '[buf]',
-              path = '[path]',
-              spell = '[spell]',
-              pandoc_references = '[ref]',
-              tags = '[tag]',
-              treesitter = '[TS]',
-              calc = '[calc]',
-              latex_symbols = '[tex]',
-              emoji = '[emoji]',
-            },
+          git = {
+            module = 'blink-cmp-git',
+            name = 'Git',
+            opts = {},
+            enabled = function()
+              return vim.tbl_contains({ 'octo', 'gitcommit', 'git' }, vim.bo.filetype)
+            end,
           },
-        },
-        sources = {
-          -- { name = 'otter' }, -- for code chunks in quarto
-          { name = 'path' },
-          { name = 'nvim_lsp_signature_help' },
-          { name = 'nvim_lsp' },
-          { name = 'luasnip', keyword_length = 3, max_item_count = 3 },
-          { name = 'pandoc_references' },
-          { name = 'buffer', keyword_length = 5, max_item_count = 3 },
-          { name = 'spell' },
-          { name = 'treesitter', keyword_length = 5, max_item_count = 3 },
-          { name = 'calc' },
-          { name = 'latex_symbols' },
-          { name = 'emoji' },
-        },
-        view = {
-          entries = 'native',
-        },
-        window = {
-          documentation = {
-            border = require('misc.style').border,
+          references = {
+            name = 'pandoc_references',
+            module = 'cmp-pandoc-references.blink',
+            score_offset = 2,
           },
+          symbols = { name = 'symbols', module = 'blink.compat.source' },
         },
-      }
-
-      -- for friendly snippets
-      require('luasnip.loaders.from_vscode').lazy_load()
-      -- for custom snippets
-      require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.fn.stdpath 'config' .. '/snips' } }
-      -- link quarto and rmarkdown to markdown snippets
-      luasnip.filetype_extend('quarto', { 'markdown' })
-      luasnip.filetype_extend('rmarkdown', { 'markdown' })
-    end,
+      },
+      appearance = {
+        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- Useful for when your theme doesn't support blink.cmp
+        -- Will be removed in a future release
+        use_nvim_cmp_as_default = true,
+        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono',
+      },
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 100,
+          treesitter_highlighting = true,
+        },
+        menu = {
+          auto_show = true,
+        },
+      },
+      signature = { enabled = true },
+    },
   },
 
   { -- gh copilot
@@ -173,6 +113,44 @@ return {
           },
         },
         panel = { enabled = false },
+      }
+    end,
+  },
+
+  { -- LLMs
+    'olimorris/codecompanion.nvim',
+    version = '*',
+    enabled = true,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-telescope/telescope.nvim',
+    },
+    keys = {
+      { '<leader>ac', ':CodeCompanionChat Toggle<cr>', desc = '[a]i [c]hat' },
+      { '<leader>aa', ':CodeCompanionActions<cr>', desc = '[a]i [a]actions' },
+    },
+    config = function()
+      require('codecompanion').setup {
+        display = {
+          diff = {
+            enabled = true,
+          },
+        },
+        strategies = {
+          chat = {
+            -- adapter = "ollama",
+            adapter = 'copilot',
+          },
+          inline = {
+            -- adapter = "ollama",
+            adapter = 'copilot',
+          },
+          agent = {
+            -- adapter = "ollama",
+            adapter = 'copilot',
+          },
+        },
       }
     end,
   },

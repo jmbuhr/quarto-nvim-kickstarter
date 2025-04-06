@@ -1,15 +1,48 @@
 return {
+
+  ---@module "neominimap.config.meta"
+  {
+    'Isrothy/neominimap.nvim',
+    version = 'v3.*.*',
+    enabled = true,
+    dependencies = {
+      'lewis6991/gitsigns.nvim',
+    },
+    -- Optional
+    init = function()
+      -- The following options are recommended when layout == "float"
+      vim.opt.wrap = false
+      vim.opt.sidescrolloff = 36 -- Set a large value
+
+      --- Put your configuration here
+      ---@type Neominimap.UserConfig
+      vim.g.neominimap = {
+        auto_enable = false,
+      }
+    end,
+  },
+
+  { -- nice quickfix list
+    'stevearc/quicker.nvim',
+    event = 'FileType qf',
+    opts = {
+      winfixheight = false,
+      wrap = true,
+    },
+  },
+  -- { -- more qf improvements
+  --   'romainl/vim-qf'
+  -- },
+
   -- telescope
   -- a nice seletion UI also to find and open files
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
-      { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       { 'nvim-telescope/telescope-dap.nvim' },
       {
         'jmbuhr/telescope-zotero.nvim',
-        enabled = true,
         dev = false,
         dependencies = {
           { 'kkharji/sqlite.lua' },
@@ -45,16 +78,41 @@ return {
       table.insert(vimgrep_arguments, '--glob')
       table.insert(vimgrep_arguments, '!docs/*')
 
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_site/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_reference/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_inv/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!*_files/libs/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!.obsidian/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!.quarto/*')
+
+      table.insert(vimgrep_arguments, '--glob')
+      table.insert(vimgrep_arguments, '!_freeze/*')
+
       telescope.setup {
         defaults = {
           buffer_previewer_maker = new_maker,
           vimgrep_arguments = vimgrep_arguments,
           file_ignore_patterns = {
-            'node_modules',
+            'node%_modules',
             '%_cache',
-            '.git/',
-            'site_libs',
-            '.venv',
+            '%.git/',
+            'site%_libs',
+            '%.venv/',
+            '%_files/libs/',
+            '%.obsidian/',
+            '%.quarto/',
+            '%_freeze/',
           },
           layout_strategy = 'flex',
           sorting_strategy = 'ascending',
@@ -78,6 +136,7 @@ return {
               'rg',
               '--files',
               '--hidden',
+              -- '--no-ignore',
               '--glob',
               '!.git/*',
               '--glob',
@@ -91,19 +150,15 @@ return {
           },
         },
         extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
           fzf = {
-            fuzzy = true,                   -- false will only do exact matching
+            fuzzy = true, -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true,    -- override the file sorter
-            case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
+            override_file_sorter = true, -- override the file sorter
+            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
           },
         },
       }
       telescope.load_extension 'fzf'
-      telescope.load_extension 'ui-select'
       telescope.load_extension 'dap'
       telescope.load_extension 'zotero'
     end,
@@ -129,7 +184,7 @@ return {
     },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
-      { '-',          ':Oil<cr>', desc = 'oil' },
+      { '-', ':Oil<cr>', desc = 'oil' },
       { '<leader>ef', ':Oil<cr>', desc = 'edit [f]iles' },
     },
     cmd = 'Oil',
@@ -191,19 +246,26 @@ return {
   },
 
   {
-    "NStefan002/screenkey.nvim",
+    'NStefan002/screenkey.nvim',
     lazy = false,
+    opts = {
+      win_opts = {
+        row = 1,
+        col = vim.o.columns - 1,
+        anchor = 'NE',
+      },
+    },
   },
 
   { -- filetree
     'nvim-tree/nvim-tree.lua',
     enabled = true,
     keys = {
-      { '<c-b>', ':NvimTreeToggle<cr>', desc = 'toggle nvim-tree' },
+      { '<leader>ft', ':NvimTreeToggle<cr>', desc = 'toggle file [t]ree' },
     },
     config = function()
       require('nvim-tree').setup {
-        disable_netrw = true,
+        disable_netrw = false,
         update_focused_file = {
           enable = true,
         },
@@ -253,7 +315,7 @@ return {
     },
     opts = {
       providers = {
-        priority = { 'markdown', 'lsp',  'norg' },
+        priority = { 'markdown', 'lsp', 'norg' },
         -- Configuration for each provider (3rd party providers are supported)
         lsp = {
           -- Lsp client names to ignore
@@ -269,9 +331,6 @@ return {
 
   { -- or show symbols in the current file as breadcrumbs
     'Bekaboo/dropbar.nvim',
-    enabled = function()
-      return vim.fn.has 'nvim-0.10' == 1
-    end,
     dependencies = {
       'nvim-telescope/telescope-fzf-native.nvim',
     },
@@ -308,15 +367,6 @@ return {
     end,
   },
 
-  { -- show indent lines
-    'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
-    main = 'ibl',
-    opts = {
-      indent = { char = '│' },
-    },
-  },
-
   { -- highlight markdown headings and code blocks etc.
     'lukas-reineke/headlines.nvim',
     enabled = false,
@@ -350,13 +400,14 @@ return {
     '3rd/image.nvim',
     enabled = true,
     dev = false,
+    -- fix to commit to keep using the rockspeck for image magick
     ft = { 'markdown', 'quarto', 'vimwiki' },
     cond = function()
       -- Disable on Windows system
-       return vim.fn.has 'win32' ~= 1 
+      return vim.fn.has 'win32' ~= 1
     end,
     dependencies = {
-       'leafo/magick', -- that's a lua rock
+      'leafo/magick', -- that's a lua rock
     },
     config = function()
       -- Requirements
@@ -384,10 +435,10 @@ return {
         window_overlap_clear_enabled = true,
         tmux_show_only_in_active_window = true,
         window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', 'scrollview', 'scrollview_sign' },
-        max_width = nil,
-        max_height = nil,
-        max_width_window_percentage = nil,
-        max_height_window_percentage = 30,
+        max_width = 100,
+        max_height = 14,
+        max_height_window_percentage = math.huge,
+        max_width_window_percentage = math.huge,
         kitty_method = 'normal',
       }
 
@@ -449,5 +500,11 @@ return {
 
       vim.keymap.set('n', '<leader>ic', clear_all_images, { desc = 'image [c]lear' })
     end,
+  },
+
+  { -- interface with databases
+    'tpope/vim-dadbod',
+    'kristijanhusak/vim-dadbod-completion',
+    'kristijanhusak/vim-dadbod-ui',
   },
 }

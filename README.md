@@ -48,4 +48,4 @@ Manually installing luarocks and the magick rock is no longer required, this is 
 > might pick up the wrong luarocks version.
 > If you forgot this step, you can do `:Lazy build luarocks.nvim` again manually after installation
 > to fix it.
-> 
+
