@@ -1,31 +1,30 @@
-# Quarto Nvim Kickstarter
+# Neovim Config
 
-Companion to <https://github.com/quarto-dev/quarto-nvim>.
+> [!IMPORTANT]
+> The ecosystem around Neovim has changed in such a way that there are on one hand better batteries-included configs – such as LazyVim (https://www.lazyvim.org/) – and on the other hand better starting points that go through making your own config step by step – such as kickstart.nvim (https://github.com/nvim-lua/kickstart.nvim) – that I would recommend for different types of newcomers instead of using this repo as is. As such I'm changing the name from `quarto-nvim-kickstarter` to just my `nvim-config`, because it is most sustainable for this to be the place where I publicly (and recklessly) experiment with my own config and people can can take inspiration from that for their own. And only when I find something to be of general use for more people I incorporate it into one of my plugins (or it's own plugin).
 
-This requires Neovim >= **v0.9.5** (https://github.com/neovim/neovim/releases/tag/stable)
+## Plugins written by me
+
+If you are a user of one or multiple of my plugins (listed below),
+you might benefit from my config in this repo to see how I personally use them.
+
+- <https://github.com/quarto-dev/quarto-nvim>
+- <https://github.com/jmbuhr/otter.nvim>
+- <https://github.com/jmbuhr/cmp-pandoc-references>
+- <https://github.com/jmbuhr/telescope-zotero.nvim>
 
 ## Videos
 
-Check out this playlist for a full guide and walkthrough:
+You might also benefit from seing this config (or older versions of it) in action.
+
 https://youtube.com/playlist?list=PLabWm-zCaD1axcMGvf7wFxJz8FZmyHSJ7
 
 ## Setup
 
 Clone this repo into `~/.config/nvim/` or copy-paste just the parts you like.
 
-If you already have your own configuration, check out `lua/plugins/quarto.lua`
-for the configuration of plugins directly relevant to your Quarto experience.
-The comments in this file will also point to to other plugins required for
-the full functionality.
-
 This configuration can make use of a "Nerd Font" for icons and symbols.
 Download one here: <https://www.nerdfonts.com/> and set it as your terminal font.
-
-### Unix, Linux Installation
-
-```bash
-git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git ~/.config/nvim
-```
 
 For displaying images in your terminal a recent version of [kitty](https://sw.kovidgoyal.net/kitty/) or [wezterm](https://wezfurlong.org/wezterm/index.html) is required
 as well as the dependecies of [image.nvim](https://github.com/3rd/image.nvim) (see `./lua/plugins/ui.lua`).
@@ -49,36 +48,4 @@ Manually installing luarocks and the magick rock is no longer required, this is 
 > might pick up the wrong luarocks version.
 > If you forgot this step, you can do `:Lazy build luarocks.nvim` again manually after installation
 > to fix it.
-
-
-### Windows Powershell Installation
-
-```bash
-git clone https://github.com/jmbuhr/quarto-nvim-kickstarter.git "$env:LOCALAPPDATA\nvim"
-```
-
-The telescope file finder uses `fzf` for fuzzy finding via the [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) extension.
-It will automatically install `fzf`, but needs some requirements which are not pre-installed on Windows.
-Check out the previous link for those (or comment out the extension in `./lua/plugins/ui.lua`).
-
-Now you are good to go!
-
-## Updating
-
-Certain updates to plugins may leave behind unused plugin data. If this configuration produces an error on startup, try removing those first, allowing the lazy.nvim package manager to recreate the correct plugin structure:
-
-```bash
-rm -r ~/.local/share/nvim
-rm -r ~/.local/state/nvim
-```
-
-## Screenshots
-
-![image](https://user-images.githubusercontent.com/17450586/210392419-3ee2b3e3-e805-4e36-99ab-6922abe3a66b.png)
-![image](https://user-images.githubusercontent.com/17450586/210392573-57c0ad1c-5db0-4f2a-9119-608bd2398494.png)
-
-Use the integrated neovim terminal to execute code chunks:
-
-![image](https://user-images.githubusercontent.com/17450586/211403680-c60e8e89-ea9b-48bd-881d-37df2bc924a3.png)
-
-
+> 
