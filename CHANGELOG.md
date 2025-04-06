@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.13.0](https://github.com/jmbuhr/nvim-config/compare/v3.12.0...v3.13.0) (2025-04-06)
+
+
+### Features
+
+* better error reporting for checkhealth fixes [#126](https://github.com/jmbuhr/nvim-config/issues/126) ([c23d86a](https://github.com/jmbuhr/nvim-config/commit/c23d86a5686bc846ea5c6a1a09542bb97abfed14))
+* gV ([a56ff39](https://github.com/jmbuhr/nvim-config/commit/a56ff393944313dd7010d175f879ba7ef5f1d727))
+
 ## [3.12.0](https://github.com/jmbuhr/quarto-nvim-kickstarter/compare/v3.11.0...v3.12.0) (2024-10-09)
 
 
