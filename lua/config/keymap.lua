@@ -380,7 +380,6 @@ wk.add({
     { '<leader>htt', vim.treesitter.inspect_tree, desc = 'show [t]ree' },
     { '<leader>i', group = '[i]mage' },
     { '<leader>l', group = '[l]anguage/lsp' },
-    { '<leader>la', vim.lsp.buf.code_action, desc = 'code [a]ction' },
     { '<leader>ld', group = '[d]iagnostics' },
     {
       '<leader>ldd',

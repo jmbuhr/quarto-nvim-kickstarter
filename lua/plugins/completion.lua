@@ -26,7 +26,7 @@ return {
       },
       {
         'jmbuhr/cmp-pandoc-references',
-        dev = true,
+        dev = false,
         ft = { 'quarto', 'markdown', 'rmarkdown' },
       },
       { 'kdheepak/cmp-latex-symbols' },
@@ -96,7 +96,7 @@ return {
 
   { -- gh copilot
     'zbirenbaum/copilot.lua',
-    enabled = false,
+    enabled = true,
     config = function()
       require('copilot').setup {
         suggestion = {

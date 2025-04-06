@@ -9,7 +9,11 @@ return {
         'nvim-treesitter/nvim-treesitter',
       },
     },
-    opts = {},
+    opts = {
+      buffers = {
+        write_to_disk = true,
+      }
+    },
   },
 
   {
@@ -79,19 +83,23 @@ return {
           ---@diagnostic disable-next-line: inject-field
           client.server_capabilities.document_formatting = true
 
-          --now builtin v0.11
-          -- map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
-          -- map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
-          -- map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+          --now builtin v0.10
           -- map('K', vim.lsp.buf.hover, '[K] hover documentation')
-          -- map('gh', vim.lsp.buf.signature_help, '[g]o to signature [h]elp')
-          -- map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
-          -- map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
-          -- map('<leader>ll', vim.lsp.codelens.run, '[l]ens run')
+
+          --now builtin v0.11
+          -- • |grn| in Normal mode maps to |vim.lsp.buf.rename()|
+          -- • |grr| in Normal mode maps to |vim.lsp.buf.references()|
+          -- • |gri| in Normal mode maps to |vim.lsp.buf.implementation()|
+          -- • |gO| in Normal mode maps to |vim.lsp.buf.document_symbol()|
+          -- • |gra| in Normal and Visual mode maps to |vim.lsp.buf.code_action()|
           -- map('<leader>lR', vim.lsp.buf.rename, '[l]sp [R]ename')
-          -- map('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
-          -- vmap('<leader>lf', vim.lsp.buf.format, '[l]sp [f]ormat')
-          -- map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
+          -- map('gr', vim.lsp.buf.references, '[g]o to [r]eferences')
+          -- map('gI', vim.lsp.buf.implementation, '[g]o to [I]mplementation')
+          -- map('gS', vim.lsp.buf.document_symbol, '[g]o so [S]ymbols')
+
+          map('gd', vim.lsp.buf.definition, '[g]o to [d]efinition')
+          map('gD', vim.lsp.buf.type_definition, '[g]o to type [D]efinition')
+          map('<leader>lq', vim.diagnostic.setqflist, '[l]sp diagnostic [q]uickfix')
         end,
       })
 
@@ -175,11 +183,6 @@ return {
         capabilities = capabilities,
         flags = lsp_flags,
         filetypes = { 'js', 'javascript', 'typescript', 'ojs' },
-      }
-
-      lspconfig.svelte.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
       }
 
       local function get_quarto_resource_path()
@@ -286,22 +289,24 @@ return {
       end
       capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
-      lspconfig.pyright.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-          python = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = 'workspace',
-            },
-          },
-        },
-        root_dir = function(fname)
-          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname)
-        end,
-      }
+      -- lspconfig.pyright.setup {
+      --   capabilities = capabilities,
+      --   flags = lsp_flags,
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         autoSearchPaths = true,
+      --         useLibraryCodeForTypes = true,
+      --         diagnosticMode = 'workspace',
+      --       },
+      --     },
+      --   },
+      --   root_dir = function(fname)
+      --     return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname)
+      --   end,
+      -- }
+
     end,
   },
 }
+

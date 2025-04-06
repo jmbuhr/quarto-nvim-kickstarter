@@ -22,3 +22,34 @@ require 'config.redir'
 vim.cmd.colorscheme 'rusty'
 vim.api.nvim_set_hl(0, 'TermCursor', { fg = '#A6E3A1', bg = '#A6E3A1' })
 vim.api.nvim_set_hl(0, 'WinSeparator', { fg = 'dimgray', bg = '' })
+
+-- Global LSP configuration
+vim.lsp.config('*', {
+  root_markers = { '.git' },
+})
+
+-- https://github.com/neovim/nvim-lspconfig/blob/d3ad666b7895f958d088cceb6f6c199672c404fe/lua/lspconfig/configs/pyright.lua#L15
+vim.lsp.config.pyright = {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = {
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    'pyrightconfig.json',
+  },
+  single_file_support = true,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = 'openFilesOnly',
+      },
+    },
+  },
+}
+
+vim.lsp.enable 'pyright'
